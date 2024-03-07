@@ -1,5 +1,5 @@
 package com.kh.rushpickme.controller;
 
 public class TestController {
-//하이
+//하이gg
 }
