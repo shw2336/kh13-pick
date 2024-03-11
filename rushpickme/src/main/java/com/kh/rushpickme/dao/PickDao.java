@@ -59,7 +59,12 @@ public class PickDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	//삭제 방법생각하기..
+	//삭제
+	public boolean delete (int pickNo) {
+		String sql = "update pick set pick_delete = 'Y' where pick_no = ?";
+		Object[] data = {pickNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 
 	//전체 신청건수
 	public int countApply () {
