@@ -18,8 +18,8 @@ public class MemberGreenMapper implements RowMapper<MemberGreenDto> {
 			dto.setMemberGreenPost(rs.getString("member_green_post"));
 			dto.setMemberGreenAddress1(rs.getString("member_green_address1"));
 			dto.setMemberGreenAddress2(rs.getString("member_green_address2"));
-			dto.setMemberGreenTicket(rs.getInt("member_green_ticket"));
 			dto.setMemberGreenPoint(rs.getInt("member_green_point"));
+			dto.setMemberGreenTicket(rs.getInt("member_green_ticket"));
 			return dto;
 	}
 	
