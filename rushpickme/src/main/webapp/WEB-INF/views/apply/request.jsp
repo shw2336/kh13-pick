@@ -5,11 +5,13 @@
 
 <body>
 <div class="container w-500">
-        <div class="cell center">
+<div class="cell center">
             <h1>수거 신청 페이지</h1>
         </div>
         <div class="cell w-500">
-            <h2> 지역 선택 </h2>
+            <h2> 신청 지역 선택 
+                <i class="fa-solid fa-truck"></i>
+            </h2>
             <select name="apply_area" class="tool w-100" oninput="">
                 <option value="">선택하세요</option>
                 <option value="강남구">강남구</option>
@@ -45,10 +47,10 @@
             </select>
             <div class="fail-feedback">반드시 지역을 선택하세요 </div>
         </div>
-        </select>
-    
-    <div class="cell w-500">
-        <h2> 주소 (상세 정보 1, 2 입력)</h2>
+<div class="cell w-500">
+       <h2>주소
+       <i class="fa-regular fa-address-book"></i>
+       </h2>
         <div class="cell flex-cell">
             <input type="text" class= "tool w-80" name="applyPost" placeholder="우편번호">
             <button type="button" class="btn-address-search tool w-100">우편번호 찾기</button><br>
@@ -63,7 +65,7 @@
     
     </div>
     <div class="cell">
-        <h2> 봉투개수 </h2>
+        <h2> 봉투개수 <i class="fa-solid fa-sack-xmark"></i></h2>
         
         <input type="number" value="3" class="tool w-100" required>
     </div>
@@ -72,16 +74,16 @@
         <input type="number" class="tool w-100" name="memberGreenPoint"  value="${memberGreenDto.memberGreenPoint}">
     </div>
     <div class="cell">
-        <h2> 수거 희망 날짜 </h2>
+        <h2> 수거 희망 날짜 <i class="fa-solid fa-calendar-check"></i></h2>
         <input type="date" name="applyHopeDate" class="tool w-500" oninput="checkApplyHopeDate();">
     </div>
     <div class="cell">
-        <h2> 배출 사진 첨부 파일 </h2>
+        <h2> 배출 사진 첨부 파일 <i class="fa-regular fa-images"></i></h2>
         <input type="file" name="applyAttach" class="tool w-500" >
         <button class="btn w-100">첨부</button>
     </div>
     <div class="cell">
-        <h2>남기실 말 </h2>
+        <h2>남기실 말 <i class="fa-solid fa-pen"></i></h2>
         <textarea type="text" name="applySay" class="tool w-100"></textarea>
     </div>
     <div class="cell">
