@@ -40,8 +40,8 @@ public class MemberDao {
 				+ ") values(?, ?, ?, ?)";
 			Object[] data = {
 				memberGreenDto.getMemberId(),memberGreenDto.getMemberGreenPost(),
-				memberGreenDto.getMemberGreenAddress1(),memberGreenDto.getMemberGreenAddress2(),
-				memberGreenDto.getMemberGreenTicket(),memberGreenDto.getMemberGreenPoint()
+				memberGreenDto.getMemberGreenAddress1(),memberGreenDto.getMemberGreenAddress2()
+				
 			};
 			jdbcTemplate.update(sql,data);
 			}

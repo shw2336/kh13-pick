@@ -5,8 +5,8 @@ public class MemberGreenDto {
 	private String memberGreenPost;
 	private String memberGreenAddress1;
 	private String memberGreenAddress2;
-	private int memberGreenTicket;
 	private int memberGreenPoint;
+	private int memberGreenTicket;
 	public MemberGreenDto() {
 		super();
 	}
