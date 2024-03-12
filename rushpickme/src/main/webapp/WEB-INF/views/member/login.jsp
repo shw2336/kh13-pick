@@ -344,9 +344,18 @@ header {
 				</form>
 				<!-- 5. direction -->
 				<div class="direction__container">
+				
+					<p class="findId">
+						아이디 <a href="/member/findId">찾기</a>
+					</p>
+					
+					
 					<p class="findPw">
 						비밀번호 <a href="#none">찾기</a>
 					</p>
+					
+					
+					
 					<p class="signUp">
 						아직 계정이 없으신가요? <a href="/member/signUp">회원가입</a>
 					</p>
