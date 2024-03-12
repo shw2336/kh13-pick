@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.mapper.PickFinishVoMapper;
 import com.kh.rushpickme.mapper.PickMapper;
+import com.kh.rushpickme.mapper.PickWaitVoMapper;
 import com.kh.rushpickme.vo.PickFinishVo;
+import com.kh.rushpickme.vo.PickWaitVo;
 
 @Repository
 public class PickDao {
@@ -22,6 +24,9 @@ public class PickDao {
 	
 	@Autowired
 	private PickFinishVoMapper pickFinishVoMapper;
+	
+	@Autowired
+	private PickWaitVoMapper pickWaitVoMapper;
 	
 	//수거접수등록
 	public void insertOk (PickDto pickDto) {
@@ -43,7 +48,7 @@ public class PickDao {
 	}
 	
 	//신청상태를 접수거부로 변경 (신청 했는데 거부되는 경우)
-	public boolean updateApplyState (int applyNo) {
+	public boolean updateApplyStateReject (int applyNo) {
 		String sql = "update apply set apply_state = '접수거부' where apply_no = ?";
 		Object[] data = {applyNo};
 		return jdbcTemplate.update(sql, data) > 0;
@@ -80,6 +85,27 @@ public class PickDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 
+	
+	//수거 완료 리스트 (신청시간기준 최신 5건만 보여주는)
+	public List<PickFinishVo> pickFinishList () {
+		String sql = "select pick_no, apply_date, pick_finish_date, pick_pay from "
+				+ "(select pick_no, apply_date, pick_finish_date, pick_pay from pick  inner join apply on pick.apply_no = apply.apply_no "
+				+ "where pick_state = '수거완료' order by apply_date desc) "
+				+ "where rownum <= 5";
+		return jdbcTemplate.query(sql, pickFinishVoMapper);
+	}
+	
+	public boolean pickRejectComment (int pickNo, String pickReject) {
+		String sql = "update pick set pick_state = '수거거부', pick_reject = ? where pick_no = ?";
+		Object[] data = {pickNo, pickReject};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	public List<PickWaitVo> waitList () {
+		String sql = "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply order by apply_hope_date asc";
+		return jdbcTemplate.query(sql, pickWaitVoMapper);
+	}
+	
 	//전체 신청건수
 	public int countApply () {
 		String sql = "select count(*) from apply where apply_state = '신청'";
@@ -103,16 +129,6 @@ public class PickDao {
 		String sql = "select count(*) from pick where pick_state = '수거거부'";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
-	
-	//수거 완료 리스트 (신청시간기준 최신 5건만 보여주는)
-	public List<PickFinishVo> pickFinishList () {
-		String sql = "select pick_no, apply_date, pick_finish_date, pick_pay from "
-				+ "(select pick_no, apply_date, pick_finish_date, pick_pay from pick  inner join apply on pick.apply_no = apply.apply_no "
-				+ "where pick_state = '수거완료' order by apply_date desc) "
-				+ "where rownum <= 5";
-		return jdbcTemplate.query(sql, pickFinishVoMapper);
-	}
-	
 }
 
 
