@@ -165,7 +165,7 @@
             
             <div class="cell">
                 <h2> 봉투개수 <i class="fa-solid fa-sack-xmark"></i></h2>
-                <input type="number"  name="applyVinyl"value="1" class="tool w-100" required>
+                <input type="number"  name="applyVinyl" value="1" class="tool w-100" required>
             </div>
             <%-- <div class="cell">
                 <h2> 보유 포인트 </h2>
