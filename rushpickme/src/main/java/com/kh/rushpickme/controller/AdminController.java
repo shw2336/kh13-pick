@@ -3,17 +3,27 @@ package com.kh.rushpickme.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.rushpickme.dao.BuyDao;
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dto.MemberDto;
 
+@Controller
+@RequestMapping("/admin")
 public class AdminController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private BuyDao buyDao;
 
 	
 	
@@ -40,12 +50,41 @@ public class AdminController {
 	
 	}
 	
+	@RequestMapping("/member/detail")
+	public String memberDetail(@RequestParam String memberId, Model model) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("buyList", buyDao.selectList(memberId));
+		return "/WEB-INF/views/admin/member/detail.jsp";
+		
+	}
+	
+	@GetMapping("/member/delete")
+	public String memberDelete(@RequestParam String memberId) {
+		memberDao.delete(memberId);
+		return "redirect:search";
+	}
+	
+	@GetMapping("/member/edit")
+	public String edit(@RequestParam String memberId, Model model) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
+		return "/WEB-INF/views/admin/member/edit.jsp";
+	}
+	
+	@PostMapping("/member/edit")
+	public String memberEdit(@ModelAttribute MemberDto memberDto) {
+		memberDao.updateMemberByAdmin(memberDto);
+		return "redirect:detail?memberId="+memberDto.getMemberId();
+	}
+	
+	
 	@RequestMapping("/member/approveGreen")
 	public String approveGreen(@RequestParam String memberId, Model model) {
 		memberDao.approveGreen(memberId);
 		List<MemberDto> list = memberDao.selectList("member_type", "green");
 		model.addAttribute("greenList", list);
-		return "/WEB-INF/views/admin/member/greenList.jsp";
+		return "/WEB-INF/views/admin/member/greenlist.jsp";
 	}
 	
 	@RequestMapping("/member/approvePicker")
@@ -53,6 +92,6 @@ public class AdminController {
 		memberDao.approvePicker(memberId);
 		List<MemberDto> list = memberDao.selectList("member_type", "picker");
 		model.addAttribute("pickerList", list);
-		return "/WEB-INF/views/admin/member/pickerList.jsp";
+		return "/WEB-INF/views/admin/member/pickerlist.jsp";
 	}
 }
