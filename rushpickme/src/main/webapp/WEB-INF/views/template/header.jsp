@@ -18,9 +18,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
 <!-- 내가 만든 JS -->
-<<<<<<< HEAD
 <script src="/js/commons.js"></script>
-=======
 <script src="/js/commons.js"></script>
 
 </head>
@@ -42,5 +40,7 @@
 					</li>
 					<li><a href="#">회원가입</a>
 					</li>
-				
->>>>>>> branch 'main' of https://github.com/shw2336/kh13-pick.git
+		</ul>
+		</div>
+		<div class="section">
+		 <div class="article" >
