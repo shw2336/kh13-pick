@@ -6,11 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dao.PickDao;
+import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.vo.PickFinishVo;
+import com.kh.rushpickme.vo.PickWaitVo;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -45,7 +50,24 @@ public class PickController {
 		return "/WEB-INF/views/pick/reject.jsp";
 	}
 	
-//	@PostMapping("/reject")
+	@PostMapping("/reject")
+	public String reject(@RequestParam int pickNo, @RequestParam String pickReject, @RequestParam int applyNo) {
+		pickDao.updateApplyStateReject(applyNo); 
+		pickDao.pickRejectComment(pickNo, pickReject);
+		return "redirect:list"; //완성 후 바꿔야 함 
+	}
+	
+	@RequestMapping("/waitList")
+	public String waitList (Model model) {
+		List<PickWaitVo> waitList = pickDao.waitList();
+		model.addAttribute("waitList", waitList);
+		return "/WEB-INF/views/pick/waitList.jsp";
+	}
+	
+	@RequestMapping("/waitDetail")
+	public String waitDetail (@RequestParam int applyNo, @RequestParam MultipartFile attach, Model model) {
+		return "/WEB-INF/views/pick/waitDetail.jsp";
+	}
 
 	
 }

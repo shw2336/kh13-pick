@@ -47,7 +47,7 @@
 
         <div class="cell flex-cell list-box">
             <h2>수거대기</h2>
-            <h5 class="right width-fill pt-10"><a href="#" class="link">전체보기+</a></h3>
+            <h5 class="right width-fill pt-10"><a href="waitList" class="link">전체보기+</a></h3>
         </div>
 
         <table class="table">

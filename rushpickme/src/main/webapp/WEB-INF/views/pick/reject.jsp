@@ -82,16 +82,12 @@
 
             <div class="cell center pb-10">
                 <button type="button" class="btn reject-btn comment-btn w-75" name="pickReject">대형폐기물 포함<span
-                        class="sub-text">
-                        (유모차, 캐리어
-                        등)</span></button>
+                        class="sub-text"> (유모차, 캐리어 등)</span></button>
             </div>
 
             <div class="cell center pb-10">
                 <button type="button" class="btn reject-btn comment-btn w-75" name="pickReject">공업용품 포함<span
-                        class="sub-text"> (시멘트,
-                        페인트
-                        등)</span></button>
+                        class="sub-text"> (시멘트, 페인트 등)</span></button>
             </div>
 
             <div class="cell center pb-10">
@@ -109,7 +105,7 @@
             
             <div class="cell center">
                 <button type="submit" class="btn submit-btn w-75" style="border-radius: 10px;">등록하기</button>
-                <div class="fail-feedback">사유를 선택하세요.</div>
+                <div class="fail-feedback">수거거부 사유를 선택하세요.</div>
             </div>
 
         </div>
