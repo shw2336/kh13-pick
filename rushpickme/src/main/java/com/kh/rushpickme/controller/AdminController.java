@@ -16,6 +16,7 @@ public class AdminController {
 	private MemberDao memberDao;
 
 	
+	
 	@RequestMapping("/member/search")
 	public String memberSearch(
 			@RequestParam(required = false) String column,
@@ -37,11 +38,5 @@ public class AdminController {
 					}
 		return "/WEB-INF/views/admin/member/search.jsp";
 	
-	}
-	@RequestMapping("/member/detail")
-	public String memberDetail(@RequestParam String memberId, Model model) {
-		MemberDto memberDto = memberDao.selectOne(memberId);
-		model.addAttribute("memberDto", memberDto);
-		model.addAttribute(memberDto)
 	}
 }
