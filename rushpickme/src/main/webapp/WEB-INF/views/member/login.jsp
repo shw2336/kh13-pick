@@ -57,7 +57,7 @@ button {
 	filter: drop-shadow(0px 20px 30px #dfe6e9);
 	backdrop-filter: blur(25px);
 	border-radius: 30px;
-	border: 2px solid rgba(255, 255, 255, 0.2);
+	border: 2px solid rgba(150, 210, 255, 0.2);
 	position: relative;
 }
 
@@ -77,7 +77,7 @@ header {
 	font-size: 16px;
 	font-weight: 400;
 }
-/*.btn--back__container {
+.btn--back__container {
     position: absolute;
     top: 30px;
     right: 30px;
@@ -92,7 +92,7 @@ header {
     justify-content: center;
     align-items: center;
 }
-*/
+
 .btn--back {
 	width: 24px;
 	height: 24px;
@@ -171,7 +171,7 @@ header {
 
 .input__container input::placeholder {
 	font-size: 12px;
-	color: #00b894;
+	color: #1e3799;
 }
 
 .input__container input:focus {
@@ -289,7 +289,7 @@ header {
 		<div class="login__wrapper">
 			<header>
 				<div class="title">
-					<a href="#none">Rush</a><span>환영합니다</span>
+					<a href="#none">Rush</a><span></span>
 				</div>
 				<div class="btn--back__container"></div>
 			</header>
