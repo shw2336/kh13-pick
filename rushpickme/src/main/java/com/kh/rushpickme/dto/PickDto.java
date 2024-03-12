@@ -12,7 +12,14 @@ public class PickDto {
 	private String pickSchedule;
 	private String pickState;
 	private String pickReject;
+	private Date pickFinishDate;
 	
+	public Date getPickFinishDate() {
+		return pickFinishDate;
+	}
+	public void setPickFinishDate(Date pickFinishDate) {
+		this.pickFinishDate = pickFinishDate;
+	}
 	public PickDto() {
 		super();
 	}
