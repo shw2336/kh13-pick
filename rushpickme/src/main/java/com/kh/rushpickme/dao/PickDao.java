@@ -41,7 +41,7 @@ public class PickDao {
 	public void insertNo (PickDto pickDto) {
 		String sql = "insert into pick "
 				+ "(pick_no, apply_no, member_id, pick_state, pick_reject) "
-				+ "values (pick_seq.nextval, ?, ?, ?, ?)";
+				+ "values (pick_seq.nextval, ?, ?, '수거거부', ?)";
 		Object[] data = {pickDto.getApplyNo(), pickDto.getMemberId(),
 				pickDto.getPickState(), pickDto.getPickReject()};
 		jdbcTemplate.update(sql, data);
@@ -95,12 +95,6 @@ public class PickDao {
 		return jdbcTemplate.query(sql, pickFinishVoMapper);
 	}
 	
-	public boolean pickRejectComment (int pickNo, String pickReject) {
-		String sql = "update pick set pick_state = '수거거부', pick_reject = ? where pick_no = ?";
-		Object[] data = {pickNo, pickReject};
-		return jdbcTemplate.update(sql, data) > 0;
-	}
-	
 	public List<PickWaitVo> waitList () {
 		String sql = "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply order by apply_hope_date asc";
 		return jdbcTemplate.query(sql, pickWaitVoMapper);
@@ -114,7 +108,7 @@ public class PickDao {
 	
 	//오래된 신청건수 (신청한지 6시간 지난 것)
 	public int countUrgentApply () {
-		String sql = "SELECT count(*) FROM apply WHERE EXTRACT(HOUR FROM (SYSTIMESTAMP - apply_date)) > 6";
+		String sql = "SELECT count(*) FROM apply WHERE ROUND((sysdate - apply_date) * 24, 2) > 6";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
