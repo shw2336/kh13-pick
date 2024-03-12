@@ -30,7 +30,7 @@ public class QnaDao {
 		
 		String sql = "select "
 							+ "qna_no, member_id, qna_title, "
-							+ "qna_content, qna_delete, qna_hits "
+							+ "qna_content, qna_delete, qna_hits, "
 							+ "qna_write, qna_edit "
 						+ "from qna order by qna_no desc";
 		return jdbcTemplate.query(sql, qnaListMapper);
@@ -45,7 +45,7 @@ public class QnaDao {
 		
 		String sql = "select "
 							+ "qna_no, member_id, qna_title, "
-							+ "qna_content, qna_delete, qna_hits "
+							+ "qna_content, qna_delete, qna_hits, "
 							+ "qna_write, qna_edit "
 						+ "from qna "
 						+ "where instr("+column+", ?) > 0 "
@@ -66,7 +66,7 @@ public class QnaDao {
 							+ "select rownum rn, TMP.* from ("
 								+ "select "
 									+ "qna_no, member_id, qna_title, "
-									+ "qna_content, qna_delete, qna_hits "
+									+ "qna_content, qna_delete, qna_hits, "
 									+ "qna_write, qna_edit "
 								+ "from qna order by qna_no desc"
 							+ ")TMP"
@@ -85,7 +85,7 @@ public class QnaDao {
 							+ "select rownum rn, TMP.* from ("
 								+ "select "
 									+ "qna_no, member_id, qna_title, "
-									+ "qna_content, qna_delete, qna_hits "
+									+ "qna_content, qna_delete, qna_hits, "
 									+ "qna_write, qna_edit "
 								+ "from qna "
 								+ "where instr("+column+", ?) > 0 "
@@ -104,7 +104,7 @@ public class QnaDao {
 									+ "select "
 										+ "qna_no, member_id, qna_title, "
 										+ "qna_content, qna_delete, qna_hits, "
-										+ "qna_write, qna_edit "
+										+ "qna_write, qna_edit, "
 										+ "qna_group, qna_target, qna_depth "
 									+ "from qna "
 									+ "where instr("+pageVO.getColumn()+", ?) > 0 "
@@ -127,7 +127,7 @@ public class QnaDao {
 									+ "select "
 										+ "qna_no, member_id, qna_title, "
 										+ "qna_content, qna_delete, qna_hits, "
-										+ "qna_write, qna_edit "
+										+ "qna_write, qna_edit, "
 										+ "qna_group, qna_target, qna_depth "
 									+ "from qna "
 									//+ "order by qna_no desc"//옛날방식(최신순)
