@@ -22,6 +22,7 @@ public class PickMapper implements RowMapper<PickDto> {
 		pickDto.setPickSchedule(rs.getString("pick_schedule"));
 		pickDto.setPickState(rs.getString("pick_state"));
 		pickDto.setPickReject(rs.getString("pick_reject"));
+		pickDto.setPickFinishDate(rs.getDate("pick_finish_date"));
 		return pickDto;
 	}
 }

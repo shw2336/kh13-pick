@@ -1,11 +1,15 @@
 package com.kh.rushpickme.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.rushpickme.dto.PickDto;
+import com.kh.rushpickme.mapper.PickFinishVoMapper;
 import com.kh.rushpickme.mapper.PickMapper;
+import com.kh.rushpickme.vo.PickFinishVo;
 
 @Repository
 public class PickDao {
@@ -15,6 +19,9 @@ public class PickDao {
 	
 	@Autowired
 	private PickMapper pickMapper;
+	
+	@Autowired
+	private PickFinishVoMapper pickFinishVoMapper;
 	
 	//수거접수등록
 	public void insertOk (PickDto pickDto) {
@@ -48,6 +55,13 @@ public class PickDao {
 				+ "pick_state = ? where pick_no = ?";
 		Object[] data = {pickDto.getPickWeight(), pickDto.getPickPay(), 
 				pickDto.getPickState(), pickDto.getPickNo()};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//수거완료시간 업데이트
+	public boolean updateFinishDate (int pickNo) {
+		String sql = "update pick set pick_finish_date = sysdate where pick_no = ?";
+		Object[] data = {pickNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
@@ -90,6 +104,14 @@ public class PickDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
+	//수거 완료 리스트 (신청시간기준 최신 5건만 보여주는)
+	public List<PickFinishVo> pickFinishList () {
+		String sql = "select pick_no, apply_date, pick_finish_date, pick_pay from "
+				+ "(select pick_no, apply_date, pick_finish_date, pick_pay from pick  inner join apply on pick.apply_no = apply.apply_no "
+				+ "where pick_state = '수거완료' order by apply_date desc) "
+				+ "where rownum <= 5";
+		return jdbcTemplate.query(sql, pickFinishVoMapper);
+	}
 	
 }
 
