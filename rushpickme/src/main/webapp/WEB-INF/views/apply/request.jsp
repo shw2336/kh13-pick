@@ -85,7 +85,6 @@
 
 </script>
 <body>
-<form action="request" method="post" enctype="multipart/form-data" autocomplete="off" class="check-form">
         <div class="container w-500">
             <div class="cell center">
             
@@ -99,6 +98,7 @@
                 <h2> 신청 지역 선택
                     <i class="fa-solid fa-truck"></i>
                 </h2>
+		<form action="request" method="post" enctype="multipart/form-data" autocomplete="off" >
                 <select name="applyArea" class="tool w-100"  oninput="areaData()">
                     <option value="">선택하세요</option>
                     <option value="강남구">강남구</option>
@@ -175,25 +175,41 @@
             
             <div class="cell">
                 <h2> 수거 희망 날짜 <i class="fa-solid fa-calendar-check"></i></h2>
-                <input type="date" name="applyHopeDate" class="tool w-500" oninput="checkApplyHopeDate();">
+                <input type="date" name="applyHopeDate" class="tool w-500" oninput="">
                 <div class="fail-feedback">잘못된 날짜 형식입니다</div>
             </div>
             
             
             <div class="cell">
                 <h2> 배출 사진 첨부 파일 <i class="fa-regular fa-images"></i></h2>
-                <input type="file" name="attach" class="tool w-500">
-                <button class="btn w-100">첨부</button>
+                <input type="file" class="tool w-500">
+                <button type="button" class="btn w-100">첨부</button>
             </div>
             
             
             <div class="cell">
                 <h2>남기실 말 <i class="fa-solid fa-pen"></i></h2>
-                <textarea type="text" name="applySay" class="tool w-100"></textarea>
+                <input type="text" name="applySay" class="tool w-100">
             </div>
             
             <div class="cell">
-                <button class="btn w-100" onclick=""> 수거 요청하기 </button>
+                <h2>출입 불가 방법  <i class="fa-solid fa-pen"></i></h2>
+                <input type="text" name="applyWay" class="tool w-100">
+            </div>
+            
+            <div class="cell">
+                <h2>신청상태 <i class="fa-solid fa-pen"></i></h2>
+                
+                <input value="신청완료" type="text" name="applyState" class="tool w-100">
+                <select>
+           			<option value="신청완료">신청완료 </option>
+
+                </select>
+                    
+            </div>
+            
+            <div class="cell">
+                <button type="submit" class="btn w-100" > 수거 요청하기 </button>
             </div>
             
             

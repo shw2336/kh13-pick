@@ -50,7 +50,7 @@ public class ApplyController {
 		
 		@RequestMapping("/requestCancel")
 		public String joinFinish() {
-			return "/WEB-INF/views/member/joinFinish.jsp";
+			return "/WEB-INF/views/apply/requestCancel.jsp";
 		}
 
 }
