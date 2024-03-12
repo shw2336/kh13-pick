@@ -73,8 +73,8 @@ public class EmailService {
 		//이메일 발송
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(memberDto.getMemberEmail());
-		message.setSubject("[KH정보교육원] 임시 비밀번호 안내");
-		message.setText("임시 비밀번호는 " + memberDto.getMemberPw() + "입니다");
+		message.setSubject("[Rush] 비밀번호 ");
+		message.setText(memberDto.getMemberName()+"님의"+"임시 비밀번호는 " + memberDto.getMemberPw() + "입니다");
 		
 		sender.send(message);
 	}
