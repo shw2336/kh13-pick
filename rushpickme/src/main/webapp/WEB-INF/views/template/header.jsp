@@ -19,7 +19,6 @@
 
 <!-- 내가 만든 JS -->
 <script src="/js/commons.js"></script>
-<script src="/js/commons.js"></script>
 
 </head>
 <body>

@@ -19,14 +19,13 @@ public class ApplyDao {
 	//수거 신청 등록
 	public void applyInsert(ApplyDto applyDto) {
 		String sql ="insert into apply (apply_no, member_id, "
-				+ "apply_area, apply_post, apply_address1,apply_address2, apply_way, apply_say, apply_weight, "
-				+ "apply_vinyl, apply_hope_date, apply_cancel, apply_state, apply_date) values (apply_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		Object[]data = {applyDto.getApplyNo(),applyDto.getMemberId(), applyDto.getApplyArea(),
+				+ "apply_area, apply_post, apply_address1,apply_address2, apply_say, apply_weight, "
+				+ "apply_vinyl, apply_hope_date) values (apply_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object[]data = {applyDto.getMemberId(), applyDto.getApplyArea(),
 				applyDto.getApplyPost(), applyDto.getApplyAddress1(), applyDto.getApplyAddress2(),
-				applyDto.getApplyWay(),applyDto.getApplySay(),applyDto.getApplyWeight(), 
-				applyDto.getApplyVinyl(), applyDto.getApplyHopeDate(),applyDto.getApplyCancel(),
-				applyDto.getApplyState(),applyDto.getApplyDate()
-				};
+				applyDto.getApplySay(),applyDto.getApplyWeight(), 
+				applyDto.getApplyVinyl(), applyDto.getApplyHopeDate()
+		};
 		jdbcTemplate.update(sql, data);
 	}
 	//첨부 파일 등록 

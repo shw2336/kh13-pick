@@ -44,7 +44,7 @@ public class ApplyController {
 				int attachNo = attachService.save(attach);//파일저장+DB저장
 				applyDao.connect(applyDto.getMemberId(), attachNo);//연결
 			}
-			return"redirect:/";
+			return"/WEB-INF/views/apply/success.jsp";
 			
 		}
 		
