@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Service;
 
 import com.kh.rushpickme.dto.QnaDto;
 
+@Service
 public class QnaMapper implements RowMapper<QnaDto>{
 
 	@Override
