@@ -23,11 +23,11 @@ public class PointDao {
 	
 	public void insert(PointDto pointDto) {
 		String sql = "insert into point("
-				+ "point_no, point_name, point_price, point_charge"
+				+ "point_no, point_name, point_sell, point_charge"
 				+ ") values(?, ?, ?, ?)";
 		Object[] data = {
 				pointDto.getPointNo(), pointDto.getPointName(),
-				pointDto.getPointPrice(), pointDto.getPointCharge()
+				pointDto.getPointSell(), pointDto.getPointCharge()
 		};
 		jdbcTemplate.update(sql, data);
 	}
@@ -38,7 +38,7 @@ public class PointDao {
 		jdbcTemplate.update(sql, data);
 	}
 	public List<PointDto> selectList() {
-		String sql = "select * from point order by point_price asc";
+		String sql = "select * from point order by point_sell asc";
 		return jdbcTemplate.query(sql, pointMapper);
 	}
 	public int findAttachNo(int pointNo) {
@@ -60,10 +60,10 @@ public class PointDao {
 	}
 	public boolean update(PointDto pointDto) {
 		String sql = "update point "
-				+ "set point_name = ?, point_price=?, point_charge=? "
+				+ "set point_name = ?, point_sell=?, point_charge=? "
 				+ "where point_no=?";
 		Object[] data= {
-				pointDto.getPointName(), pointDto.getPointPrice(),
+				pointDto.getPointName(), pointDto.getPointSell(),
 				pointDto.getPointCharge(), pointDto.getPointNo()
 		};
 		return jdbcTemplate.update(sql, data) > 0;
