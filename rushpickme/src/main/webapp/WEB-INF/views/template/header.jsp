@@ -16,3 +16,6 @@
     
     <!--  jQuery CDN -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+<!-- 내가 만든 JS -->
+<script src="/js/commons.js"></script>
