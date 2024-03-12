@@ -122,8 +122,24 @@ public class MemberController {
   	}
   	@PostMapping("/findId")
   	public String findId(@RequestParam String memberNick) {
-//  		boolean result = emailService.sendMemberId
+ 		boolean result = emailService.sendMemberId(memberNick);
+ 		
+ 		if(result) {
+ 			return "redirect:findIdClear";
+ 		}
+ 		else {
+ 			return "redirect:findIdFail";
+ 		}
+ 		
   	}
+  	@RequestMapping("/findIdClear")
+	public String findIdSuccess() {
+		return"/WEB-INF/views/member/findIdClear.jsp";
+	}
+	@RequestMapping("/findIdFail")
+	public String findIdFail() {
+		return "/WEB-INF/views/member/findIdFail.jsp";
+	}
     
     
 }
