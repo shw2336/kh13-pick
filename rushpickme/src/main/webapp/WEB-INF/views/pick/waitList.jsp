@@ -13,7 +13,7 @@
 	</div>
 	
 	<div class="cell">
-	<table class="table table-horizontal">
+	<table class="table table-horizontal table-hover">
 		<thead>
 			<tr>
 				<th>수거번호</th>
