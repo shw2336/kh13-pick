@@ -3,4 +3,6 @@
 
     <jsp:include page ="/WEB-INF/views/template/header.jsp"></jsp:include>
     
+    <h1>green 리스트</h1>
+    
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
