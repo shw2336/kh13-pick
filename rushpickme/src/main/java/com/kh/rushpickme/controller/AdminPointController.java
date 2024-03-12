@@ -95,7 +95,7 @@ public class AdminPointController {
 	@PostMapping("edit")
 	public String edit(@ModelAttribute PointDto pointDto,
 							@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
-		pointDao.updata(pointDto);
+		pointDao.update(pointDto);
 		
 		if(!attach.isEmpty()) {
 			 try {

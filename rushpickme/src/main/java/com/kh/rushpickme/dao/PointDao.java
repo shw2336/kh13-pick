@@ -58,7 +58,7 @@ public class PointDao {
 		List<PointDto> list = jdbcTemplate.query(sql, pointMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	public boolean updata(PointDto pointDto) {
+	public boolean update(PointDto pointDto) {
 		String sql = "update point "
 				+ "set point_name = ?, point_price=?, point_charge=? "
 				+ "where point_no=?";
