@@ -108,7 +108,7 @@ public class PickDao {
 	
 	//전체 신청건수
 	public int countApply () {
-		String sql = "select count(*) from apply where apply_state = '신청'";
+		String sql = "select count(*) from apply where apply_state = '신청완료'";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	

@@ -29,6 +29,7 @@ public class PickController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	//전체화면
 	@RequestMapping("/list")
 	public String list (Model model, HttpSession session) {
 		String loginId = (String) session.getAttribute("loginId");
@@ -45,6 +46,18 @@ public class PickController {
 		return "/WEB-INF/views/pick/list.jsp";
 	}
 	
+	@RequestMapping("/waitList")
+	public String waitList (Model model) {
+		List<PickWaitVo> waitList = pickDao.waitList();
+		model.addAttribute("waitList", waitList);
+		return "/WEB-INF/views/pick/waitList.jsp";
+	}
+	
+	@RequestMapping("/waitDetail")
+	public String waitDetail (@RequestParam int applyNo, @RequestParam MultipartFile attach, Model model) {
+		return "/WEB-INF/views/pick/waitDetail.jsp";
+	}
+	
 	@GetMapping("/reject")
 	public String reject () {
 		return "/WEB-INF/views/pick/reject.jsp";
@@ -57,17 +70,6 @@ public class PickController {
 		return "redirect:list"; //완성 후 바꿔야 함 
 	}
 	
-	@RequestMapping("/waitList")
-	public String waitList (Model model) {
-		List<PickWaitVo> waitList = pickDao.waitList();
-		model.addAttribute("waitList", waitList);
-		return "/WEB-INF/views/pick/waitList.jsp";
-	}
-	
-	@RequestMapping("/waitDetail")
-	public String waitDetail (@RequestParam int applyNo, @RequestParam MultipartFile attach, Model model) {
-		return "/WEB-INF/views/pick/waitDetail.jsp";
-	}
 
 	
 }
