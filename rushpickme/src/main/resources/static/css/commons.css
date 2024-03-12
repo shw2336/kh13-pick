@@ -622,7 +622,7 @@ textarea.tool.tool-fixed {
 */
 .menu,
 .menu ul {
-    background-color: #2d3436;
+    background-color:white;
 }
 .menu li {
     font-size: 20px;
@@ -642,14 +642,8 @@ textarea.tool.tool-fixed {
     마우스가 올라가면(:hover) 
     하위 메뉴(ul)를 표시하도록 처리 
 */
-.menu li:hover > ul {
-    display: block; 
-}
 
 /* 모든 메뉴에 마우스가 올라가면 강조 표시 */
-.menu li:hover {
-    background-color: #636e72;
-}
 
 /* 2차 메뉴(ul)의 위치를 미세조정 */
 .menu > li > ul {
