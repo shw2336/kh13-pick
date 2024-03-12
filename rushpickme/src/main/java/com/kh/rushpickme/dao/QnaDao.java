@@ -190,7 +190,7 @@ public class QnaDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
-	//등록할 때 시퀀스 번호를 생성하면 절대 안된다
+	//등록할 때 시퀀스 번호를 생성하면 절대 안된다!
 	public void insert(QnaDto qnaDto) {
 		//String sql = "insert into qna(7개) values(?, ?, ?, ?, sysdate, null, 0)";
 		//String sql = "insert into qna(4개) values(?, ?, ?, ?)";
