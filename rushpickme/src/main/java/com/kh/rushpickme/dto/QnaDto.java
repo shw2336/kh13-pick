@@ -113,7 +113,7 @@ public class QnaDto {
 		this.qnaDepth = qnaDepth;
 	}
 
-	public String getBoardWriterStr() {
+	public String getMemberIdStr() {
 		if(memberId == null)
 			return "탈퇴한사용자";
 		else
@@ -124,7 +124,7 @@ public class QnaDto {
 	//- LocalDate 형태로 시간을 변환하여 오늘 날짜와 비교
 	//- 날짜가 같다면 LocalDateTime으로 변환해서 시간만 반환
 	//- 날짜가 다르다면 LocalDate를 그대로 반환
-	public String getBoardWtimeStr() {
+	public String getQnaWriteStr() {
 		LocalDate today = LocalDate.now();//오늘날짜
 		LocalDate wtime = qnaWrite.toLocalDate();//작성일자
 		if(wtime.equals(today)) {//작성일이 오늘이면
@@ -140,7 +140,7 @@ public class QnaDto {
 	}
 	
 	//현재시각을 기준으로 얼마나 지난 글인지를 계산하여 반환
-	public String getBoardWtimeDiff() {
+	public String getQnaWriteDiff() {
 		long now = System.currentTimeMillis();
 		long before = qnaWrite.getTime();
 		long gap = now - before;
