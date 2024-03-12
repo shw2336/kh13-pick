@@ -18,4 +18,29 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
 <!-- 내가 만든 JS -->
+<<<<<<< HEAD
 <script src="/js/commons.js"></script>
+=======
+<script src="/js/commons.js"></script>
+
+</head>
+<body>
+
+	<main>
+		<div class="header">
+			<h1 class="left">RUSHPICKME</h1>
+		</div>
+		<div class="nav">
+			<ul class="menu">
+				<li><a href="/"> <i class="fa-solid fa-house"></i> HOME
+				</a></li>
+					<li><a href="#">수거서비스</a>
+					</li>
+					<li><a href="#">문의사항</a>
+					</li>
+					<li><a href="#">포인트</a>
+					</li>
+					<li><a href="#">회원가입</a>
+					</li>
+				
+>>>>>>> branch 'main' of https://github.com/shw2336/kh13-pick.git

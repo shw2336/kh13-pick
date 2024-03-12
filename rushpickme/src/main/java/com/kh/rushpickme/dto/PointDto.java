@@ -3,7 +3,7 @@ package com.kh.rushpickme.dto;
 public class PointDto {
 	private int pointNo;
 	private String pointName;
-	private int pointPrice, pointCharge;
+	private int pointSell, pointCharge;
 	public int getPointNo() {
 		return pointNo;
 	}
@@ -16,11 +16,11 @@ public class PointDto {
 	public void setPointName(String pointName) {
 		this.pointName = pointName;
 	}
-	public int getPointPrice() {
-		return pointPrice;
+	public int getPointSell() {
+		return pointSell;
 	}
-	public void setPointPrice(int pointPrice) {
-		this.pointPrice = pointPrice;
+	public void setPointSell(int pointSell) {
+		this.pointSell = pointSell;
 	}
 	public int getPointCharge() {
 		return pointCharge;
@@ -31,5 +31,4 @@ public class PointDto {
 	public PointDto() {
 		super();
 	}
-	
 }

@@ -16,7 +16,7 @@ public class PointMapper implements RowMapper<PointDto> {
 		PointDto pointDto = new PointDto();
 		pointDto.setPointNo(rs.getInt("point_no"));
 		pointDto.setPointName(rs.getString("point_name"));
-		pointDto.setPointPrice(rs.getInt("point_price"));
+		pointDto.setPointSell(rs.getInt("point_sell"));
 		pointDto.setPointCharge(rs.getInt("point_charge"));
 		return pointDto;
 	}
