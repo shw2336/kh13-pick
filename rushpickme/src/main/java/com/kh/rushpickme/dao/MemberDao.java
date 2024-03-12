@@ -132,6 +132,22 @@ public class MemberDao {
 			Object[] data = {point, memberId};
 			return jdbcTemplate.update(sql, data) > 0;
 		}
+		
+		//관리자에 의한 회원 정보 수정
+		public boolean updateMemberByAdmin(MemberDto memberDto) {
+			String sql = "update member set "
+					+ "member_nick=?, member_contact=?, "
+					+ "member_name=?, member_type=?, "
+					+ "member_email=?, member_birth=? "
+					+ "where member_id=?";
+		Object[] data= {
+				memberDto.getMemberNick(), memberDto.getMemberContact(),
+				memberDto.getMemberName(), memberDto.getMemberType(),
+				memberDto.getMemberEmail(), memberDto.getMemberBirth(),
+				memberDto.getMemberId()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+		}
 	
 	
 	
