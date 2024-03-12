@@ -11,31 +11,29 @@
 <style>
     /* 메뉴 글씨체 색상 및 메뉴 바탕색 */
     .menu a {
-        color: green; /* 글자색을 초록색으로 설정 */
-        background-color: white; /* 바탕색을 흰색으로 설정 */
-        padding: 5px 10px; /* 텍스트 주변에 여백을 주기 위해 padding 추가 */
-        text-decoration: none; /* 링크 텍스트의 밑줄 제거 */
-    	
+        color: green;
+        background-color: white;
+        padding: 5px 10px;
+        text-decoration: none;
     }
 
     .header {
         display: flex;
-        justify-content: space-between;
+        justify-content: center; /* 가운데 정렬을 위한 수정 */
         align-items: center;
+        flex-direction: column; /* 세로 방향으로 배치 */
     }
 
     .header h1 {
-        margin: 0; /* Remove default margin */
+        margin: 0;
     }
 
     .header img {
-        width: 200px; /* Adjust the width as needed */
-        height: 200px; /* Adjust the height as needed */
+        width: 200px;
+        height: 200px;
     }
-    
-        .menu {
-        text-align: center; /* 가운데 정렬을 위한 text-align 추가 */
-    }
+
+  
 </style>
 
 <!-- font awesome 아이콘 CDN -->
@@ -64,12 +62,13 @@
             </ul>
         </div>
     </div>
-
+  
     <div class="section">
         <div class="article">
             <!-- Your article content goes here -->
         </div>
     </div>
+  
 </main>
 
 </body>

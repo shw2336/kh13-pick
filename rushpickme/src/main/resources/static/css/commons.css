@@ -667,7 +667,7 @@ textarea.tool.tool-fixed {
 /* menu-end 클래스가 붙은 메뉴 한 개만큼은 우측으로 붙여서 처리 */
 .menu {
     /* 메뉴를 원하는 위치에 배치하고 싶다면 */
-    position: relative;
+    position: center;
 
     /* 메뉴를 상단에 고정하고 싶다면 */
     /*
