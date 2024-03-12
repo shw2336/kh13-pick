@@ -46,7 +46,7 @@ public class ApplyController {
 			}
 			return"/WEB-INF/views/apply/success.jsp";
 			
-		}
+		}  
 		
 		@RequestMapping("/requestCancel")
 		public String joinFinish() {
