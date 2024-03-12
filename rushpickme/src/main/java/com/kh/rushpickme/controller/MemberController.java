@@ -6,11 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.dto.MemberGreenDto;
 import com.kh.rushpickme.dto.MemberPickDto;
+import com.kh.rushpickme.service.AttachService;
+import com.kh.rushpickme.service.EmailService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,6 +24,22 @@ public class MemberController {
 	
 	@Autowired
 	MemberDao memberDao;
+	
+	@Autowired
+	private AttachDao attachDao;
+	
+	@Autowired
+	private AttachService attachService;
+	
+	@Autowired
+	private EmailService emailService;
+	
+	//회원가입 선택창
+	@GetMapping("/signUp")
+	public String singUp() {
+		return "/WEB-INF/views/member/signUp.jsp";
+	}
+	
 	
     //일반회원 가입
     @GetMapping("/signUpGreen")
@@ -94,6 +114,15 @@ public class MemberController {
   		else {//로그인 실패
   			return "redirect:login?error";
   		}
+  	}
+  	
+  	@GetMapping("/findId")
+  	public String findId() {
+  		return "/WEB-INF/views/member/findId.jsp";
+  	}
+  	@PostMapping("/findId")
+  	public String findId(@RequestParam String memberNick) {
+//  		boolean result = emailService.sendMemberId
   	}
     
     
