@@ -128,7 +128,7 @@ public class MemberDao {
 			String sql = "update member set "
 								+ "member_nick=?, member_contact=?, member_name=?, "
 								+ " member_email=?, "
-								+ "member_birth=?, "
+								+ "member_birth=? "
 							+ "where member_id = ?";
 			Object[] data = {
 				memberDto.getMemberNick(),memberDto.getMemberContact(),memberDto.getMemberName(),

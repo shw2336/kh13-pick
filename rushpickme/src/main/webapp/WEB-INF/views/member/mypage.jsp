@@ -222,16 +222,17 @@ div{
   </div>
   <div class="summaryContainer">
     <div class="item">
-        <div class="number">354</div>
-        <div>단골상점</div>
+        <div class="number">${memberDto.memberName}</div>
+        <div>이름</div>
       </div>
       <div class="item">
-        <div class="number">354</div>
-        <div>상품후기</div>
+        <div class="number">${memberDto.memberContact}</div>
+        <div>연락처</div>
       </div>
       <div class="item">
-        <div class="number">354</div>
-        <div>적립금(BLCT)</div>
+        <div class="number">${memberGreenDto.memberGreenAddress1}${memberGreenDto.memberGreenAddress2}</div>
+        
+        <div>신청지</div>
       </div>
   </div>  
   <div class="shippingStatusContainer">
@@ -272,11 +273,7 @@ div{
     
   </div>  
   <div class="listContainer">
-    <a href="#" class="item">
-        <div class="icon">ii</div>
-        <div class="text">주문목록<span class="circle"></span></div>
-        <div class="right"> > </div>
-    </a>
+    
     <a href="/review/list" class="item">
         <div class="icon">ii</div>
         <div class="text">리뷰게시판</div>
@@ -312,6 +309,21 @@ div{
           <span class="blct"></span>
           > </div>
     </a>
+    
+    <a href="#" class="item">
+        <div class="icon">ii</div>
+        <div class="text">
+          <span>부름티켓</span>
+          <span class="smallLight">
+            <span>|</span>
+            <span>${memberGreenDto.memberGreenTicket}</span>
+          </span>          
+        </div>                
+        <div class="right">
+          <span class="blct"></span>
+          > </div>
+    </a>
+    
     <a href="/member/findpassword" class="item">
         <div class="icon">ii</div>
         <div class="text">비밀번호 변경</div>
