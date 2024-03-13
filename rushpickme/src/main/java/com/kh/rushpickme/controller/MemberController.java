@@ -204,6 +204,8 @@ public class MemberController {
 		// 조건
 		boolean isValid = memberDto.getMemberPw().equals(findMemberDto.getMemberPw());
 
+		System.out.println("aaa");
+		System.out.println(loginId);
 		// 변경
 		if (isValid) {
 			memberDao.updateMember(memberDto);
