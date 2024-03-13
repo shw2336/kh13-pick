@@ -18,8 +18,6 @@ import com.kh.rushpickme.service.AttachService;
 
 import jakarta.servlet.http.HttpSession;
 
-
-
 @Controller
 @RequestMapping("/apply")
 public class ApplyController {
@@ -41,31 +39,26 @@ public class ApplyController {
 		}
 		@PostMapping("/request")
 		private String request(@ModelAttribute ApplyDto applyDto, 
-					               	@RequestParam MultipartFile attach,HttpSession session ) throws IllegalStateException, IOException {
+					               	@RequestParam MultipartFile applyAttach,HttpSession session ) throws IllegalStateException, IOException {
+			//1. 세션에 저장된 아이디를 꺼낸다
+			String loginId = "testuser1";
+			//로그인 아이디 뽑기 
+			applyDto.setMemberId(loginId);
+			
+			int longinNo = applyDao.getSequence();
+			
+			applyDto.setApplyNo(longinNo); 
+			
 			applyDao.applyInsert(applyDto);
+			
 			//첨부파일 등록
-			if(!attach.isEmpty()) {
-				int attachNo = attachService.save(attach);//파일저장+DB저장
-				applyDao.connect(applyDto.getMemberId(), attachNo);//연결
+			if(!applyAttach.isEmpty()) {
+				int attachNo = attachService.save(applyAttach);//파일저장+DB저장
+				applyDao.connect(applyDto.getApplyNo(), attachNo);//연결
 			}
+
+			
 			return"redirect:/";
-		}
-		//미리 아이디 꺼내기 
-		public String request(HttpSession session, @ModelAttribute ApplyDto applyDto) {
-		//1. 세션에 저장된 아이디를 꺼낸다
-//		String loginId = (String) session.getAttribute("loginId");
-		String loginId = "testuser1";
-		//로그인 아이디 뽑기 
-		applyDto.setMemberId(loginId);
-		
-		int longinNo = applyDao.getSequence();
-		
-		applyDto.setApplyNo(longinNo); 
-		
-		applyDao.applyInsert(applyDto);
-		
-		//4. 연결될 화면을 반환한다
-		return "redirect:/";
 		}
 		
 		//stateList화면 

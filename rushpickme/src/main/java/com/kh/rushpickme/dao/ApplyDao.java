@@ -19,20 +19,19 @@ public class ApplyDao {
 	//수거 신청 등록
 	public void applyInsert(ApplyDto applyDto) {
 		String sql ="insert into apply (apply_no, member_id, "
-				+ "apply_area, apply_post, apply_address1,apply_address2, apply_say,apply_way, apply_weight, "
-				+ "apply_vinyl, apply_hope_date,apply_date) values (apply_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		Object[]data = {applyDto.getMemberId(), applyDto.getApplyArea(),
+				+ "apply_area, apply_post, apply_address1,apply_address2, apply_say, apply_way, apply_weight, "
+				+ "apply_vinyl, apply_hope_date) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object[]data = {applyDto.getApplyNo(), applyDto.getMemberId(), applyDto.getApplyArea(),
 				applyDto.getApplyPost(), applyDto.getApplyAddress1(), applyDto.getApplyAddress2(),
 				applyDto.getApplySay(),applyDto.getApplyWay(), applyDto.getApplyWeight(), 
-				applyDto.getApplyVinyl(), applyDto.getApplyHopeDate(),applyDto.getApplyState()
+				applyDto.getApplyVinyl(), applyDto.getApplyHopeDate()
 		};
 		jdbcTemplate.update(sql, data);
 	}
-	//첨부 파일 등록 
-	public void connect(String memberId, int attachNo ) {
-		String sql ="select attach_no from member_attach where member_id = ?";
-		Object[]data = {memberId,attachNo};
-		
+	//첨부 파일 연결
+	public void connect(int applyNo, int attachNo ) {
+		String sql ="insert into apply_attach (apply_no, attach_no) VALUES (?, ?)";
+		Object[]data = {applyNo,attachNo};
 		jdbcTemplate.update(sql,data);
 	}
 	public int getSequence() {

@@ -13,10 +13,11 @@ public class ApplyDto {
 	private String applyWay;
 	private int applyWeight;
 	private int applyVinyl;
-	private Date applyHopeDate;
 	private String applyCancel;
 	private String applyState;
+	private String applyHopeDate;
 	private Date applyDate;
+	
 	
 	public ApplyDto() {
 		super();
@@ -81,12 +82,6 @@ public class ApplyDto {
 	public void setApplyVinyl(int applyVinyl) {
 		this.applyVinyl = applyVinyl;
 	}
-	public Date getApplyHopeDate() {
-		return applyHopeDate;
-	}
-	public void setApplyHopeDate(Date applyHopeDate) {
-		this.applyHopeDate = applyHopeDate;
-	}
 	public String getApplyCancel() {
 		return applyCancel;
 	}
@@ -99,11 +94,21 @@ public class ApplyDto {
 	public void setApplyState(String applyState) {
 		this.applyState = applyState;
 	}
+	public String getApplyHopeDate() {
+		return applyHopeDate;
+	}
+	public void setApplyHopeDate(String applyHopeDate) {
+		this.applyHopeDate = applyHopeDate;
+	}
 	public Date getApplyDate() {
 		return applyDate;
 	}
 	public void setApplyDate(Date applyDate) {
 		this.applyDate = applyDate;
 	}
+	
+	
+	
+	
 	
 }
