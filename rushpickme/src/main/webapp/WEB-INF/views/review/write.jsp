@@ -41,15 +41,13 @@
         });
     </script>
 
-
-
 <form action="write" method="post" autocomplete="off">
 
 <div class="container w-800">
 	<div class="cell center"><h1>리뷰 작성</h1></div>
 
 	        <div class="cell">
-            <h2>작성할 때</h2>
+            <h2>1~5점</h2>
         </div>
         <form>
         <div class="cell">
