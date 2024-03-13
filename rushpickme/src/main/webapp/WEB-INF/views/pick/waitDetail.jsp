@@ -21,12 +21,17 @@
 }
 </style>
 
+<script type="text/javascript">
+	function reject (){
+		window.location.href = "reject?applyNo=12";
+	}
+</script>
 
 <div class="container pick-container w-600 px-50 pt-10 my-50">
 
 	<div class="cell">
 		<h1>
-			<span>testuser1 님의 신청 정보</span>
+			<span>testuser1 님의</span>  신청 정보
 		</h1>
 	</div>
 	<br>
@@ -66,8 +71,8 @@
 	</div>
 	<br>
 	<div class="cell right">
-		<button>접수하기</button>
-		<button>거부하기</button>
+		<button class="btn">접수하기</button>
+		<button class="btn"onclick="reject()">거부하기</button>
 	</div>
 
 </div>

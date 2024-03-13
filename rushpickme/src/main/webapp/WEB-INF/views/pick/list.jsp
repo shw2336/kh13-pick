@@ -103,9 +103,9 @@
 	<div class="cell flex-cell list-box">
 		<h2>&nbsp;&nbsp;수거완료</h2>
 		&nbsp;
-		<h5 class=" width-fill pt-10">(최근 5건)</h5>
+		<h5 class=" width-fill pt-10">(최근 3건)</h5>
 		<h5 class="right width-fill pt-10">
-			<a href="#" class="link">전체보기+</a>
+			<a href="finishList" class="link">전체보기+</a>
 		</h5>
 	</div>
 
@@ -127,7 +127,7 @@
 							pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					<td><fmt:formatDate value="${voList.pickFinishDate}"
 							pattern="yyyy-MM-dd HH:mm:ss" /></td>
-					<td>${voList.pickPay}</td>
+					<td>${voList.pickPay} 원</td>
 				</tr>
 			</c:forEach>
 		</tbody>

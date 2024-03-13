@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dao.PickDao;
+import com.kh.rushpickme.dto.MemberPickDto;
 import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.vo.PageVO;
 import com.kh.rushpickme.vo.PickFinishVo;
@@ -41,6 +42,8 @@ public class PickController {
 		String loginId = (String) session.getAttribute("loginId");
 		model.addAttribute("loginId", loginId);
 		
+		MemberPickDto findArea = pickDao.pickArea(loginId);
+		System.out.println(findArea); 
 		List<PickFinishVo> voList = pickDao.pickFinishList();
 		model.addAttribute("voList", voList);
 		
@@ -49,7 +52,7 @@ public class PickController {
 		model.addAttribute("countProceed", pickDao.countProceed());
 		model.addAttribute("countReject", pickDao.countReject());
 		
-		return "/WEB-INF/views/pick/list.jsp";
+		return "/WEB-INF/views/pick/list.jsp"; 
 	}
 	
 	@RequestMapping("/waitList")
@@ -70,6 +73,16 @@ public class PickController {
 		List<PickProceedVo> proceedList = pickDao.proceedListByPaging(pageVo);
 		model.addAttribute("proceedList", proceedList);
 		return "/WEB-INF/views/pick/proceedList.jsp";
+	}
+	
+	@RequestMapping("/finishList")
+	public String finishList (Model model, @ModelAttribute PageVO pageVo) {
+		int count = pickDao.countFinish();
+		pageVo.setCount(count);
+		model.addAttribute("pageVo", pageVo);
+		List<PickFinishVo> finishList = pickDao.pickFinishListAll(pageVo);
+		model.addAttribute("finishList", finishList);
+		return "/WEB-INF/views/pick/finishList.jsp";
 	}
 	
 	@RequestMapping("/waitDetail")
