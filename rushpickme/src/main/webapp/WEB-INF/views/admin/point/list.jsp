@@ -13,7 +13,7 @@
 	<tr>
 		<td><img src="image?pointNo=${pointDto.pointNo}"></td>
 		<td>${pointDto.pointName}</td>
-		<td>${pointDto.pointPrice}원</td>
+		<td>${pointDto.pointSell}원</td>
 		<td>${pointDto.pointCharge}포인트 충전</td>
 		<td>
 		<a href="edit?pointNo=${pointDto.pointNo}">수정</a>
