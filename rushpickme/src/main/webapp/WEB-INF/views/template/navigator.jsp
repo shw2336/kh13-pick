@@ -2,9 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 
+<!-- 내가 구현한 스타일 -->
+<link rel="stylesheet" type="text/css" href="/css/commons.css">
+
 <%-- 네비게이터 --%>
 <div class="page-navigator">
-	<%-- 이전이 있을 경우만 링크를 제공! --%>
+	<%-- 이전이 있을 경우만 링크를 제공 --%>
 	<c:choose>
 		<c:when test="${pageVO.isFirstBlock()}">
 			<a class="off">&lt;이전</a>
