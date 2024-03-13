@@ -20,10 +20,10 @@ public class BuyDao {
 	
 	public void insert(BuyDto buyDto) {
 		String sql ="insert into buy("
-				+ "buy_no,member_id, point_no, buy_date, "
+				+ "buy_no, member_id, point_no, buy_date, "
 				+ " buy_qty, buy_total, point_name "
 				+ ") "
-				+ "values(buy_seq.nextval,?,?,?,?,?,?)";
+				+ "values(buy_seq.nextval, ?, ?, ?, ?, ?, ?)";
 			
 		Object[] data= {
 				buyDto.getMemberId(),buyDto.getPointNo(),buyDto.getBuyDate(),

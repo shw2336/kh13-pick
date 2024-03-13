@@ -112,13 +112,7 @@ public class MemberDao {
 			List<MemberDto> list = jdbcTemplate.query(sql,mapper,data);
 			return list.isEmpty() ? null : list.get(0);
 		}
-		//그린 멤버 승인
-		public void approveGreen(String memberId) {
-			String sql = "update member set member_type = 'green' where member_id = ?";
-			Object[] data = {memberId};
-			jdbcTemplate.update(sql, data);
-		}
-		
+
 		//피커 멤버 승인
 		public void approvePicker(String memberId) {
 			String sql = "update member set member_type = 'picker' where member_id = ?";
