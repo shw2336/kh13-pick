@@ -55,9 +55,9 @@
             <ul class="menu center">
                 <li><a href="/">홈</a></li>
                 <li><a href="#">수거서비스</a></li>
-                <li><a href="#">문의사항</a></li>
+                <li><a href="/qna/list">문의사항</a></li>
                 <li><a href="#">포인트</a></li>
-                <li><a href="#">로그인</a></li>
+                <li><a href="/member/login">로그인</a></li>
                 <li><a href="#">회원가입</a></li>
             </ul>
         </div>
