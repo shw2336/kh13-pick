@@ -6,10 +6,38 @@
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container w-800 py-50">
+<style>
+     .pick-container {
+         border-radius: 10px;
+         border: 1px solid gainsboro;
+         box-shadow: 0px 4px 4px 2px gainsboro;
+     }
+     
+     table > tbody > .contents-tr {
+     	cursor: pointer;
+     	height: 40px;
+     }
+     
+     
+     
+</style>
+
+<script type="text/javascript">
+
+	function aaa (no){
+		alert(no);
+	}
 	
-	<div class="cell">
-		<span style="font-size:20px; font-weight:bold;">접수 대기 리스트</span>
+	
+
+</script>
+
+<div class="container pick-container w-800 py-30 px-50 my-50">
+	
+	<div class="cell flex-cell pb-10">
+		<div class="cell">
+			<span style="font-size:25px; font-weight:bold;">수거대기 리스트</span>
+		</div>
 	</div>
 	
 	<div class="cell">
@@ -20,20 +48,20 @@
 				<th>주소</th>
 				<th>배출봉투</th>
 				<th>신청일시</th>
-				<th>수거희망일시</th>
+				<th>수거희망일</th>
 			</tr>
 		</thead>
 	
 		<tbody>
 			<c:forEach var="waitList" items="${waitList}">
-				<tr>
+				<tr onclick="aaa('${waitList.applyNo}');" class="contents-tr">
 					<td>${waitList.applyNo}</td>
 					<td>${waitList.applyAddress1}</td>
 					<td>${waitList.applyVinyl}</td>
 					<td><fmt:formatDate value="${waitList.applyDate}"
-							pattern="yyyy-MM-dd HH:mm:ss" /></td>
+							pattern="MM월 dd일 HH:mm" /></td>
 					<td><fmt:formatDate value="${waitList.applyHopeDate}"
-					pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					pattern="MM월 dd일" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>
