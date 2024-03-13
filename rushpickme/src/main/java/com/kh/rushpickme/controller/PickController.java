@@ -43,7 +43,7 @@ public class PickController {
 		model.addAttribute("loginId", loginId);
 		
 		MemberPickDto findArea = pickDao.pickArea(loginId);
-		System.out.println(findArea);
+		System.out.println(findArea); 
 		List<PickFinishVo> voList = pickDao.pickFinishList();
 		model.addAttribute("voList", voList);
 		
@@ -52,7 +52,7 @@ public class PickController {
 		model.addAttribute("countProceed", pickDao.countProceed());
 		model.addAttribute("countReject", pickDao.countReject());
 		
-		return "/WEB-INF/views/pick/list.jsp";
+		return "/WEB-INF/views/pick/list.jsp"; 
 	}
 	
 	@RequestMapping("/waitList")
