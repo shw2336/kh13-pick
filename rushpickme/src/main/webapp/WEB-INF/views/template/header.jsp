@@ -65,7 +65,7 @@
   
     <div class="section">
         <div class="article">
-            <!-- Your article content goes here -->
+            <!-- Your article content goes hered -->
         </div>
     </div>
   
