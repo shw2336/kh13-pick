@@ -55,7 +55,7 @@
             <ul class="menu center">
                 <li><a href="/">홈</a></li>
                 <li><a href="#">수거서비스</a></li>
-                <li><a href="#">문의사항</a></li>
+                <li><a href="/qna/list">문의사항</a></li>
                 <li><a href="#">포인트</a></li>
                 <li><a href="/member/login">로그인</a></li>
                 <li><a href="/member/signUp">회원가입</a></li>
@@ -65,7 +65,7 @@
   
     <div class="section">
         <div class="article">
-            <!-- Your article content goes here -->
+            <!-- Your article content goes hered -->
         </div>
     </div>
   
