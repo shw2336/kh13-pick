@@ -439,8 +439,10 @@ textarea.tool.tool-fixed {
 .page-navigator > a.on ,
 .page-navigator > a:not(.off):hover
 {
-    color: #2d3436;
-    border-color: #2d3436;
+    color: rgb(255, 128, 128);
+    font-weight: bold;
+/*     border-color: #2d3436; */
+	border : none;
 }
 
 /* off 클래스에 대한 효과 추가 */

@@ -17,6 +17,7 @@ import com.kh.rushpickme.dao.PickDao;
 import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.vo.PageVO;
 import com.kh.rushpickme.vo.PickFinishVo;
+import com.kh.rushpickme.vo.PickProceedVo;
 import com.kh.rushpickme.vo.PickWaitVo;
 
 import jakarta.servlet.http.HttpSession;
@@ -53,12 +54,22 @@ public class PickController {
 	
 	@RequestMapping("/waitList")
 	public String waitList (Model model, @ModelAttribute PageVO pageVo) {
-		int count = pickDao.listCnt(pageVo);
+		int count = pickDao.countApply();
 		pageVo.setCount(count);	
 		model.addAttribute("pageVo", pageVo);
-		List<PickWaitVo> waitList = pickDao.waiyListByPaging(pageVo);
+		List<PickWaitVo> waitList = pickDao.waitListByPaging(pageVo);
 		model.addAttribute("waitList", waitList);
 		return "/WEB-INF/views/pick/waitList.jsp";
+	}
+	
+	@RequestMapping("/proceedList")
+	public String proceedList (Model model, @ModelAttribute PageVO pageVo) {
+		int count = pickDao.countProceed();
+		pageVo.setCount(count);
+		model.addAttribute("pageVo", pageVo);
+		List<PickProceedVo> proceedList = pickDao.proceedListByPaging(pageVo);
+		model.addAttribute("proceedList", proceedList);
+		return "/WEB-INF/views/pick/proceedList.jsp";
 	}
 	
 	@RequestMapping("/waitDetail")
