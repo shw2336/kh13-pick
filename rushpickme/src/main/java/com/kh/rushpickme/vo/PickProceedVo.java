@@ -8,7 +8,7 @@ public class PickProceedVo {
 	private String applyAddress1;
 	private int applyVinyl;
 	private Date applyDate;
-	private Date applyHopeDate;
+	private String applyHopeDate;
 	private String timePasses;
 	
 	public PickProceedVo() {
@@ -32,16 +32,19 @@ public class PickProceedVo {
 	public void setApplyVinyl(int applyVinyl) {
 		this.applyVinyl = applyVinyl;
 	}
+
+
+
 	public Date getApplyDate() {
 		return applyDate;
 	}
 	public void setApplyDate(Date applyDate) {
 		this.applyDate = applyDate;
 	}
-	public Date getApplyHopeDate() {
+	public String getApplyHopeDate() {
 		return applyHopeDate;
 	}
-	public void setApplyHopeDate(Date applyHopeDate) {
+	public void setApplyHopeDate(String applyHopeDate) {
 		this.applyHopeDate = applyHopeDate;
 	}
 	public String getTimePasses() {

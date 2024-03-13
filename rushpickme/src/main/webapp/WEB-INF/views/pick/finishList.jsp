@@ -51,9 +51,9 @@
 					<tr class="contents-tr">
 						<td>${finishList.pickNo}</td>
 						<td><fmt:formatDate value="${finishList.applyDate}"
-								pattern="yyyy-MM-dd HH:mm:ss" /></td>
+								pattern="MM월 dd일 HH시 mm분" /></td>
 						<td><fmt:formatDate value="${finishList.pickFinishDate}"
-								pattern="yyyy-MM-dd HH:mm:ss" /></td>
+								pattern="MM월 dd일 HH시 mm분" /></td>
 						<td>${finishList.pickPay} 원</td>
 					</tr>
 				</c:forEach>
