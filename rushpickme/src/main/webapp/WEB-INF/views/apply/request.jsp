@@ -7,7 +7,7 @@
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
         //지역 선택 
-     $("[name=applyArea]").on("blur",function(){
+    	 $("[name=applyArea]").on("blur",function(){
             var regex=/^[가-힣]+$/;
             state.applyAreaeValid = regex.test($(this).val());
            
@@ -74,14 +74,14 @@
         //남길 말 넘기기 
         
         
-     /*    //수거 신청 버튼 후 메인페이지(러쉬픽미) 로 넘어가기 
+     //수거 신청 버튼 후 메인페이지(러쉬픽미) 로 넘어가기 
         function mainPage(){
         	var choice = confirm("정말 신청하시겠습니까?");
         	if(choice){
         		window.open("http://localhost:8080/","RushPickMe","width500,height=500");
         	}
         }
-         */
+         
 
 </script>
 <body>
@@ -91,9 +91,6 @@
                 <h1>수거 신청 페이지</h1>
                 
             </div>
-            
-            
-            
             <div class="cell w-500">
                 <h2> 신청 지역 선택
                     <i class="fa-solid fa-truck"></i>
@@ -182,7 +179,7 @@
             
             <div class="cell">
                 <h2> 배출 사진 첨부 파일 <i class="fa-regular fa-images"></i></h2>
-                <input type="file" class="tool w-500">
+                <input name="applyAttach" type="file" class="tool w-500">
                 <button type="button" class="btn w-100">첨부</button>
             </div>
             
