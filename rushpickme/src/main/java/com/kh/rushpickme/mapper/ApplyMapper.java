@@ -24,9 +24,9 @@ public class ApplyMapper implements RowMapper<ApplyDto>{
 		applyDto.setApplyWay(rs.getString("apply_way"));
 		applyDto.setApplyWeight(rs.getInt("apply_weight"));
 		applyDto.setApplyVinyl(rs.getInt("apply_vinyl"));
-		applyDto.setApplyHopeDate(rs.getDate("apply_hope_date"));
 		applyDto.setApplyCancel(rs.getString("apply_cancel"));
 		applyDto.setApplyState(rs.getString("apply_state"));
+		applyDto.setApplyHopeDate(rs.getString("apply_hope_date"));
 		applyDto.setApplyDate(rs.getDate("apply_date"));
 		
 		return applyDto;
