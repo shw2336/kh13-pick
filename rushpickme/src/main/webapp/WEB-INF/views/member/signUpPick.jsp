@@ -320,7 +320,7 @@
 	</div>
 	
 	<!-- 1페이지 - 아이디/비밀번호 -->
-	<div class="cell page">
+	<div class="cell">
 		<div class="cell">
             <label>
                 아이디
@@ -373,7 +373,7 @@
         </div>
 	
 	
-	<div class="cell page">
+	<div class="cell">
 		<div class="cell">
             <label>
                 닉네임<i class="fa-solid fa-pen"></i>
@@ -389,7 +389,7 @@
 		
 	</div>
 	
-	<div class="cell page">
+	<div class="cell">
 		<div class="cell">
             <label>이메일<i class="fa-regular fa-envelope"></i></i></label>
             
@@ -428,7 +428,7 @@
 		
 	</div>
 	
-	<div class="cell page">
+	<div class="cell">
 	<!-- 	<!-- 주소 : 모두 입력하든가 입력하지 않든가 -->
         <div class="cell">
             <label>주소<i class="fa-regular fa-address-book"></i>
