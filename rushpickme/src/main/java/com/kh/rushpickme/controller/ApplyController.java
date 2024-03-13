@@ -42,24 +42,19 @@ public class ApplyController {
 		@PostMapping("/request")
 		private String request(@ModelAttribute ApplyDto applyDto, 
 					               	@RequestParam MultipartFile attach,HttpSession session ) throws IllegalStateException, IOException {
-			
-			applyDao.insert(applyDto);
-			
+			applyDao.applyInsert(applyDto);
 			//첨부파일 등록
 			if(!attach.isEmpty()) {
 				int attachNo = attachService.save(attach);//파일저장+DB저장
 				applyDao.connect(applyDto.getMemberId(), attachNo);//연결
 			}
 			return"redirect:/";
-			
 		}
 		//미리 아이디 꺼내기 
 		public String request(HttpSession session, @ModelAttribute ApplyDto applyDto) {
 		//1. 세션에 저장된 아이디를 꺼낸다
 //		String loginId = (String) session.getAttribute("loginId");
 		String loginId = "testuser1";
-		
-		
 		//로그인 아이디 뽑기 
 		applyDto.setMemberId(loginId);
 		
@@ -67,10 +62,16 @@ public class ApplyController {
 		
 		applyDto.setApplyNo(longinNo); 
 		
-		applyDao.insert(applyDto);
+		applyDao.applyInsert(applyDto);
 		
 		//4. 연결될 화면을 반환한다
 		return "redirect:/";
+		}
+		
+		//stateList화면 
+		@GetMapping("/stateList")
+		private String stateList() {
+			return "/WEB-INF/views/apply/stateList.jsp"; //이용상세 내역 페이지 
 		}
 		
 		

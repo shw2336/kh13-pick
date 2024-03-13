@@ -6,15 +6,6 @@
 
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
-        //지역 선택 
-    	 $("[name=applyArea]").on("blur",function(){
-            var regex=/^[가-힣]+$/;
-            state.applyAreaeValid = regex.test($(this).val());
-           
-           $(this).removeClass("success fail")
-                            .addClass(applyAreaValid ? "success" : "fail");
-
-        });
         //우편 번호 선택 
         $(function () {
             $(".btn-address-search").click(function () {
@@ -51,19 +42,19 @@
             });
         });
 
-        function checkApplyHopeDate() {
+      //  function checkApplyHopeDate() {
             //select는 option이 있지만 select 자체로 제어하도록 권장
-            var inputTarget = document.querySelector("[name=applyHopeDate]");
+        //    var inputTarget = document.querySelector("[name=applyHopeDate]");
 
 
             //날짜 검사
-            var regex = /^(19[0-9]{2}|20[0-9]{2})-(02-(0[1-9]|1[0-9]|2[0-8])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
-            var isValid = regex.test(inputTarget.value);
+       //     var regex = /^(19[0-9]{2}|20[0-9]{2})-(02-(0[1-9]|1[0-9]|2[0-8])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
+        //    var isValid = regex.test(inputTarget.value);
 
-            inputTarget.classList.remove("success", "fail");
-            inputTarget.classList.add(isValid ? "success" : "fail");
-            return isValid;
-        }
+     //      inputTarget.classList.remove("success", "fail");
+       //     inputTarget.classList.add(isValid ? "success" : "fail");
+        //    return isValid;
+     //   }
         //보유포인트 가져오기 
 
 
@@ -81,6 +72,9 @@
         		window.open("http://localhost:8080/","RushPickMe","width500,height=500");
         	}
         }
+        
+        
+        
          
 
 </script>
@@ -95,7 +89,7 @@
                 <h2> 신청 지역 선택
                     <i class="fa-solid fa-truck"></i>
                 </h2>
-		<form action="request" method="post" enctype="multipart/form-data" autocomplete="off" >
+		<form action="add" method="post" autocomplete="off">
                 <select name="applyArea" class="tool w-100"  oninput="areaData()">
                     <option value="">선택하세요</option>
                     <option value="강남구">강남구</option>
