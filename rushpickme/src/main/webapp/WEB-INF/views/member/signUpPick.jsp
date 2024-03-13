@@ -3,6 +3,7 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+ <!-- 수정 업로드 -->
 <script type="text/javascript">
 	$(function(){
 	    //상태객체(React의 state로 개념이 이어짐)
