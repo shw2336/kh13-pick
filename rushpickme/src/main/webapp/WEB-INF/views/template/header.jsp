@@ -58,7 +58,7 @@
                 <li><a href="/qna/list">문의사항</a></li>
                 <li><a href="#">포인트</a></li>
                 <li><a href="/member/login">로그인</a></li>
-                <li><a href="#">회원가입</a></li>
+                <li><a href="/member/signUp">회원가입</a></li>
             </ul>
         </div>
     </div>
