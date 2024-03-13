@@ -157,21 +157,21 @@ public class MemberController {
 
 	}
 
-	// 개인정보 변경
-	@GetMapping("/changeaccount")
-	public String changeAccount(Model model, HttpSession session) {
+	// 일반회원 개인정보 변경
+	@GetMapping("/changeAccountGreen")
+	public String changeAccountGreen(Model model, HttpSession session) {
 		// 1.로그인 되어있는 회원을 세션에서 가져온다
 		String loginId = (String) session.getAttribute("loginId");
 
 		// 2.로그인 되어있는 아이디로 Dto에 있는 정보를 불러온다
 		MemberDto memberDto = memberDao.selectOne(loginId);
 		MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
-		MemberPickDto memberPickDto = memberDao.selectOnePick(loginId);
+		//MemberPickDto memberPickDto = memberDao.selectOnePick(loginId);
 
 		// 3. 화면에 정보 전달
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("memberGreenDto", memberGreenDto);
-		model.addAttribute("memberPickDto", memberPickDto);
+		//model.addAttribute("memberPickDto", memberPickDto);
 
 		// 4.로그인 되어있는 회원의 구매내역 첨부
 		model.addAttribute("buyList", buyDao.selectList(loginId));
@@ -179,28 +179,29 @@ public class MemberController {
 		// 5.현재 사용자의 Q&A 작성글
 		model.addAttribute(loginId, memberDto);
 		model.addAttribute(loginId, memberGreenDto);
-		model.addAttribute(loginId, memberPickDto);
+		//model.addAttribute(loginId, memberPickDto);
 
 		// 6.view 전달
-		return "/WEB-INF/views/member/changeAccount.jsp";
+		return "/WEB-INF/views/member/changeAccountGreen.jsp";
 	}
 
-	@PostMapping("/changeaccount")
-	public String changeAccount(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberGreenDto memberGreenDto,
-			@ModelAttribute MemberPickDto memberPickDto, HttpSession session) {
+	@PostMapping("/changeAccountGreen")
+	public String changeAccountGreen(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberGreenDto memberGreenDto,
+									HttpSession session) {
 		String loginId = (String) session.getAttribute("loginId");
 		// memberDto 아이디 설정
 		memberDto.setMemberId(loginId);
 		// memberGreenDto 아이디 설정
 		memberGreenDto.setMemberId(loginId);
 		// memberPickDto 아이디 설정
-		memberPickDto.setMemberId(loginId);
+		//memberPickDto.setMemberId(loginId);
 
 		// DB정보 조회
 		MemberDto findMemberDto = memberDao.selectOne(loginId);
-		MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
-		MemberPickDto findPickDto = memberDao.selectOnePick(loginId);
-
+		//MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
+		//MemberPickDto findPickDto = memberDao.selectOnePick(loginId);
+		
+		
 		// 조건
 		boolean isValid = memberDto.getMemberPw().equals(findMemberDto.getMemberPw());
 
@@ -210,7 +211,7 @@ public class MemberController {
 		if (isValid) {
 			memberDao.updateMember(memberDto);
 			memberDao.updateGreenMember(memberGreenDto);
-			memberDao.updatePickMember(memberPickDto);
+			//memberDao.updatePickMember(memberPickDto);
 
 			return "redirect:mypage";
 		}
@@ -222,6 +223,70 @@ public class MemberController {
 		}
 
 	}
+	
+	// 수거회원 개인정보 변경
+		@GetMapping("/changeAccountPick")
+		public String changeAccountPick(Model model, HttpSession session) {
+			// 1.로그인 되어있는 회원을 세션에서 가져온다
+			String loginId = (String) session.getAttribute("loginId");
+
+			// 2.로그인 되어있는 아이디로 Dto에 있는 정보를 불러온다
+			MemberDto memberDto = memberDao.selectOne(loginId);
+		//	MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
+			MemberPickDto memberPickDto = memberDao.selectOnePick(loginId);
+
+			// 3. 화면에 정보 전달
+			model.addAttribute("memberDto", memberDto);
+		//	model.addAttribute("memberGreenDto", memberGreenDto);
+			model.addAttribute("memberPickDto", memberPickDto);
+
+			// 4.로그인 되어있는 회원의 구매내역 첨부
+			model.addAttribute("buyList", buyDao.selectList(loginId));
+
+			// 5.현재 사용자의 Q&A 작성글
+			model.addAttribute(loginId, memberDto);
+		//	model.addAttribute(loginId, memberGreenDto);
+			model.addAttribute(loginId, memberPickDto);
+
+			// 6.view 전달
+			return "/WEB-INF/views/member/changeAccountPick.jsp";
+		}
+
+		@PostMapping("/changeAccountPick")
+		public String changeAccountPick(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberPickDto memberPickDto,
+				 HttpSession session) {
+			String loginId = (String) session.getAttribute("loginId");
+			// memberDto 아이디 설정
+			memberDto.setMemberId(loginId);
+			// memberGreenDto 아이디 설정
+			//memberGreenDto.setMemberId(loginId);
+			// memberPickDto 아이디 설정
+			memberPickDto.setMemberId(loginId);
+
+			// DB정보 조회
+			MemberDto findMemberDto = memberDao.selectOne(loginId);
+			//MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
+			//MemberPickDto findPickDto = memberDao.selectOnePick(loginId);
+
+			// 조건
+			boolean isValid = memberDto.getMemberPw().equals(findMemberDto.getMemberPw());
+
+			// 변경
+			if (isValid) {
+				memberDao.updateMember(memberDto);
+				//memberDao.updateGreenMember(memberGreenDto);
+				memberDao.updatePickMember(memberPickDto);
+
+				return "redirect:mypage";
+			}
+
+			else {
+				// 이전 페이지로 리다이렉트
+				return "redirect:change?error";
+
+			}
+
+		}
 
 	@GetMapping("/changepassword")
 	public String changePassword() {
@@ -236,8 +301,8 @@ public class MemberController {
 
 		// DB에 있는 비밀번호 확인
 		MemberDto findDto = memberDao.selectOne(loginId);
-		MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
-		MemberPickDto findPickDto = memberDao.selectOnePick(loginId);
+//		MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
+//		MemberPickDto findPickDto = memberDao.selectOnePick(loginId);
 		boolean isValid = findDto.getMemberPw().equals(afterPw);
 
 		if (isValid) {
@@ -282,6 +347,34 @@ public class MemberController {
 			return "redirect:exit?error";
 		}
 
+	}
+	@GetMapping("/findPw")
+	public String findPw() {
+		return "/WEB-INF/views/member/findPw.jsp";
+	}
+	@PostMapping("/findPw")
+	public String findPw(@ModelAttribute MemberDto memberDto) {
+		MemberDto findDto = memberDao.selectOne(memberDto.getMemberId());
+		
+		//아이디가 있으면서 이메일까지 일치하면 통과
+		boolean isValid = findDto!=null&&
+				findDto.getMemberEmail().equals(memberDto.getMemberEmail());
+		if(isValid) {
+			emailService.sendTempPassword(findDto);
+			return "redirect:findPwSuccess";
+		}
+		else {
+			return "redirect:findPwFail";
+		}
+		
+	}
+	@RequestMapping("/findPwSuccess")
+	public String findPwsuccess() {
+		return "/WEB-INF/views/member/findPwSuccess.jsp";
+	}
+	@RequestMapping("/findPwFail")
+	public String findPwfail() {
+		return "/WEB-INF/views/member/findPwFail.jsp";
 	}
 
 }

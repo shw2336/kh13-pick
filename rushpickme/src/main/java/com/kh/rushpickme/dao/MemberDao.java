@@ -127,13 +127,14 @@ public class MemberDao {
 		public boolean updateMember(MemberDto memberDto) {
 			String sql = "update member set "
 								+ "member_nick=?, member_contact=?, member_name=?, "
-								+ " member_email=?, "
-								+ "member_birth=? "
-							+ "where member_id = ?";
+								+ "member_email=?,"
+								+ "member_birth=? where member_id=? ";
+								
+							
 			Object[] data = {
 				memberDto.getMemberNick(),memberDto.getMemberContact(),memberDto.getMemberName(),
-				memberDto.getMemberEmail(),
-				memberDto.getMemberBirth()
+				memberDto.getMemberEmail(),memberDto.getMemberBirth(),memberDto.getMemberId()
+				
 			};
 			return jdbcTemplate.update(sql, data) > 0;
 		}
@@ -144,10 +145,10 @@ public class MemberDao {
 										+ "member_green_post=?, member_green_address1=?, member_green_address2=? "
 										+ "where member_id =?" ;
 										
-									
+		
 					Object[] data = {
 							memberGreenDto.getMemberGreenPost(),memberGreenDto.getMemberGreenAddress1(),
-							memberGreenDto.getMemberGreenAddress2()
+							memberGreenDto.getMemberGreenAddress2(),memberGreenDto.getMemberId()
 					};
 					return jdbcTemplate.update(sql, data) > 0;
 				}
@@ -157,7 +158,7 @@ public class MemberDao {
 							+ "member_pick_area "
 							+ "where member_id =?";
 					Object[] data = {
-							memberPickDto.getMemberPickArea()
+							memberPickDto.getMemberPickArea(),memberPickDto.getMemberId()
 					};
 					return jdbcTemplate.update(sql,data)>0;
 				}
