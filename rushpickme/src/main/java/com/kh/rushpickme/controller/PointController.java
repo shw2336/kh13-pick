@@ -48,15 +48,15 @@ public class PointController {
 	
 	return "redirect:chargeFinish";
 }
-@RequestMapping("/chargeFinish")
-public String chargeFinish() {
-	return "/WEB-INF/views/point/chargeFinish.jsp";
-}
+	@RequestMapping("/chargeFinish")
+	public String chargeFinish() {
+	    return "/WEB-INF/views/point/chargeFinish.jsp";
+	}
 
 @RequestMapping("/image")
-public String image(@RequestParam int itemNo) {
+public String image(@RequestParam int pointNo) {
 	try {
-		int attachNo = pointDao.findAttachNo(itemNo);
+		int attachNo = pointDao.findAttachNo(pointNo);
 		return "redirect:/download?attachNo=" + attachNo;
 	}
 	catch(Exception e) {

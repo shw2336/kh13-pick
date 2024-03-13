@@ -79,14 +79,6 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping("/member/approveGreen")
-	public String approveGreen(@RequestParam String memberId, Model model) {
-		memberDao.approveGreen(memberId);
-		List<MemberDto> list = memberDao.selectList("member_type", "green");
-		model.addAttribute("greenList", list);
-		return "/WEB-INF/views/admin/member/greenlist.jsp";
-	}
-	
 	@RequestMapping("/member/approvePicker")
 	public String approvePicker(@RequestParam String memberId, Model model) {
 		memberDao.approvePicker(memberId);
