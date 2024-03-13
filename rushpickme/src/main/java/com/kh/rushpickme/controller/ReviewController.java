@@ -107,7 +107,7 @@ public class ReviewController {
 		List<ReviewDto> list = reviewDao.selectListByPaging(pageVO);
 		model.addAttribute("list", list);
 		
-		return "/WEB-INF/views/review/list2.jsp";
+		return "/WEB-INF/views/review/list.jsp";
 	}
 	
 	@RequestMapping("/detail")

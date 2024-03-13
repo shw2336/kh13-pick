@@ -30,7 +30,7 @@ public class ReviewDao {
 		
 		String sql = "select "
 							+ "review_no, ask_no, member_id, "
-							+ "review_star, review_content, review_delete "
+							+ "review_star, review_content, review_delete, "
 							+ "review_write, review_edit "
 						+ "from review order by review_no desc";
 		return jdbcTemplate.query(sql, reviewListMapper);
@@ -45,7 +45,7 @@ public class ReviewDao {
 		
 		String sql = "select "
 							+ "review_no, ask_no, member_id, "
-							+ "review_star, review_content, review_delete "
+							+ "review_star, review_content, review_delete, "
 							+ "review_write, review_edit "
 						+ "from review "
 						+ "where instr("+column+", ?) > 0 "
@@ -66,7 +66,7 @@ public class ReviewDao {
 							+ "select rownum rn, TMP.* from ("
 								+ "select "
 									+ "review_no, ask_no, member_id, "
-									+ "review_star, review_content, review_delete "
+									+ "review_star, review_content, review_delete, "
 									+ "review_write, review_edit "
 								+ "from review order by review_no desc"
 							+ ")TMP"
@@ -85,7 +85,7 @@ public class ReviewDao {
 							+ "select rownum rn, TMP.* from ("
 								+ "select "
 									+ "review_no, ask_no, member_id, "
-									+ "review_star, review_content, review_delete "
+									+ "review_star, review_content, review_delete, "
 									+ "review_write, review_edit "
 								+ "from review "
 								+ "where instr("+column+", ?) > 0 "
