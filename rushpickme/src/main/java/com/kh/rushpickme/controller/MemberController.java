@@ -188,7 +188,8 @@ public class MemberController {
 	@PostMapping("/changeAccountGreen")
 	public String changeAccountGreen(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberGreenDto memberGreenDto,
 									HttpSession session) {
-		String loginId = (String) session.getAttribute("loginId");
+		String loginId = (String)session.getAttribute("loginId");
+
 		// memberDto 아이디 설정
 		memberDto.setMemberId(loginId);
 		// memberGreenDto 아이디 설정
@@ -198,32 +199,30 @@ public class MemberController {
 
 		// DB정보 조회
 		MemberDto findMemberDto = memberDao.selectOne(loginId);
-		//MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
+//		MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
 		//MemberPickDto findPickDto = memberDao.selectOnePick(loginId);
 		
 		
-		// 조건
-		boolean isValid = memberDto.getMemberPw().equals(findMemberDto.getMemberPw());
-
-		System.out.println("aaa");
-		System.out.println(loginId);
-		// 변경
-		if (isValid) {
-			memberDao.updateMember(memberDto);
-			memberDao.updateGreenMember(memberGreenDto);
-			//memberDao.updatePickMember(memberPickDto);
-
-			return "redirect:mypage";
+		/// 조건
+		boolean isValid = false;
+		String memberPw = memberDto.getMemberPw();
+		String findMemberPw = findMemberDto.getMemberPw();
+		if (memberPw != null && findMemberPw != null) {
+		    isValid = memberPw.equals(findMemberPw);
 		}
 
-		else {
-			// 이전 페이지로 리다이렉트
-			return "redirect:change?error";
-
+		// 변경
+		if (isValid) {
+		    memberDao.updateMember(memberDto);
+		    memberDao.updateGreenMember(memberGreenDto);
+		    return "redirect:mypage";
+		} else {
+		    // 이전 페이지로 리다이렉트
+		    return "redirect:/";
 		}
 
 	}
-	
+	//ㅎ2
 	// 수거회원 개인정보 변경
 		@GetMapping("/changeAccountPick")
 		public String changeAccountPick(Model model, HttpSession session) {
