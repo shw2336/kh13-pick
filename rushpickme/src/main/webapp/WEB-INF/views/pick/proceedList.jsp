@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -18,17 +18,13 @@
      	height: 40px;
      }
      
-     
-     
 </style>
 
 <script type="text/javascript">
 
-	function detail (no){
-		window.location.href = "waitDetail?applyNo=" + no;
-	}
-	
-	
+// 	function detail (no){
+// 		window.location.href = "waitDetail?applyNo=" + no;
+// 	}
 
 </script>
 
@@ -36,7 +32,7 @@
 	
 	<div class="cell flex-cell pb-10">
 		<div class="cell">
-			<span style="font-size:25px; font-weight:bold;">수거대기 리스트</span>
+			<span style="font-size:25px; font-weight:bold;">수거 진행중...</span>
 		</div>
 	</div>
 	
@@ -44,24 +40,26 @@
 	<table class="table table-horizontal table-hover">
 		<thead>
 			<tr>
-				<th>신청번호</th>
+				<th>수거번호</th>
 				<th>주소</th>
 				<th>배출봉투</th>
 				<th>신청일시</th>
 				<th>수거희망일</th>
+				<th></th>
 			</tr>
 		</thead>
 	
 		<tbody>
-			<c:forEach var="waitList" items="${waitList}">
-				<tr onclick="detail('${waitList.applyNo}');" class="contents-tr">
-					<td>${waitList.applyNo}</td>
-					<td>${waitList.applyAddress1}</td>
-					<td>${waitList.applyVinyl}</td>
-					<td><fmt:formatDate value="${waitList.applyDate}"
+			<c:forEach var="proceedList" items="${proceedList}">
+				<tr class="contents-tr">
+					<td>${proceedList.pickNo}</td>
+					<td>${proceedList.applyAddress1}</td>
+					<td>${proceedList.applyVinyl}</td>
+					<td><fmt:formatDate value="${proceedList.applyDate}"
 							pattern="MM월 dd일 HH:mm" /></td>
-					<td><fmt:formatDate value="${waitList.applyHopeDate}"
+					<td><fmt:formatDate value="${proceedList.applyHopeDate}"
 					pattern="MM월 dd일" /></td>
+					<td>${proceedList.timePasses}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
