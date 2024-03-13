@@ -5,11 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.dto.MemberGreenDto;
 import com.kh.rushpickme.dto.MemberPickDto;
+import com.kh.rushpickme.mapper.MemberGreenMapper;
 import com.kh.rushpickme.mapper.MemberMapper;
+import com.kh.rushpickme.mapper.MemberPickMapper;
+
+import jakarta.servlet.http.HttpSession;
 
 @Repository
 public class MemberDao {
@@ -17,6 +23,13 @@ public class MemberDao {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private MemberMapper mapper;
+	@Autowired
+	private MemberGreenMapper greenMapper;
+	@Autowired
+	private MemberPickMapper pickMapper;
+	
+	@Autowired
+	private BuyDao buyDao;
 	
 	//회원 가입
 	public void insert(MemberDto memberdto) {
@@ -78,6 +91,25 @@ public class MemberDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	//일반회원 상세(그린)
+	public MemberGreenDto selectOneGreen(String memberId) {
+		String sql = "select * from member_green where member_id = ?";
+		Object[] data = {memberId};
+		List<MemberGreenDto> list = jdbcTemplate.query(sql, greenMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	//수거회원 상세(피커)
+		public MemberPickDto selectOnePick(String memberId) {
+			String sql = "select * from member_pick where member_id = ?";
+			Object[] data = {memberId};
+			List<MemberPickDto> list = jdbcTemplate.query(sql, pickMapper, data);
+			return list.isEmpty() ? null : list.get(0);
+		}
+		
+	
+		
+	
 		//비밀번호 변경
 		public boolean updateMemberPw(MemberDto memberdto) {
 			String sql = "update member set member_pw=? where member_id=?";
@@ -105,6 +137,30 @@ public class MemberDao {
 			};
 			return jdbcTemplate.update(sql, data) > 0;
 		}
+		
+		//일반회원정보 변경
+				public boolean updateGreenMember(MemberGreenDto memberGreenDto) {
+					String sql = "update member_green set "
+										+ "member_green_post=?, member_green_address1=?, member_green_address2=? "
+										+ "where member_id =?" ;
+										
+									
+					Object[] data = {
+							memberGreenDto.getMemberGreenPost(),memberGreenDto.getMemberGreenAddress1(),
+							memberGreenDto.getMemberGreenAddress2()
+					};
+					return jdbcTemplate.update(sql, data) > 0;
+				}
+				//수거회원근무지 변경
+				public boolean updatePickMember(MemberPickDto memberPickDto) {
+					String sql = "update member_pick set "
+							+ "member_pick_area "
+							+ "where member_id =?";
+					Object[] data = {
+							memberPickDto.getMemberPickArea()
+					};
+					return jdbcTemplate.update(sql,data)>0;
+				}
 		
 		public MemberDto selectOneByMemberNick(String memberNick) {
 			String sql = "select * from member where member_nick = ?";
