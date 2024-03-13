@@ -32,42 +32,44 @@
 
 </script>
 
-<div class="container pick-container w-800 py-30 px-50 my-50">
-	
-	<div class="cell flex-cell pb-10">
-		<div class="cell">
-			<span style="font-size:25px; font-weight:bold;">수거대기 리스트</span>
+	<div class="container pick-container w-800 py-30 px-50 my-50">
+		
+		<div class="cell flex-cell pb-10">
+			<div class="cell">
+				<span style="font-size:25px; font-weight:bold;">수거대기 리스트</span>
+			</div>
 		</div>
-	</div>
-	
-	<div class="cell">
-	<table class="table table-horizontal table-hover">
-		<thead>
-			<tr>
-				<th>신청번호</th>
-				<th>주소</th>
-				<th>배출봉투</th>
-				<th>신청일시</th>
-				<th>수거희망일</th>
-			</tr>
-		</thead>
-	
-		<tbody>
-			<c:forEach var="waitList" items="${waitList}">
-				<tr onclick="detail('${waitList.applyNo}');" class="contents-tr">
-					<td>${waitList.applyNo}</td>
-					<td>${waitList.applyAddress1}</td>
-					<td>${waitList.applyVinyl}</td>
-					<td><fmt:formatDate value="${waitList.applyDate}"
-					pattern="MM월 dd일" /></td>
-					<td>${waitList.applyHopeDate}</td>
+		
+		<div class="cell">
+		<table class="table table-horizontal table-hover">
+			<thead>
+				<tr>
+					<th>신청번호</th>
+					<th>주소</th>
+					<th>배출봉투</th>
+					<th>신청일시</th>
+					<th>수거희망일</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+		
+			<tbody>
+				<c:forEach var="waitList" items="${waitList}">
+					<tr onclick="detail('${waitList.applyNo}');" class="contents-tr">
+						<td>${waitList.applyNo}</td>
+						<td>${waitList.applyAddress1}</td>
+						<td>${waitList.applyVinyl}</td>
+						<td><fmt:formatDate value="${waitList.applyDate}"
+						pattern="MM월 dd일" /></td>
+						<td>${waitList.applyHopeDate}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		</div>
+		<form action="waitList">
+			<jsp:include page="/WEB-INF/views/template/pickNavigator.jsp"></jsp:include>
+		</form>
 	</div>
 	
-	<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
-	
-</div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

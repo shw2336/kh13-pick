@@ -3,9 +3,12 @@ package com.kh.rushpickme.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +30,10 @@ import jakarta.servlet.http.HttpSession;
 @Controller 
 @RequestMapping("/pick")
 public class PickController {
-
+	@InitBinder
+	public void initBinder (WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+	}
 	@Autowired
 	private PickDao pickDao;
 	
@@ -43,12 +49,21 @@ public class PickController {
 		String loginId = (String) session.getAttribute("loginId");
 		model.addAttribute("loginId", loginId);
 		
-		MemberPickDto findArea = pickDao.pickArea(loginId);
-		System.out.println(findArea); 
+		String findArea = pickDao.pickArea(loginId);
+		session.setAttribute("findArea", findArea); 
+		System.out.println(findArea);
+		//근무지역 세션에 담아주기, list에서 사용하려고
+		
+		if (findArea != null) {
+			model.addAttribute("findArea",findArea);
+		}else {
+			return "redirect:/member/login";
+		}
+			
 		List<PickFinishVo> voList = pickDao.pickFinishList();
 		model.addAttribute("voList", voList);
 		
-		model.addAttribute("countApply", pickDao.countApply());
+		model.addAttribute("countApply", pickDao.countApply(loginId));
 		model.addAttribute("countUrgentApply", pickDao.countUrgentApply());
 		model.addAttribute("countProceed", pickDao.countProceed());
 		model.addAttribute("countReject", pickDao.countReject());
@@ -57,11 +72,12 @@ public class PickController {
 	}
 	
 	@RequestMapping("/waitList")
-	public String waitList (Model model, @ModelAttribute PageVO pageVo) {
-		int count = pickDao.countApply();
+	public String waitList (Model model, HttpSession session, @ModelAttribute PageVO pageVo) {
+		String findArea = (String) session.getAttribute("findArea");
+		int count = pickDao.countApply((String)session.getAttribute("loginId"));
 		pageVo.setCount(count);	
 		model.addAttribute("pageVo", pageVo);
-		List<PickWaitVo> waitList = pickDao.waitListByPaging(pageVo);
+		List<PickWaitVo> waitList = pickDao.waitListByPaging(pageVo, findArea);
 		model.addAttribute("waitList", waitList);
 		return "/WEB-INF/views/pick/waitList.jsp";
 	}
@@ -90,6 +106,7 @@ public class PickController {
 	@RequestMapping("/waitDetail")
 	public String waitDetail (Model model, @RequestParam int applyNo) {
 		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
+		System.out.println(findApplyDto.getMemberId());
 		model.addAttribute("findApplyDto", findApplyDto);
 		
 		return "/WEB-INF/views/pick/waitDetail.jsp";
@@ -105,21 +122,21 @@ public class PickController {
 	public String reject(@ModelAttribute PickDto pickDto, HttpSession session) {
 		String loginId = (String) session.getAttribute("loginId");
 		pickDto.setMemberId(loginId);
-		
+
 		pickDao.insertNo(pickDto);
 		pickDao.updateApplyStateReject(pickDto.getApplyNo());
 
 		return "redirect:list"; //완성 후 바꿔야 함 
 	}
 	
-//	@RequestMapping ("/image")
-//	public String image (@RequestParam int applyNo) {
-//		try {
-//			int attachNo = applyDao.(applyNo);
-//			return "redirect:/download?attachNo=" + attachNo;
-//		} catch (Exception e) {
-//			return "redirect:/image/profile.jpg";
-//		}
-//	}
+	@RequestMapping ("/image")
+	public String image (@RequestParam int applyNo) {
+		try {
+			int attachNo = pickDao.applyAttachNo(applyNo);
+			return "redirect:/download?attachNo=" + attachNo;
+		} catch (Exception e) {
+			return "redirect:/image/attachNull.png";
+		}
+	}
 	
 }

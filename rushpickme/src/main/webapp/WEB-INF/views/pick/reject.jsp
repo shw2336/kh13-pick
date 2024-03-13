@@ -64,19 +64,15 @@
 					var length = $(".selected-btn").length;
 					$(".submit-btn").removeClass("success fail").addClass(
 							length > 0 ? "success" : "fail");
-					console.log($("#pickReject").val());
-
-					return false; //나중에 뺄 것 
 				});
-
 	});
 </script>
 
 
 <form action="reject" method="post" autocomplete="off" class="check-form">
 
-	<input type="hidden" value="신청번호" name="applyNo" /> <input
-		type="hidden" id="pickReject" name="pickReject" />
+	<input type="hidden" value="${applyNo}" name="applyNo" /> 
+	<input type="hidden" id="pickReject" name="pickReject" />
 
 	<div class="container w-400" style="margin-top: 50px; margin-bottom:80px;">
 
