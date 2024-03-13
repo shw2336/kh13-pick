@@ -180,7 +180,7 @@ public class ReviewDao {
 		String sql = "insert into review("
 						+ "review_no, ask_no, member_id, review_star, "
 						+ "review_content"
-					+ ") values(?, ?, ?, ?)";
+					+ ") values(?, ?, ?, ?, ?)";
 		Object[] data = {
 			reviewDto.getReviewNo(), reviewDto.getAskNo(),
 			reviewDto.getMemberId(), reviewDto.getReviewStar(),
