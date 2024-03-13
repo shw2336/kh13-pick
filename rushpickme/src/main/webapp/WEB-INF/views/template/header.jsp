@@ -43,7 +43,59 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
 <!-- 내가 만든 JS -->
-<script src="/js/commons.js"></script>
+<script>
+	$(function() {
+		var options = {
+			//에디터 툴바(메뉴) 설정
+			toolbar : [
+				// [groupName, [list of button]]
+				[ 'style', [ 'bold', 'italic', 'underline' ] ],
+				[ 'fontsize', [ 'fontname', 'fontsize' ] ],
+				[ 'color', [ 'forecolor', 'backcolor' ] ],
+				[ 'para', [ 'style', 'ul', 'ol', 'paragraph' ] ],
+				[ 'insert', [ 'picture', 'link', 'hr' ] ], 
+			],
+			//기본높이 설정(단위 : px)
+			height : 200,
+			minHeight : 200,
+			maxHeight : 300,
+			//안내문구 설정
+			//placeholder: "입력하세요",
+			callbacks : {
+				onImageUpload : function(files) {
+					var editor = this;
+					
+					var formData = new FormData();
+					for (var i = 0; i < files.length; i++) {
+						formData.append("attachList", files[i]);
+					}
+
+					$.ajax({
+						url : "/rest/board_attach/upload",
+						method : "post",
+						data : formData,
+						processData : false,
+						contentType : false,
+						success : function(response) {
+							if (response == null)
+								return;
+
+							for (var i = 0; i < response.length; i++) {
+								var tag = $("<img>")
+									.attr("src", "/download?attachNo=" + response[i])
+									.attr("data-key", response[i])
+									.addClass("server-img");
+								$(editor).summernote("insertNode", tag[0]);
+							} 
+						}
+					});
+				}
+			}
+		};
+
+		$("[name=boardContent]").summernote(options);
+	});
+</script>
 
 </head>
 <body>
@@ -55,10 +107,26 @@
             <ul class="menu center">
                 <li><a href="/">홈</a></li>
                 <li><a href="#">수거서비스</a></li>
-                <li><a href="/qna/list">문의사항</a></li>
-                <li><a href="#">포인트</a></li>
+                
+                <li><a href="#">게시판</a>
+                <ul>
+                <li><a href ="/qna/list">문의게시판</a>
+                <li><a href="/">리뷰게시판</a>
+                </ul></li>
+                
+                <li><a href="/point/charge">포인트</a></li>
                 <li><a href="/member/login">로그인</a></li>
                 <li><a href="/member/signUp">회원가입</a></li>
+                
+                	<c:if test="${sessionScope.loginLevel == '관리자'}">
+					<li><a href="#">관리자메뉴</a>
+					<ul>
+					<li><a href="/admin/member/search">회원관리</a></li>
+					<li><a href="/admin/member/pickerlist">피커승인</a></li>
+					</ul></li>
+					</c:if>
+						
+						
             </ul>
         </div>
     </div>

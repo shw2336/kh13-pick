@@ -17,23 +17,21 @@ public class PointDao {
 	private PointMapper pointMapper;
 	
 	public int getSequence() {
-		String sql = "select point_seq.nextval from dual";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	    String sql = "select point_seq.nextval from dual";
+	    return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
 	public void insert(PointDto pointDto) {
-		String sql = "insert into point("
-				+ "point_no, point_name, point_sell, point_charge"
-				+ ") values(?, ?, ?, ?)";
-		Object[] data = {
-				pointDto.getPointNo(), pointDto.getPointName(),
-				pointDto.getPointSell(), pointDto.getPointCharge()
-		};
-		jdbcTemplate.update(sql, data);
+	    String sql = "insert into point(point_no, point_name, point_sell, point_charge) values(?, ?, ?, ?)";
+	    Object[] data = {
+	        pointDto.getPointNo(), pointDto.getPointName(),
+	        pointDto.getPointSell(), pointDto.getPointCharge()
+	    };
+	    jdbcTemplate.update(sql, data);
 	}
 	
 	public void connect(int pointNo, int attachNo) {
-		String sql = "insert into point_attach(point_no, attach_no) values(?, ?)";
+		String sql = "insert into image(point_no, attach_no) values(?, ?)";
 		Object[] data = {pointNo, attachNo};
 		jdbcTemplate.update(sql, data);
 	}

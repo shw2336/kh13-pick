@@ -27,6 +27,7 @@ public class PointController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	
 	@GetMapping("/charge")
 	public String charge(Model model) {
 		model.addAttribute("list", pointDao.selectList());
