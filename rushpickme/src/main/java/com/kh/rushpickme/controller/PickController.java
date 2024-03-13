@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dao.PickDao;
 import com.kh.rushpickme.dto.PickDto;
+import com.kh.rushpickme.vo.PageVO;
 import com.kh.rushpickme.vo.PickFinishVo;
 import com.kh.rushpickme.vo.PickWaitVo;
 
@@ -29,6 +30,9 @@ public class PickController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private ApplyDao applyDao;
 	
 	//전체화면
 	@RequestMapping("/list")
@@ -48,14 +52,20 @@ public class PickController {
 	}
 	
 	@RequestMapping("/waitList")
-	public String waitList (Model model) {
-		List<PickWaitVo> waitList = pickDao.waitList();
+	public String waitList (Model model, @ModelAttribute PageVO pageVo) {
+		int count = pickDao.listCnt(pageVo);
+		pageVo.setCount(count);	
+		model.addAttribute("pageVo", pageVo);
+		List<PickWaitVo> waitList = pickDao.waiyListByPaging(pageVo);
 		model.addAttribute("waitList", waitList);
 		return "/WEB-INF/views/pick/waitList.jsp";
 	}
 	
 	@RequestMapping("/waitDetail")
-	public String waitDetail (@RequestParam int applyNo, @RequestParam MultipartFile attach, Model model) {
+	public String waitDetail () {
+//		@RequestParam int applyNo, Model model
+//		ApplyDto applyDto = applyDao.detail(applyNo);
+//		model.addAttribute("applyDto", applyDto);
 		return "/WEB-INF/views/pick/waitDetail.jsp";
 	}
 	
@@ -76,6 +86,17 @@ public class PickController {
 		return "redirect:list"; //완성 후 바꿔야 함 
 	}
 	
-
+	// 첨부파일 
+//	@RequestMapping ("/image")
+//	public String image (@RequestParam int applyNo) {
+//		try {
+////			int attachNo = applyDao.(applyNo);
+////			return "redirect:/download?attachNo=" + attachNo;
+//		} catch (Exception e) {
+////			return "redirect:/image/profile.jpg";
+//		}
+	
+	
+//	}
 	
 }
