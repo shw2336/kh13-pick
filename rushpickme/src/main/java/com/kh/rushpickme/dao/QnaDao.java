@@ -174,7 +174,7 @@ public class QnaDao {
 	}
 	
 	//조회수 증가
-	public boolean updateqnaReadcount(int qnaNo) {
+	public boolean updateQnaHits(int qnaNo) {
 		String sql = "update qna "
 						+ "set qna_hits = qna_hits + 1 "
 						+ "where qna_no = ?";
