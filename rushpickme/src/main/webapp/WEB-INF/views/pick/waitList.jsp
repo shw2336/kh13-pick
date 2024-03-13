@@ -24,8 +24,8 @@
 
 <script type="text/javascript">
 
-	function aaa (no){
-		alert(no);
+	function detail (no){
+		window.location.href = "waitDetail?applyNo=" + no;
 	}
 	
 	
@@ -54,7 +54,7 @@
 	
 		<tbody>
 			<c:forEach var="waitList" items="${waitList}">
-				<tr onclick="aaa('${waitList.applyNo}');" class="contents-tr">
+				<tr onclick="detail('${waitList.applyNo}');" class="contents-tr">
 					<td>${waitList.applyNo}</td>
 					<td>${waitList.applyAddress1}</td>
 					<td>${waitList.applyVinyl}</td>
@@ -67,6 +67,8 @@
 		</tbody>
 	</table>
 	</div>
+	
+	<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 	
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

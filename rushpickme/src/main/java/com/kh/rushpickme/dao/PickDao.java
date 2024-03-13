@@ -10,6 +10,7 @@ import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.mapper.PickFinishVoMapper;
 import com.kh.rushpickme.mapper.PickMapper;
 import com.kh.rushpickme.mapper.PickWaitVoMapper;
+import com.kh.rushpickme.vo.PageVO;
 import com.kh.rushpickme.vo.PickFinishVo;
 import com.kh.rushpickme.vo.PickWaitVo;
 
@@ -27,7 +28,7 @@ public class PickDao {
 	
 	@Autowired
 	private PickWaitVoMapper pickWaitVoMapper;
-	
+
 	//수거접수등록
 	public void insertOk (PickDto pickDto) {
 		String sql = "insert into pick "
@@ -99,6 +100,26 @@ public class PickDao {
 		String sql = "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply order by apply_hope_date asc";
 		return jdbcTemplate.query(sql, pickWaitVoMapper);
 	}
+		//목록+페이징
+	// - page : 현재 조회할 페이지 번호
+	// - size : 조회할 페이지의 출력개수
+	// - 위 두개를 이용하여 시작행(beginRow)과 종료행(endRow)를 계산
+	public List <PickWaitVo> waiyListByPaging (PageVO pageVo) {
+		String sql = "select * from ("
+				+ "select rownum RN, T.* from ("
+				+ "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date "
+				+ " from apply order by apply_hope_date asc"
+				+ ")T "
+				+ ") where RN between ? and ?";
+		Object[] data = {pageVo.getBeginRow(), pageVo.getEndRow()};
+		return jdbcTemplate.query(sql, pickWaitVoMapper, data);
+	}
+	
+	public int listCnt (PageVO pageVo) {
+		String sql = "select count(*) from apply where apply_state = '신청'";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
 	
 	//전체 신청건수
 	public int countApply () {

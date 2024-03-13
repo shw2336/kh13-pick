@@ -22,7 +22,7 @@
 </style>
 
 
-<div class="container pick-container w-600 px-50 pt-10">
+<div class="container pick-container w-600 px-50 pt-10 my-50">
 
 	<div class="cell">
 		<h1>
@@ -59,7 +59,10 @@
 	<br>
 	<div class="cell">
 		<h2>배출사진</h2>
-		<input class="tool w-100" value="배출사진">
+		<div class="cell">
+<!-- 				<img src="image?applyNo=#"  -->
+<!-- 					class="image" width="100%"> -->
+		</div>
 	</div>
 	<br>
 	<div class="cell right">
