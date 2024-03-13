@@ -430,16 +430,12 @@
                             id="" class="tool w-100" readonly>                                              
         </div>
         
-<!--         <div class="cell"> -->
-<!-- 			<label> -->
-<!-- 			    비밀번호 확인 -->
-<!-- 			     <i class="fa-solid fa-check"></i> -->
-<!-- 			</label> -->
-<!-- 			<!-- 비밀번호 확인은 백엔드로 전송되지 않도록 이름을 부여하지 않는다 --> 
-<!-- 		    <input type="password" placeholder="" name="memberPw" -->
-<!-- 		                    id="pw-reinput" class="tool w-100"> -->
+        <div class="cell">
+	<label>비밀번호 확인 <b style="color:red">*</b></label>
+	 <input type="password" name="memberPw" required> <br><br>
+	</div>
 		    
-<!-- 		</div> -->
+		</div>
         
        
 		
