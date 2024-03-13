@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dao.PickDao;
+import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.dto.MemberPickDto;
 import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.vo.PageVO;
@@ -85,11 +86,12 @@ public class PickController {
 		return "/WEB-INF/views/pick/finishList.jsp";
 	}
 	
+	// 수거접수리스트 상세조회 화면 
 	@RequestMapping("/waitDetail")
-	public String waitDetail () {
-//		@RequestParam int applyNo, Model model
-//		ApplyDto applyDto = applyDao.detail(applyNo);
-//		model.addAttribute("applyDto", applyDto);
+	public String waitDetail (Model model, @RequestParam int applyNo) {
+		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
+		model.addAttribute("findApplyDto", findApplyDto);
+		
 		return "/WEB-INF/views/pick/waitDetail.jsp";
 	}
 	
@@ -110,17 +112,14 @@ public class PickController {
 		return "redirect:list"; //완성 후 바꿔야 함 
 	}
 	
-	// 첨부파일 
 //	@RequestMapping ("/image")
 //	public String image (@RequestParam int applyNo) {
 //		try {
-////			int attachNo = applyDao.(applyNo);
-////			return "redirect:/download?attachNo=" + attachNo;
+//			int attachNo = applyDao.(applyNo);
+//			return "redirect:/download?attachNo=" + attachNo;
 //		} catch (Exception e) {
-////			return "redirect:/image/profile.jpg";
+//			return "redirect:/image/profile.jpg";
 //		}
-	
-	
 //	}
 	
 }

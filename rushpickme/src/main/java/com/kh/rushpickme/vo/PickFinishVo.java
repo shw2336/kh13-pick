@@ -18,6 +18,7 @@ public class PickFinishVo {
 	public void setPickNo(int pickNo) {
 		this.pickNo = pickNo;
 	}
+
 	public Date getApplyDate() {
 		return applyDate;
 	}

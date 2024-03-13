@@ -18,7 +18,7 @@ public class PickProceedVoMapper implements RowMapper<PickProceedVo> {
 		pickProceedVo.setApplyAddress1(rs.getString("apply_address1"));
 		pickProceedVo.setApplyVinyl(rs.getInt("apply_vinyl"));
 		pickProceedVo.setApplyDate(rs.getDate("apply_date"));
-		pickProceedVo.setApplyHopeDate(rs.getDate("apply_hope_date"));
+		pickProceedVo.setApplyHopeDate(rs.getString("apply_hope_date"));
 		pickProceedVo.setTimePasses(rs.getString("time_passes"));
 		return pickProceedVo;
 	}

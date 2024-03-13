@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.dto.MemberPickDto;
 import com.kh.rushpickme.dto.PickDto;
+import com.kh.rushpickme.mapper.ApplyMapper;
 import com.kh.rushpickme.mapper.MemberPickMapper;
 import com.kh.rushpickme.mapper.PickFinishVoMapper;
 import com.kh.rushpickme.mapper.PickMapper;
@@ -38,6 +40,9 @@ public class PickDao {
 	
 	@Autowired
 	private MemberPickMapper memberPickMapper;
+	
+	@Autowired
+	private ApplyMapper applyMapper;
 
 	//수거접수등록
 	public void insertOk (PickDto pickDto) {
@@ -139,8 +144,8 @@ public class PickDao {
 	public List <PickProceedVo> proceedListByPaging (PageVO pageVo) {
 		String sql = "select * from ("
 				+ "select rownum RN, T.* from ("
-				+ "SELECT  pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN round(sysdate-apply_hope_date) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
-				+ "from (select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN round(sysdate-apply_hope_date) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
+				+ "select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
+				+ "from (select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
 				+ "from pick inner join apply on pick.apply_no = apply.apply_no where pick_state = '수거접수' order by apply_date desc))T) "
 				+ "where RN between ? and ?";
 		Object[] data = {pageVo.getBeginRow(), pageVo.getEndRow()};
@@ -182,6 +187,14 @@ public class PickDao {
 		String sql = "select member_pick_area from member_pick where member_id = ?";
 		Object[] data = {memberId};
 		List <MemberPickDto> list = jdbcTemplate.query(sql, memberPickMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	//신청정보 조회
+	public ApplyDto selectOneByApply (int applyNo) {
+		String sql = "select * from apply where apply_no = ?";
+		Object[] data = {applyNo};
+		List <ApplyDto> list = jdbcTemplate.query(sql, applyMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
 }

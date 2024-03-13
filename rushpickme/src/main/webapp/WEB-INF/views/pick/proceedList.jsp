@@ -57,8 +57,7 @@
 					<td>${proceedList.applyVinyl}</td>
 					<td><fmt:formatDate value="${proceedList.applyDate}"
 							pattern="MM월 dd일 HH:mm" /></td>
-					<td><fmt:formatDate value="${proceedList.applyHopeDate}"
-					pattern="MM월 dd일" /></td>
+					<td>${proceedList.applyHopeDate}</td>
 					<td>${proceedList.timePasses}</td>
 				</tr>
 			</c:forEach>

@@ -59,9 +59,8 @@
 					<td>${waitList.applyAddress1}</td>
 					<td>${waitList.applyVinyl}</td>
 					<td><fmt:formatDate value="${waitList.applyDate}"
-							pattern="MM월 dd일 HH:mm" /></td>
-					<td><fmt:formatDate value="${waitList.applyHopeDate}"
 					pattern="MM월 dd일" /></td>
+					<td>${waitList.applyHopeDate}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

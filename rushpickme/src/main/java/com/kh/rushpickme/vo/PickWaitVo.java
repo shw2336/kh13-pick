@@ -8,7 +8,7 @@ public class PickWaitVo {
 	private String applyAddress1;
 	private int applyVinyl;
 	private Date applyDate;
-	private Date applyHopeDate;
+	private String applyHopeDate;
 
 	public PickWaitVo() {
 		super();
@@ -37,11 +37,13 @@ public class PickWaitVo {
 	public void setApplyDate(Date applyDate) {
 		this.applyDate = applyDate;
 	}
-	public Date getApplyHopeDate() {
+	public String getApplyHopeDate() {
 		return applyHopeDate;
 	}
-	public void setApplyHopeDate(Date applyHopeDate) {
+	public void setApplyHopeDate(String applyHopeDate) {
 		this.applyHopeDate = applyHopeDate;
 	}
+
+
 	
 }
