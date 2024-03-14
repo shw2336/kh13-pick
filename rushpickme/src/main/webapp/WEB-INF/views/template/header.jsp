@@ -17,7 +17,6 @@
 <!-- 내가 구현한 스타일 -->
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
 <!--     <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
-<link rel="stylesheet" type="text/css" href="/css/layout.css">
 
 <!-- font awesome 아이콘 CDN -->
 <link rel="stylesheet" type="text/css"
@@ -82,15 +81,7 @@
                 <li><a href="/point/charge">포인트</a></li>
                 <li><a href="/member/login">로그인</a></li>
                 <li><a href="/member/signUp">회원가입</a></li>
-                
-                <c:if test="${sessionScope.loginType == '관리자'}">
-                    <li><a href="#">관리자메뉴</a>
-                        <ul>
-                            <li><a href="/admin/member/search">회원관리</a></li>
-                            <li><a href="/admin/member/pickerlist">피커승인</a></li>
-                        </ul>
-                    </li>
-                </c:if>
+               
                 <li class="menu-end">
                     <c:choose>
                         <c:when test="${sessionScope.loginId != null}">
@@ -101,6 +92,15 @@
                                 <li><a href="/point/charge">포인트충전</a></li>
                                 <li><a href="/member/logout">로그아웃</a></li>
                             </ul>
+                            <c:if test="${sessionScope.loginLevel == '관리자'}">
+                                <li class="board-menu"><a href="#">관리자메뉴</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="/admin/member/search">회원관리</a></li>
+                                        <li><a href="/admin/member/edit">회원수정</a></li>
+                                        <li><a href="/admin/member/pickerlist">피커승인</a></li>
+                                    </ul>
+                                </li>
+                            </c:if>
                         </c:when>
                     </c:choose>
                 </li>       
@@ -110,10 +110,3 @@
   
     <div class="section">
         <div class="article">
-            <!-- 여기에 본문 내용을 추가하세요 -->
-        </div>
-    </div>
-</main>
-
-</body>
-</html>

@@ -45,6 +45,8 @@ public class PointController {
 	
 	buyDao.insert(buyDto);//구매내역 등록
 	int item = pointDto.getPointCharge() * buyDto.getBuyQty();
+//	memberDao.plusMemberPoint(loginId, item);//포인트 증가
+	
 	
 	return "redirect:chargeFinish";
 }

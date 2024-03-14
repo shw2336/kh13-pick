@@ -188,6 +188,13 @@ public class MemberDao {
 		    };
 		    return jdbcTemplate.update(sql, data) > 0;
 		}
-
-		
+//		public boolean plusMemberPoint(String loginId, int item) {
+//			String sql = "update member "
+//					+ "set member_green_point = member_green_point + ? "
+//					+ "where member_id = ?";
+//			Object[] data = {point, memberId};
+//			return jdbcTemplate.update(sql, data) > 0;
+//		}
+//		public boolean 
+//		
 }
