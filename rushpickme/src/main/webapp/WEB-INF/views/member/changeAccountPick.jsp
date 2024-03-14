@@ -85,7 +85,7 @@
 	        }
 	    });
 	    $("[name=memberNick]").blur(function(){
-	        var regex =  /^(?=.*그린)[가-힣0-9]{2,10}$/;
+	        var regex =  /^(?=.*피커)[가-힣0-9]{2,10}$/;
 	        var value = $(this).val();
 	
 	        if(regex.test(value)) {
@@ -305,7 +305,7 @@
 
 <div class="container w-500">
 
-	<div class="cell center"><h1>일반회원 정보</h1></div>
+	<div class="cell center"><h1>수거회원 정보</h1></div>
 	
 	<!-- 진행바 -->
 	<div class="cell">
@@ -334,10 +334,10 @@
                 닉네임<i class="fa-solid fa-pen"></i>
                
             </label>
-            <input value="그린" type="text" name="memberNick" placeholder="닉네임에 '그린' 을 포함 하여야 합니다"
+            <input value="피커" type="text" name="memberNick" placeholder="닉네임에 '그린' 을 포함 하여야 합니다"
                                 class="tool w-100">
             <div class="success-feedback">사용 가능한 닉네임입니다</div>
-            <div class="fail-feedback">닉네임을 그린포함 한글,숫자 2~10글자로 작성하세요 ex)그린왕혜진</div>
+            <div class="fail-feedback">닉네임을 피커포함 한글,숫자 2~10글자로 작성하세요 ex)그린왕혜진</div>
             <div class="fail2-feedback">이미 사용중인 닉네임입니다</div>
         </div>
 		
@@ -419,15 +419,7 @@
                             id="" class="tool w-100">                                              
         </div>
         
-        <div class="cell">
-            <label>
-                부름티켓
-                <i class="fa-solid fa-signature"></i>
-            </label>
-         
-            <input value="" type="text" name="" placeholder="회원가입시 무료로 3장을 드립니다 "
-                            id="" class="tool w-100" readonly>                                              
-        </div>
+        
         
         <div class="cell">
 			<label>
@@ -442,6 +434,15 @@
 		    <div class="fail2-feedback">비밀번호를 먼저 입력하세요</div>
 		</div>
         
+         <div class="cell">
+            <label>
+                근무지
+                <i class="fa-solid fa-signature"></i>
+            </label>
+         
+            <input value="" type="text" name="" placeholder="근무지 변경은 shinramyeon@rushpickme.io 로 문의하세요 "
+                            id="" class="tool w-100" readonly>                                              
+        </div>
        
 		
 		

@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dao.BuyDao;
 import com.kh.rushpickme.dao.MemberDao;
+import com.kh.rushpickme.dao.PickDao;
+import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.dto.MemberGreenDto;
 import com.kh.rushpickme.dto.MemberPickDto;
+import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.service.AttachService;
 import com.kh.rushpickme.service.EmailService;
 
@@ -38,6 +41,9 @@ public class MemberController {
 
 	@Autowired
 	private BuyDao buyDao;
+	
+	@Autowired
+	private PickDao pickDao;
 
 	// 회원가입 선택창
 	@GetMapping("/signUp")
@@ -132,30 +138,54 @@ public class MemberController {
 	}
 
 	@RequestMapping("/mypage")
-	public String myPage(HttpSession session, Model model) {
-		// 1. 세션-> 아이디를 가져온다
-		String loginId = (String) session.getAttribute("loginId");
+	public String myPage(HttpSession session, Model model,
+						@ModelAttribute PickDto pickDto,
+						@ModelAttribute ApplyDto applyDto
+							) {
+	    // 1. 세션에서 아이디를 가져온다
+	    String loginId = (String) session.getAttribute("loginId");
 
-		// 2. 아이디에 맞는 정보를 조회
-		MemberDto memberDto = memberDao.selectOne(loginId);
-		MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
-		MemberPickDto memberPickDto = memberDao.selectOnePick(loginId);
+	    // 2. 아이디에 맞는 정보를 조회
+	    MemberDto memberDto = memberDao.selectOne(loginId);
+	    MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
+	    MemberPickDto memberPickDto = memberDao.selectOnePick(loginId);
+	    System.out.println(memberPickDto.getMemberPickArea());
+	    
+	    // 3. memberDto가 null이 아니고, memberDto의 memberType이 "그린"인지 확인하여 isValid 변수에 할당
+	    boolean isValid = memberDto != null && memberDto.getMemberType().equals("그린");
 
-		// 3.조회 정보를 화면에 보여준다
-		model.addAttribute("memberDto", memberDto);
-		model.addAttribute("memberGreenDto", memberGreenDto);
-		model.addAttribute("memberPickDto", memberPickDto);
+	    // 4. 조회 정보를 화면에 보여준다
+	    model.addAttribute("memberDto", memberDto);
+	    model.addAttribute("memberGreenDto", memberGreenDto);
+	    model.addAttribute("memberPickDto", memberPickDto);
+	    model.addAttribute("countProcess",pickDao.countProceed());
+	    model.addAttribute("countReject", pickDao.countReject());
+	    model.addAttribute("countFinish", pickDao.countFinish());
+	    model.addAttribute("pickDto", pickDto);
+	    model.addAttribute("applyDto", applyDto);
 
-		// 4. 구매내역을 화면에 같이 보여준다
-		model.addAttribute("buyList", buyDao.selectList(loginId));
+	    // 5. 구매내역을 화면에 같이 보여준다
+	    model.addAttribute("buyList", buyDao.selectList(loginId));
+	    
+	    // 6. 로그인 되어있는 작성 글 내역을 첨부
+	    model.addAttribute(loginId, memberDto);
+	    model.addAttribute(loginId, memberPickDto);
 
-		// 5.로그인 되어있는 작성 글 내역을 첨부
-		model.addAttribute(loginId, memberDto);
-
-		// 6.화면 반환
-		return "/WEB-INF/views/member/mypage.jsp";
-
+	    // 7. memberDto의 memberType에 따라 다른 뷰를 반환
+	    if (isValid) {
+	        // "그린"이면 그린 마이페이지 반환
+	        return "/WEB-INF/views/member/myPageGreen.jsp";
+	    }  else {
+	        // 그 외의 경우에는 피커 마이페이지 반환
+	        return "/WEB-INF/views/member/myPagePick.jsp";
+	    }
+	
+	    
 	}
+
+	
+
+	
 
 	// 일반회원 개인정보 변경
 	@GetMapping("/changeAccountGreen")
@@ -352,9 +382,9 @@ public class MemberController {
 
 			memberDao.delete(loginId);
 			session.removeAttribute("loginId");
-			return "redirect:exitFinish";
+			return "/WEB-INF/views/member/leaveFinish.jsp";
 		} else {
-			return "redirect:exit?error";
+			return "redirect:leaveFinish?error";
 		}
 
 	}

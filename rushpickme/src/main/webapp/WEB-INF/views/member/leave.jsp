@@ -1,32 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+                                                                pageEncoding="UTF-8"%>
+    
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
 
 <style>
-.button---container!important {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 100px;
-}
-
-.button---container::before, .button---container::after {
-	content: "";
-	flex-grow: 1;
-}
-
-.button---container button {
-	width: calc(17% - 5px);
-}
-
-* !important {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-div !important {
+div!important {
   position: relative;
   width: 300px;
   margin-left: 50px;
@@ -49,7 +35,7 @@ input {
 input::placeholder { color: #aaaaaa; }
 input:focus { outline: none; }
 
-span  {
+span {
   display: block;
   position: absolute;
   bottom: 0;
@@ -62,7 +48,7 @@ span  {
   transition: 0.5s;
 }
 
-label  {
+label {
 position: absolute;
 color: #aaa;
 left: 50%;
@@ -85,31 +71,30 @@ width: 100%;
 
 
 
-
 </style>
 
 
 <div class="container w-1200">
 	<div class="cell center">
-		<h1>회원탈퇴</h1>
+		
 	</div>
 
 	
 
-	<div><form action="leave" method="post" autocomplete="off"></div>
+	<form action="leave" method="post" autocomplete="off">
 		<div class="cell center">
 		           ${memberDto.memberName}님의
 			       ${memberDto.memberId} 계정을 삭제 합니다
 			       </div>
 			       <div class="cell center">
-			       <h5>	탈퇴를 위해 비밀번호를 한번 더 입력 해주세요</h5>
-			       <br>
-			       <br>
+			       	<h5 style="color:red">탈퇴 를 위해 비밀번호를 한번 더 입력 해주세요</h5>
+			       <br><br><br><br><br><br><br>
+			       
 			        </div>
 					<div class="cell center">
-    				<input name="memberPw" type="password" required>
-    						<label>비밀번호</label>
-    						<span></span>
+    					<span style="color:red"></span>	
+    				<input name="memberPw" type="password" placeholder="패스워드 입력" required>
+    						
 					</div>
 
 
@@ -120,11 +105,11 @@ width: 100%;
 	  
       </div>
       
-      <c:if test="${param.error != null}">
+    <!--    <c:if test="${param.error != null}">
 	<div class="cell center">
 		<h3 style="color:red">비밀번호가 일치하지 않습니다</h3>
 	</div>
-	</c:if>
+	</c:if>-->
    
 </div>
 
