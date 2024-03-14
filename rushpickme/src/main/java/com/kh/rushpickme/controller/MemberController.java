@@ -322,18 +322,29 @@ public class MemberController {
 
 	@RequestMapping("completePassword")
 	public String completePassword() {
+		
+		
 		return "/WEB-INF/views/member/completePassword.jsp";
 	}
 
 	@GetMapping("/leave")
-	public String leave() {
+	public String leave(Model model, HttpSession session) {
+		String loginId = (String) session.getAttribute("loginId");
+		
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		
+		model.addAttribute("memberDto", memberDto);
+		
 		return "/WEB-INF/views/member/leave.jsp";
 	}
 
 	@PostMapping("/leave")
-	public String exit(@RequestParam String memberPw, HttpSession session) {
+	public String exit(@RequestParam String memberPw,
+						@ModelAttribute MemberDto memberDto, HttpSession session, Model model) {
 		String loginId = (String) session.getAttribute("loginId");
-
+		
+			
+		
 		MemberDto findDto = memberDao.selectOne(loginId);
 		boolean isValid = findDto.getMemberPw().equals(memberPw);
 
