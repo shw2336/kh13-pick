@@ -65,13 +65,13 @@ public class PickController {
 			return "redirect:/member/login";
 		}
 			
-		List<PickFinishVo> voList = pickDao.pickFinishList();
+		List<PickFinishVo> voList = pickDao.pickFinishList(loginId);
 		model.addAttribute("voList", voList);
 		
 		model.addAttribute("countApply", pickDao.countApply(loginId));
-		model.addAttribute("countUrgentApply", pickDao.countUrgentApply());
-		model.addAttribute("countProceed", pickDao.countProceed());
-		model.addAttribute("countReject", pickDao.countReject());
+		model.addAttribute("countUrgentApply", pickDao.countUrgentApply(loginId));
+		model.addAttribute("countProceed", pickDao.countProceed(loginId));
+		model.addAttribute("countReject", pickDao.countReject(loginId));
 		
 		return "/WEB-INF/views/pick/list.jsp"; 
 	}
@@ -97,11 +97,12 @@ public class PickController {
 	}
 	
 	@RequestMapping("/proceedList")
-	public String proceedList (Model model, @ModelAttribute PageVO pageVo) {
-		int count = pickDao.countProceed();
+	public String proceedList (Model model, @ModelAttribute PageVO pageVo, HttpSession session) {
+		String memberId = (String) session.getAttribute("loginId");
+		int count = pickDao.countProceed(memberId);
 		pageVo.setCount(count);
 		model.addAttribute("pageVo", pageVo);
-		List<PickProceedVo> proceedList = pickDao.proceedListByPaging(pageVo);
+		List<PickProceedVo> proceedList = pickDao.proceedListByPaging(memberId, pageVo);
 		model.addAttribute("proceedList", proceedList);
 		return "/WEB-INF/views/pick/proceedList.jsp";
 	}
