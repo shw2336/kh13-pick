@@ -351,7 +351,7 @@ header {
 					
 					
 					<p class="findPw">
-						비밀번호 <a href="#none">찾기</a>
+						비밀번호 <a href="/member/findPw">찾기</a>
 					</p>
 					
 					

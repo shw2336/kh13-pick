@@ -89,7 +89,7 @@ public class MemberController {
 	// - 사용자가 입력한 아이디를 추가한다
 	@GetMapping("/login")
 	public String login() {
-		return "/WEB-INF/views/member/login.jsp";
+		return "/WEB-INF/views/member/login2.jsp";
 	}
 
 	@PostMapping("/login")
