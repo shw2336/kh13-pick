@@ -3,6 +3,15 @@
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+         .apply-container {
+            border-radius: 30px;
+            border: 2px solid gainsboro;
+            box-shadow: 0px 4px 4px 2px gainsboro;
+            padding: 50px;
+
+        }
+</style>
 
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
@@ -79,17 +88,19 @@
 
 </script>
 <body>
+ 	<div class="container apply-container w-650 mt-50 mb-50">
+ 	<input type="hidden" value="신청완료" type="text" name="applyState" class="tool w-100">
         <div class="container w-500">
             <div class="cell center">
             
                 <h1>수거 신청 페이지</h1>
                 
             </div>
-            <div class="cell w-500">
+            <div class="cell w-500 ">
                 <h2> 신청 지역 선택
                     <i class="fa-solid fa-truck"></i>
                 </h2>
-		<form action="request" method="post" autocomplete="off" enctype="multipart/form-data">
+				<form action="request" method="post" autocomplete="off" enctype="multipart/form-data">
                 <select name="applyArea" class="tool w-100"  oninput="areaData()">
                     <option value="">선택하세요</option>
                     <option value="강남구">강남구</option>
@@ -147,14 +158,14 @@
             </div>
             
             
-            <div class="cell">
+            <div class="cell w-500">
                 <h2> 예상 무게 </h2>
                 <input value="" placeholder="ex) 5" name="applyWeight" class="tool w-100" required> <br>
                 <label>일반쓰레기 한 봉지(10L) 당 약5kg정도 입니다.</label>
             </div>
             
             
-            <div class="cell">
+            <div class="cell w-500">
                 <h2> 봉투개수 <i class="fa-solid fa-sack-xmark"></i></h2>
                 <input type="number"  name="applyVinyl" value="1" class="tool w-100" required>
             </div>
@@ -164,49 +175,35 @@
             </div> --%>
             
             
-            <div class="cell">
+            <div class="cell w-500">
                 <h2> 수거 희망 날짜 <i class="fa-solid fa-calendar-check"></i></h2>
-                <input type="date" name="applyHopeDate" class="tool w-500" oninput="">
+                <input type="date" name="applyHopeDate" class="tool w-500" oninput="" required>
                 <div class="fail-feedback">잘못된 날짜 형식입니다</div>
             </div>
             
             
-            <div class="cell">
+            <div class="cell w-500">
                 <h2> 배출 사진 첨부 파일 <i class="fa-regular fa-images"></i></h2>
-                <input name="applyAttach" type="file" class="tool w-500">
+                <input name="applyAttach" type="file" class="tool w-500" required>
                 <button type="button" class="btn w-100">첨부</button>
             </div>
             
             
-            <div class="cell">
+            <div class="cell w-500">
                 <h2>남기실 말 <i class="fa-solid fa-pen"></i></h2>
-                <input type="text" name="applySay" class="tool w-100">
+                <input type="text" name="applySay" class="tool w-100" required>
             </div>
             
-            <div class="cell">
-                <h2>출입 불가 방법  <i class="fa-solid fa-pen"></i></h2>
-                <input type="text" name="applyWay" class="tool w-100">
-            </div>
-            
-            <div class="cell">
-                <h2>신청상태 <i class="fa-solid fa-pen"></i></h2>
-                
-                <input value="신청완료" type="text" name="applyState" class="tool w-100">
-                <select>
-           			<option value="신청완료">신청완료 </option>
-
-                </select>
-                    
-            </div>
-            
-            <div class="cell">
+            <div class="cell w-500">
+                <h2>출입 방법  <i class="fa-solid fa-pen"></i></h2>
+                <input type="text" name="applyWay" class="tool w-100" placeholder="전화하기 또는 세대호출 입력" required>
+                <br><br>
                 <button type="submit" class="btn w-100" > 수거 요청하기 </button>
             </div>
+            </div>
             
-            
+        	</div>
         </div>
-        </div>
-        
     </form>
 </body>
 
