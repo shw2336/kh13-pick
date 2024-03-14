@@ -3,10 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!-- 내가 구현한 스타일 -->
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
-
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
 
 <style>
     .form-input {
@@ -17,6 +24,20 @@
     }
 </style>
 
+    <script>
+        $(function(){
+            //출력용
+            $(".score").score({
+                starColor: "#0984e3", //별 색상
+                display:{//표시 옵션
+                    showNumber: true,//숫자 표시 여부
+                    textColor: "#0984e3", //글자 색상
+                    placeLimit: 1,//표시할 소수점 자리수
+                },
+            });
+        });
+        </script>
+        
 <div class="container w-800">
 	<div class="cell">
 		<h1>리뷰게시판</h1>
@@ -47,14 +68,14 @@
 		<%-- 테이블 --%>
 		<table class="table table-horizontal">
 			<thead>
-				<tr bgcolor=#E9E9ED>
+				<tr>
 					<th>번호</th>
 					<th>별점</th>
 					<th width="40%">리뷰내용</th>
 					<th>조회수</th>
 					<th>글쓴이</th>
 					<th>작성일</th>
-
+	
 				</tr>
 			</thead>
 			<tbody align="center">
@@ -62,8 +83,14 @@
 					<tr bgcolor="#ebf8fa">
 						<td>${reviewDto.reviewNo}</td>
 						<%-- 별점 칸 --%>
-						<td>${reviewDto.reviewStar}</td>
-						<td w-40 class="center">
+						<td>
+	        <div class="cell">
+        </div>
+        <div class="cell">
+            <div class="score" data-max="5.0" data-rate="5.0"></div>            
+        </div>  
+						</td>
+						<td class="center">
 							 <%-- 내용 출력 --%> <a class="link link-animation"
 							href="detail?reviewNo=${reviewDto.reviewNo}"> ${reviewDto.reviewContent} </a>
 						</td>
@@ -73,13 +100,19 @@
 					</tr>
 				</c:forEach>
 			</tbody>
+			
 			<tfoot align="center">
 							<c:forEach var="reviewDto" items="${list}">
 					<tr>
 						<td>${reviewDto.reviewNo}</td>
 						<%-- 제목 칸 --%>
-						<td>${reviewDto.reviewStar}</td>
-						<td w-40 class="center">
+						<td>
+						      
+        <div class="cell">
+            <div class="score" data-max="5.0" data-rate="5"></div>            
+        </div>  
+						</td>
+						<td class="center">
 							 <%-- 내용 출력 --%> <a class="link link-animation"
 							href="detail?reviewNo=${reviewDto.reviewNo}"> ${reviewDto.reviewContent} </a>
 						</td>

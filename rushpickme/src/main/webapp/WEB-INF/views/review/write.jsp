@@ -46,17 +46,14 @@
 <div class="container w-800">
 	<div class="cell center"><h1>리뷰 작성</h1></div>
 
-	        <div class="cell">
-            <h2>1~5점</h2>
+      <div class="cell">
+            <h2>작성할 때</h2>
         </div>
         <form>
-        <div class="cell">
+        <div class="cell reviewStar">
             <div class="score-edit" data-max="5.0" data-rate="3.5"></div>
         </div>
-        <div class="cell">
-            <button class="btn positive" type="submit">전송</button>
-        </div>
-          </form>
+        </form>
           
 	<div class="cell">
 		<label>내용</label>
@@ -71,7 +68,7 @@
 	</div>
 	<div class="cell right">
 		<a href="list" class="btn">목록</a>
-		<button class="btn positive">등록</button>
+		<button class="btn positive" type="submit">등록</button>
 	</div>
 </div>
 	

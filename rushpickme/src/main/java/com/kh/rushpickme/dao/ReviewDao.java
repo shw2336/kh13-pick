@@ -221,6 +221,16 @@ public class ReviewDao {
 		return jdbcTemplate.query(sql, reviewMapper, param);
 	}
 	
+//	//별점
+//	public boolean updateReviewStar(ReviewDto reviewDto) {
+//		String sql = "update review set review_star = ? where ask_no = ?";
+//	    Object[] data = {
+//	        reviewDto.getReviewStar(),
+//	        reviewDto.getAskNo()
+//	    };
+//		return jdbcTemplate.update(sql, data) > 0;
+//	}
+	
 }
 
 
