@@ -26,6 +26,13 @@
 <!-- 스타일 -->
 <style>
     /* 메뉴 글씨체 색상 및 메뉴 바탕색 */
+    
+    .header img {
+            display: block; 
+            margin: 0 auto; 
+            max-width: 20%; 
+            height: auto; 
+        }
     .menu a {
         color: green;
         background-color: white;

@@ -45,9 +45,9 @@ public class PointDao {
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	public boolean delete(int pointNo) {
-		String sql = "delete point where point_no = ?";
-		Object[] data = {pointNo};
-		return jdbcTemplate.update(sql, data) > 0;
+	    String sql = "delete from point where point_no = ?";
+	    Object[] data = { pointNo };
+	    return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 	public PointDto selectOne(int pointNo) {
@@ -57,14 +57,14 @@ public class PointDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	public boolean update(PointDto pointDto) {
-		String sql = "update point "
-				+ "set point_name = ?, point_sell=?, point_charge=? "
-				+ "where point_no=?";
-		Object[] data= {
-				pointDto.getPointName(), pointDto.getPointSell(),
-				pointDto.getPointCharge(), pointDto.getPointNo()
-		};
-		return jdbcTemplate.update(sql, data) > 0;
+	    String sql = "update point "
+	            + "set point_name = ?, point_sell = ?, point_charge = ? "
+	            + "where point_no = ?";
+	    Object[] data = {
+	            pointDto.getPointName(), pointDto.getPointSell(),
+	            pointDto.getPointCharge(), pointDto.getPointNo()
+	    };
+	    return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 }
