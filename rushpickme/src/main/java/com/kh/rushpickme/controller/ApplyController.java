@@ -21,8 +21,7 @@ import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.service.AttachService;
-import com.kh.rushpickme.vo.ApplyRequestListVo;
-import com.kh.rushpickme.vo.PageVO;
+
 
 import jakarta.mail.Session;
 import jakarta.servlet.http.HttpSession;
@@ -71,10 +70,31 @@ public class ApplyController {
 
 		return "redirect:/";
 	}
+	// stateList화면
+	@GetMapping("/stateList")
+	private String stateList() {
+		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
+	}
+//	@PostMapping("/stateList")
+//	private String stateList() {/*int applyNo, HttpSession httpSession*/
+//
+//		
+////		applyDao.applyInsert(applyDto);
+////		applyDao.update
+//	
+//	return "/WEB-INF/views/apply/stateList.jsp";
+//}
+	@GetMapping("/stateDetail")
+	private String stateDetail() {
+		return "/WEB-INF/views/apply/stateDetail.jsp"; // 수거 진행 상세 페이지
+	}
 	
-//	@RequestMapping("/requestList")
-//	public String list(Model model, HttpSession session,
-//							@ModelAttribute ApplyRequestListVo applyRequestListVo) {
+	
+	
+	
+	@RequestMapping("/requestList")
+	public String list() {
+//					Model model, HttpSession session,		@ModelAttribute ApplyRequestListVo applyRequestListVo) {
 //		int findNo = (int) session.getAttribute("applyNo");
 //		int count = applyDao.count(applyRequestListVo);
 //		applyRequestListVo.setCount(count);
@@ -82,40 +102,18 @@ public class ApplyController {
 //		
 //		List<ApplyRequestListVo> requestList = applyDao.requestListByPaging(applyRequestListVo, findNo);
 //		model.addAttribute("list", requestList);
-//		
-//		return "/WEB-INF/views/apply/requestList.jsp";
-//		
-//	}
-	
-	
-
-	
-	
-	
-	
-	
-	
+		
+		return "/WEB-INF/views/apply/requestList.jsp";
+		
+	}
 	
 
-//	// stateList화면
-//	@GetMapping("/stateList")
-//	private String stateList() {
-//		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
-//	}
-//
-////	@PostMapping("/stateList")
-////		private String stateList(int applyNo, HttpSession httpSession) {
-////
-////			
-////			applyDao.applyInsert(applyDto);
-////			applyDao.update
-////		};
-////		
-////	}
+		
 
-	@GetMapping("/requestCancel")
-	private String requsetCancel() {
-		return "/WEB-INF/views/apply/requestCancel.jsp";
+
+	@GetMapping("/cancel")
+	private String cancel() {
+		return "/WEB-INF/views/apply/cancel.jsp";
 	}
 
 }

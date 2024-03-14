@@ -47,7 +47,7 @@ function detail (no){
         </thead>
     
         <tbody>
-            <c:forEach var="ApplyRequestListVo" items="${paveVO}">
+            <c:forEach var="ApplyRequestListVo" items="${pageVO}">
                 <tr onclick="detail('${ApplyRequestListVo.applyNo}');" class="contents-tr">
                     <td>${requestList.applyNo}</td>
                     <td>${requestList.applyAddress1}</td>
@@ -62,7 +62,11 @@ function detail (no){
     </div>
     <!-- <form action="requestList">
         <jsp:include page="/WEB-INF/views/template/pickNavigator.jsp"></jsp:include>
-    </form> -->
+    </form>
+     -->
+    
+   
+    
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
