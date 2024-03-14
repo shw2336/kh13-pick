@@ -75,7 +75,7 @@
                 <li class="board-menu"><a href="#">게시판</a>
                     <ul class="sub-menu">
                         <li><a href="/qna/list">문의게시판</a></li>
-                        <li><a href="/">리뷰게시판</a></li>
+                        <li><a href="/review/list">리뷰게시판</a></li>
                     </ul>
                 </li>
                 
