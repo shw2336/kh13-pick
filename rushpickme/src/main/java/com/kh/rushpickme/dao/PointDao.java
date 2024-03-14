@@ -28,7 +28,10 @@ public class PointDao {
 	        pointDto.getPointSell(), pointDto.getPointCharge()
 	    };
 	    jdbcTemplate.update(sql, data);
+	
 	}
+	
+	
 	
 	public void connect(int pointNo, int attachNo) {
 		String sql = "insert into image(point_no, attach_no) values(?, ?)";
@@ -44,9 +47,10 @@ public class PointDao {
 		Object[] data = {pointNo};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
+	
 	public boolean delete(int pointNo) {
 	    String sql = "delete from point where point_no = ?";
-	    Object[] data = { pointNo };
+	    Object[] data = {pointNo};
 	    return jdbcTemplate.update(sql, data) > 0;
 	}
 	

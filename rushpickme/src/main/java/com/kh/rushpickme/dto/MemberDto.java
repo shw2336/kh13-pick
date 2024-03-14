@@ -61,7 +61,7 @@ public class MemberDto {
 	public void setMemberBirth(String memberBirth) {
 		this.memberBirth = memberBirth;
 	}
-	
+
 	
 	
 }

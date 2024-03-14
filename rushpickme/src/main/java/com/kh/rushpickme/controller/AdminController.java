@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.rushpickme.dao.AdminDao;
 import com.kh.rushpickme.dao.BuyDao;
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dto.MemberDto;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
@@ -25,6 +28,8 @@ public class AdminController {
 	@Autowired
 	private BuyDao buyDao;
 
+	@Autowired
+	private AdminDao adminDao;
 	
 	
 	@RequestMapping("/member/search")
@@ -48,6 +53,11 @@ public class AdminController {
 					}
 		return "/WEB-INF/views/admin/member/search.jsp";
 	
+	}
+	@GetMapping("/member/detail")
+	public String memberDetail(@RequestParam String memberId) {
+		memberDao.selectOne(memberId);
+		return "/WEB-INF/views/admin/member/detail.jsp";
 	}
 	
 	@RequestMapping("/member/detail")
@@ -78,12 +88,19 @@ public class AdminController {
 		return "redirect:detail?memberId="+memberDto.getMemberId();
 	}
 	
-	
-	@RequestMapping("/member/approvePicker")
-	public String approvePicker(@RequestParam String memberId, Model model) {
-		memberDao.approvePicker(memberId);
-		List<MemberDto> list = memberDao.selectList("member_type", "picker");
-		model.addAttribute("pickerList", list);
-		return "/WEB-INF/views/admin/member/pickerlist.jsp";
+	@GetMapping("/member/pickerlist")
+	public String Picker(@RequestParam String memberId, Model model) {
+	    MemberDto memberDto = adminDao.selectOne(memberId);
+	    model.addAttribute("memberDto", memberDto);
+	    return "/WEB-INF/views/admin/member/pickerlist.jsp";
+	}
+
+	@PostMapping("/member/pickerlist")
+	public String approvePicker(HttpSession session, Model model) {
+		String loginId = (String)session.getAttribute("loginId");
+	    memberDao.approvePicker(loginId);
+	    List<MemberDto> list = memberDao.selectList(loginId, loginId);
+	    model.addAttribute("pickerList", list);
+	    return "/WEB-INF/views/admin/member/pickerlist.jsp";
 	}
 }
