@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.rushpickme.dao.ReviewDao;
@@ -107,6 +108,12 @@ public class ReviewController {
 		List<ReviewDto> list = reviewDao.selectListByPaging(pageVO);
 		model.addAttribute("list", list);
 		
+//		ReviewDto reviewDto = reviewDto.getReviewStar();
+//		int star = reviewDao.count(reviewStar);
+//		
+//		list = reviewDao.get
+//		model.addAttribute("list", list);
+		
 		return "/WEB-INF/views/review/list.jsp";
 	}
 	
@@ -134,6 +141,7 @@ public class ReviewController {
 		
 		//아이디를 게시글 정보에 포함시킨다
 		reviewDto.setMemberId(loginId);
+		reviewDto.setAskNo(27);
 		
 		int sequence = reviewDao.getSequence();//DB에서 시퀀스 번호를 추출
 		reviewDto.setReviewNo(sequence);//게시글 정보에 추출한 번호를 포함시킨다
