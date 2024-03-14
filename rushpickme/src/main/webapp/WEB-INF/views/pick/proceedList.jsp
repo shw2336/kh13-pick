@@ -22,9 +22,9 @@
 
 <script type="text/javascript">
 
-// 	function detail (no){
-// 		window.location.href = "waitDetail?applyNo=" + no;
-// 	}
+	function detail (no){
+		window.location.href = "proceedDetail?pickNo=" + no;
+	}
 
 </script>
 
@@ -51,7 +51,7 @@
 	
 		<tbody>
 			<c:forEach var="proceedList" items="${proceedList}">
-				<tr class="contents-tr">
+				<tr class="contents-tr" onclick="detail('${proceedList.pickNo}');">
 					<td>${proceedList.pickNo}</td>
 					<td>${proceedList.applyAddress1}</td>
 					<td>${proceedList.applyVinyl}</td>

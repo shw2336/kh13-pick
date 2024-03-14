@@ -23,8 +23,9 @@
 </style>
 
 <script type="text/javascript">
-	
-
+	function detail (num){
+		window.location.href = "finishDetail?pickNo=" + num;
+	}
 </script>
 
 <div class="container pick-container w-800 py-30 px-50 my-50">
@@ -48,7 +49,7 @@
 		
 			<tbody>
 				<c:forEach var="finishList" items="${finishList}">
-					<tr class="contents-tr">
+					<tr class="contents-tr" onclick="detail('${finishList.pickNo}');">
 						<td>${finishList.pickNo}</td>
 						<td><fmt:formatDate value="${finishList.applyDate}"
 								pattern="MM월 dd일 HH시 mm분" /></td>
