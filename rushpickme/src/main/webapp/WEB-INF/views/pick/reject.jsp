@@ -21,11 +21,11 @@
 }
 
 .selected-btn {
-	background-color: lightblue;
+	background-color: rgb(114,188,114);
 }
 
 .btn.success {
-	border-color: green !important;
+	border-color: rgb(114,188,114) !important;
 }
 
 .btn.fail {

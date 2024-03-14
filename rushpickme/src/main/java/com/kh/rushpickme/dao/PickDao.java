@@ -69,6 +69,13 @@ public class PickDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+	//신청상태를 수거완료로 변경 
+	public boolean updateApplyStateFinish (int applyNo) {
+		String sql = "update apply set apply_state = '수거완료' where apply_no = ?";
+		Object[] data = {applyNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	//신청상태를 접수거부로 변경 (신청 했는데 거부되는 경우)
 	public boolean updateApplyStateReject (int applyNo) {
 		String sql = "update apply set apply_state = '접수거부' where apply_no = ?";
@@ -78,17 +85,10 @@ public class PickDao {
 	
 	//수거정보 수정(수거완료)
 	public boolean updateInfo (PickDto pickDto) {
-		String sql = "update pick set pick_weight = ?, pick_pay = ? "
-				+ "pick_state = ? where pick_no = ?";
+		String sql = "update pick set pick_weight = ?, pick_pay = ?, "
+				+ "pick_state = '수거완료', pick_finish_date = sysdate where pick_no = ?";
 		Object[] data = {pickDto.getPickWeight(), pickDto.getPickPay(), 
-				pickDto.getPickState(), pickDto.getPickNo()};
-		return jdbcTemplate.update(sql, data) > 0;
-	}
-	
-	//수거완료시간 업데이트
-	public boolean updateFinishDate (int pickNo) {
-		String sql = "update pick set pick_finish_date = sysdate where pick_no = ?";
-		Object[] data = {pickNo};
+				pickDto.getPickNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
@@ -204,12 +204,40 @@ public class PickDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	//applyNo 조회 (pickNo로)
+	public int selectApplyNo (int pickNo) {
+		String sql = "select apply_no from pick where pick_no = ?";
+		Object[] data = {pickNo};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	
+	//pickNo 조회 (applyNo로)
+	public int selectPickNo (int applyNo) {
+		String sql = "select pick_no from pick where apply_no = ?";
+		Object[] data = {applyNo};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	
 	// 신청자가 넣은 사진 찾기
 	public int applyAttachNo (int applyNo) {
 		String sql = "select attach_no from apply_attach where apply_no = ?";
 		Object[] data = {applyNo};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
+	
+	//수거자가 넣은 사진 찾기
+	public int pickAttachNo (int pickNo) {
+		String sql = "select attach_no from pick_attach where pick_no = ?";
+		Object[] data = {pickNo};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	
+	public void connect(int pickNo, int attachNo) {
+		String sql = "insert into pick_attach(pick_no, attach_no) values (?, ?)";
+		Object[] data = {pickNo, attachNo};
+		jdbcTemplate.update(sql, data);
+	}
+	
 }
 
 

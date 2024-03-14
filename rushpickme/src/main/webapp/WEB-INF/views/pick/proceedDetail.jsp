@@ -22,19 +22,22 @@
 </style>
 
 <script type="text/javascript">
-	function reject (num) {
-		window.location.href = "reject?applyNo=" + num;
+	function rejectAfter (num) {
+		window.location.href = "rejectAfter?applyNo=" + num;
 	}
 	
-	function accept (num) {
-		window.location.href = "accept?applyNo=" + num;
+	function complete (num) {
+		window.location.href = "complete?applyNo=" + num;
 	}
+	
 </script>
 
 	<div class="cell center mt-30" >
 		<h1>
-			<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님의 신청 정보
+			<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님의 
+			<span style="color: rgb(66,138,66)">${applyNo}번</span> 신청 정보
 		</h1>
+		
 	</div>
 
 <div class="container pick-container w-600 px-50 pt-10 my-50">
@@ -67,6 +70,12 @@
 		<input class="detail-tool w-100" value="${findApplyDto.applySay}" readonly>
 	</div>
 	<br>
+		<div class="cell">
+		<h2>출입 불가시 이렇게 해 주세요. </h2>
+		<input class="detail-tool w-100" style="color: rgb(66,138,66)" value="${findApplyDto.applyWay}" readonly>
+		<input class="detail-tool w-100" value="전화번호는 ${memberContact} 입니다." readonly>
+	</div>
+	<br>
 	<div class="cell">
 		<h2>배출사진</h2>
 		<div class="cell">
@@ -75,8 +84,8 @@
 	</div>
 	<br>
 	<div class="cell right">
-		<button class="btn" onclick="accept('${findApplyDto.applyNo}')">접수하기</button>
-		<button class="btn" onclick="reject('${findApplyDto.applyNo}')">거부하기</button>
+		<button class="btn" onclick="complete('${findApplyDto.applyNo}')">수거완료</button>
+		<button class="btn" onclick="rejectAfter('${findApplyDto.applyNo}')">거부하기</button>
 	</div>
 
 </div>
