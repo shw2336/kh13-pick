@@ -11,7 +11,7 @@ public class ReviewDto {
 	private int reviewNo;//게시번호
 	private int askNo;//신청번호
 	private String memberId;//작성자(회원아이디)
-	private String reviewStar;//별점
+	private int reviewStar;//별점
 	private String reviewContent;//내용
 	private String reviewDelete;//삭제여부
 	private int reviewHits;//조회수
@@ -39,10 +39,10 @@ public class ReviewDto {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getReviewStar() {
+	public int getReviewStar() {
 		return reviewStar;
 	}
-	public void setReviewStar(String reviewStar) {
+	public void setReviewStar(int reviewStar) {
 		this.reviewStar = reviewStar;
 	}
 	public String getReviewContent() {
