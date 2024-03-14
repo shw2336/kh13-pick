@@ -58,8 +58,7 @@ public class PickDao {
 		String sql = "insert into pick "
 				+ "(pick_no, apply_no, member_id, pick_state, pick_reject) "
 				+ "values (pick_seq.nextval, ?, ?, '수거거부', ?)";
-		Object[] data = {pickDto.getApplyNo(), pickDto.getMemberId(),
-				pickDto.getPickState(), pickDto.getPickReject()};
+		Object[] data = {pickDto.getApplyNo(), pickDto.getMemberId(), pickDto.getPickReject()};
 		jdbcTemplate.update(sql, data);
 	}
 	
@@ -117,7 +116,7 @@ public class PickDao {
 				+ "select rownum RN, T.* from ("
 				+ "select pick_no, apply_date, pick_finish_date, pick_pay from ("
 				+ "select pick_no, apply_date, pick_finish_date, pick_pay from pick "
-				+ "inner join apply on pick.apply_no = apply.apply_no where pick_state = '수거완료' "
+				+ "inner join apply on pick.apply_no = apply.apply_no where pick_state like '수거완료' "
 				+ "order by pick_finish_date desc)"
 				+ ")T "
 				+ ") where RN between ? and ?";
@@ -126,18 +125,18 @@ public class PickDao {
 	}
 	
 	public List<PickWaitVo> waitList () {
-		String sql = "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply order by apply_hope_date asc";
+		String sql = "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply where apply_state like '신청완료' order by apply_hope_date asc";
 		return jdbcTemplate.query(sql, pickWaitVoMapper);
 	}
 
-	public List <PickWaitVo> waitListByPaging (PageVO pageVo) {
+	public List <PickWaitVo> waitListByPaging (PageVO pageVo, String findArea) {
 		String sql = "select * from ("
 				+ "select rownum RN, T.* from ("
-				+ "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date "
-				+ " from apply order by apply_hope_date asc"
+				+ "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply where apply_state like '신청완료' and apply_area like ? "
+				+ "order by apply_hope_date asc"
 				+ ")T "
 				+ ") where RN between ? and ?";
-		Object[] data = {pageVo.getBeginRow(), pageVo.getEndRow()};
+		Object[] data = {findArea, pageVo.getBeginRow(), pageVo.getEndRow()};
 		return jdbcTemplate.query(sql, pickWaitVoMapper, data);
 	}
 	
@@ -146,16 +145,17 @@ public class PickDao {
 				+ "select rownum RN, T.* from ("
 				+ "select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
 				+ "from (select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
-				+ "from pick inner join apply on pick.apply_no = apply.apply_no where pick_state = '수거접수' order by apply_date desc))T) "
+				+ "from pick inner join apply on pick.apply_no = apply.apply_no where pick_state like '수거접수' order by apply_date desc))T) "
 				+ "where RN between ? and ?";
 		Object[] data = {pageVo.getBeginRow(), pageVo.getEndRow()};
 		return jdbcTemplate.query(sql, pickProceedVoMapper, data);
 	}
 
 	//전체 신청건수
-	public int countApply () {
-		String sql = "select count(*) from apply where apply_state = '신청완료'";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	public int countApply (String memberId) {
+		String sql = "select count(*) from apply where apply_state like '신청완료' and APPLY_AREA in (select MEMBER_PICK_AREA from member_pick where member_id like ?)";
+		Object[] data = {memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
 	//오래된 신청건수 (신청한지 6시간 지난 것)
@@ -166,27 +166,27 @@ public class PickDao {
 	
 	//수거 진행건수
 	public int countProceed () {
-		String sql = "select count(*) from pick where pick_state = '수거접수'";
+		String sql = "select count(*) from pick where pick_state like '수거접수'";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
 	//수거 거부건수
 	public int countReject () {
-		String sql = "select count(*) from pick where pick_state = '수거거부'";
+		String sql = "select count(*) from pick where pick_state like '수거거부'";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
 	//수거 완료건수
 	public int countFinish () {
-		String sql = "select count(*) from pick where pick_state='수거완료'";
+		String sql = "select count(*) from pick where pick_state like '수거완료'";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
 	//수거자 근무지 조회
-	public MemberPickDto pickArea (String memberId) {
+	public String pickArea (String memberId) {
 		String sql = "select member_pick_area from member_pick where member_id = ?";
 		Object[] data = {memberId};
-		List <MemberPickDto> list = jdbcTemplate.query(sql, memberPickMapper, data);
+	    List<String> list = jdbcTemplate.queryForList(sql, String.class, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
@@ -194,8 +194,15 @@ public class PickDao {
 	public ApplyDto selectOneByApply (int applyNo) {
 		String sql = "select * from apply where apply_no = ?";
 		Object[] data = {applyNo};
-		List <ApplyDto> list = jdbcTemplate.query(sql, applyMapper, data);
+	    List<ApplyDto> list = jdbcTemplate.query(sql, applyMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	// 신청자가 넣은 사진 찾기
+	public int applyAttachNo (int applyNo) {
+		String sql = "select attach_no from apply_attach where apply_no = ?";
+		Object[] data = {applyNo};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 }
 

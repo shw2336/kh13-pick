@@ -65,8 +65,7 @@
 	<div class="cell">
 		<h2>배출사진</h2>
 		<div class="cell">
-<!-- 				<img src="image?applyNo=#"  -->
-<!-- 					class="image" width="100%"> -->
+				<img src="image?applyNo=${findApplyDto.applyNo}" class="image" width="100%">
 		</div>
 	</div>
 	<br>

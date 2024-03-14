@@ -64,8 +64,10 @@
 		</tbody>
 	</table>
 	</div>
+	<form action="proceedList">
+		<jsp:include page="/WEB-INF/views/template/pickNavigator.jsp"></jsp:include>
+	</form>
 	
-	<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 	
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

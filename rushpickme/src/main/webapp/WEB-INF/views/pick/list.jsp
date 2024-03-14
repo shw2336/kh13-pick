@@ -38,7 +38,7 @@
 
 <div class="container w-700 my-50">
 	<div class="cell left">
-		<h1>${sessionScope.loginId}님의 근무지는 <span style="color: rgb(66,138,66)">영등포구</span> 입니다. </h1>
+		<h1>${sessionScope.loginId}님의 근무지는 <span style="color: rgb(66,138,66)">${findArea}</span> 입니다. </h1>
 		<h2>안전 운전 하세요!</h2>
 	</div>
 </div>
