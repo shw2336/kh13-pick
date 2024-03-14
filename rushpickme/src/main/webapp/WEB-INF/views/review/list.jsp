@@ -51,26 +51,44 @@
 					<th>번호</th>
 					<th>별점</th>
 					<th width="40%">리뷰내용</th>
-					<th>작성자</th>
+					<th>조회수</th>
+					<th>글쓴이</th>
 					<th>작성일</th>
 
 				</tr>
 			</thead>
 			<tbody align="center">
-				<c:forEach var="reviewDto" items="${list}">
-					<tr>
+				<c:forEach var="reviewDto" items="${topList}">
+					<tr bgcolor="#ebf8fa">
 						<td>${reviewDto.reviewNo}</td>
-						<%-- 제목 칸 --%>
+						<%-- 별점 칸 --%>
 						<td>${reviewDto.reviewStar}</td>
-						<td class="left">
+						<td w-40 class="center">
 							 <%-- 내용 출력 --%> <a class="link link-animation"
 							href="detail?reviewNo=${reviewDto.reviewNo}"> ${reviewDto.reviewContent} </a>
 						</td>
+						<td>${reviewDto.reviewHits}</td>
 						<td>${reviewDto.memberIdStr}</td>
 						<td>${reviewDto.reviewWriteStr}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
+			<tfoot align="center">
+							<c:forEach var="reviewDto" items="${list}">
+					<tr>
+						<td>${reviewDto.reviewNo}</td>
+						<%-- 제목 칸 --%>
+						<td>${reviewDto.reviewStar}</td>
+						<td w-40 class="center">
+							 <%-- 내용 출력 --%> <a class="link link-animation"
+							href="detail?reviewNo=${reviewDto.reviewNo}"> ${reviewDto.reviewContent} </a>
+						</td>
+						<td>${reviewDto.reviewHits}</td>
+						<td>${reviewDto.memberIdStr}</td>
+						<td>${reviewDto.reviewWriteStr}</td>
+					</tr>
+				</c:forEach>
+			</tfoot>
 		</table>
 	</div>
 	<div class="cell">

@@ -14,6 +14,7 @@ public class ReviewDto {
 	private String reviewStar;//별점
 	private String reviewContent;//내용
 	private String reviewDelete;//삭제여부
+	private int reviewHits;//조회수
 	private Date reviewWrite;//작성날짜
 	private Date reviewEdit;//수정날짜
 	
@@ -55,6 +56,12 @@ public class ReviewDto {
 	}
 	public void setReviewDelete(String reviewDelete) {
 		this.reviewDelete = reviewDelete;
+	}
+	public int getReviewHits() {
+		return reviewHits;
+	}
+	public void setReviewHits(int reviewHits) {
+		this.reviewHits = reviewHits;
 	}
 	public Date getReviewWrite() {
 		return reviewWrite;
