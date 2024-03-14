@@ -96,8 +96,7 @@
                                 <li class="board-menu"><a href="#">관리자메뉴</a>
                                     <ul class="sub-menu">
                                         <li><a href="/admin/member/search">회원관리</a></li>
-                                        <li><a href="/admin/member/edit">회원수정</a></li>
-                                        <li><a href="/admin/member/pickerlist">피커승인</a></li>
+                                        <li><a href="/admin/point/add">포인트관리</a></li>
                                     </ul>
                                 </li>
                             </c:if>

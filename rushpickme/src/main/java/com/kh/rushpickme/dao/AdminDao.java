@@ -18,17 +18,17 @@ public class AdminDao {
     @Autowired
     private MemberMapper mapper;
     
-    public List<MemberDto> selectList(String column) {
-        String sql = "select * from member where member_nick like '%피커%' "
-                   + "order by ? asc";
-        Object[] data = {column};
-        return jdbcTemplate.query(sql, mapper, data);
+    // 피커 회원 목록 조회
+    public List<MemberDto> getPickerList() {
+        String sql = "select * from member where member_type = '피커'";
+        return jdbcTemplate.query(sql, mapper);
     }
 
-	public MemberDto selectOne(String memberId) {
-		String sql = "select * from member where member_id = ?";
-		Object[] data={memberId};
-		List<MemberDto> list = jdbcTemplate.query(sql, mapper, data);
-		return list.isEmpty() ? null : list.get(0);
-	}
+    // 회원 상세 정보 조회
+    public MemberDto selectOne(String memberId) {
+        String sql = "select * from member where member_id = ?";
+        Object[] data = {memberId};
+        List<MemberDto> list = jdbcTemplate.query(sql, mapper, data);
+        return list.isEmpty() ? null : list.get(0);
+    }
 }
