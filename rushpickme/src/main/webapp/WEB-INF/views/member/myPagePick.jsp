@@ -230,111 +230,87 @@ div{
         <div>연락처</div>
       </div>
       <div class="item">
-        <div class="number">${memberGreenDto.memberGreenAddress1}${memberGreenDto.memberGreenAddress2}</div>
+        <div class="number">${memberPickDto.memberPickArea}</div>
         
-        <div>신청지</div>
+        <div>근무지</div>
       </div>
   </div>  
   <div class="shippingStatusContainer">
     <div class="title">
-      신청/신청상황
+      나의 수거현황
     </div>
     <div class="status">
       
       <div class="item">
         <div>
-          <div class="green number"><!-- ${memberPickDto.pickState} --></div>
-          <div class="text">진행중</div>
+          <div class="green number"></div>
+          <div class="text">진행</div>
         </div>
-        <div class="icon"> > </div>
+        <div class="icon">${countProcess} > </div>
       </div>     
       <div class="item">
         <div>
-          <div class="number"><!-- ${memberPickDto.pickState} --></div>
-          <div class="text">신청완료</div>
+          <div class="number"></div>
+          <div class="text">거부</div>
         </div>
-        <div class="icon"> > </div>
+        <div class="icon">${countReject} > </div>
       </div>     
       <div class="item">
         <div>
-          <div class="green number"><!-- ${memberPickDto.pickState} --></div>
-          <div class="text">접수거부</div>
+          <div class="green number"></div>
+          <div class="text">완료</div>
         </div>
-        <div class="icon"> > </div>
+        <div class="icon">${countFinish} > </div>
       </div>     
-      <div class="item">
-        <div>
-          <div class="green number"><!-- ${memberPickDto.pickState} --></div>
-          <div class="text">수거완료</div>
-        </div>
-      </div>     
+      
       
     </div>
     
   </div>  
   <div class="listContainer">
     
-    <a href="/review/list" class="item">
+    
+    <a href="/pick/waitList" class="item">
         <div class="icon">ii</div>
-        <div class="text">리뷰게시판</div>
+        <div class="text">대기리스트</div>
         <div class="right"> > </div>
-    </a>
-    <a href="/qna/list" class="item">
+    </a>  
+    
+    <a href="/pick/proceedList" class="item">
         <div class="icon">ii</div>
-        <div class="text">Q&A</div>
+        <div class="text">진행리스트</div>
         <div class="right"> > </div>
-    </a>
-    <a href="#" class="item">
+    </a>  
+    
+    <a href="/pick/finishList" class="item">
         <div class="icon">ii</div>
-        <div class="text">단골상점</div>
+        <div class="text">완료리스트</div>
         <div class="right"> > </div>
-    </a>
-    <a href="#" class="item">
-        <div class="icon">ii</div>
-        <div class="text">찜한상품</div>
-        <div class="right"> > </div>
-    </a>
-  </div>
-  <div class="listContainer">
-    <a href="#" class="item">
-        <div class="icon">ii</div>
-        <div class="text">
-          <span>내 포인트</span>
-          <span class="smallLight">
-            <span>|</span>
-            <span>${memberGreenDto.memberGreenPoint}</span>
-          </span>          
-        </div>                
-        <div class="right">
-          <span class="blct"></span>
-          > </div>
     </a>
     
-    <a href="#" class="item">
+    <a href="/pick/list" class="item">
         <div class="icon">ii</div>
-        <div class="text">
-          <span>부름티켓</span>
-          <span class="smallLight">
-            <span>|</span>
-            <span>${memberGreenDto.memberGreenTicket}</span>
-          </span>          
-        </div>                
-        <div class="right">
-          <span class="blct"></span>
-          > </div>
-    </a>
+        <div class="text">전체현황</div>
+        <div class="right"> > </div>
+    </a>    
+  
+  </div>
+  <div class="listContainer">
+   
+    
+  
     
     <a href="/member/findpassword" class="item">
         <div class="icon">ii</div>
         <div class="text">비밀번호 변경</div>
         <div class="right"> > </div>
     </a>
-    <a href="#" class="item">
+    <a href="/member/leave" class="item">
         <div class="icon">ii</div>
         <div class="text">회원탈퇴</div>
         <div class="right"> > </div>
     </a>
-    <a href="/member/edit" class="item">
+    <a href="/member/changeAccountPick" class="item">
         <div class="icon">ii</div>
         <div class="text">개인정보변경</div>
         <div class="right"> > </div>
