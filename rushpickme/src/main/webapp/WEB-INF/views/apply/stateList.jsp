@@ -25,7 +25,7 @@
     
     
     
-        <div class="cell list-box">
+    <div class="cell list-box">
     <div class="cell">
         <input type="hidden" id="applyState" name="applyState">
         <h2 style="text-align: center;">수거 현황 리스트</h2>
@@ -37,9 +37,29 @@
                 </button>
             </form>
         </div>
-        <hr>
-    </div>
+        	<hr>
+    	</div>
+	</div>
+	<div class="cell list-box">
+    <div class="cell">
+        <input type="hidden" id="applyState" name="applyState">
+        <h2 style="text-align: center;">수거 현황 리스트</h2>
+        <div class="right">
+            <form action="requestCancel" method="post">
+                	<button type="submit" class="btn negative">
+                	<input type="hidden" value="y" name="applyCancel">
+                    신청취소하기 
+                </button>
+            </form>
+        </div>
+        	<hr>
+    	</div>
+	</div>
+
 </div>
+
+
+
 
 </body>
 </html>
