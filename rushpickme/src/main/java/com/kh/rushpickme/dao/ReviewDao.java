@@ -30,7 +30,7 @@ public class ReviewDao {
 		
 		String sql = "select "
 							+ "review_no, ask_no, member_id, "
-							+ "review_star, review_content, review_delete, "
+							+ "review_star, review_content, review_delete, review_hits, "
 							+ "review_write, review_edit "
 						+ "from review order by review_no desc";
 		return jdbcTemplate.query(sql, reviewListMapper);
@@ -45,7 +45,7 @@ public class ReviewDao {
 		
 		String sql = "select "
 							+ "review_no, ask_no, member_id, "
-							+ "review_star, review_content, review_delete, "
+							+ "review_star, review_content, review_delete, review_hits, "
 							+ "review_write, review_edit "
 						+ "from review "
 						+ "where instr("+column+", ?) > 0 "
@@ -66,7 +66,7 @@ public class ReviewDao {
 							+ "select rownum rn, TMP.* from ("
 								+ "select "
 									+ "review_no, ask_no, member_id, "
-									+ "review_star, review_content, review_delete, "
+									+ "review_star, review_content, review_delete, review_hits, "
 									+ "review_write, review_edit "
 								+ "from review order by review_no desc"
 							+ ")TMP"
@@ -85,7 +85,7 @@ public class ReviewDao {
 							+ "select rownum rn, TMP.* from ("
 								+ "select "
 									+ "review_no, ask_no, member_id, "
-									+ "review_star, review_content, review_delete, "
+									+ "review_star, review_content, review_delete, review_hits, "
 									+ "review_write, review_edit "
 								+ "from review "
 								+ "where instr("+column+", ?) > 0 "
@@ -103,7 +103,7 @@ public class ReviewDao {
 								+ "select rownum rn, TMP.* from ("
 									+ "select "
 										+ "review_no, ask_no, member_id, "
-										+ "review_star, review_content, review_delete, "
+										+ "review_star, review_content, review_delete, review_hits, "
 										+ "review_write, review_edit "
 									+ "from review "
 									+ "where instr("+pageVO.getColumn()+", ?) > 0 "
@@ -122,7 +122,7 @@ public class ReviewDao {
 								+ "select rownum rn, TMP.* from ("
 									+ "select "
 										+ "review_no, ask_no, member_id, "
-										+ "review_star, review_content, review_delete, "
+										+ "review_star, review_content, review_delete, review_hits, "
 										+ "review_write, review_edit "
 									+ "from review "
 									//+ "order by review_no desc"//옛날방식(최신순)
@@ -165,6 +165,15 @@ public class ReviewDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	//조회수 증가
+	public boolean updateReviewHits(int reviewNo) {
+		String sql = "update review "
+						+ "set review_hits = review_hits + 1 "
+						+ "where review_no = ?";
+		Object[] data = {reviewNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	//count, sequence, max, min, sum, avg처럼 결과가 하나만 나오는 경우
 	//그 결과는 객체가 아니라 원시데이터 형태일 확률이 높다
 	public int getSequence() {
@@ -203,6 +212,15 @@ public class ReviewDao {
 		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	//인기 게시물 조회
+	public List<ReviewDto> selectTopList(int count){
+		String sql = "select * from (select * from review order by review_hits desc)\r\n"
+				+ "where rownum<=?";
+		Object[] param = {count};
+		return jdbcTemplate.query(sql, reviewMapper, param);
+	}
+	
 }
 
 
