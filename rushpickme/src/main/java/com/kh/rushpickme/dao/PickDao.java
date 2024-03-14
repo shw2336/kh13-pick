@@ -62,6 +62,13 @@ public class PickDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	//신청상태를 진행중으로 변경 (수거 접수한 경우)
+	public boolean updateApplyStateProceed (int applyNo) {
+		String sql = "update apply set apply_state = '진행중' where apply_no = ?";
+		Object[] data = {applyNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	//신청상태를 접수거부로 변경 (신청 했는데 거부되는 경우)
 	public boolean updateApplyStateReject (int applyNo) {
 		String sql = "update apply set apply_state = '접수거부' where apply_no = ?";
@@ -99,7 +106,6 @@ public class PickDao {
 		Object[] data = {pickNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-
 	
 	//수거 완료 리스트 (신청시간기준 최신 5건만 보여주는)
 	public List<PickFinishVo> pickFinishList () {

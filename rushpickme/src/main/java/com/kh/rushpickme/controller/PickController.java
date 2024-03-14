@@ -112,6 +112,28 @@ public class PickController {
 		return "/WEB-INF/views/pick/waitDetail.jsp";
 	}
 	
+	// 수거 접수
+	@GetMapping("/accept")
+	public String accept (@RequestParam int applyNo, Model model) {
+		model.addAttribute("applyNo", applyNo);
+		return "/WEB-INF/views/pick/accept.jsp";
+	}
+	
+	@PostMapping("/accept")
+	public String accept (@ModelAttribute PickDto pickDto, HttpSession session, Model model) {
+		pickDto.setMemberId((String) session.getAttribute("loginId"));
+		pickDao.insertOk(pickDto);
+		pickDao.updateApplyStateProceed(pickDto.getApplyNo());
+		return "redirect:acceptFinish";
+	}
+	
+	@RequestMapping ("/acceptFinish")
+	public String joinComplete () {
+		return "/WEB-INF/views/pick/acceptFinish.jsp";
+	}
+	
+	
+	// 수거 거부
 	@GetMapping("/reject")
 	public String reject (@RequestParam int applyNo, Model model) {
 		model.addAttribute("applyNo", applyNo);

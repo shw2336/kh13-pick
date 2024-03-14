@@ -22,18 +22,23 @@
 </style>
 
 <script type="text/javascript">
-	function reject (no){
-		window.location.href = "reject?applyNo=" + no;
+	function reject (num) {
+		window.location.href = "reject?applyNo=" + num;
+	}
+	
+	function accept (num) {
+		window.location.href = "accept?applyNo=" + num;
 	}
 </script>
 
-<div class="container pick-container w-600 px-50 pt-10 my-50">
-
-	<div class="cell">
+	<div class="cell center mt-30" >
 		<h1>
 			<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님의 신청 정보
 		</h1>
 	</div>
+
+<div class="container pick-container w-600 px-50 pt-10 my-50">
+
 	<br>
 	<div class="cell">
 		<h2>주소</h2>
@@ -70,8 +75,8 @@
 	</div>
 	<br>
 	<div class="cell right">
-		<button class="btn">접수하기</button>
-		<button class="btn"onclick="reject('${findApplyDto.applyNo}')">거부하기</button>
+		<button class="btn" onclick="accept('${findApplyDto.applyNo}')">접수하기</button>
+		<button class="btn" onclick="reject('${findApplyDto.applyNo}')">거부하기</button>
 	</div>
 
 </div>
