@@ -28,10 +28,12 @@
 	<c:when test="${list == null}">
 		
 	</c:when>
+	
 	<c:when test="${list.isEmpty()}">
 		<h2>검색 결과가 존재하지 않습니다</h2>
 	</c:when>
 	<c:otherwise>
+	<div class="cell center container w-800">
 		<table border="1" width="800">
 			<thead>
 				<tr>
@@ -63,6 +65,7 @@
 		</table>
 	</c:otherwise>
 </c:choose>
+</div>
 </div>
     
     

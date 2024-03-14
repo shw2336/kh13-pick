@@ -50,23 +50,16 @@ public class AdminController {
 				List<MemberDto>list=memberDao.selectList(column, keyword);
 				model.addAttribute("list", list);
 			}
-					}
+		}
 		return "/WEB-INF/views/admin/member/search.jsp";
-	
 	}
+	
 	@GetMapping("/member/detail")
-	public String memberDetail(@RequestParam String memberId) {
-		memberDao.selectOne(memberId);
-		return "/WEB-INF/views/admin/member/detail.jsp";
-	}
-	
-	@RequestMapping("/member/detail")
 	public String memberDetail(@RequestParam String memberId, Model model) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("buyList", buyDao.selectList(memberId));
 		return "/WEB-INF/views/admin/member/detail.jsp";
-		
 	}
 	
 	@GetMapping("/member/delete")
@@ -81,7 +74,6 @@ public class AdminController {
 		model.addAttribute("memberDto", memberDto);
 		return "/WEB-INF/views/admin/member/edit.jsp";
 	}
-	
 	@PostMapping("/member/edit")
 	public String memberEdit(@ModelAttribute MemberDto memberDto) {
 		memberDao.updateMemberByAdmin(memberDto);
@@ -89,18 +81,15 @@ public class AdminController {
 	}
 	
 	@GetMapping("/member/pickerlist")
-	public String Picker(@RequestParam String memberId, Model model) {
-	    MemberDto memberDto = adminDao.selectOne(memberId);
-	    model.addAttribute("memberDto", memberDto);
-	    return "/WEB-INF/views/admin/member/pickerlist.jsp";
+	public String pickerList(Model model) {
+		List<MemberDto> pickerList = adminDao.getPickerList();
+		model.addAttribute("pickerList", pickerList);
+		return "/WEB-INF/views/admin/member/pickerlist.jsp";
 	}
 
-	@PostMapping("/member/pickerlist")
-	public String approvePicker(HttpSession session, Model model) {
-		String loginId = (String)session.getAttribute("loginId");
-	    memberDao.approvePicker(loginId);
-	    List<MemberDto> list = memberDao.selectList(loginId, loginId);
-	    model.addAttribute("pickerList", list);
-	    return "/WEB-INF/views/admin/member/pickerlist.jsp";
+	@PostMapping("/member/approvePicker")
+	public String approvePicker(@RequestParam String memberId) {
+		memberDao.approvePicker(memberId);
+		return "redirect:pickerlist";
 	}
 }

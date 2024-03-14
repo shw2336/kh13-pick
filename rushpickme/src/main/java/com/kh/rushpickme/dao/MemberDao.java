@@ -177,24 +177,14 @@ public class MemberDao {
 		public boolean updateMemberByAdmin(MemberDto memberDto) {
 		    String sql = "update member set "
 		            + "member_nick=?, member_contact=?, "
-		            + "member_name=?, member_type=?, "
-		            + "member_email=?, member_birth=? "
+		            + "member_type=? "
 		            + "where member_id=?";
 		    Object[] data = {
 		            memberDto.getMemberNick(), memberDto.getMemberContact(),
-		            memberDto.getMemberName(), memberDto.getMemberType(),
-		            memberDto.getMemberEmail(), memberDto.getMemberBirth(),
+		            memberDto.getMemberType(),
 		            memberDto.getMemberId()
 		    };
 		    return jdbcTemplate.update(sql, data) > 0;
 		}
-//		public boolean plusMemberPoint(String loginId, int item) {
-//			String sql = "update member "
-//					+ "set member_green_point = member_green_point + ? "
-//					+ "where member_id = ?";
-//			Object[] data = {point, memberId};
-//			return jdbcTemplate.update(sql, data) > 0;
-//		}
-//		public boolean 
-//		
-}
+	
+		}
