@@ -79,7 +79,7 @@ public class MemberDao {
 		return jdbcTemplate.query(sql, mapper, data);
 		
 	}
-	//회원 상세
+	//회원 상세ㅋ
 	public MemberDto selectOne(String memberId) {
 		String sql = "select * from member where member_id = ?";
 		Object[] data = {memberId};
