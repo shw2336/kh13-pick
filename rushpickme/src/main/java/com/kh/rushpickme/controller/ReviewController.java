@@ -135,14 +135,16 @@ public class ReviewController {
 	}
 	
 	@PostMapping("/write")
-	public String write(@ModelAttribute ReviewDto reviewDto, HttpSession session) {
+	public String write(@ModelAttribute ReviewDto reviewDto, HttpSession session,
+					@RequestParam float score) {
 		//세션에서 로그인한 사용자의 ID를 추출
 		String loginId = (String)session.getAttribute("loginId");
 		
 		//아이디를 게시글 정보에 포함시킨다
 		reviewDto.setMemberId(loginId);
 		reviewDto.setAskNo(27);
-		
+		int reviewStar = (int)score;
+		reviewDto.setReviewStar(reviewStar);
 		int sequence = reviewDao.getSequence();//DB에서 시퀀스 번호를 추출
 		reviewDto.setReviewNo(sequence);//게시글 정보에 추출한 번호를 포함시킨다
 		reviewDao.insert(reviewDto);//등록

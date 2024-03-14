@@ -17,7 +17,7 @@
     <script>
         $(function(){
             //작성용
-            $(".score-edit").score({
+                $(".score-edit").score({
                 starColor: "#0984e3", //별 색상
                 editable: true,//편집 가능 설정
                 integerOnly: true,//정수만 선택 가능하도록 설정
@@ -49,11 +49,10 @@
       <div class="cell">
             <h2>작성할 때</h2>
         </div>
-        <form>
-        <div class="cell reviewStar">
+        
+        <div class="cell">
             <div class="score-edit" data-max="5.0" data-rate="3.5"></div>
         </div>
-        </form>
           
 	<div class="cell">
 		<label>내용</label>

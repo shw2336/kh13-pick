@@ -17,7 +17,7 @@ public class ReviewListMapper implements RowMapper<ReviewDto>{
 		reviewDto.setReviewNo(rs.getInt("review_no"));
 		reviewDto.setAskNo(rs.getInt("ask_no"));
 		reviewDto.setMemberId(rs.getString("member_id"));
-		reviewDto.setReviewStar(rs.getString("review_star"));
+		reviewDto.setReviewStar(rs.getInt("review_star"));
 		reviewDto.setReviewContent(rs.getString("review_content"));
 		reviewDto.setReviewDelete(rs.getString("review_delete"));
 		reviewDto.setReviewHits(rs.getInt("review_hits"));
