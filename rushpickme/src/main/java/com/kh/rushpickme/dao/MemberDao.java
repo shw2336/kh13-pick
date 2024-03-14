@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.dto.MemberGreenDto;
@@ -14,8 +12,6 @@ import com.kh.rushpickme.dto.MemberPickDto;
 import com.kh.rushpickme.mapper.MemberGreenMapper;
 import com.kh.rushpickme.mapper.MemberMapper;
 import com.kh.rushpickme.mapper.MemberPickMapper;
-
-import jakarta.servlet.http.HttpSession;
 
 @Repository
 public class MemberDao {
@@ -176,13 +172,6 @@ public class MemberDao {
 			Object[] data = {memberId};
 			jdbcTemplate.update(sql, data);
 		}
-		public boolean plusMemberPoint(String memberId, int point) {
-			String sql = "update member "
-							+ "set member_point = member_point + ? "
-							+ "where member_id = ?";
-			Object[] data = {point, memberId};
-			return jdbcTemplate.update(sql, data) > 0;
-		}
 		
 		// 관리자에 의한 회원 정보 수정
 		public boolean updateMemberByAdmin(MemberDto memberDto) {
@@ -199,7 +188,6 @@ public class MemberDao {
 		    };
 		    return jdbcTemplate.update(sql, data) > 0;
 		}
-	
-	
-	
+
+		
 }

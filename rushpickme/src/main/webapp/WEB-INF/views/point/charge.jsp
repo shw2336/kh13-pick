@@ -10,7 +10,7 @@
 <c:forEach var="pointDto" items="${list}">
 
 <hr>
-<div>s
+<div>
     <h2>${pointDto.pointName}</h2>
     <img src="image?pointNo=${pointDto.pointNo}"> <br>
     가격 : 
