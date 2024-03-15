@@ -15,9 +15,20 @@
         border: 1px solid #636e72;
         border-radius: 0.5em;
     }
+    
+         .pick-container {
+         border-radius: 10px;
+         border: 1px solid gainsboro;
+         box-shadow: 0px 4px 4px 2px gainsboro;
+     }
+     
+     table > tbody > .contents-tr {
+     	cursor: pointer;
+     	height: 40px;
+     }
 </style>
 
-<div class="container w-800">
+<div class="container pick-container w-800 py-30 px-50 my-50">
 	<div class="cell">
 		<h1>Q&A</h1>
 	</div>
@@ -47,9 +58,9 @@
 	</div>
 	<div class="cell">
 		<%-- 테이블 --%>
-		<table class="table table-horizontal">
+		<table class="table table-horizontal table-hover" >
 			<thead>
-				<tr bgcolor=#E9E9ED>
+				<tr bgcolor=#bde0fe>
 					<th>번호</th>
 					<th width="40%">제목</th>
 					<th>작성자</th>
@@ -57,9 +68,9 @@
 					<th>조회수</th>
 				</tr>
 			</thead>
-			<tbody align="center">
+			<tbody>
 				<c:forEach var="qnaDto" items="${list}">
-					<tr bgcolor=#f8f9fa>
+					<tr>
 						<td>${qnaDto.qnaNo}</td>
 						<%-- 제목 칸 --%>
 						<td class="left">

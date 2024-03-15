@@ -26,6 +26,18 @@
 .ff {
 	color: #ff8080;
 }
+
+         .pick-container {
+         border-radius: 10px;
+         border: 1px solid gainsboro;
+         box-shadow: 0px 4px 4px 2px gainsboro;
+     }
+     
+     table > tbody > .contents-tr {
+     	cursor: pointer;
+     	height: 40px;
+     }
+
 </style>
 
 <script>
@@ -43,7 +55,7 @@
 </script>
 
 
-<div class="container w-800">
+<div class="container pick-container w-800 py-30 px-50 my-50">
 	<div class="cell">
 		<h1>리뷰게시판</h1>
 	</div>
@@ -71,7 +83,7 @@
 	</div>
 	<div class="cell">
 		<%-- 테이블 --%>
-		<table class="table table-horizontal">
+		<table class="table table-horizontal table-hover">
 			<thead>
 				<tr bgcolor=#bde0fe>
 					<th>번호</th>
@@ -86,7 +98,7 @@
 
 			<tbody align="center">
 				<c:forEach var="reviewDto" items="${list}">
-					<tr bgcolor=#F5FAFF>
+					<tr>
 						<td>${reviewDto.reviewNo}</td>
 						<%-- 별점 --%>
 						<td>
