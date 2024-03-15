@@ -24,15 +24,15 @@
     }
 
     .info-table th {
-        background-color: #ecf39e;
+        background-color: #e9edc9;
     }
 
     .info-table tr:nth-child(even) {
-        background-color: #f6f1d1;
+        background-color: white;
     }
 
     .info-table tr:hover {
-        background-color: #aacc00;
+        background-color: beige;
     }
 
     .actions {
@@ -43,8 +43,8 @@
         display: inline-block;
         margin-right: 20px;
         padding: 10px 20px;
-        background-color: #ecf39e;
-        color: #4CAF50;
+        background-color: #4CAF50;
+        color: #2d3436;
         text-decoration: none;
         border: none;
         border-radius: 5px;

@@ -52,20 +52,26 @@
     }
 
     .member th {
-        background-color: #ecf39e;
+        background-color: #e9edc9;
     }
 
     .member tr:nth-child(even) {
-        background-color: #f6f1d1;
+        background-color: white;
     }
-
+ .search-input {
+        border: 1px solid #ddd; 
+    }
     .member tr:hover {
-        background-color: #aacc00;
+        background-color: beige;
     }
 
     .detail-link {
         text-decoration: none;
         color: #ff8080;
+    }
+    
+      .search-select {
+        border: 1px solid #ddd;
     }
 
     .detail-link:hover {

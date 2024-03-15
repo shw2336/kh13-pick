@@ -80,16 +80,17 @@ public class AdminController {
 		return "redirect:detail?memberId="+memberDto.getMemberId();
 	}
 	
-	@GetMapping("/member/pickerlist")
-	public String pickerList(Model model) {
-		List<MemberDto> pickerList = adminDao.getPickerList();
-		model.addAttribute("pickerList", pickerList);
-		return "/WEB-INF/views/admin/member/pickerlist.jsp";
-	}
-
-	@PostMapping("/member/approvePicker")
-	public String approvePicker(@RequestParam String memberId) {
-		memberDao.approvePicker(memberId);
-		return "redirect:pickerlist";
-	}
+//	@GetMapping("/member/pickerlist")
+//	public String pickerList(Model model) {
+//		List<MemberDto> pickerList = adminDao.getPickerList();
+//		model.addAttribute("pickerList", pickerList);
+//		return "/WEB-INF/views/admin/member/pickerlist.jsp";
+//	}
+//
+//	@PostMapping("/member/approvePicker")
+//	public String approvePicker(@RequestParam String memberId) {
+//		memberDao.approvePicker(memberId);
+//		return "redirect:pickerlist";
+//	}
+//	
 }
