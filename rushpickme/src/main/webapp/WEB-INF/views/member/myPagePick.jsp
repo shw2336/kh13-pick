@@ -218,7 +218,7 @@ div{
       <div class="grade">${memberDto.memberType}</div>
       <div class="name">${memberDto.memberNick}님 환영 합니다!</div>
     </div>    
-    <div class="modify">i</div>    
+    <div class="modify"><img src="image" width="100" height="100"></div>    
   </div>
   <div class="summaryContainer">
     <div class="item">

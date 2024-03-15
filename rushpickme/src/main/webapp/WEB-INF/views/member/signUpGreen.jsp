@@ -462,7 +462,11 @@
             <input value="" type="text" name="" placeholder="회원가입시 무료로 3장을 드립니다 "
                             id="" class="tool w-100" readonly>                                              
         </div>
-        
+        	
+        	<div class="cell">
+			<label>프로필 이미지</label>
+			<input type="file" name="attach" class="tool w-100">
+		</div>
        
 		
 		

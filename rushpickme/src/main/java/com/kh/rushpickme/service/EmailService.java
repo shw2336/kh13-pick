@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dto.MemberDto;
@@ -75,6 +76,21 @@ public class EmailService {
 		message.setTo(memberDto.getMemberEmail());
 		message.setSubject("[Rush] 비밀번호 ");
 		message.setText(memberDto.getMemberName()+"님의"+"임시 비밀번호는 " + memberDto.getMemberPw() + "입니다");
+		
+		sender.send(message);
+	}
+	
+	public void sendWelcomeMail(String memberemail, @ModelAttribute MemberDto memberDto) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(memberemail);
+		message.setSubject("[Rush] 가입을 환영합니다");
+		message.setText("회원님의 가입 정보를 알려 드립니다"
+						+"아이디"+memberDto.getMemberId()	
+						+"이름"+memberDto.getMemberName()
+						+"생년월일"+memberDto.getMemberBirth()
+						+"닉네임"+memberDto.getMemberNick()
+						+"이메일"+memberDto.getMemberEmail()	
+						+"많은 활동 부탁 드립니다 감사합니다."	);
 		
 		sender.send(message);
 	}
