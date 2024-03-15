@@ -3,28 +3,63 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="cell center container w-800">
-<h1>회원 정보 수정</h1>
+<style>
+    .container {
+        text-align: center;
+        margin: auto;
+        width: 30%;
+    }
 
-<%--
-	추가로 전달할 정보 - 아이디(hidden)
-	수정할 정보 - 닉네임,이메일,생년월일,연락처,주소,(+등급,포인트)	
- --%>
- 
-<form action="edit" method="post">
-	<input type="hidden" name="memberId" value="${memberDto.memberId}">
-	
-	닉네임<input type="text" name="memberNick" value="${memberDto.memberNick}" required> <br><br>
-	전화번호<input type="tel" name="memberContact" value="${memberDto.memberContact}" required> <br><br>
-	등급
-	<select name ="memberType" required >
-		<option value = "">선택하세요</option>
-		<option value = "그린"  ${memberDto.memberType == '그린' ? 'selected' : ''}>그린</option>
-		<option value = "피커"  ${memberDto.memberType == '피커' ? 'selected' : ''}>피커</option>
-		<option value = "관리자"  ${memberDto.memberType == '관리자' ? 'selected' : ''}>관리자</option>
-	</select>
-	
-	<button>변경</button>
-</form>
+    form {
+        margin-top: 20px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    select {
+        padding: 10px;
+        width: 100%;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<div class="container">
+    <img src="/image/memberedit.png">
+
+    <form action="edit" method="post">
+        <input type="hidden" name="memberId" value="${memberDto.memberId}">
+        
+        <label for="memberNick">닉네임</label>
+        <input type="text" id="memberNick" name="memberNick" value="${memberDto.memberNick}" required> <br>
+        
+        <label for="memberContact">전화번호</label>
+        <input type="tel" id="memberContact" name="memberContact" value="${memberDto.memberContact}" required> <br>
+        
+        <label for="memberType">등급</label>
+        <select id="memberType" name="memberType" required >
+            <option value="">선택하세요</option>
+            <option value="그린" ${memberDto.memberType == '그린' ? 'selected' : ''}>그린</option>
+            <option value="피커" ${memberDto.memberType == '피커' ? 'selected' : ''}>피커</option>
+            <option value="관리자" ${memberDto.memberType == '관리자' ? 'selected' : ''}>관리자</option>
+        </select>
+        
+        <button type="submit">변경</button>
+    </form>
 </div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
