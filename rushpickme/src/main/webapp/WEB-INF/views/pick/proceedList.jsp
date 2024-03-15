@@ -3,8 +3,9 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-    
+
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+    
 
 <style>
      .pick-container {
@@ -32,7 +33,9 @@
 	
 	<div class="cell flex-cell pb-10">
 		<div class="cell">
-			<span style="font-size:25px; font-weight:bold;">수거 진행중...</span>
+			<span style="font-size:25px; font-weight:bold;">수거 진행중	</span>
+			<span><i class="fa-solid fa-clock" style="color: rgb(255, 128, 128)"></i> 고객님의 
+			<span style="color: rgb(66,138,66); font-weight:bold;">수거 희망일</span>이 지났을 경우 표시됩니다. </span>
 		</div>
 	</div>
 	
@@ -58,7 +61,14 @@
 					<td><fmt:formatDate value="${proceedList.applyDate}"
 							pattern="MM월 dd일 HH:mm" /></td>
 					<td>${proceedList.applyHopeDate}</td>
-					<td>${proceedList.timePasses}</td>
+					<c:choose>
+						<c:when test="${proceedList.timePasses eq 'Y'}">
+							<td><i class="fa-solid fa-clock" style="color: rgb(255, 128, 128)"></i></td>
+						</c:when>
+						<c:otherwise>
+							<td><i class="fa-regular fa-clock" style="color: rgb(66,138,66)"></i></td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 			</c:forEach>
 		</tbody>

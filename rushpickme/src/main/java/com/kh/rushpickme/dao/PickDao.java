@@ -47,8 +47,8 @@ public class PickDao {
 	//수거접수등록
 	public void insertOk (PickDto pickDto) {
 		String sql = "insert into pick "
-				+ "(pick_no, apply_no, member_id, pick_schedule) "
-				+ "values (pick_seq.nextval, ?, ?, ?)";
+				+ "(pick_no, apply_no, member_id, pick_schedule, pick_state) "
+				+ "values (pick_seq.nextval, ?, ?, ?, '수거접수')";
 		Object[] data = {pickDto.getApplyNo(), pickDto.getMemberId(), pickDto.getPickSchedule()};
 		jdbcTemplate.update(sql, data);
 	}
@@ -61,7 +61,7 @@ public class PickDao {
 		Object[] data = {pickDto.getApplyNo(), pickDto.getMemberId(), pickDto.getPickReject()};
 		jdbcTemplate.update(sql, data);
 	}
-	
+
 	//신청상태를 진행중으로 변경 (수거 접수한 경우)
 	public boolean updateApplyStateProceed (int applyNo) {
 		String sql = "update apply set apply_state = '진행중' where apply_no = ?";
@@ -87,16 +87,15 @@ public class PickDao {
 	public boolean updateInfo (PickDto pickDto) {
 		String sql = "update pick set pick_weight = ?, pick_pay = ?, "
 				+ "pick_state = '수거완료', pick_finish_date = sysdate where pick_no = ?";
-		Object[] data = {pickDto.getPickWeight(), pickDto.getPickPay(), 
-				pickDto.getPickNo()};
+		Object[] data = {pickDto.getPickWeight(), pickDto.getPickPay(), pickDto.getPickNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 	//수거거부등록(현장에서 수거를 거부하게 되는 경우)
 	public boolean updateNo (PickDto pickDto) {
-		String sql = "update pick set pick_state = ?, pick_reject = ? "
+		String sql = "update pick set pick_state = '수거거부', pick_reject = ? "
 				+ "where pick_no = ?";
-		Object[] data = {pickDto.getPickState(), pickDto.getPickReject(), pickDto.getPickNo()};
+		Object[] data = {pickDto.getPickReject(), pickDto.getPickNo()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
@@ -107,12 +106,12 @@ public class PickDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	//수거 완료 리스트 (신청시간기준 최신 5건만 보여주는)
+	//수거 완료 리스트 (신청시간기준 최신 3건만 보여주는)
 	public List<PickFinishVo> pickFinishList (String memberId) {
 		String sql = "select pick_no, apply_date, pick_finish_date, pick_pay from "
 				+ "(select pick_no, apply_date, pick_finish_date, pick_pay from pick join apply on pick.apply_no = apply.apply_no "
 				+ "where pick.pick_state like '수거완료' AND apply.apply_area IN ( SELECT MEMBER_PICK_AREA FROM member_pick WHERE member_pick.member_id LIKE ?) "
-				+ "order by apply_date desc) where rownum <= 3";
+				+ "order by pick_finish_date desc) where rownum <= 3";
 		Object[] data = {memberId};
 		return jdbcTemplate.query(sql, pickFinishVoMapper, data);
 	}
@@ -147,12 +146,13 @@ public class PickDao {
 		return jdbcTemplate.query(sql, pickWaitVoMapper, data);
 	}
 	
+	// 신청자의 수거희망일이 지나버렸는지 확인하여 리스트추출 (time_passes 컬럼 추가해서 확인결과 받기)     
 	public List <PickProceedVo> proceedListByPaging (String memberId, PageVO pageVo) {
 		String sql = "select * from ("
 				+ "select rownum RN, T.* from ("
 				+ "select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
 				+ "from (select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
-				+ "from pick inner join apply on pick.apply_no = apply.apply_no where pick_state like '수거접수' and pick.member_id like ? order by apply_date desc))T) "
+				+ "from pick inner join apply on pick.apply_no = apply.apply_no where pick_state like '수거접수' and pick.member_id like ? order by apply_hope_date asc))T) "
 				+ "where RN between ? and ?";
 		Object[] data = {memberId, pageVo.getBeginRow(), pageVo.getEndRow()};
 		return jdbcTemplate.query(sql, pickProceedVoMapper, data);
