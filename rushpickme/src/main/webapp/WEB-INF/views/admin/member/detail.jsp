@@ -40,7 +40,7 @@
 
 </table>
 
-<h2><a href="#">임시 비밀번호 발행</a></h2>
+
 <h2><a href="edit?memberId=${memberDto.memberId}">회원정보 변경</a></h2>
 <h2><a href="delete?memberId=${memberDto.memberId}">회원 강제탈퇴</a></h2>
 
