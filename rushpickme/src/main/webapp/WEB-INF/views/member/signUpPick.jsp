@@ -315,12 +315,9 @@
 
 	<div class="cell center"><h1 >수거회원 정보</h1></div>
 	
-	<!-- 진행바 -->
-	<div class="cell">
-		<div class="progressbar"><div class="guage"></div></div>
-	</div>
 	
-	<!-- 1페이지 - 아이디/비밀번호 -->
+	
+	
 	<div class="cell">
 		<div class="cell">
             <label>
