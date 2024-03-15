@@ -448,7 +448,7 @@ textarea.tool.tool-fixed {
 /* off 클래스에 대한 효과 추가 */
 .page-navigator > a.off {
 	color: #b2bec3;
-	cursor: not-allowed;
+	cursor: text;
 }
 
 /* 이미지 디자인 */
