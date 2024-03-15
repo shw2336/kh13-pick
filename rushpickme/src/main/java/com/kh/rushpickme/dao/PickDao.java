@@ -108,12 +108,13 @@ public class PickDao {
 	}
 	
 	//수거 완료 리스트 (신청시간기준 최신 5건만 보여주는)
-	public List<PickFinishVo> pickFinishList () {
+	public List<PickFinishVo> pickFinishList (String memberId) {
 		String sql = "select pick_no, apply_date, pick_finish_date, pick_pay from "
-				+ "(select pick_no, apply_date, pick_finish_date, pick_pay from pick  inner join apply on pick.apply_no = apply.apply_no "
-				+ "where pick_state = '수거완료' order by apply_date desc) "
-				+ "where rownum <= 3";
-		return jdbcTemplate.query(sql, pickFinishVoMapper);
+				+ "(select pick_no, apply_date, pick_finish_date, pick_pay from pick join apply on pick.apply_no = apply.apply_no "
+				+ "where pick.pick_state like '수거완료' AND apply.apply_area IN ( SELECT MEMBER_PICK_AREA FROM member_pick WHERE member_pick.member_id LIKE ?) "
+				+ "order by apply_date desc) where rownum <= 3";
+		Object[] data = {memberId};
+		return jdbcTemplate.query(sql, pickFinishVoMapper, data);
 	}
 	
 	//수거 완료 리스트 전체 
@@ -146,14 +147,14 @@ public class PickDao {
 		return jdbcTemplate.query(sql, pickWaitVoMapper, data);
 	}
 	
-	public List <PickProceedVo> proceedListByPaging (PageVO pageVo) {
+	public List <PickProceedVo> proceedListByPaging (String memberId, PageVO pageVo) {
 		String sql = "select * from ("
 				+ "select rownum RN, T.* from ("
 				+ "select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
 				+ "from (select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
-				+ "from pick inner join apply on pick.apply_no = apply.apply_no where pick_state like '수거접수' order by apply_date desc))T) "
+				+ "from pick inner join apply on pick.apply_no = apply.apply_no where pick_state like '수거접수' and pick.member_id like ? order by apply_date desc))T) "
 				+ "where RN between ? and ?";
-		Object[] data = {pageVo.getBeginRow(), pageVo.getEndRow()};
+		Object[] data = {memberId, pageVo.getBeginRow(), pageVo.getEndRow()};
 		return jdbcTemplate.query(sql, pickProceedVoMapper, data);
 	}
 
@@ -165,21 +166,30 @@ public class PickDao {
 	}
 	
 	//오래된 신청건수 (신청한지 6시간 지난 것)
-	public int countUrgentApply () {
-		String sql = "SELECT count(*) FROM apply WHERE ROUND((sysdate - apply_date) * 24, 2) > 6";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	public int countUrgentApply (String memberId) {
+		String sql = "SELECT count(*) FROM apply WHERE ROUND((sysdate - apply_date) * 24, 2) > 6 and apply_state like '신청완료' and apply_area in (select member_pick_area from member_pick where member_id like ?)";
+		Object[] data = {memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
 	//수거 진행건수
-	public int countProceed () {
-		String sql = "select count(*) from pick where pick_state like '수거접수'";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	public int countProceed (String memberId) {
+		String sql = "SELECT count(*) FROM pick join apply on apply.APPLY_NO = pick.APPLY_NO "
+				+ "WHERE pick.pick_state LIKE '수거접수' "
+				+ "AND apply.apply_area IN "
+				+ "( SELECT MEMBER_PICK_AREA FROM member_pick WHERE member_pick.member_id LIKE ?)";
+		Object[] data = {memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
 	//수거 거부건수
-	public int countReject () {
-		String sql = "select count(*) from pick where pick_state like '수거거부'";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	public int countReject (String memberId) {
+		String sql = "SELECT count(*) FROM pick join apply on apply.APPLY_NO = pick.APPLY_NO "
+				+ "WHERE pick.pick_state LIKE '수거거부' "
+				+ "AND apply.apply_area IN "
+				+ "( SELECT MEMBER_PICK_AREA FROM member_pick WHERE member_pick.member_id LIKE ?)";
+		Object[] data = {memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
 	//수거 완료건수

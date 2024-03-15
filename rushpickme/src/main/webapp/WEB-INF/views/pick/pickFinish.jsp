@@ -5,13 +5,10 @@
 
 
 <style>
-.pick-container {
-	border-radius: 10px;
-	border: 1px solid gainsboro;
-	box-shadow: 0px 4px 4px 2px gainsboro;
-}
+
 </style>
-<div class="container pick-container w-600 px-50 pt-10 my-50">
+
+<div class="container  w-600 px-50 pt-10 my-50">
 	<div class="cell">
 		<img src="/image/acceptFinish.png" class="image" width="100%">
 	</div>
