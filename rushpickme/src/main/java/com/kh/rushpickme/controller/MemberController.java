@@ -1,5 +1,7 @@
 package com.kh.rushpickme.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dao.BuyDao;
@@ -44,6 +47,8 @@ public class MemberController {
 	
 	@Autowired
 	private PickDao pickDao;
+	
+	
 
 	// 회원가입 선택창
 	@GetMapping("/signUp")
@@ -58,11 +63,23 @@ public class MemberController {
 	}
 
 	@PostMapping("/signUpGreen")
-	public String signUpGreen(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberGreenDto memberGreenDto) {
+	public String signUpGreen(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberGreenDto memberGreenDto,
+							@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
 
 		memberDao.insert(memberDto);
 		memberDao.insertGreen(memberGreenDto);
-		return "redirect:signUpSuccess";
+		
+		if(!attach.isEmpty()) {
+			int attachNo = attachService.save(attach);
+			
+			memberDao.connect(memberDto.getMemberId(),attachNo);
+			
+		}
+		//가입 환영 메일 발송
+		emailService.sendWelcomeMail(memberDto.getMemberEmail(), memberDto);
+			return "redirect:signUpSuccess";
+		
+		
 	}
 
 	@RequestMapping("/signUpSuccess")
@@ -77,10 +94,18 @@ public class MemberController {
 	}
 
 	@PostMapping("/signUpPick")
-	public String signUpPick(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberPickDto memberPickDto) {
+	public String signUpPick(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberPickDto memberPickDto,
+			@RequestParam MultipartFile attach	) throws IllegalStateException, IOException {
 
 		memberDao.insert(memberDto);
 		memberDao.insertPick(memberPickDto);
+		
+		if(!attach.isEmpty()) {
+			int attachNo = attachService.save(attach);
+			
+			memberDao.connect(memberDto.getMemberId(),attachNo);
+			
+		}
 		return "redirect:signUpSuccess";
 	}
 
@@ -156,7 +181,7 @@ public class MemberController {
 	    MemberDto memberDto = memberDao.selectOne(loginId);
 	    MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
 	    MemberPickDto memberPickDto = memberDao.selectOnePick(loginId);
-	    System.out.println(memberPickDto.getMemberPickArea());
+	    
 	    
 	    // 3. memberDto가 null이 아니고, memberDto의 memberType이 "그린"인지 확인하여 isValid 변수에 할당
 	    boolean isValid = memberDto != null && memberDto.getMemberType().equals("그린");
@@ -386,6 +411,13 @@ public class MemberController {
 		boolean isValid = findDto.getMemberPw().equals(memberPw);
 
 		if (isValid) {
+			try {
+				int attachNo = memberDao.findAttachNo(loginId);
+				attachService.remove(attachNo);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
 
 			memberDao.delete(loginId);
 			session.removeAttribute("loginId");
@@ -422,6 +454,20 @@ public class MemberController {
 	@RequestMapping("/findPwFail")
 	public String findPwfail() {
 		return "/WEB-INF/views/member/findPwFail.jsp";
+	}
+	@RequestMapping("/image")
+	public String image(HttpSession session) {
+	try{
+		String loginId=(String)session.getAttribute("loginId");
+		int attachNo = memberDao.findAttachNo(loginId);
+		return "redirect:/download?attachNo="+attachNo;
+	}
+		
+	
+	catch(Exception e) {
+		
+		return "redirect:/image/picking.png";
+	}
 	}
 
 }

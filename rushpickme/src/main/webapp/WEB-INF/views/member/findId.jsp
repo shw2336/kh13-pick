@@ -94,10 +94,13 @@ width: 100%;
 <body>
 	<div class="container w-1200">
 		<div class="cell center">
+			<h2 style="color:green">아이디 찾기</h2>
+			<br><br><br><br><br><br><br><br><br><br>
 			<form action="findId" method="post">
 				<input type="text" name="memberNick" placeholder="닉네임을 입력 해주세요"
 					required>
 				<div>
+				
 					<button class="btn positive" type="submit">찾기</button>
 			</form>
 		</div>

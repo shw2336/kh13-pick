@@ -427,7 +427,7 @@
         
         <div class="cell">
 	<label>비밀번호 확인 <b style="color:red">*</b></label>
-	 <input type="password" name="memberPw" required> <br><br>
+	 <input class="tool w-100" type="password" name="memberPw" placeholder="비밀번호 입력" required> <br><br>
 	</div>
 		    
 		</div>
