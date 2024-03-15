@@ -30,7 +30,7 @@ function detail (no){
 
     <div class="cell flex-cell pb-10">
         <div class="cell">
-            <span style="font-size:25px; font-weight:bold;">신청내역 리스트</span>
+            <span style="font-size:25px; font-weight:bold;">신청내역 목록 리스트</span>
         </div>
     </div>
     
@@ -43,20 +43,18 @@ function detail (no){
                 <th>배출봉투</th>
                 <th>신청일시</th>
                 <th>수거희망일</th>
-                <th>결제금액</th>
             </tr>
         </thead>
     
         <tbody>
-            <c:forEach var="requestList" items="${requestList}">
-                <tr onclick="detail('${requestList.applyNo}');" class="contents-tr">
-                    <td>${requestList.applyNo}</td>
-                    <td>${requestList.applyAddress1}</td>
-                    <td>${requestList.applyVinyl}</td>
-                    <td><fmt:formatDate value="${requestList.applyDate}"
+            <c:forEach var="applyDto" items="${requestList}">
+                <tr onclick="detail('${requsetDetail.applyNo}');" class="contents-tr">
+                    <td>${applyDto.applyNo}</td>
+                    <td>${applyDto.applyAddress1}</td>
+                    <td>${applyDto.applyVinyl}</td>
+                    <td><fmt:formatDate value="${applyDto.applyDate}"
                     pattern="MM월 dd일" /></td>
-                    <td>${requestList.applyHopeDate}</td>
-                    <td>${requestList.pickPay}원<td>
+                    <td>${applyDto.applyHopeDate}</td>
                 </tr>
             </c:forEach>
         </tbody>
