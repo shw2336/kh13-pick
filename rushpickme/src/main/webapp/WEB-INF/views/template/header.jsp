@@ -31,6 +31,7 @@
             margin: 0 auto; 
             max-width: 20%; 
             height: auto; 
+            cursor: pointer; /* 홈으로 가는 버튼 커서 설정 */
         }
     .menu a {
         color: green;
@@ -58,6 +59,14 @@
 
 <!--  jQuery CDN -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $(".header img").click(function(){
+            window.location.href = "/"; // 홈으로 이동하는 URL 설정
+        });
+    });
+</script>
 
 </head>
 <body>
