@@ -69,7 +69,7 @@
             <ul class="menu center">
                 <li><a href="/">홈</a></li>
                 
-                <li><a href="#">수거서비스</a></li>
+                <li><a href="/pick/list">수거서비스</a></li>
                 
                 <li class="board-menu"><a href="#">게시판</a>
                     <ul class="sub-menu">
