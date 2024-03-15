@@ -75,37 +75,52 @@
                     <ul class="sub-menu">
                         <li><a href="/qna/list">문의게시판</a></li>
                         <li><a href="/review/list">리뷰게시판</a></li>
+                        
                     </ul>
+                    <li><a href="/member/signUp">회원가입</a></li>
                 </li>
                 
-                <li><a href="/point/charge">포인트</a></li>
-                <li><a href="/member/login">로그인</a></li>
-                <li><a href="/member/signUp">회원가입</a></li>
-               
-                <li class="menu-end">
-                    <c:choose>
-                        <c:when test="${sessionScope.loginId != null}">
-                            <a href="/member/mypage"> <i class="fa-solid fa-user"></i>
-                                ${sessionScope.loginId}
-                            </a>
-                            <ul>
-                                <li><a href="/point/charge">포인트충전</a></li>
-                                <li><a href="/member/logout">로그아웃</a></li>
-                            </ul>
-                            <c:if test="${sessionScope.loginLevel == '관리자'}">
-                                <li class="board-menu"><a href="#">관리자메뉴</a>
-                                    <ul class="sub-menu">
+                
+                
+                
+                
+                
+                <%-- 관리자 메뉴는 관리자에게만 출력 --%>
+				<c:if test="${sessionScope.loginLevel == '관리자'}">
+				
+					 <li class="board-menu"><a href="#">관리자메뉴</a>
+		
+						<ul class="sub-menu">
                                         <li><a href="/admin/member/search">회원관리</a></li>
                                         <li><a href="/admin/point/add">포인트관리</a></li>
                                     </ul>
-                                </li>
-                            </c:if>
-                        </c:when>
-                    </c:choose>
-                </li>       
+                                    <li><a href="/member/logout">로그아웃</a></li>
+				</c:if>
+
+				<li class="menu-end">
+						<c:choose>
+						<c:when test="${sessionScope.loginId != null && sessionScope.loginLevel != '관리자'}">
+							<a href="/member/mypage"> <i class="fa-solid fa-user"></i>
+								${sessionScope.loginId}
+							</a>
+					
+								
+								<li><a href="/member/logout">로그아웃</a></li>
+								<li><a href="/point/charge">포인트충전</a></li>
+								
+						</c:when>
+						<c:when test="${sessionScope.loginId != null && sessionScope.loginLevel eq '관리자'}">
+								<a href="#"><i class="fa-solid fa-user"></i>${sessionScope.loginId}</a>
+						</c:when>
+						<c:when test="${sessionScope.loginId eq null}">
+								<a href="/member/login">로그인</a>
+						</c:when>
+					</c:choose>
+                
             </ul>
         </div>
     </div>
+   </main>
   
     <div class="section">
         <div class="article">
