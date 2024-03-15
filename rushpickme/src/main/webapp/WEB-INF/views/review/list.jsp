@@ -29,17 +29,20 @@
 .wid {
 	max-width: 10em;
 }
+.ff {
+	color: #ff8080;
+}
 </style>
 
 <script>
 	$(function() {
 		//출력용
 		$(".score").score({
-			starColor : "#ffba08", //별 색상
+			starColor : "#ff8080", //별 색상
 			display : {//표시 옵션
-				showNumber : true,//숫자 표시 여부
-				textColor : "#0984e3", //글자 색상
-				placeLimit : 1,//표시할 소수점 자리수
+				showNumber : false,//숫자 표시 여부
+				textColor : "#ff8080", //글자 색상
+				placeLimit : 0,//표시할 소수점 자리수
 			},
 		});
 	});
@@ -78,7 +81,7 @@
 			<thead>
 				<tr bgcolor=#bde0fe>
 					<th>번호</th>
-					<th>별점</th>
+					<th class="ff">별점</th>
 					<th width="40%">리뷰내용</th>
 					<th>조회수</th>
 					<th>글쓴이</th>
@@ -89,7 +92,7 @@
 
 			<tbody align="center">
 				<c:forEach var="reviewDto" items="${list}">
-					<tr>
+					<tr bgcolor=#F5FAFF>
 						<td>${reviewDto.reviewNo}</td>
 						<%-- 별점 --%>
 						<td>

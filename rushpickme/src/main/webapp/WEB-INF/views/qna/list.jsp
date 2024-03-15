@@ -59,7 +59,7 @@
 			</thead>
 			<tbody align="center">
 				<c:forEach var="qnaDto" items="${list}">
-					<tr>
+					<tr bgcolor=#f8f9fa>
 						<td>${qnaDto.qnaNo}</td>
 						<%-- 제목 칸 --%>
 						<td class="left">

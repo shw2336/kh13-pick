@@ -142,7 +142,7 @@ public class ReviewController {
 		
 		//아이디를 게시글 정보에 포함시킨다
 		reviewDto.setMemberId(loginId);
-		reviewDto.setAskNo(27);
+		reviewDto.setAskNo(4);
 		int reviewStar = (int)score;
 		reviewDto.setReviewStar(reviewStar);
 		int sequence = reviewDao.getSequence();//DB에서 시퀀스 번호를 추출
@@ -185,9 +185,20 @@ public class ReviewController {
 		model.addAttribute("reviewDto", reviewDto);
 		return "/WEB-INF/views/review/edit.jsp";
 	}
-	
+
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute ReviewDto reviewDto) {
+	public String edit(@ModelAttribute ReviewDto reviewDto, HttpSession session,
+			@RequestParam float score) {
+		
+		//세션에서 로그인한 사용자의 ID를 추출
+				String loginId = (String)session.getAttribute("loginId");
+				
+				//아이디를 게시글 정보에 포함시킨다
+				reviewDto.setMemberId(loginId);
+				reviewDto.setAskNo(4);
+				int reviewStar = (int)score;
+				reviewDto.setReviewStar(reviewStar);
+				
 		//수정 전,후를 비교하여 사라진 이미지를 찾아 삭제
 		//- 수정 전 이미지 그룹과 수정 후 이미지의 차집합(Set 사용)
 		
