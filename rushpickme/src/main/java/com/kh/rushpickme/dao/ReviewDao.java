@@ -107,7 +107,7 @@ public class ReviewDao {
 										+ "review_write, review_edit "
 									+ "from review "
 									+ "where instr("+pageVO.getColumn()+", ?) > 0 "
-									//+ "order by review_no desc"//옛날방식(최신순)
+									+ "order by review_no desc"
 								+ ")TMP"
 							+ ") where rn between ? and ?";
 			Object[] data = {
@@ -125,7 +125,7 @@ public class ReviewDao {
 										+ "review_star, review_content, review_delete, review_hits, "
 										+ "review_write, review_edit "
 									+ "from review "
-									//+ "order by review_no desc"//옛날방식(최신순)
+									+ "order by review_no desc"
 								+ ")TMP"
 							+ ") where rn between ? and ?";
 			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};

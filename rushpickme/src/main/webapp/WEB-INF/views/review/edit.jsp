@@ -12,8 +12,6 @@
     <!-- font awesome 아이콘 CDN -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-
-
     <script>
         $(function(){
             //작성용
@@ -41,36 +39,30 @@
         });
     </script>
 
-<form action="write" method="post" autocomplete="off">
+<form action="edit" method="post" autocomplete="off">
+	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
 
 <div class="container w-800">
-	<div class="cell center"><h1>리뷰 작성</h1></div>
+	<div class="cell center"><h1>리뷰 수정</h1></div>
 
       <div class="cell">
             <h2>작성할 때</h2>
         </div>
         
         <div class="cell">
-            <div class="score-edit" data-max="5.0"></div>
+            <div class="score-edit" data-max="5.0" data-rate="${reviewDto.reviewStar}"></div>
         </div>
-          
+
 	<div class="cell">
 		<label>내용</label>
-		<%-- 
-			여러 줄 입력하고 싶다면 textarea 태그를 사용한다 
-			<input type="text" name="boardContent" required>
-			
-			textarea 태그는 종료 태그가 필요하며, type과 value를 설정할 수 없다
-			 <textarea name="boardContent" required></textarea>
-		--%>
-		<textarea name="reviewContent" required class="tool w-100" rows="10"></textarea>
+		<%-- textarea는 시작태그와 종료태그 사이에 내용을 작성 --%>
+		<textarea name="reviewContent" required class="tool w-100" rows="10">${reviewDto.reviewContent}</textarea>
 	</div>
 	<div class="cell right">
 		<a href="list" class="btn">목록</a>
-		<button class="btn positive" type="submit">등록</button>
+		<button class="btn positive" type="submit">수정</button>
 	</div>
 </div>
-	
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
