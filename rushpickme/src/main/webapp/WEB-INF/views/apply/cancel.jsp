@@ -17,10 +17,12 @@
 	</style>
  <body>
  <br><br>
-     <div class="container center apply-container w-500 p-20 mt-50 mb-50" id="apply-completed">
+     <div class="container center apply-container w-700 p-20 mt-50 mb-50" id="apply-completed">
         <div class="cell list-box">
-            <div class="cell center">
-                <h2 style="text-align: center;">신청 취소 완료 되었습니다</h2>
+        
+                <div class="cell">
+                <img class="dummy" src="/image/fail.png" style="width:400px; height:300px">
+                </div>
             </div>
         </div>
         </div>

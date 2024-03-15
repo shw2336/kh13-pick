@@ -21,7 +21,8 @@ import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.service.AttachService;
-
+import com.kh.rushpickme.vo.ApplyListVO;
+import com.kh.rushpickme.vo.PageVO;
 
 import jakarta.mail.Session;
 import jakarta.servlet.http.HttpSession;
@@ -89,28 +90,19 @@ public class ApplyController {
 		return "/WEB-INF/views/apply/stateDetail.jsp"; // 수거 진행 상세 페이지
 	}
 	
-	
-	
-	
 	@RequestMapping("/requestList")
-	public String list() {
-//					Model model, HttpSession session,		@ModelAttribute ApplyRequestListVo applyRequestListVo) {
-//		int findNo = (int) session.getAttribute("applyNo");
-//		int count = applyDao.count(applyRequestListVo);
-//		applyRequestListVo.setCount(count);
-//		model.addAttribute("pageVO", applyRequestListVo);
-//		
-//		List<ApplyRequestListVo> requestList = applyDao.requestListByPaging(applyRequestListVo, findNo);
-//		model.addAttribute("list", requestList);
+	public String requestList(Model model) {
 		
+		List<ApplyListVO> requestList = applyDao.applyList();
+		model.addAttribute("requestList", requestList);
+			
 		return "/WEB-INF/views/apply/requestList.jsp";
-		
-	}
+		}
 	
+	
+	 
 
-		
-
-
+	
 	@GetMapping("/cancel")
 	private String cancel() {
 		return "/WEB-INF/views/apply/cancel.jsp";
