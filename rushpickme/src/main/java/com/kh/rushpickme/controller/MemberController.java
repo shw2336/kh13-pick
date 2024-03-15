@@ -109,6 +109,13 @@ public class MemberController {
 			return "redirect:login?error";
 		}
 	}
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("loginId");
+		session.removeAttribute("loginLevel");
+		
+		return "redirect:/";
+	}
 
 	@GetMapping("/findId")
 	public String findId() {
@@ -158,8 +165,8 @@ public class MemberController {
 	    model.addAttribute("memberDto", memberDto);
 	    model.addAttribute("memberGreenDto", memberGreenDto);
 	    model.addAttribute("memberPickDto", memberPickDto);
-	    model.addAttribute("countProcess",pickDao.countProceed());
-	    model.addAttribute("countReject", pickDao.countReject());
+	    model.addAttribute("countProcess",pickDao.countProceed(loginId));
+	    model.addAttribute("countReject", pickDao.countReject(loginId));
 	    model.addAttribute("countFinish", pickDao.countFinish());
 	    model.addAttribute("pickDto", pickDto);
 	    model.addAttribute("applyDto", applyDto);
