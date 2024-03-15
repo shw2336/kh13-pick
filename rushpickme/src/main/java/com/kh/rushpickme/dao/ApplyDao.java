@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.rushpickme.dto.ApplyDto;
+import com.kh.rushpickme.mapper.ApplyListVOMapper;
 import com.kh.rushpickme.mapper.ApplyMapper;
+import com.kh.rushpickme.vo.ApplyListVO;
 import com.kh.rushpickme.vo.PageVO;
 
 
@@ -21,6 +23,8 @@ public class ApplyDao {
 	@Autowired
 	private ApplyMapper applyMapper;
 	
+	@Autowired
+	private ApplyListVOMapper applyListVOMapper;
 	
 
 	//수거 신청 등록
@@ -52,7 +56,22 @@ public class ApplyDao {
 		List<ApplyDto> list = jdbcTemplate.query(sql, applyMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-		
+	//멤버아이디로 신청 내역 뽑기
+	public List<ApplyListVO> applyList(String memberId) {
+		String sql ="SELECT member_id, apply_no, apply_address1, apply_vinyl,apply_date, apply_hope_date, pick_pay FROM ( SELECT apply.member_id, apply.apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, pick_pay from apply INNER JOIN pick ON apply.apply_no = pick.apply_no)where member_id =? ";
+		Object[]data = {memberId};
+		return jdbcTemplate.query(sql,applyListVOMapper , data);
+	}
+	//전체 리스트 조회 
+		public List<ApplyListVO> applyList() {
+			String sql="SELECT member_id, apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, pick_pay FROM ( SELECT apply.member_id, apply.apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, pick_pay, apply_state FROM apply INNER JOIN pick ON apply.apply_no = pick.apply_no) WHERE apply_state LIKE '신청완료' ORDER BY apply_hope_date ASC";
+			return jdbcTemplate.query(sql, applyListVOMapper);
+		}
+	
+	
+	
+	
+
 		
 	}
 
