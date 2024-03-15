@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 
-<!-- 내가 구현한 스타일 -->
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
 
 <%-- 네비게이터 --%>
 <div class="page-navigator">

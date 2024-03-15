@@ -10,7 +10,7 @@
 
 <div class="container  w-600 px-50 pt-10 my-50">
 	<div class="cell">
-		<img src="/image/acceptFinish.png" class="image" width="100%">
+		<img src="/image/pickFinish.png" class="image" width="100%">
 	</div>
 </div>
 

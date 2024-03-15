@@ -29,9 +29,18 @@
 	.table>tfoot>tr>th, .table>tfoot>tr>td {
 	padding: 0.75em;
 }
+
+ table > tbody > .contents-tr {
+ 	cursor: pointer;
+ 	height: 40px;
+ }
 </style>
 
 <script type="text/javascript">
+	
+	function detail (num){
+		window.location.href = "finishDetail?pickNo=" + num;
+	}
 	
 </script>
 
@@ -109,7 +118,7 @@
 		</h5>
 	</div>
 
-	<table class="table table-horizontal">
+	<table class="table table-horizontal table-hover">
 		<thead>
 			<tr>
 				<th>수거번호</th>
@@ -121,7 +130,7 @@
 
 		<tbody>
 			<c:forEach var="voList" items="${voList}">
-				<tr>
+				<tr onclick="detail(${voList.pickNo});" class="contents-tr">
 					<td>${voList.pickNo}</td>
 					<td><fmt:formatDate value="${voList.applyDate}"
 							pattern="yyyy-MM-dd HH:mm:ss" /></td>

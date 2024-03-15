@@ -22,8 +22,8 @@
 </style>
 
 <script type="text/javascript">
-	function rejectAfter (num) {
-		window.location.href = "rejectAfter?applyNo=" + num;
+	function reject (num) {
+		window.location.href = "reject?applyNo=" + num;
 	}
 	
 	function complete (num) {
@@ -32,7 +32,7 @@
 	
 </script>
 
-	<div class="cell center mt-30" >
+	<div class="cell center mt-50" >
 		<h1>
 			<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님의 
 			<span style="color: rgb(66,138,66)">${applyNo}번</span> 신청 정보
@@ -85,7 +85,7 @@
 	<br>
 	<div class="cell right">
 		<button class="btn" onclick="complete('${findApplyDto.applyNo}')">수거완료</button>
-		<button class="btn" onclick="rejectAfter('${findApplyDto.applyNo}')">거부하기</button>
+		<button class="btn" onclick="reject('${findApplyDto.applyNo}')">거부하기</button>
 	</div>
 
 </div>

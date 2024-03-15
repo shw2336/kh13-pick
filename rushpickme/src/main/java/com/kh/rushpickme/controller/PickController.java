@@ -164,27 +164,49 @@ public class PickController {
 	}
 	
 	
-	// 수거 거부
+	// 수거 거부 (접수상태에서 거부하는 경우 or 진행상태에서 거부하는 경우)
 	@GetMapping("/reject")
 	public String reject (@RequestParam int applyNo, Model model) {
+		//apply_state 값 넘겨주기
 		model.addAttribute("applyNo", applyNo);
+		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
+		model.addAttribute("findApplyState", findApplyDto.getApplyState());
+		
 		return "/WEB-INF/views/pick/reject.jsp";
 	}
 	
 	@PostMapping("/reject")
-	public String reject(@ModelAttribute PickDto pickDto, HttpSession session) {
+	public String reject(@ModelAttribute PickDto pickDto, @RequestParam int applyNo, @RequestParam MultipartFile attach, HttpSession session) throws IllegalStateException, IOException {
 		String loginId = (String) session.getAttribute("loginId");
 		pickDto.setMemberId(loginId);
 
-		pickDao.insertNo(pickDto);
+		int pickNo = pickDao.selectPickNo(applyNo);
+		pickDto.setPickNo(pickNo);
+		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
+		String applyState = findApplyDto.getApplyState();
+		
+		if (applyState.equals("신청완료")) {
+			pickDao.insertNo(pickDto);
+		}else if (applyState.equals("진행중")) {
+			pickDao.updateNo(pickDto);
+		}
+		// 신청자의 상태도 접수거부로 바꾸기
 		pickDao.updateApplyStateReject(pickDto.getApplyNo());
-
-		return "redirect:list"; //완성 후 바꿔야 함 
+		
+		if (!attach.isEmpty()) {
+			int attachNo = attachService.save(attach);
+			pickDao.connect(pickNo, attachNo);
+		}
+		return "redirect:list";
 	}
 	
 	@GetMapping("/complete")
 	public String complete(@RequestParam int applyNo, Model model) {
 		model.addAttribute("applyNo", applyNo);
+		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
+		model.addAttribute("findApplyDto", findApplyDto);
+		int pickNo = pickDao.selectPickNo(applyNo);
+		model.addAttribute("pickNo", pickNo);
 		return "/WEB-INF/views/pick/complete.jsp";
 	}
 	

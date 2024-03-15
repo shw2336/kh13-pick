@@ -48,8 +48,8 @@
 			</thead>
 		
 			<tbody>
-				<c:forEach var="finishList" items="${finishList}">
-					<tr class="contents-tr" onclick="detail('${finishList.pickNo}');">
+				<c:forEach var="finishList" items="${finishList}"> 
+				<tr class="contents-tr" onclick="detail('${finishList.pickNo}');">
 						<td>${finishList.pickNo}</td>
 						<td><fmt:formatDate value="${finishList.applyDate}"
 								pattern="MM월 dd일 HH시 mm분" /></td>
