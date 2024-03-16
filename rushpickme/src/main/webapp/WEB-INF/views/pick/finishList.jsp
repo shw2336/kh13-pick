@@ -28,41 +28,49 @@
 	}
 </script>
 
-<div class="container pick-container w-800 py-30 px-50 my-50">
-	
-	<div class="cell flex-cell pb-10">
-		<div class="cell">
-			<span style="font-size:25px; font-weight:bold;">수거완료 리스트</span>
-		</div>
-	</div>
-	
-	<div class="cell">
-		<table class="table table-horizontal table-hover">
-			<thead>
-				<tr>
-					<th>수거번호</th>
-					<th>신청일시</th>
-					<th>수거일시</th>
-					<th>수거비용</th>
-				</tr>
-			</thead>
+<form action="finishList" method="post">
+	<div class="container pick-container w-800 py-30 px-50 my-50">
 		
-			<tbody>
-				<c:forEach var="finishList" items="${finishList}"> 
-				<tr class="contents-tr" onclick="detail('${finishList.pickNo}');">
-						<td>${finishList.pickNo}</td>
-						<td><fmt:formatDate value="${finishList.applyDate}"
-								pattern="MM월 dd일 HH시 mm분" /></td>
-						<td><fmt:formatDate value="${finishList.pickFinishDate}"
-								pattern="MM월 dd일 HH시 mm분" /></td>
-						<td>${finishList.pickPay} 원</td>
+		<div class="cell flex-cell pb-10">
+			<div class="cell">
+				<span style="font-size:25px; font-weight:bold;">수거완료 리스트</span>
+			</div>
+		</div>
+		
+		<div class="cell">
+			<table class="table table-horizontal table-hover">
+				<thead>
+					<tr>
+						<th>선택</th>
+						<th>수거번호</th>
+						<th>신청일시</th>
+						<th>수거일시</th>
+						<th>수거비용</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+			
+				<tbody>
+					<c:forEach var="finishList" items="${finishList}"> 
+					<tr class="contents-tr">
+							<td><input type="checkbox" name="deletePicks" value="${finishList.pickNo}"></td>
+							
+							<td onclick="detail('${finishList.pickNo}');">${finishList.pickNo}</td>
+							<td onclick="detail('${finishList.pickNo}');">
+								<fmt:formatDate value="${finishList.applyDate}" pattern="MM월 dd일 HH시 mm분" /></td>
+							<td onclick="detail('${finishList.pickNo}');">
+								<fmt:formatDate value="${finishList.pickFinishDate}" pattern="MM월 dd일 HH시 mm분" /></td>
+							<td onclick="detail('${finishList.pickNo}');">${finishList.pickPay} 원</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<div class="cell right">
+			<button type="submit" class="btn" style="border-radius:10px; background-color:;">삭제하기</button>
+		</div>
+		
+		<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 	</div>
-	
-	<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
-	
-</div>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+</form>
+
+	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

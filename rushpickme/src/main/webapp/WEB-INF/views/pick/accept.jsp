@@ -34,6 +34,7 @@
 	$(function() {
 
 		$(document).on("click", ".time-btn", function() {
+			$(".submit-btn").removeClass("success fail");
 			$(this).addClass("selected-btn");
 			$(".accept-btn").not(this).removeClass("selected-btn");
 			$("#pickSchedule").val($(this).text());
@@ -43,7 +44,8 @@
 			function() {
 				var length = $(".selected-btn").length;
 				$(".submit-btn").removeClass("success fail").addClass(length > 0 ? "success" : "fail");
-			});
+				return length > 0;
+		});
 	});
 	
 </script>
@@ -78,7 +80,7 @@
 		
 		<div class="cell center">
 			<button type="submit" class="btn submit-btn w-75" style="border-radius: 10px;">확 정</button>
-			<div class="fail-feedback">시간을 선택하세요.</div>
+			<div class="fail-feedback pt-20" >시간을 선택하세요.</div>
 		</div>
 
 	</div>
