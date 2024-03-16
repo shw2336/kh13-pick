@@ -99,11 +99,25 @@ public class PickDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	//삭제
+	//삭제 (1건)
 	public boolean delete (int pickNo) {
 		String sql = "update pick set pick_delete = 'Y' where pick_no = ?";
 		Object[] data = {pickNo};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//삭제 (여러 건)
+	public boolean deleteByArray (Object[] nums) {
+		String sql = "update pick set pick_delete = 'Y' where pick_no IN (";
+		for (int i = 0; i < nums.length; i ++) {
+			if (i > 0) {
+				sql += ",";
+			}
+			sql += "?";
+		}
+		sql += ")";
+		
+		return jdbcTemplate.update(sql, nums) > 0;
 	}
 	
 	//수거 완료 리스트 (신청시간기준 최신 3건만 보여주는)
@@ -111,6 +125,7 @@ public class PickDao {
 		String sql = "select pick_no, apply_date, pick_finish_date, pick_pay from "
 				+ "(select pick_no, apply_date, pick_finish_date, pick_pay from pick join apply on pick.apply_no = apply.apply_no "
 				+ "where pick.pick_state like '수거완료' AND apply.apply_area IN ( SELECT MEMBER_PICK_AREA FROM member_pick WHERE member_pick.member_id LIKE ?) "
+				+ "and pick_delete ='N' "
 				+ "order by pick_finish_date desc) where rownum <= 3";
 		Object[] data = {memberId};
 		return jdbcTemplate.query(sql, pickFinishVoMapper, data);
@@ -123,6 +138,7 @@ public class PickDao {
 				+ "select pick_no, apply_date, pick_finish_date, pick_pay from ("
 				+ "select pick_no, apply_date, pick_finish_date, pick_pay from pick "
 				+ "inner join apply on pick.apply_no = apply.apply_no where pick_state like '수거완료' "
+				+ "and pick_delete = 'N'"
 				+ "order by pick_finish_date desc)"
 				+ ")T "
 				+ ") where RN between ? and ?";
@@ -150,9 +166,16 @@ public class PickDao {
 	public List <PickProceedVo> proceedListByPaging (String memberId, PageVO pageVo) {
 		String sql = "select * from ("
 				+ "select rownum RN, T.* from ("
-				+ "select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
-				+ "from (select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
-				+ "from pick inner join apply on pick.apply_no = apply.apply_no where pick_state like '수거접수' and pick.member_id like ? order by apply_hope_date asc))T) "
+				+ "select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, "
+				+ "case when TRUNC(TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) = TRUNC(SYSDATE) THEN 'N' "
+				+ "WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' "
+				+ "ELSE 'N' "
+				+ "END AS time_passes "
+				+ "from (select pick_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, "
+				+ "CASE WHEN ROUND((SYSDATE - TO_DATE(apply_hope_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) > 0 THEN 'Y' ELSE 'N' END AS time_passes "
+				+ "from pick inner join apply on pick.apply_no = apply.apply_no "
+				+ "where pick_state like '수거접수' and pick.member_id like ? "
+				+ "order by apply_hope_date asc))T) "
 				+ "where RN between ? and ?";
 		Object[] data = {memberId, pageVo.getBeginRow(), pageVo.getEndRow()};
 		return jdbcTemplate.query(sql, pickProceedVoMapper, data);

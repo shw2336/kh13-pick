@@ -32,7 +32,6 @@
                 return this.pickWeightValid && this.pickPayValid;
             }
         };
-
         $("[name=pickWeight]").blur(function () {
             var regex = /^[0-9]+$/;
             state.pickWeightValid = regex.test($(this).val()) && $(this).val() > 0;
@@ -49,7 +48,35 @@
 			$(this).find("[name]").blur();
 			return state.isOk();
 		});
+		
+		$("#uploadFile").change(function(event){
+			
+			if ($("#uploadFile").val().length == 0) {
+				$("#imgArea").html("");
+			}else {
+				var fileType = $("#uploadFile").val().split(".");
+				var regex = /^(jpeg|jpg|png|gif|bmp)$/;
+				if(!regex.test(fileType[1])){
+					$("#uploadFile").val("");
+					$("#imgArea").html("");
+					return alert("이미지 파일만 등록 가능합니다.");
+				}
+				$("#imgArea").html("");
+				var file = event.target.files;
+
+				var image = new Image();
+				var imageTempUrl = window.URL.createObjectURL(file[0]);
+
+				image.src = imageTempUrl;
+				image.style.width = "280px";
+
+				$("#imgArea").append(image);
+			}
+		});
+		
     });
+    
+    
 </script>
     
 <form action="complete" method="post" enctype="multipart/form-data" autocomplete="off" class="check-form">
@@ -81,6 +108,9 @@
 			<h2>수거 이미지</h2>
 			<input type="file" name="attach" class="image w-100">
 		</div>
+		
+		<input type="file" name="uploadFile" id="uploadFile">
+		<div id="imgArea"></div>
 		
 		<div class="cell flex-cell">
 			<div class="cell">

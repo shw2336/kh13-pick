@@ -37,16 +37,20 @@
 </style>
 
 <script type="text/javascript">
+
 	$(function() {
 		$(".reject-comment").val("");
 
 		if ($(".applyState").val() === "진행중") {
 			$(".attach-file").show();
+		}else if ($(".applyState").val() === "신청완료") {
+			$(".attach-file").hide();
 		}
 	
 		$(document).on("click", ".comment-btn", function() {
 			$(".reject-comment").val("");
 			$("#pickReject").val(""); // textarea값 초기화
+			$(".submit-btn").removeClass("success fail");
 			$(this).addClass("selected-btn");
 			$(".reject-btn").not(this).removeClass("selected-btn");
 			$(".reject-comment").hide();
@@ -67,11 +71,38 @@
 				var length = $(".selected-btn").length;
 				$(".submit-btn").removeClass("success fail").addClass(
 						length > 0 ? "success" : "fail");
-
+				return length > 0 ;
 			});
 		
 	});
 	
+	//이미지 미리보기
+	$(function(){
+		$("#uploadFile").change(function(event){
+			//파일 선택한게 없다면 (취소버튼 눌렀을 때)
+			if ($("#uploadFile").val().length == 0) {
+				$("#imgArea").html("");
+			}else { //파일 선택한게 있다면
+				var fileType = $("#uploadFile").val().split(".");	//확장자 체크 :	 .을 기준으로 나누기
+				var regex = /^(jpeg|jpg|png|gif|bmp)$/;	//이미지파일 확장자 정규표현식 검사
+				if(!regex.test(fileType[1])){	// .뒤에붙은 확장자가 이미지가 아닌경우
+					$("#uploadFile").val("");	//input 파일값 초기화
+					$("#imgArea").html("");	//이미지 미리보기 화면 초기화
+					return alert("이미지 파일만 등록 가능합니다."); 
+				}
+				$("#imgArea").html("");	//이미지파일이라면, 일단 이미지 미리보기 화면 초기화
+				var file = event.target.files;	//event에서 파일객체(files)를 찾고 
+
+				var image = new Image();	//이미지 객체 생성
+				var imageTempUrl = window.URL.createObjectURL(file[0]); //임시 이미지 URL생성 (현재 선택한파일)
+
+				image.src = imageTempUrl;
+				image.style.width = "280px";
+
+				$("#imgArea").append(image);
+			}
+		});
+	});
 	
 </script>
 
@@ -114,23 +145,20 @@
 		</div>
 		<br>
 		
-		<c:choose>
-			<c:when test="${findApplyState eq '진행중'}">
-				<div class="cell reject-btn mb-30 attach-file">
-					<div class="cell left ps-10">
-						<h3>현장 사진 등록하기</h3>
-					</div>
-					<div class="cell ps-10">
-						<input type="file" name="attach" class="image w-100" >
-					</div>
-				</div>
-			</c:when>
-		</c:choose>
+		<div class="cell reject-btn mb-30 attach-file">
+			<div class="cell left ps-10">
+				<h3>현장 사진 등록하기</h3>
+			</div>
+			<div class="cell ps-10">
+				<input type="file" name="attach" id="uploadFile" class="image w-100"  accept="image/gif, image/jpeg, image/png">
+				<div id="imgArea" class="w-100"></div>
+			</div>
+		</div>
 
 		<div class="cell center">
 			<button type="submit" class="btn submit-btn w-100"
 				style="border-radius: 10px;">등록하기</button>
-			<div class="fail-feedback">사유를 선택하세요.</div>
+			<div class="fail-feedback pt-20">사유를 선택하세요.</div>
 		</div>
 </div>
 </form>

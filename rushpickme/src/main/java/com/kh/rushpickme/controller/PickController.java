@@ -100,10 +100,13 @@ public class PickController {
 	public String proceedList (Model model, @ModelAttribute PageVO pageVo, HttpSession session) {
 		String memberId = (String) session.getAttribute("loginId");
 		int count = pickDao.countProceed(memberId);
+		
 		pageVo.setCount(count);
 		model.addAttribute("pageVo", pageVo);
+		
 		List<PickProceedVo> proceedList = pickDao.proceedListByPaging(memberId, pageVo);
 		model.addAttribute("proceedList", proceedList);
+		
 		return "/WEB-INF/views/pick/proceedList.jsp";
 	}
 	
@@ -126,9 +129,25 @@ public class PickController {
 		int count = pickDao.countFinish();
 		pageVo.setCount(count);
 		model.addAttribute("pageVo", pageVo);
+		
 		List<PickFinishVo> finishList = pickDao.pickFinishListAll(pageVo);
 		model.addAttribute("finishList", finishList);
+		
 		return "/WEB-INF/views/pick/finishList.jsp";
+	}
+	
+	@PostMapping("/finishList")
+	public String finishList (@RequestParam Object[] deletePicks) {
+		
+		//배열로 넘기기
+		pickDao.deleteByArray(deletePicks);
+		
+		return "redirect:finishList";
+	}
+	
+	@RequestMapping("/deleteFinish")
+	public String deleteFinish () {
+		return "/WEB-INF/views/pick/deleteFinish.jsp";
 	}
 	
 	@RequestMapping("/finishDetail")
@@ -180,17 +199,20 @@ public class PickController {
 		String loginId = (String) session.getAttribute("loginId");
 		pickDto.setMemberId(loginId);
 
-		int pickNo = pickDao.selectPickNo(applyNo);
-		pickDto.setPickNo(pickNo);
 		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
 		String applyState = findApplyDto.getApplyState();
 		
+		int pickNo = 0;
 		if (applyState.equals("신청완료")) {
+			//접수 전 이기 때문에 pickNo가 없음 
 			pickDao.insertNo(pickDto);
 		}else if (applyState.equals("진행중")) {
+			//진행중일때만 pickNo가 존재 
+			pickNo = pickDao.selectPickNo(applyNo);
+			pickDto.setPickNo(pickNo);
 			pickDao.updateNo(pickDto);
 		}
-		// 신청자의 상태도 접수거부로 바꾸기
+		//신청자의 상태도 접수거부로 변경
 		pickDao.updateApplyStateReject(pickDto.getApplyNo());
 		
 		if (!attach.isEmpty()) {
@@ -205,8 +227,10 @@ public class PickController {
 		model.addAttribute("applyNo", applyNo);
 		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
 		model.addAttribute("findApplyDto", findApplyDto);
+		
 		int pickNo = pickDao.selectPickNo(applyNo);
 		model.addAttribute("pickNo", pickNo);
+		
 		return "/WEB-INF/views/pick/complete.jsp";
 	}
 	
@@ -215,7 +239,7 @@ public class PickController {
 		int pickNo = pickDao.selectPickNo(applyNo);
 		pickDto.setPickNo(pickNo);
 		//수거완료되면 수거완료시간 업데이트, 비닐중량, 금액 업데이트
-		//신청자 상태 변경
+		//신청자 상태 수거완료로 변경
 		pickDao.updateInfo(pickDto);
 		pickDao.updateApplyStateFinish(applyNo);
 		
