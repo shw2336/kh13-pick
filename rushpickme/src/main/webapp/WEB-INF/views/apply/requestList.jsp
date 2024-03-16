@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -30,7 +31,7 @@ function detail (no){
 
     <div class="cell flex-cell pb-10">
         <div class="cell">
-            <span style="font-size:25px; font-weight:bold;">신청내역 리스트</span>
+            <span style="font-size:25px; font-weight:bold;">신청내역 목록 리스트</span>
         </div>
     </div>
     
@@ -47,26 +48,19 @@ function detail (no){
         </thead>
     
         <tbody>
-            <c:forEach var="ApplyRequestListVo" items="${pageVO}">
-                <tr onclick="detail('${ApplyRequestListVo.applyNo}');" class="contents-tr">
-                    <td>${requestList.applyNo}</td>
-                    <td>${requestList.applyAddress1}</td>
-                    <td>${requestList.applyVinyl}</td>
-                    <td><fmt:formatDate value="${requestList.applyDate}"
+            <c:forEach var="applyDto" items="${requestList}">
+                <tr onclick="detail('${requsetDetail.applyNo}');" class="contents-tr">
+                    <td>${applyDto.applyNo}</td>
+                    <td>${applyDto.applyAddress1}</td>
+                    <td>${applyDto.applyVinyl}</td>
+                    <td><fmt:formatDate value="${applyDto.applyDate}"
                     pattern="MM월 dd일" /></td>
-                    <td>${requestList.applyHopeDate}</td>
+                    <td>${applyDto.applyHopeDate}</td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
     </div>
-    <!-- <form action="requestList">
-        <jsp:include page="/WEB-INF/views/template/pickNavigator.jsp"></jsp:include>
-    </form>
-     -->
-    
-   
-    
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

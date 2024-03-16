@@ -21,7 +21,8 @@ import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.service.AttachService;
-
+import com.kh.rushpickme.vo.ApplyListVO;
+import com.kh.rushpickme.vo.PageVO;
 
 import jakarta.mail.Session;
 import jakarta.servlet.http.HttpSession;
@@ -42,7 +43,6 @@ public class ApplyController {
 	
 
 	// 수거 신청 페이지
-
 	@GetMapping("/request")
 	private String request() {
 		return "/WEB-INF/views/apply/request.jsp"; // 수거 신청 정보입력페이지 주소
@@ -89,28 +89,30 @@ public class ApplyController {
 		return "/WEB-INF/views/apply/stateDetail.jsp"; // 수거 진행 상세 페이지
 	}
 	
-	
-	
-	
-	@RequestMapping("/requestList")
-	public String list() {
-//					Model model, HttpSession session,		@ModelAttribute ApplyRequestListVo applyRequestListVo) {
-//		int findNo = (int) session.getAttribute("applyNo");
-//		int count = applyDao.count(applyRequestListVo);
-//		applyRequestListVo.setCount(count);
-//		model.addAttribute("pageVO", applyRequestListVo);
+	//join 썼을때 결제 내역 할때 사용하기 
+//	@RequestMapping("/requestList")
+//	public String requestList(Model model) {
 //		
-//		List<ApplyRequestListVo> requestList = applyDao.requestListByPaging(applyRequestListVo, findNo);
-//		model.addAttribute("list", requestList);
-		
+//		List<ApplyListVO> requestList = applyDao.applyList();
+//		model.addAttribute("requestList", requestList);
+//			
+//		return "/WEB-INF/views/apply/requestList.jsp";
+//		}
+	@GetMapping("/requestList")
+	public String requestList(Model model, String memberId) {
+		List<ApplyDto> applyList = applyDao.requsetList();
+		//applyDao에서 requestList들을 부를게 
+		//부르는 형태는 List <applyDto>야 
+//		int number = 3;
+//		model.addAttribute("jsp에서부를이름",현재여기서 데이터 담아놓은 파라미터명);
+		model.addAttribute(applyList);
 		return "/WEB-INF/views/apply/requestList.jsp";
-		
 	}
 	
+	
+	 
 
-		
-
-
+	
 	@GetMapping("/cancel")
 	private String cancel() {
 		return "/WEB-INF/views/apply/cancel.jsp";
