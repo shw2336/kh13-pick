@@ -25,7 +25,12 @@
 <!-- 스타일 -->
 <style>
     /* 메뉴 글씨체 색상 및 메뉴 바탕색 */
-    
+  
+    .header {
+        padding-top: 50px; /* 위 여백 설정 */
+        padding-bottom: 150px; /* 아래 여백 설정 */
+    }
+
     .header img {
             display: block; 
             margin: 0 auto; 
@@ -73,6 +78,7 @@
 
 <main>
     <div class="header">
+  
         <h1 class="left"><img src="/image/title.png" ></h1>
         <div class="nav">
             <ul class="menu center">
@@ -89,7 +95,7 @@
                     <li><a href="/member/signUp">회원가입</a></li>
                 </li>
                 
-                
+               
                 
                 
                 

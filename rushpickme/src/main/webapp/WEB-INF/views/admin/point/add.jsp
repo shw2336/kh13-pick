@@ -2,15 +2,12 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
     .container {
-        display: grid;
-        margin-top: 50px;
-        margin-bottom: 50px;
-        padding: 60px;
-        border: 1px solid #ffffff;
-        background-color: #ffffff;
-        box-shadow: 0 0 1px 1px rgb(66, 138, 66);
-        border-radius: 5px;
+        border-radius: 30px;
+        border: 2px solid gainsboro;
+        box-shadow: 0px 4px 4px 2px gainsboro;
+        padding: 50px;
     }
+
 
     .title-icon {
         margin-top: 30px;
