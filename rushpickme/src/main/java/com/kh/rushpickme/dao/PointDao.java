@@ -43,7 +43,7 @@ public class PointDao {
 		return jdbcTemplate.query(sql, pointMapper);
 	}
 	public int findAttachNo(int pointNo) {
-		String sql = "select attach_no from point_attach where point_no=?";
+		String sql = "select attach_no from image where point_no=?";
 		Object[] data = {pointNo};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
