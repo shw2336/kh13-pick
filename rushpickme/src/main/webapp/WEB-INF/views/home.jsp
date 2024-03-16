@@ -16,7 +16,7 @@
         }
         .slogan {
             width: 50%; /* 조정 가능한 너비 */
-            margin-left: 5%; /* 왼쪽 여백 조정 */
+            margin-left: 20%; /* 왼쪽 여백 조정 */
             display: flex; /* Flexbox 사용 */
             align-items: center; /* 가운데 정렬 */
         }
@@ -31,6 +31,7 @@
         .additional-images img {
             width: 20%; /* 추가 이미지의 너비 설정 */
             max-width: 100%; /* 이미지의 최대 너비 설정 */
+            margin-left: 44%;
         }
     </style>
 </head>
@@ -46,7 +47,7 @@
     <div class="additional-images" style="margin-right: 70px; margin-top: -150px;"> <!-- 추가 이미지 상단 여백 조정 -->
          <a href="/point/charge"><img src="/image/shop.png"></a>
     </div>
-    <img src="/image/how.png" style="width: 1300px; height: auto; margin-top:70px;">
+    <img src="/image/how.png" style="width: 1200px; height: auto; margin-top:70px; margin-left:160px;">
     <div class="swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -65,10 +66,24 @@
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 <!-- Swiper JS -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script type="text/javascript">
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js">
     $(function(){
-        var options = {
+        var swiper = new Swiper('.swiper', {
             loop: true,
-            effect: "slide",
-            autoplay: tr
+            effect: 'slide',
+            autoplay: {
+                delay: 4000, // 4초마다 자동 슬라이드
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    });
+</script>
+</body>
+</html>
