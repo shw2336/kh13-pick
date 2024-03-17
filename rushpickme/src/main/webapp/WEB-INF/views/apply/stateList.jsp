@@ -28,9 +28,9 @@
             <div class="cell center">
                 <h2 style="text-align: center;">신청완료</h2>
                 <div class="right">
-            <form action="requestCancel" method="post">
+            <form action="cancel" method="post" autocomplete="off" enctype="multipart/form-data">
                 	<button type="submit" class="btn negative">
-                	<input type="hidden" value="y" name="applyCancel">
+                	<input type="hidden" value="y" name="cancel">
                     신청취소하기 
                 </button>
             </form>
@@ -72,7 +72,7 @@
                 <hr>
             </div>
             <div class="cell center">
-                <img class="dummy" src="/image/Picker.png" style="width:350px; height:250px">
+                <img class="dummy" src="/image/Picker2.png" style="width:350px; height:250px">
             </div>
         </div>
     </div>
