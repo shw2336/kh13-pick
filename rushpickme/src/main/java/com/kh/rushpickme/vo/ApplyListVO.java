@@ -57,7 +57,4 @@ public class ApplyListVO {
 		this.pickPay = pickPay;
 	}
 	
-	
-	
-
 }

@@ -108,16 +108,9 @@ public class ApplyController {
 		model.addAttribute(applyList);
 		return "/WEB-INF/views/apply/requestList.jsp";
 	}
-	
-	
-	 
-
-	
-	
-	
-	
 	@GetMapping("/cancel")
 	private String cancel() {
 		return "/WEB-INF/views/apply/cancel.jsp";
 	}
+
 }
