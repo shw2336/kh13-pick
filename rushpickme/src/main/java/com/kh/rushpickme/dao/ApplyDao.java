@@ -53,13 +53,13 @@ public class ApplyDao {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-//	//조회
-//	public ApplyDto selectOne(int applyNo) {
-//		String sql = "select * from apply where apply_no = ?";
-//		Object[] data = {applyNo};
-//		List<ApplyDto> list = jdbcTemplate.query(sql, applyMapper, data);
-//		return list.isEmpty() ? null : list.get(0);
-//	}
+	//조회
+	public ApplyDto selectOne(int applyNo) {
+		String sql = "select * from apply where apply_no = ?";
+		Object[] data = {applyNo};
+		List<ApplyDto> list = jdbcTemplate.query(sql, applyMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 //	//멤버아이디로 신청 내역 뽑기
 //	public List<ApplyListVO> applyList(String memberId) {
 //		String sql ="SELECT member_id, apply_no, apply_address1, apply_vinyl,apply_date, apply_hope_date, pick_pay FROM ( SELECT apply.member_id, apply.apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, pick_pay from apply INNER JOIN pick ON apply.apply_no = pick.apply_no)where member_id =? ";
