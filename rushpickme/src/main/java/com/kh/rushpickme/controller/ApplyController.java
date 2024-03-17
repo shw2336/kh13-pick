@@ -117,5 +117,4 @@ public class ApplyController {
 	private String cancel() {
 		return "/WEB-INF/views/apply/cancel.jsp";
 	}
-
 }
