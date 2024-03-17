@@ -70,34 +70,25 @@ public class ApplyController {
 
 		return "redirect:/";
 	}
-	// stateList화면
-	@GetMapping("/stateList")
+	
+	// 수거 현황 진행사항 페이지
+	@GetMapping("/state")
 	public String stateList() {
 		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
 	}
-//	@PostMapping("/stateList")
-//	private String stateList() {/*int applyNo, HttpSession httpSession*/
-//
-//		
-////		applyDao.applyInsert(applyDto);
-////		applyDao.update
-//	
-//	return "/WEB-INF/views/apply/stateList.jsp";
-//}
-	@GetMapping("/stateDetail")
-	public String stateDetail() {
-		return "/WEB-INF/views/apply/stateDetail.jsp"; // 수거 진행 상세 페이지
-	}
 	
-	//join 썼을때 결제 내역 할때 사용하기 
-//	@RequestMapping("/requestList")
-//	public String requestList(Model model) {
-//		
-//		List<ApplyListVO> requestList = applyDao.applyList();
-//		model.addAttribute("requestList", requestList);
-//			
-//		return "/WEB-INF/views/apply/requestList.jsp";
-//		}
+	@PostMapping("/state")
+	private String state(@ModelAttribute ApplyDto applyDto, HttpSession session, @ModelAttribute ApplyDao applyDao) {
+		String loginId = "testuser1";
+		applyDto.setMemberId(loginId);
+		int longinNo = applyDao.getSequence();
+		applyDto.setApplyNo(longinNo);
+		applyDao.state(longinNo, loginId, applyDto);
+	
+	return "redirect:/";
+}
+	
+	
 	//신청 목록 
 	@GetMapping("/requestList")
 	public String requestList(Model model, String memberId) {
@@ -109,6 +100,7 @@ public class ApplyController {
 		model.addAttribute(applyList);
 		return "/WEB-INF/views/apply/requestList.jsp";
 	}
+	
 	//신청 상세 조회 
 	@RequestMapping("/requestDetail")
     public String detail(@RequestParam int applyNo, Model model) {
@@ -119,9 +111,26 @@ public class ApplyController {
 	 
 
 	
-	@GetMapping("/cancel")
-	public String cancel() {
+	@RequestMapping("/cancel")
+	public String cancel(@RequestParam int applyNo,HttpSession httpSession, ApplyDto applyDto) {
+			String loginId = "testuser1";
+			applyDto.setMemberId(loginId);
+			applyDao.cancel(applyNo);
 		return "/WEB-INF/views/apply/cancel.jsp";
 	}
+	
+	
+	
+	//join 썼을때 결제 내역 할때 사용하기 
+//	@RequestMapping("/requestList")
+//	public String requestList(Model model) {
+//		
+//		List<ApplyListVO> requestList = applyDao.applyList();
+//		model.addAttribute("requestList", requestList);
+//			
+//		return "/WEB-INF/views/apply/requestList.jsp";
+//		}
+	
+	
 
 }
