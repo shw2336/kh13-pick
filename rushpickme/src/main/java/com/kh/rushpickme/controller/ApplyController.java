@@ -105,7 +105,7 @@ public class ApplyController {
 	@RequestMapping("/requestDetail")
     public String detail(@RequestParam int applyNo, Model model) {
         ApplyDto applyDto = applyDao.selectOne(applyNo);
-        model.addAttribute("applyDto", applyDto);
+        model.addAttribute("ApplyDto", applyDto);
         return "/WEB-INF/views/apply/requestDetail.jsp";
     }
 	
