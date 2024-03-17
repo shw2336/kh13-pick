@@ -59,7 +59,7 @@ public class ApplyDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	//수거 신청 목록 과 관련된 내용 
-	public List<ApplyDto> state(int applyNo, String MemeberId, ApplyDto appltDto) {
+	public List<ApplyDto> stateList(int applyNo, String MemeberId, ApplyDto appltDto) {
 		String sql="select * from apply where apply_no = ?";
 		return jdbcTemplate.query(sql, applyMapper);
 		
@@ -95,6 +95,7 @@ public class ApplyDao {
 
 
 		
+	
 	}
 
 

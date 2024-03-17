@@ -72,18 +72,18 @@ public class ApplyController {
 	}
 	
 	// 수거 현황 진행사항 페이지
-	@GetMapping("/state")
+	@GetMapping("/stateList")
 	public String stateList() {
 		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
 	}
 	
-	@PostMapping("/state")
+	@PostMapping("/stateList")
 	private String state(@ModelAttribute ApplyDto applyDto, HttpSession session, @ModelAttribute ApplyDao applyDao) {
 		String loginId = "testuser1";
 		applyDto.setMemberId(loginId);
 		int longinNo = applyDao.getSequence();
 		applyDto.setApplyNo(longinNo);
-		applyDao.state(longinNo, loginId, applyDto);
+		applyDao.stateList(longinNo, loginId, applyDto);
 	
 	return "redirect:/";
 }
@@ -105,9 +105,13 @@ public class ApplyController {
 	@RequestMapping("/requestDetail")
     public String detail(@RequestParam int applyNo, Model model) {
         ApplyDto applyDto = applyDao.selectOne(applyNo);
-        model.addAttribute("ApplyDto", applyDto);
+        model.addAttribute("applyDto", applyDto);
         return "/WEB-INF/views/apply/requestDetail.jsp";
     }
+	@GetMapping("cancel")
+	public String cancel() {
+		return "/WEB-INF/views/apply/cancel.jsp";
+	}
 	
 	@RequestMapping("/cancel")
 	public String cancel(@RequestParam int applyNo,HttpSession httpSession, ApplyDto applyDto) {
