@@ -101,7 +101,7 @@
 			<tr>
 				<th style="width: 20%;"><i
 					class="fa-solid fa-circle-xmark fa-2x" style="color: rgb(255, 128, 128)"></i></span></th>
-				<td style="width: 70%;" class="left explain"><a href="#" class="link">수거 거부</a></td>
+				<td style="width: 70%;" class="left explain"><a href="rejectList" class="link">수거 거부</a></td>
 				<td class="center"><span class="num">${countReject}</span>건</td>
 			</tr>
 		</tbody>

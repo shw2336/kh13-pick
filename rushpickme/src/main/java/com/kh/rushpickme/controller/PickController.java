@@ -26,6 +26,7 @@ import com.kh.rushpickme.service.AttachService;
 import com.kh.rushpickme.vo.PageVO;
 import com.kh.rushpickme.vo.PickFinishVo;
 import com.kh.rushpickme.vo.PickProceedVo;
+import com.kh.rushpickme.vo.PickRejectVo;
 import com.kh.rushpickme.vo.PickWaitVo;
 
 import jakarta.servlet.http.HttpSession;
@@ -124,13 +125,27 @@ public class PickController {
 		return "/WEB-INF/views/pick/proceedDetail.jsp";
 	}
 	
-	@RequestMapping("/finishList")
-	public String finishList (Model model, @ModelAttribute PageVO pageVo) {
-		int count = pickDao.countFinish();
+	@RequestMapping("/rejectList")
+	public String rejectList (Model model, @ModelAttribute PageVO pageVo, HttpSession session) {
+		String memberId = (String) session.getAttribute("loginId");
+		int count = pickDao.countReject(memberId);
 		pageVo.setCount(count);
 		model.addAttribute("pageVo", pageVo);
 		
-		List<PickFinishVo> finishList = pickDao.pickFinishListAll(pageVo);
+		List<PickRejectVo> rejectList = pickDao.rejectListByPaging(memberId, pageVo);
+		model.addAttribute("rejectList", rejectList);
+		
+		return "/WEB-INF/views/pick/rejectList.jsp";
+	}
+	
+	@GetMapping("/finishList")
+	public String finishList (Model model, @ModelAttribute PageVO pageVo, HttpSession session) {
+		String memberId = (String) session.getAttribute("loginId");
+		int count = pickDao.countFinish(memberId);
+		pageVo.setCount(count);
+		model.addAttribute("pageVo", pageVo);
+		
+		List<PickFinishVo> finishList = pickDao.pickFinishListByPaging(memberId, pageVo);
 		model.addAttribute("finishList", finishList);
 		
 		return "/WEB-INF/views/pick/finishList.jsp";
