@@ -23,8 +23,10 @@
    	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
     	function cancel(num) {
-        window.location.href = "cancel?applyNo=" + num;
+//         window.location.href = "cancel?applyNo=" + num;
+		console.log(num);
     	}
+    	
 	</script>
 <body>
     <div class="cell center mt-30" >

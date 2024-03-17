@@ -25,7 +25,7 @@
 
 </script>
 
-<div class="cell center mt-30" >
+<div class="cell center" >
 		<h1>
 			<span style="color: rgb(66,138,66)">${pickNo}번</span> 수거 정보
 		</h1>

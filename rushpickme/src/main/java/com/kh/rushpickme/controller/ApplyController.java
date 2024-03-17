@@ -108,8 +108,6 @@ public class ApplyController {
         model.addAttribute("applyDto", applyDto);
         return "/WEB-INF/views/apply/requestDetail.jsp";
     }
-	 
-
 	
 	@RequestMapping("/cancel")
 	public String cancel(@RequestParam int applyNo,HttpSession httpSession, ApplyDto applyDto) {
