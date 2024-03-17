@@ -9,6 +9,10 @@
         margin: 0 auto;
         padding: 20px;
         text-align: center;
+        border-radius: 30px;
+        border: 2px solid gainsboro;
+        box-shadow: 0px 4px 4px 2px gainsboro;
+ 		padding: 50px;
     }
 
   .info-table {
