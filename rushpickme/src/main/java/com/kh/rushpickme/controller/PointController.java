@@ -44,7 +44,7 @@ public class PointController {
         buyDto.setBuyTotal(pointDto.getPointSell() * buyDto.getBuyQty());//금액x수량
 
         buyDao.insert(buyDto);//구매내역 등록
-        int item = pointDto.getPointCharge() * buyDto.getBuyQty();
+        int item = pointDto.getPointSell() * buyDto.getBuyQty();
         memberDao.plusMemberPoint(loginId, item);//포인트 증가
         
         // green 회원의 포인트 구매 내역 저장
