@@ -32,7 +32,7 @@
 	
 </script>
 
-	<div class="cell center mt-50" >
+	<div class="cell center" >
 		<h1>
 			<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님의 
 			<span style="color: rgb(66,138,66)">${applyNo}번</span> 신청 정보
