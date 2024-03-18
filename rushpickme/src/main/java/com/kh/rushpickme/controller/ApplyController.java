@@ -101,16 +101,6 @@ public class ApplyController {
         return "/WEB-INF/views/apply/applyDetail.jsp";
     }
 	
-//	@PostMapping("/stateList")
-//	private String state(@ModelAttribute ApplyDto applyDto, HttpSession session, @ModelAttribute ApplyDao applyDao) {
-//		String loginId = "testuser1";
-//		applyDto.setMemberId(loginId);
-//		int longinNo = applyDao.getSequence();
-//		applyDto.setApplyNo(longinNo);
-//		applyDao.stateList(longinNo, loginId, applyDto);
-//	return "redirect:/";
-//}
-	
 	//applyDao에서 requestList들을 부를게 
 	//부르는 형태는 List <applyDto>야 
 //		int number = 3;
