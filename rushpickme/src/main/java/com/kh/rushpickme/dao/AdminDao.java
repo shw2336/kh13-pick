@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.mapper.MemberMapper;
+import com.kh.rushpickme.vo.PageVO;
 
 @Repository
 public class AdminDao {
@@ -31,7 +32,5 @@ public class AdminDao {
         List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
         return list.isEmpty() ? null : list.get(0);
     }
-    
-   
-    
+	
 }

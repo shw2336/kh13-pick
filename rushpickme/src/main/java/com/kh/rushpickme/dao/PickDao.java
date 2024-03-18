@@ -11,6 +11,7 @@ import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.mapper.ApplyMapper;
 import com.kh.rushpickme.mapper.MemberPickMapper;
 import com.kh.rushpickme.mapper.PickFinishVoMapper;
+import com.kh.rushpickme.mapper.PickListMapper;
 import com.kh.rushpickme.mapper.PickMapper;
 import com.kh.rushpickme.mapper.PickProceedVoMapper;
 import com.kh.rushpickme.mapper.PickRejectVoMapper;
@@ -47,6 +48,9 @@ public class PickDao {
 	
 	@Autowired
 	private PickRejectVoMapper pickRejectVoMapper;
+	
+	@Autowired
+	private PickListMapper pickListMapper;
 
 	//수거접수등록
 	public void insertOk (PickDto pickDto) {
@@ -305,6 +309,63 @@ public class PickDao {
 	    String sql = "select * from pick ";
 		return jdbcTemplate.query(sql, pickMapper);
 	}
+	
+//	//통합+페이징
+//	public List<PickDto> selectListByPaging(PageVO pageVO) {
+//		if(pageVO.isSearch()) {
+//			String sql = "select * from ("
+//					+ "select rownum rn, TMP.* from ("
+//					+ "select "
+//					+ "pick_no, apply_no, member_id, pick_weight, pick_pay, "
+//					+ "pick_schedule, pick_state, pick_reject, pick_delete, pick_finish_date "
+//					+ "from pick "
+//					+ "where instr("+pageVO.getColumn()+", ?) > 0 "
+//							+ ")TMP"
+//							+ ") where rn between ? and ?";
+//			Object[] data = {
+//					pageVO.getKeyword(),
+//					pageVO.getBeginRow(),
+//					pageVO.getEndRow()
+//			};
+//			return jdbcTemplate.query(sql, pickMapper, data);
+//		}
+//		else {
+//			String sql = "select * from ("
+//					+ "select rownum rn, TMP.* from ("
+//					+ "select "
+//					+ "pick_no, apply_no, member_id, pick_weight, pick_pay, "
+//					+ "pick_schedule, pick_state, pick_reject, pick_delete, pick_finish_date "
+//					+ "from pick "
+//					+ ")TMP"
+//					+ ") where rn between ? and ?";
+//			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+//			return jdbcTemplate.query(sql, pickListMapper, data);
+//		}
+//	}
+//	
+//	//카운트
+//	public int count() {
+//		String sql = "select count(*) from pick";
+//		return jdbcTemplate.queryForObject(sql, int.class);
+//	}
+//	public int count(String column, String keyword) {
+//		String sql = "select count(*) from pick "
+//				+ "where instr("+column+", ?) > 0";
+//		Object[] data = {keyword};
+//		return jdbcTemplate.queryForObject(sql, int.class, data);
+//	}
+//	public int count(PageVO pageVO) {
+//		if(pageVO.isSearch()) {
+//			String sql = "select coint(*) form pick "
+//					+ "where instr("+pageVO.getColumn()+",? ) > 0";
+//			Object[] data = {pageVO.getKeyword()};
+//			return jdbcTemplate.queryForObject(sql, int.class, data);
+//		}
+//		else {
+//			String sql = "select count(*) from pick";
+//			return jdbcTemplate.queryForObject(sql, int.class);
+//		}
+	//}
 	}
 	
 

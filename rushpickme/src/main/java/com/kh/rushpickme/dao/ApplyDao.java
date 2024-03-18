@@ -5,11 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.mapper.ApplyDetailVOMapper;
+//import com.kh.rushpickme.mapper.ApplyListMapper;
 import com.kh.rushpickme.mapper.ApplyListVOMapper;
 import com.kh.rushpickme.mapper.ApplyMapper;
 import com.kh.rushpickme.vo.ApplyDetailVO;
@@ -31,7 +30,10 @@ public class ApplyDao {
 	
 	@Autowired
 	private ApplyDetailVOMapper applyDetailVOMapper;
-	
+//	
+//	@Autowired
+//	private ApplyListMapper applyListMapper;
+//	
 
 	//수거 신청 등록
 	public void applyInsert(ApplyDto applyDto) {
@@ -72,6 +74,69 @@ public class ApplyDao {
 		return jdbcTemplate.query(sql, applyListVOMapper,data);
 		
 	}
+	
+	
+//	//통합+페이징
+//	public List<ApplyDto> selectListByPaging(PageVO pageVO) {
+//			if(pageVO.isSearch()) {
+//				String sql = "select * from ("
+//						+ "select rownum rn, TMP.* from ("
+//						+ "select "
+//						+ "apply_no, member_id, apply_area, apply_post, apply_address1, "
+//						+ "apply_address2, apply_say, apply_way, apply_weight, apply_vinyl, "
+//						+ "apply_hope_date, apply_cancel, apply_date, apply_state "
+//						+ "from apply "
+//						+ "where instr("+pageVO.getColumn()+", ?) > 0"
+//								+ ")TMP"
+//								+ "where rn between ? and ?";
+//				Object[] data = {
+//						pageVO.getKeyword(),
+//						pageVO.getBeginRow(),
+//						pageVO.getEndRow()
+//				};
+//				return jdbcTemplate.query(sql, applyListMapper, data);
+//			}
+//			else {
+//				String sql = "select * from ("
+//						+ "select rownum rn, TMP.* from ("
+//						+ "select "
+//						+ "apply_no, member_id, apply_area, apply_post, apply_address1, "
+//						+ "apply_address2, apply_say, apply_way, apply_weight, apply_vinyl, "
+//						+ "apply_hope_date, apply_cancel, apply_date, apply_state "
+//						+ "from apply "
+//						+ ")TMP"
+//						+ ") where rn between ? and ?";
+//				Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+//				return jdbcTemplate.query(sql, applyListMapper, data);
+//			}
+//				
+//	}
+//	
+//	
+//	//카운트
+//	public int count() {
+//		String sql = "select count(*) from apply";
+//		return jdbcTemplate.queryForObject(sql, int.class);
+//	}
+//	public int count(String column, String keyword) {
+//		String sql = "select count(*) from apply "
+//						+ "where instr("+column+", ?) > 0";
+//		Object[] data = {keyword};
+//		return jdbcTemplate.queryForObject(sql, int.class, data);
+//	}
+//	public int count(PageVO pageVO) {
+//		if(pageVO.isSearch()) {//검색
+//			String sql = "select count(*) from apply "
+//							+ "where instr("+pageVO.getColumn()+", ?) > 0";
+//			Object[] data = {pageVO.getKeyword()};
+//			return jdbcTemplate.queryForObject(sql, int.class, data);
+//		}
+//		else {//목록
+//			String sql = "select count(*) from apply";
+//			return jdbcTemplate.queryForObject(sql, int.class);
+//		}
+//	}
+//	
 
 //	//신청 상세내역 (requsetDetail)(selectOne)
 //	public List<ApplyDto> applyDetail(int applyNo) {

@@ -139,6 +139,12 @@
             </div>
         </c:otherwise>
     </c:choose>
+
+<div class="cell">
+    <%-- 네비게이터 --%>
+    <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 </div>
+</div>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

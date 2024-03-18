@@ -29,8 +29,11 @@
         background-color: #f2f2f2;
     }
 </style>
+
 <div class="center">
-<h2>수거 관리</h2></div>
+    <h2>신청 관리</h2>
+</div>
+
 <div class="cell container">
     <table>
         <thead>
@@ -72,6 +75,11 @@
             </c:forEach>
         </tbody>
     </table>
+</div>
+
+<div class="cell">
+    <%-- 네비게이터 --%>
+    <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
