@@ -44,12 +44,12 @@ public class ApplyController {
 
 	// 수거 신청 페이지
 	@GetMapping("/request")
-	private String request() {
+	public String request() {
 		return "/WEB-INF/views/apply/request.jsp"; // 수거 신청 정보입력페이지 주소
 	}
 
 	@PostMapping("/request")
-	private String request(@ModelAttribute ApplyDto applyDto, @RequestParam MultipartFile applyAttach,
+	public String request(@ModelAttribute ApplyDto applyDto, @RequestParam MultipartFile applyAttach,
 			HttpSession session) throws IllegalStateException, IOException {
 		// 1. 세션에 저장된 아이디를 꺼낸다
 		String loginId = "testuser1";
@@ -70,34 +70,26 @@ public class ApplyController {
 
 		return "redirect:/";
 	}
-	// stateList화면
+	
+	// 수거 현황 진행사항 페이지
 	@GetMapping("/stateList")
-	private String stateList() {
+	public String stateList() {
 		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
 	}
-//	@PostMapping("/stateList")
-//	private String stateList() {/*int applyNo, HttpSession httpSession*/
-//
-//		
-////		applyDao.applyInsert(applyDto);
-////		applyDao.update
-//	
-//	return "/WEB-INF/views/apply/stateList.jsp";
-//}
-	@GetMapping("/stateDetail")
-	private String stateDetail() {
-		return "/WEB-INF/views/apply/stateDetail.jsp"; // 수거 진행 상세 페이지
-	}
 	
-	//join 썼을때 결제 내역 할때 사용하기 
-//	@RequestMapping("/requestList")
-//	public String requestList(Model model) {
-//		
-//		List<ApplyListVO> requestList = applyDao.applyList();
-//		model.addAttribute("requestList", requestList);
-//			
-//		return "/WEB-INF/views/apply/requestList.jsp";
-//		}
+	@PostMapping("/stateList")
+	private String state(@ModelAttribute ApplyDto applyDto, HttpSession session, @ModelAttribute ApplyDao applyDao) {
+		String loginId = "testuser1";
+		applyDto.setMemberId(loginId);
+		int longinNo = applyDao.getSequence();
+		applyDto.setApplyNo(longinNo);
+		applyDao.stateList(longinNo, loginId, applyDto);
+	
+	return "redirect:/";
+}
+	
+	
+	//신청 목록 
 	@GetMapping("/requestList")
 	public String requestList(Model model, String memberId) {
 		List<ApplyDto> applyList = applyDao.requsetList();
@@ -108,9 +100,41 @@ public class ApplyController {
 		model.addAttribute(applyList);
 		return "/WEB-INF/views/apply/requestList.jsp";
 	}
-	@GetMapping("/cancel")
-	private String cancel() {
+
+
+	
+	//신청 상세 조회 
+	@RequestMapping("/requestDetail")
+    public String detail(@RequestParam int applyNo, Model model) {
+        ApplyDto applyDto = applyDao.selectOne(applyNo);
+        model.addAttribute("applyDto", applyDto);
+        return "/WEB-INF/views/apply/requestDetail.jsp";
+    }
+	@GetMapping("cancel")
+	public String cancel() {
 		return "/WEB-INF/views/apply/cancel.jsp";
 	}
+	
+	@RequestMapping("/cancel")
+	public String cancel(@RequestParam int applyNo,HttpSession httpSession, ApplyDto applyDto) {
+			String loginId = "testuser1";
+			applyDto.setMemberId(loginId);
+			applyDao.cancel(applyNo);
+		return "/WEB-INF/views/apply/cancel.jsp";
+	}
+	
+	
+	
+	//join 썼을때 결제 내역 할때 사용하기 
+//	@RequestMapping("/requestList")
+//	public String requestList(Model model) {
+//		
+//		List<ApplyListVO> requestList = applyDao.applyList();
+//		model.addAttribute("requestList", requestList);
+//			
+//		return "/WEB-INF/views/apply/requestList.jsp";
+//		}
+	
+	
 
 }

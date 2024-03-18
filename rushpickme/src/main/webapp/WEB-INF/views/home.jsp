@@ -72,6 +72,7 @@
          <a href="/point/charge"><img src="/image/shop.png"></a>
     </div>
     <img src="/image/how.png" style="width: 1200px; height: auto; margin-top:70px; margin-left:160px;">
+    <img src="/image/how2.png" style="width: 1200px; height: auto; margin-top:70px; margin-left:160px;">
     <!-- 슬라이더 컨테이너 추가 -->
     <div class="swiper-container">
         <!-- 슬라이드 항목을 감싸는 wrapper 추가 -->

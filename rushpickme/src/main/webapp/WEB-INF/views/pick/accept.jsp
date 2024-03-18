@@ -55,7 +55,7 @@
 	<input type="hidden" value="${applyNo}" name="applyNo" /> 
 	<input type="hidden" id="pickSchedule" name="pickSchedule" />
 
-	<div class="container w-400" style="margin-top: 50px; margin-bottom:80px;">
+	<div class="container w-400" style="margin-bottom:80px;">
 
 		<div class="cell center mb-40">
 			<h2><span style="color: rgb(66,138,66)">언제</span> 수거 예정이세요?</h2>
