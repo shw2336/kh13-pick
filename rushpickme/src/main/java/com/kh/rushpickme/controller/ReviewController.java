@@ -108,12 +108,6 @@ public class ReviewController {
 		List<ReviewDto> list = reviewDao.selectListByPaging(pageVO);
 		model.addAttribute("list", list);
 		
-//		ReviewDto reviewDto = reviewDto.getReviewStar();
-//		int star = reviewDao.count(reviewStar);
-//		
-//		list = reviewDao.get
-//		model.addAttribute("list", list);
-		
 		return "/WEB-INF/views/review/list.jsp";
 	}
 	
@@ -142,7 +136,7 @@ public class ReviewController {
 		
 		//아이디를 게시글 정보에 포함시킨다
 		reviewDto.setMemberId(loginId);
-		reviewDto.setAskNo(4);
+		reviewDto.setAskNo(127);
 		int reviewStar = (int)score;
 		reviewDto.setReviewStar(reviewStar);
 		int sequence = reviewDao.getSequence();//DB에서 시퀀스 번호를 추출
