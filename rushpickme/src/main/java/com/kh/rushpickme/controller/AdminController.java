@@ -46,7 +46,7 @@ public class AdminController {
 	public String checkApply(Model model) {
 		//String loginId = (String) session.getAttribute("loginId");
 		//List<ApplyDto> applyList = applyDao.requsetList();
-		model.addAttribute("list", applyDao.requsetList());
+		model.addAttribute("list", applyDao.requestList());
 		return "/WEB-INF/views/admin/check/apply.jsp";
 	}
 	
@@ -56,7 +56,6 @@ public class AdminController {
 		return "/WEB-INF/views/admin/check/pick.jsp";
 	}
 	
-
 	
 	@RequestMapping("/member/search")
 	public String memberSearch(

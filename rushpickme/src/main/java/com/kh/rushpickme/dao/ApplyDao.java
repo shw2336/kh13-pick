@@ -94,6 +94,7 @@ public class ApplyDao {
 		Object[] data = {applyNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+
 	
 //		//멤버아이디로 신청 내역 뽑기
 //		public List<ApplyListVO> applyList(String memberId) {

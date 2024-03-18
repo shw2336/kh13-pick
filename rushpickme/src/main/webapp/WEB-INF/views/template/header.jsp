@@ -84,18 +84,24 @@
             <ul class="menu center">
                 <li><a href="/">홈</a></li>
                 
-                <li><a href="/pick/list">수거서비스</a></li>
+                <c:if test="${sessionScope.loginLevel == '피커'}">
+               <li><a href="/pick/list">수거서비스</a></li>
+               </c:if>
+               
+               
+               <c:if test="${sessionScope.loginLevel == '그린'}">
+               <li><a href="/apply/request">수거서비스</a></li>
+               </c:if>
                 
                 <li class="board-menu"><a href="#">게시판</a>
                     <ul class="sub-menu">
                         <li><a href="/qna/list">문의게시판</a></li>
                         <li><a href="/review/list">리뷰게시판</a></li>
-                        
+                
                     </ul>
                     <li><a href="/member/signUp">회원가입</a></li>
                 </li>
                 
-               
                 
                 
                 
