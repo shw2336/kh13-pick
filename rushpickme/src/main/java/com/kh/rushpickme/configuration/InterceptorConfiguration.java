@@ -56,7 +56,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 //		- *는 동일 엔드포인트까지만 포함하여 설정할 때 사용 (자식)
 		registry.addInterceptor(memberInterceptor)
 					.addPathPatterns(
-						"/member/**",
+						"/member/",
 						"/qna/**",
 						"/review/**"
 						//"/point/**",

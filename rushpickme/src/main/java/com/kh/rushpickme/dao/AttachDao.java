@@ -18,6 +18,8 @@ public class AttachDao {
 	@Autowired
 	private AttachMapper attachMapper;
 	
+	
+	
 	public int getSequence() {
 		String sql = "select attach_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
@@ -42,6 +44,22 @@ public class AttachDao {
 		String sql = "delete attach where attach_no = ?";
 		Object[] data = {attachNo};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	public boolean change(AttachDto attachDto ) {
+		String sql= "update attach set "
+				+ "attach_name=?, attach_type=?, attach_size=? "
+				+ "where attach_no=?  " ;
+		Object [] data = {attachDto.getAttachName(),attachDto.getAttachType(),
+				attachDto.getAttachSize(),attachDto.getAttachNo()
+				};
+		return jdbcTemplate.update(sql,data)>0;
+	}
+	
+	public void findAttach(int attachNo) {
+		String sql="SELECT attach_no FROM member_attach WHERE MEMBER_id = ?";
+		Object[] data= {attachNo};
+		jdbcTemplate.update(sql,data);
 	}
 
 

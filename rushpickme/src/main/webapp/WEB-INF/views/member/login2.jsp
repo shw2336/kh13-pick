@@ -103,7 +103,7 @@ body {
 	        $("#checkId").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
 	    }
 	     
-	    $("#checkId").change(function(){ // 체크박스에 변화가 있다면,
+	    $("#checkId").on(function(){ // 체크박스에 변화가 있다면,
 	        if($("#checkId").is(":checked")){ // ID 저장하기 체크했을 때,
 	            setCookie("key", $("#id").val(), 7); // 7일 동안 쿠키 보관
 	        }else{ // ID 저장하기 체크 해제 시,

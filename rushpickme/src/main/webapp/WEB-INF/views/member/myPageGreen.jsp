@@ -288,7 +288,7 @@ div{
     
   </div>
   <div class="listContainer">
-    <a href="#" class="item">
+    <a href="/point/charge" class="item">
         <div class="icon">ii</div>
         <div class="text">
           <span>내 포인트</span>
