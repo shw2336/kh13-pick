@@ -315,7 +315,8 @@
                 이름<i class="fa-solid fa-pencil"></i>
                
             </label>
-            <input type="text" name="memberName" placeholder="한글 2~10글자"
+            <input value="${memberDto.memberName}" type="text" name="memberName" placeholder="한글 2~10글자"
+            
                                 class="tool w-100">
             <div class="success-feedback">올바른 이름 입니다</div>
             <div class="fail-feedback">한글2~10글자로 작성하세요</div>
@@ -329,7 +330,7 @@
                 닉네임<i class="fa-solid fa-pen"></i>
                
             </label>
-            <input value="그린" type="text" name="memberNick" placeholder="닉네임에 '그린' 을 포함 하여야 합니다"
+            <input value="${memberDto.memberNick}" type="text" name="memberNick" placeholder="닉네임에 '그린' 을 포함 하여야 합니다"
                                 class="tool w-100">
             <div class="success-feedback">사용 가능한 닉네임입니다</div>
             <div class="fail-feedback">닉네임을 그린포함 한글,숫자 2~10글자로 작성하세요 ex)그린왕혜진</div>
@@ -344,7 +345,7 @@
             <label>이메일<i class="fa-regular fa-envelope"></i></label>
             
             <div class="flex-cell" style="flex-wrap:wrap;">
-	            <input type="email" name="memberEmail" 
+	            <input type="email" name="memberEmail" value="${memberDto.memberEmail}"
 	                                placeholder="pick123@rushpickme.com" class="tool width-fill">
 	            <!-- <button type="button" class="btn negative btn-send-cert"> -->
 <!-- 	            	<i class="fa-solid fa-paper-plane"></i> -->
@@ -366,7 +367,7 @@
         <div class="cell">
             <label>생년월일<i class="fa-solid fa-cake-candles"></i>
             </label>
-            <input type="date" name="memberBirth" class="tool w-100">
+            <input vlaue="${memberDto.memberBirth}" type="date" name="memberBirth" class="tool w-100">
             <div class="fail-feedback">잘못된 날짜 형식입니다</div>
         </div>
         
@@ -380,14 +381,14 @@
 	</div>
 	
 	<div class="cell">
-	<!-- 	<!-- 주소 : 모두 입력하든가 입력하지 않든가 -->
+	
         <div class="cell">
             <label>주소<i class="fa-regular fa-address-book"></i>
             </label>
         </div>
         <div class="cell">
-            <input type="text" name="memberGreenPost"  readonly
-                    placeholder="우편번호" class="tool" size="6" maxlength="6">
+            <input type= "text" name="memberGreenPost" vlaue="${memberGreenDto.memberGreenPost}"
+                    placeholder="우편번호" class="tool" size="6" maxlength="6" readonly>
             <button type="button" class="btn positive btn-address-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>        
@@ -396,11 +397,11 @@
             </button>
         </div>
         <div class="cell">
-            <input type="text" name="memberGreenAddress1" 
-                    placeholder="기본주소" class="tool w-100" readonly>
+            <input type="text" name="memberGreenAddress1" value="${memberGreenDto.memberGreenAddress1}"
+                    placeholder="기본주소" class="tool w-100" readonly >
         </div>
         <div class="cell">
-            <input type="text" name="memberGreenAddress2" 
+            <input type="text" name="memberGreenAddress2" value="${memberGreenDto.memberGreenAddress2}"
                     placeholder="상세주소" class="tool w-100">
             <div class="fail-feedback">주소를 모두 작성하세요</div>
         </div> 
@@ -411,7 +412,7 @@
                 <i class="fa-solid fa-phone"></i>
             </label>
             
-            <input type="text" name="memberContact" placeholder="-제외하고 작성"
+            <input type="text" name="memberContact" placeholder="-제외하고 작성" value="${memberDto.memberContact}"
                             id="" class="tool w-100">                                              
         </div>
         
@@ -430,6 +431,11 @@
 	 <input class="tool w-100" type="password" name="memberPw" placeholder="비밀번호 입력" required> <br><br>
 	</div>
 		    
+		</div>
+		
+		<div class="cell">
+			<label>프로필 이미지</label>
+			<input type="file" name="attach" class="tool w-100">
 		</div>
         
        

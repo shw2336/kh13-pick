@@ -70,6 +70,7 @@ public class MemberController {
 		memberDao.insertGreen(memberGreenDto);
 		
 		if(!attach.isEmpty()) {
+			
 			int attachNo = attachService.save(attach);
 			
 			memberDao.connect(memberDto.getMemberId(),attachNo);
@@ -249,7 +250,7 @@ public class MemberController {
 
 	@PostMapping("/changeAccountGreen")
 	public String changeAccountGreen(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberGreenDto memberGreenDto,
-									HttpSession session) {
+									HttpSession session,Model model, @RequestParam MultipartFile attach) throws IllegalStateException, IOException {
 		String loginId = (String)session.getAttribute("loginId");
 
 		// memberDto 아이디 설정
@@ -264,6 +265,25 @@ public class MemberController {
 //		MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
 		//MemberPickDto findPickDto = memberDao.selectOnePick(loginId);
 		
+		//로그인한 아이디로 attach no 조회하는 dao 실행
+		int attachNoById = memberDao.findAttachNo(loginId);
+			
+		
+		
+		//attach_no가 없으면
+		
+		if(!attach.isEmpty()) {
+			
+			int attachNo = attachService.save(attach);
+			
+			memberDao.connect(memberDto.getMemberId(),attachNo);
+			
+		}
+		//attach_no가 이미 있으면
+		//attachService.remove(attachNo) 한 담에 .save(attach)
+		
+		
+		
 		
 		/// 조건
 		boolean isValid = false;
@@ -272,6 +292,9 @@ public class MemberController {
 		if (memberPw != null && findMemberPw != null) {
 		    isValid = memberPw.equals(findMemberPw);
 		}
+		
+		
+		
 
 		// 변경
 		if (isValid) {
@@ -421,8 +444,10 @@ public class MemberController {
 
 			memberDao.delete(loginId);
 			session.removeAttribute("loginId");
+			
 			return "/WEB-INF/views/member/leaveFinish.jsp";
-		} else {
+		} 
+		else {
 			return "redirect:leaveFinish?error";
 		}
 

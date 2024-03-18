@@ -1,8 +1,12 @@
 package com.kh.rushpickme.service;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,6 +46,27 @@ public class AttachService {
 		attachDao.delete(attachNo);
 	}
 	
+//	public void change(int attachNo, MultipartFile attach) throws IOException {
+//	    	
+//		 BufferedImage bufferedImage = ImageIO.read(attach.getInputStream()) ;
+//		 int width = (int) (bufferedImage.getWidth() * 100) ;
+//		 int height = (int) (bufferedImage.getHeight() * 100) ;
+//		 BufferedImage resizedFile = Scalr.resize(bufferedImage
+//		   , Scalr.Method.SPEED
+//		   , Scalr.Mode.AUTOMATIC
+//		   , width
+//		   , height
+//		   , Scalr.OP_ANTIALIAS)
+//		   ;
+//		 ImageIO.write(resizedFile
+//		   , extension
+//		   , 
+//		   new 
+//		   File(System.getProperty("user.home"), "upload"))
+//		   ;
+//		
+//	}
+//	
 	
 	
 	
