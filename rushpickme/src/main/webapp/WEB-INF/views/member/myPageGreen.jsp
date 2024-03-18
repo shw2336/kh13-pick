@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%--  <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>--%>
+ <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
   <style>
     
@@ -237,37 +237,28 @@ div{
   </div>  
   <div class="shippingStatusContainer">
     <div class="title">
-      신청/신청상황
+      신청/신청상황 
     </div>
     <div class="status">
+      
       
       <div class="item">
         <div>
           <div class="green number"></div>
-          <div class="text">진행상황</div>
+          <div class="listContainer">
+          <a href="/apply/applyDetail" class="item">
+        <div class="icon cell left"></div>
+        <div class="cell left">신청상세</div>
+        <div class="cell left">  </div>
+    </a>
+    </div>
+          </a>
         </div>
-        <div class="icon">${applyDto.applyState} > </div>
+        <div class="icon"> </div>
       </div>     
       <div class="item">
-        <div>
-          <div class="number"></div>
-          <div class="text">수거중량</div>
-        </div>
-        <div class="icon">${pickDto.pickWeight} > </div>
-      </div>     
-      <div class="item">
-        <div>
-          <div class="green number"></div>
-          <div class="text">금액</div>
-        </div>
-        <div class="icon">${pickDto.pickPay} > </div>
-      </div>     
-      <div class="item">
-        <div>
-          <div class="green number"></div>
-          <div class="text">방문예정시간</div>
-        </div>
-        <div class="icon">${pickDto.pickSchedule} > </div>
+        
+    
       </div>     
       
     </div>
