@@ -36,7 +36,7 @@
 		</h1>
 	</div>
 
-	<div class="container pick-container w-600 px-50 pt-10 my-50">
+	<div class="container apply-container w-600 px-50 pt-10 my-50">
 
 	<br>
 	<div class="cell">

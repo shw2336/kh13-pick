@@ -24,14 +24,14 @@
 </style>		
 <script type="text/javascript">
 function detail (no){
-		window.location.href = "waitDetail?applyNo=" + no;
+		window.location.href = "stateList?applyNo=" + no;
 	}
 	
 </script>
 
     <div class="cell flex-cell pb-10">
         <div class="cell">
-            <span style="font-size:25px; font-weight:bold;">신청내역 목록 리스트</span>
+            <span style="color: rgb(66,138,66);font-size:25px; font-weight:bold;">${applyDto.memberId}</span> 님 신청내역 목록 리스트
         </div>
     </div>
     
@@ -48,14 +48,14 @@ function detail (no){
         </thead>
     
         <tbody>
-            <c:forEach var="applyDto" items="${requestList}">
-                <tr onclick="detail('${requsetDetail.applyNo}');" class="contents-tr">
-                    <td>${applyDto.applyNo}</td>
-                    <td>${applyDto.applyAddress1}</td>
-                    <td>${applyDto.applyVinyl}</td>
-                    <td><fmt:formatDate value="${applyDto.applyDate}"
+            <c:forEach var="applyList" items="${applyList}">
+                <tr onclick="detail('${applyList.applyNo}');" class="contents-tr">
+                    <td>${applyList.applyNo}</td>
+                    <td>${applyList.applyAddress1}</td>
+                    <td>${applyList.applyVinyl}</td>
+                    <td><fmt:formatDate value="${applyList.applyDate}"
                     pattern="MM월 dd일" /></td>
-                    <td>${applyDto.applyHopeDate}</td>
+                    <td>${applyList.applyHopeDate}</td>
                 </tr>
             </c:forEach>
         </tbody>

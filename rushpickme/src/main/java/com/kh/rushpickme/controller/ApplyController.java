@@ -70,51 +70,54 @@ public class ApplyController {
 
 		return "redirect:/";
 	}
-	
+	//신청 목록 
+		@RequestMapping("/applyList")
+		public String applyList(Model model, String memberId,ApplyListVO applyListVO,ApplyDto applyDto) {
+			String loginId ="testuser1";
+			applyDto.setMemberId(loginId);
+			List<ApplyListVO> applyList = applyDao.applyList( loginId);
+			model.addAttribute("applyList",applyList);
+			return "/WEB-INF/views/apply/applyList.jsp";
+		}
+		
 	// 수거 현황 진행사항 페이지
 	@GetMapping("/stateList")
 	public String stateList() {
 		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
 	}
 	
-	@PostMapping("/stateList")
-	private String state(@ModelAttribute ApplyDto applyDto, HttpSession session, @ModelAttribute ApplyDao applyDao) {
-		String loginId = "testuser1";
-		applyDto.setMemberId(loginId);
-		int longinNo = applyDao.getSequence();
-		applyDto.setApplyNo(longinNo);
-		applyDao.stateList(longinNo, loginId, applyDto);
+//	@PostMapping("/stateList")
+//	private String state(@ModelAttribute ApplyDto applyDto, HttpSession session, @ModelAttribute ApplyDao applyDao) {
+//		String loginId = "testuser1";
+//		applyDto.setMemberId(loginId);
+//		int longinNo = applyDao.getSequence();
+//		applyDto.setApplyNo(longinNo);
+//		applyDao.stateList(longinNo, loginId, applyDto);
+//	return "redirect:/";
+//}
 	
-	return "redirect:/";
-}
-	
-	
-	//신청 목록 
-	@GetMapping("/requestList")
-	public String requestList(Model model, String memberId) {
-		List<ApplyDto> applyList = applyDao.requsetList();
-		//applyDao에서 requestList들을 부를게 
-		//부르는 형태는 List <applyDto>야 
+	//applyDao에서 requestList들을 부를게 
+	//부르는 형태는 List <applyDto>야 
 //		int number = 3;
 //		model.addAttribute("jsp에서부를이름",현재여기서 데이터 담아놓은 파라미터명);
-		model.addAttribute(applyList);
-		return "/WEB-INF/views/apply/requestList.jsp";
-	}
+	
 
 
 	
 	//신청 상세 조회 
-	@RequestMapping("/requestDetail")
+	@RequestMapping("/applyDetail")
     public String detail(@RequestParam int applyNo, Model model) {
         ApplyDto applyDto = applyDao.selectOne(applyNo);
         model.addAttribute("applyDto", applyDto);
-        return "/WEB-INF/views/apply/requestDetail.jsp";
+        return "/WEB-INF/views/apply/applyDetail.jsp";
     }
+	
+	
+	//신청 취소 
 	@GetMapping("cancel")
 	public String cancel() {
 		return "/WEB-INF/views/apply/cancel.jsp";
 	}
-	
 	@RequestMapping("/cancel")
 	public String cancel(@RequestParam int applyNo,HttpSession httpSession, ApplyDto applyDto) {
 			String loginId = "testuser1";

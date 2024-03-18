@@ -58,27 +58,35 @@ public class ApplyDao {
 		List<ApplyDto> list = jdbcTemplate.query(sql, applyMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	//수거 신청 목록 과 관련된 내용 
-	public List<ApplyDto> stateList(int applyNo, String MemeberId, ApplyDto appltDto) {
-		String sql="select * from apply where apply_no = ?";
-		return jdbcTemplate.query(sql, applyMapper);
+	
+	//수거 신청 목록 과 관련된 내용 requsetList (selectList)
+	public List<ApplyListVO> applyList( String memberId) {
+		String sql="select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply where member_id=? ";
+		Object[]data= {memberId};
+		List<ApplyListVO> applyList =jdbcTemplate.query(sql,applyListVOMapper,data);
+		return jdbcTemplate.query(sql, applyListVOMapper,data);
 		
 	}
 
-	//수거 신청 목록 과 관련된 내용 
-	public List<ApplyDto> requsetList() {
-		String sql="select * from apply ";
-		return jdbcTemplate.query(sql, applyMapper);
-		
+	//신청 상세내역 (requsetDetail)(selectOne)
+	public List<ApplyDto> requsetDetail(int applyNo) {
+		String sql="select * from apply where apply_no=?";
+		Object[] data = {applyNo};
+		return jdbcTemplate.query(sql, applyMapper,data);
 	}
+	
+	//수거 신청 상태 목록 과 관련된 내용 (stateList)
+	
+	
 	
 	
 	//수거 신청 (삭제, Delete)
 	public boolean cancel(int applyNo) {
-		String sql = "delete apply where apply_no = ?";
+		String sql = "update apply set apply_cancel = 'Y' where apply_no = ?";
 		Object[] data = {applyNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
 //		//멤버아이디로 신청 내역 뽑기
 //		public List<ApplyListVO> applyList(String memberId) {
 //			String sql ="SELECT member_id, apply_no, apply_address1, apply_vinyl,apply_date, apply_hope_date, pick_pay FROM ( SELECT apply.member_id, apply.apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, pick_pay from apply INNER JOIN pick ON apply.apply_no = pick.apply_no)where member_id =? ";

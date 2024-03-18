@@ -15,6 +15,15 @@
         }
 
    </style>
+   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript">
+	
+    	function cancel(num) {
+    	window.location.href = "applyDetail?applyNo=" + num;	
+		console.log(num);
+    	}
+    	
+	</script>
 <body>
    <input type="hidden" value="${applyNo}" name="applyNo" /> 
    <!-- 
@@ -22,16 +31,16 @@
     <input type="hidden" value ="${pickState}" name="pickState"/>
     <input type="hidden" value="${pickReject}" name="pickReject"/> --> 
     
-     <div class="container apply-container w-750 p-20 mt-50" id="apply-completed">
+     <div class="container apply-container w-750 p-20 " id="apply-completed">
         
         <div class="cell list-box">
             <div class="cell center">
-                <h2 style="text-align: center;">신청완료</h2>
+                <h2 style="text-align: center;">신청  완료</h2>
                 <div class="right">
-            <form action="requsetDetail" method="post" autocomplete="off" enctype="multipart/form-data">
+            <form action="applyDetail" method="post" autocomplete="off" enctype="multipart/form-data">
                 	<button type="submit" class="btn negative">
-                	<input type="hidden" value="Y" name="cancel">
-                    신청취소하기 
+                	<!--<input type="hidden" value="N" name="cancel">-->
+                    상세보기 및 취소
                 </button>
             </form>
         </div>
@@ -65,25 +74,25 @@
         <i class="fa-solid fa-chevron-down" style="font-size: 80px;color:rgb(66,138,66)"></i><br>
        </div>
     
-        <div class="container apply-container w-750 p-20  p-20 mt-50">
         <div class="cell list-box">
-            <div class="cell">
-                <h2 style="text-align: center;">수거완료</h2>
-                <hr>
+            <div class="cell center">
+                <h2 style="text-align: center;">수거  완료</h2>
                 <div class="right">
-                <form action="pay" method="post" autocomplete="off" enctype="multipart/form-data">
-                <button type="submit" class="btn">
-                	<input type="hidden" name="pay">
-                    결제하기 
+            <form action="#" method="post" autocomplete="off" enctype="multipart/form-data">
+                	<button type="submit" class="btn positive">
+                	<input type="hidden" value="수거 완료" name="pickPay">
+                    결제 내역 확인 
                 </button>
-                </form>
-                </div>
+            </form>
+        </div>
+                
             </div>
+                <hr>
             <div class="cell center">
                 <img class="dummy" src="/image/Picker2.png" style="width:350px; height:250px">
             </div>
         </div>
-    </div>
+ 
 
 
 

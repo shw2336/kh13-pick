@@ -3,22 +3,15 @@ package com.kh.rushpickme.vo;
 import java.util.Date;
 
 public class ApplyListVO {
-	private String memberId;
 	private int applyNo;
 	private String applyAddress1;
 	private int applyVinyl;
 	private Date applyDate;
 	private String applyHopeDate;
-	private int pickPay;
+	
 	
 	public ApplyListVO() {
 		super();
-	}
-	public String getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
 	}
 	public int getApplyNo() {
 		return applyNo;
@@ -50,11 +43,7 @@ public class ApplyListVO {
 	public void setApplyHopeDate(String applyHopeDate) {
 		this.applyHopeDate = applyHopeDate;
 	}
-	public int getPickPay() {
-		return pickPay;
-	}
-	public void setPickPay(int pickPay) {
-		this.pickPay = pickPay;
-	}
+	
+	
 	
 }
