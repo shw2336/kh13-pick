@@ -53,7 +53,7 @@ public class ApplyController {
 	public String request(@ModelAttribute ApplyDto applyDto, @RequestParam MultipartFile applyAttach,
 			HttpSession session) throws IllegalStateException, IOException {
 		// 1. 세션에 저장된 아이디를 꺼낸다
-		String loginId = "testuser3";
+		String loginId = "jihaehuh123";
 		// 로그인 아이디 뽑기
 		applyDto.setMemberId(loginId);
 
@@ -74,7 +74,7 @@ public class ApplyController {
 	//신청 목록 
 		@RequestMapping("/applyList")
 		public String applyList(Model model, String memberId,ApplyListVO applyListVO,ApplyDto applyDto) {
-			String loginId ="testuser3";
+			String loginId ="jihaehuh123";
 			applyDto.setMemberId(loginId);
 			List<ApplyListVO> applyList = applyDao.applyList( loginId);
 			model.addAttribute("applyList",applyList);
@@ -92,7 +92,7 @@ public class ApplyController {
 
 	
 	//신청 상세 조회 
-	@RequestMapping("/applyDetail")
+	@GetMapping("/applyDetail")
     public String applyDetail(@RequestParam int applyNo, Model model, ApplyDetailVO applyDetailVO) {
 		//리스트가 아니고 ApplyDetailVO로 담아야할듯 
 		//1명 정보 뽑는거니까 리스트 아님
@@ -106,20 +106,25 @@ public class ApplyController {
 //		int number = 3;
 //		model.addAttribute("jsp에서부를이름",현재여기서 데이터 담아놓은 파라미터명);
 	
-
+	@PostMapping("/applyDetail")
+	public String cancel(@RequestParam int applyNo) {
+		applyDao.cancel(applyNo);
+		return "/WEB-INF/views/apply/cancel.jsp";
+	}
 	
-	//신청 취소 
-	@GetMapping("/cancel")
-	public String cancel() {
-		return "/WEB-INF/views/apply/cancel.jsp";
-	}
+//	//신청 취소 
 	@RequestMapping("/cancel")
-	public String cancel(@RequestParam int applyNo,HttpSession httpSession, ApplyDto applyDto) {
-			String loginId = "testuser3";
-			applyDto.setMemberId(loginId);
-			applyDao.cancel(applyNo);
-		return "/WEB-INF/views/apply/cancel.jsp";
+	public String cancel() {
+		return "redirect:/";
 	}
+
+//	@RequestMapping("/cancel")
+//	public String cancel(@RequestParam int applyNo,HttpSession httpSession, ApplyDto applyDto) {
+//			String loginId = "jihaehuh123";
+//			applyDto.setMemberId(loginId);
+//			applyDao.cancel(applyNo);
+//		return "/WEB-INF/views/apply/cancel.jsp";
+//	}
 	
 	
 	

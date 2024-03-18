@@ -184,19 +184,23 @@
             
             <div class="cell w-500">
                 <h2> 배출 사진 첨부 파일 <i class="fa-regular fa-images"></i></h2>
-                <input name="applyAttach" type="file" class="tool w-500" required>
+                <input name="applyAttach" type="file" class="tool w-500" >
                 <button type="button" class="btn w-100">첨부</button>
             </div>
             
             
             <div class="cell w-500">
                 <h2>남기실 말 <i class="fa-solid fa-pen"></i></h2>
-                <input type="text" name="applySay" class="tool w-100" required>
+                <input type="text" name="applySay" class="tool w-100" >
             </div>
             
             <div class="cell w-500">
                 <h2>출입 방법  <i class="fa-solid fa-pen"></i></h2>
-                <input type="text" name="applyWay" class="tool w-100" placeholder="전화하기 또는 세대호출 입력" required>
+                <select name="applyWay" class="tool w-100"  oninput="applyWayData()">
+                    <option value="전화하기">전화하기</option>
+                    <option value="세대호출">세대호출</option>
+                    </select>
+                   
                 <br><br>
                 <button type="submit" class="btn w-100" > 수거 요청하기 </button>
             </div>
