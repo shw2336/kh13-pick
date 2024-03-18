@@ -39,7 +39,7 @@
             cursor: pointer; /* 홈으로 가는 버튼 커서 설정 */
         }
     .menu a {
-        color: green;
+        color: rgb(66,138,66);
         background-color: white;
         padding: 5px 10px;
         text-decoration: none;
