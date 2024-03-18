@@ -100,6 +100,8 @@ public class ApplyController {
 		model.addAttribute(applyList);
 		return "/WEB-INF/views/apply/requestList.jsp";
 	}
+
+
 	
 	//신청 상세 조회 
 	@RequestMapping("/requestDetail")
