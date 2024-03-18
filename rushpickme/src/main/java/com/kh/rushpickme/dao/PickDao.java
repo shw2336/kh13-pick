@@ -7,17 +7,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.rushpickme.dto.ApplyDto;
-import com.kh.rushpickme.dto.MemberPickDto;
 import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.mapper.ApplyMapper;
 import com.kh.rushpickme.mapper.MemberPickMapper;
 import com.kh.rushpickme.mapper.PickFinishVoMapper;
 import com.kh.rushpickme.mapper.PickMapper;
 import com.kh.rushpickme.mapper.PickProceedVoMapper;
+import com.kh.rushpickme.mapper.PickRejectVoMapper;
 import com.kh.rushpickme.mapper.PickWaitVoMapper;
 import com.kh.rushpickme.vo.PageVO;
 import com.kh.rushpickme.vo.PickFinishVo;
 import com.kh.rushpickme.vo.PickProceedVo;
+import com.kh.rushpickme.vo.PickRejectVo;
 import com.kh.rushpickme.vo.PickWaitVo;
 
 @Repository
@@ -43,6 +44,9 @@ public class PickDao {
 	
 	@Autowired
 	private ApplyMapper applyMapper;
+	
+	@Autowired
+	private PickRejectVoMapper pickRejectVoMapper;
 
 	//수거접수등록
 	public void insertOk (PickDto pickDto) {
@@ -132,20 +136,22 @@ public class PickDao {
 	}
 	
 	//수거 완료 리스트 전체 
-	public List<PickFinishVo> pickFinishListAll (PageVO pageVo) {
+	public List<PickFinishVo> pickFinishListByPaging (String memberId, PageVO pageVo) {
 		String sql = "select * from ("
 				+ "select rownum RN, T.* from ("
 				+ "select pick_no, apply_date, pick_finish_date, pick_pay from ("
 				+ "select pick_no, apply_date, pick_finish_date, pick_pay from pick "
 				+ "inner join apply on pick.apply_no = apply.apply_no where pick_state like '수거완료' "
-				+ "and pick_delete = 'N'"
+				+ "and pick_delete = 'N' "
+				+ "and apply.apply_area in (select member_pick_area from member_pick where member_pick.member_id like ?) "
 				+ "order by pick_finish_date desc)"
 				+ ")T "
 				+ ") where RN between ? and ?";
-		Object[] data = {pageVo.getBeginRow(), pageVo.getEndRow()};
+		Object[] data = {memberId, pageVo.getBeginRow(), pageVo.getEndRow()};
 		return jdbcTemplate.query(sql, pickFinishVoMapper, data);
 	}
 	
+	//수거 대기 리스트
 	public List<PickWaitVo> waitList () {
 		String sql = "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply where apply_state like '신청완료' order by apply_hope_date asc";
 		return jdbcTemplate.query(sql, pickWaitVoMapper);
@@ -162,7 +168,7 @@ public class PickDao {
 		return jdbcTemplate.query(sql, pickWaitVoMapper, data);
 	}
 	
-	// 신청자의 수거희망일이 지나버렸는지 확인하여 리스트추출 (time_passes 컬럼 추가해서 확인결과 받기)     
+	// 진행중 리스트, 신청자의 수거희망일이 지나버렸는지 확인하여 리스트추출 (time_passes 컬럼 추가해서 확인결과 받기)     
 	public List <PickProceedVo> proceedListByPaging (String memberId, PageVO pageVo) {
 		String sql = "select * from ("
 				+ "select rownum RN, T.* from ("
@@ -179,6 +185,20 @@ public class PickDao {
 				+ "where RN between ? and ?";
 		Object[] data = {memberId, pageVo.getBeginRow(), pageVo.getEndRow()};
 		return jdbcTemplate.query(sql, pickProceedVoMapper, data);
+	}
+	
+	//수거 거부 리스트
+	public List <PickRejectVo> rejectListByPaging (String memberId, PageVO pageVo) {
+		String sql = "select * from ("
+				+ "select rownum RN, T.* from ("
+				+ "select apply.apply_no, pick.pick_no, apply.member_id, apply.apply_date, pick.pick_reject from pick "
+				+ "join apply on pick.apply_no = apply.apply_no "
+				+ "where pick.pick_state like '수거거부' and apply.apply_state like '접수거부' "
+				+ "and apply.apply_area in (select member_pick_area from member_pick where member_pick.member_id like ?) "
+				+ "order by apply_date desc)T ) "
+				+ "where RN between ? and ?";
+		Object[] data = {memberId, pageVo.getBeginRow(), pageVo.getEndRow()};
+		return jdbcTemplate.query(sql, pickRejectVoMapper, data);
 	}
 
 	//전체 신청건수
@@ -216,9 +236,13 @@ public class PickDao {
 	}
 	
 	//수거 완료건수
-	public int countFinish () {
-		String sql = "select count(*) from pick where pick_state like '수거완료'";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	public int countFinish (String memberId) {
+		String sql = "SELECT count(*) FROM pick join apply on apply.apply_no = pick.apply_no "
+				+ "WHERE pick.pick_state LIKE '수거완료' "
+				+ "AND apply.apply_area IN ("
+				+ "SELECT MEMBER_PICK_AREA FROM member_pick WHERE member_pick.member_id LIKE ?)";
+		Object[] data = {memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
 	//수거자 근무지 조회

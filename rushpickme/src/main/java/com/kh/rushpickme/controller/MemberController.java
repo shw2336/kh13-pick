@@ -192,7 +192,7 @@ public class MemberController {
 	    model.addAttribute("memberPickDto", memberPickDto);
 	    model.addAttribute("countProcess",pickDao.countProceed(loginId));
 	    model.addAttribute("countReject", pickDao.countReject(loginId));
-	    model.addAttribute("countFinish", pickDao.countFinish());
+	    model.addAttribute("countFinish", pickDao.countFinish(loginId));
 	    model.addAttribute("pickDto", pickDto);
 	    model.addAttribute("applyDto", applyDto);
 
