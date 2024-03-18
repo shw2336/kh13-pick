@@ -38,6 +38,16 @@
      	height: 40px;
      }
 
+.fixed-height-td {
+    height: 60px; /* 고정하려는 높이 설정 */
+    width: 60px;
+}
+
+.fixed-height-td img {
+    max-width: 60px; /* 이미지의 최대 너비를 100%로 설정하여 부모 요소에 맞춥니다. */
+    max-height: 60px; /* 이미지의 높이를 자동으로 조절하여 비율을 유지합니다. */
+}
+
 </style>
 
 <script>
@@ -108,7 +118,7 @@
 								</div>
 							</div>
 						</td>
-						<td class="center ellipsis wid">
+						<td class="center ellipsis wid fixed-height-td">
 							<%-- 내용 출력 --%> <a class="link link-animation"
 							href="detail?reviewNo=${reviewDto.reviewNo}">
 								${reviewDto.reviewContent} </a>
