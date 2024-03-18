@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dto.MemberDto;
+import com.kh.rushpickme.service.EmailService;
 
 @CrossOrigin
 @RestController
@@ -36,6 +37,13 @@ public class MemberRestController {
 		return memberDto == null;
 	}
 	
+	@Autowired
+	private EmailService emailService;
 	
+	@RequestMapping("/sendFinishMail")
+	public void sendFinishMail (@RequestParam String memberEmail) {
+		//emailService를 이용해서 인증번호를 보내는 코드
+		emailService.sendFinishMail(memberEmail);
+	}
 
 }
