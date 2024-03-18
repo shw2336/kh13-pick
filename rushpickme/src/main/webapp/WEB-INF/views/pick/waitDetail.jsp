@@ -98,7 +98,7 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d667a3facb2ac08f0c7fe4e48bd917e9&lib
 </script>
 
 	<div class="cell center" >
-		<h1>
+		<h1> 
 			<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님의 신청 정보
 		</h1>
 	</div>

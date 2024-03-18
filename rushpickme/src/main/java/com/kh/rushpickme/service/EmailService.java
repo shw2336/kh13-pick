@@ -95,6 +95,25 @@ public class EmailService {
 		sender.send(message);
 	}
 	
+	//수거완료처리시 후기작성 요청 메일 전송
+	public void sendFinishMail(String email) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(email);
+		message.setSubject("[Rush Pick Me!] 수거 완료!");
+		message.setText("후기작성을 부탁 드려요!");
+		sender.send(message);
+//		
+//		MimeMessage message = mailSender.createMimeMessage();
+//		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+//		helper.setTo(email);
+//		helper.setSubject("[Rush Pick Me!] 수거 완료!");
+//
+//		String htmlContent = "<p>후기 작성을 부탁 드려요! 아래 링크를 클릭하여 후기를 작성해 주세요.</p>" +
+//		                     "<p><a href=\"http://example.com/write_review\">후기 작성하기</a></p>";
+//		helper.setText(htmlContent, true);
+//
+//		mailSender.send(message);
+	}
 	
 	
 }

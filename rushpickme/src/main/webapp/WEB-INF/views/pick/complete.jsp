@@ -44,11 +44,6 @@
             $(this).removeClass("success fail").addClass(state.pickPayValid ? "success" : "fail");
         });
         
-		$(".check-form").submit(function(){
-			$(this).find("[name]").blur();
-			return state.isOk();
-		});
-		
 		$("#uploadFile").change(function(event){
 			
 			if ($("#uploadFile").val().length == 0) {
@@ -74,6 +69,29 @@
 			}
 		});
 		
+		//수거완료시 후기작성 메일전송
+        $(".check-form").submit(function(){
+ 		   $(this).find("[name]").blur();
+		    if (!state.isOk()) {
+		        // 입력 값이 유효하지 않으면 폼 제출을 중단하고 함수를 종료합니다.
+		        event.preventDefault();
+		        return false;
+		    }else {
+		    	 //이메일 불러오기
+	            var inputEmail = $("[name=memberEmail]").val();
+	            if (inputEmail.length == 0) return;
+	            $.ajax({
+	                url: "http://localhost:8080/rest/member/sendFinishMail",
+	                method: "post",
+	                data: {memberEmail : inputEmail},
+	                success: function(response) {
+	                },
+	                error:function(){
+	                    alert("!시스템 오류! 잠시 후 이용 해 주세요.");
+	                }
+	            });
+		    }
+        });
     });
     
     
@@ -82,6 +100,7 @@
 <form action="complete" method="post" enctype="multipart/form-data" autocomplete="off" class="check-form">
 
 	<input type="hidden" value="${applyNo}" name="applyNo" /> 
+	<input type="hidden" value="${memberEmail}" name="memberEmail" />
 
 		<div class="cell center mt-50" >
 			<h2>
@@ -106,11 +125,9 @@
 		
 		<div class="cell">
 			<h2>수거 이미지</h2>
-			<input type="file" name="attach" class="image w-100">
+			<input type="file" name="attach"id="uploadFile" class="image w-100">
+			<div id="imgArea"></div>
 		</div>
-		
-		<input type="file" name="uploadFile" id="uploadFile">
-		<div id="imgArea"></div>
 		
 		<div class="cell flex-cell">
 			<div class="cell">
@@ -118,7 +135,8 @@
 				신청정보 다시보기</button>
 			</div>
 			<div class="cell width-fill right">
-				<button type="submit" class="btn w-75" style="border-radius: 10px;">등록하기</button>
+				<button type="submit" class="btn btn-send-finish w-75" style="border-radius: 10px;">
+				<i></i><span>등록하기</span></button>
 			</div>
 		</div>
 	</div>

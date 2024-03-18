@@ -91,7 +91,7 @@
 					return alert("이미지 파일만 등록 가능합니다."); 
 				}
 				$("#imgArea").html("");	//이미지파일이라면, 일단 이미지 미리보기 화면 초기화
-				var file = event.target.files;	//event에서 파일객체(files)를 찾고 
+				var file = event.target.files;	//파일 입력 요소에서 선택한 파일을 가져와서 변수 file에 저장
 
 				var image = new Image();	//이미지 객체 생성
 				var imageTempUrl = window.URL.createObjectURL(file[0]); //임시 이미지 URL생성 (현재 선택한파일)

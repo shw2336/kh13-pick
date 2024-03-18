@@ -13,13 +13,21 @@ public class PickDto {
 	private String pickState;
 	private String pickReject;
 	private Date pickFinishDate;
+	private String pickDelete;
 	
+	public String getPickDelete() {
+		return pickDelete;
+	}
+	public void setPickDelete(String pickDelete) {
+		this.pickDelete = pickDelete;
+	}
 	public Date getPickFinishDate() {
 		return pickFinishDate;
 	}
 	public void setPickFinishDate(Date pickFinishDate) {
 		this.pickFinishDate = pickFinishDate;
 	}
+
 	public PickDto() {
 		super();
 	}

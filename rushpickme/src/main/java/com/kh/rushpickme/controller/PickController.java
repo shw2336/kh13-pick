@@ -193,7 +193,7 @@ public class PickController {
 	}
 	
 	@RequestMapping ("/acceptFinish")
-	public String joinComplete () {
+	public String acceptFinish () {
 		return "/WEB-INF/views/pick/acceptFinish.jsp";
 	}
 	
@@ -242,6 +242,11 @@ public class PickController {
 		model.addAttribute("applyNo", applyNo);
 		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
 		model.addAttribute("findApplyDto", findApplyDto);
+		
+		String memberId = findApplyDto.getMemberId();
+		MemberDto findMemberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberEmail", findMemberDto.getMemberEmail());
+		//신청자의 email주소를 넘기기 (로그인아이디x)
 		
 		int pickNo = pickDao.selectPickNo(applyNo);
 		model.addAttribute("pickNo", pickNo);
