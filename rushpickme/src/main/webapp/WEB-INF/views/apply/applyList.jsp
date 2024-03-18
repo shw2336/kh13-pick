@@ -23,7 +23,7 @@
      }
 </style>		
 <script type="text/javascript">
-function detail (no){
+function state (no){
 		window.location.href = "stateList?applyNo=" + no;
 	}
 	
@@ -49,7 +49,7 @@ function detail (no){
     
         <tbody>
             <c:forEach var="applyList" items="${applyList}">
-                <tr onclick="detail('${applyList.applyNo}');" class="contents-tr">
+                <tr onclick="state('${applyList.applyNo}');" class="contents-tr">
                     <td>${applyList.applyNo}</td>
                     <td>${applyList.applyAddress1}</td>
                     <td>${applyList.applyVinyl}</td>

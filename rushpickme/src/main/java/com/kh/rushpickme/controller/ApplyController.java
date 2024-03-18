@@ -21,6 +21,7 @@ import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.service.AttachService;
+import com.kh.rushpickme.vo.ApplyDetailVO;
 import com.kh.rushpickme.vo.ApplyListVO;
 import com.kh.rushpickme.vo.PageVO;
 
@@ -52,7 +53,7 @@ public class ApplyController {
 	public String request(@ModelAttribute ApplyDto applyDto, @RequestParam MultipartFile applyAttach,
 			HttpSession session) throws IllegalStateException, IOException {
 		// 1. 세션에 저장된 아이디를 꺼낸다
-		String loginId = "testuser1";
+		String loginId = "testuser3";
 		// 로그인 아이디 뽑기
 		applyDto.setMemberId(loginId);
 
@@ -73,7 +74,7 @@ public class ApplyController {
 	//신청 목록 
 		@RequestMapping("/applyList")
 		public String applyList(Model model, String memberId,ApplyListVO applyListVO,ApplyDto applyDto) {
-			String loginId ="testuser1";
+			String loginId ="testuser3";
 			applyDto.setMemberId(loginId);
 			List<ApplyListVO> applyList = applyDao.applyList( loginId);
 			model.addAttribute("applyList",applyList);
@@ -81,10 +82,24 @@ public class ApplyController {
 		}
 		
 	// 수거 현황 진행사항 페이지
-	@GetMapping("/stateList")
-	public String stateList() {
+	@RequestMapping("/stateList")
+	public String stateList(@RequestParam int applyNo, Model model) {
+		model.addAttribute("applyNo",applyNo);
+//	      List<ApplyDetailVO>applyDetail = applyDao.applyDetail(applyNo);
+//	        model.addAttribute("applyDetail", applyDetail);
 		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
 	}
+
+	
+	//신청 상세 조회 
+	@RequestMapping("/applyDetail")
+    public String applyDetail(@RequestParam int applyNo, Model model, ApplyDetailVO applyDetailVO) {
+		//리스트가 아니고 ApplyDetailVO로 담아야할듯 
+		//1명 정보 뽑는거니까 리스트 아님
+		ApplyDetailVO applyDetail= applyDao.applyDetail(applyNo);
+        model.addAttribute("applyDetail", applyDetail);
+        return "/WEB-INF/views/apply/applyDetail.jsp";
+    }
 	
 //	@PostMapping("/stateList")
 //	private String state(@ModelAttribute ApplyDto applyDto, HttpSession session, @ModelAttribute ApplyDao applyDao) {
@@ -102,25 +117,15 @@ public class ApplyController {
 //		model.addAttribute("jsp에서부를이름",현재여기서 데이터 담아놓은 파라미터명);
 	
 
-
-	
-	//신청 상세 조회 
-	@RequestMapping("/applyDetail")
-    public String detail(@RequestParam int applyNo, Model model) {
-        ApplyDto applyDto = applyDao.selectOne(applyNo);
-        model.addAttribute("applyDto", applyDto);
-        return "/WEB-INF/views/apply/applyDetail.jsp";
-    }
-	
 	
 	//신청 취소 
-	@GetMapping("cancel")
+	@GetMapping("/cancel")
 	public String cancel() {
 		return "/WEB-INF/views/apply/cancel.jsp";
 	}
 	@RequestMapping("/cancel")
 	public String cancel(@RequestParam int applyNo,HttpSession httpSession, ApplyDto applyDto) {
-			String loginId = "testuser1";
+			String loginId = "testuser3";
 			applyDto.setMemberId(loginId);
 			applyDao.cancel(applyNo);
 		return "/WEB-INF/views/apply/cancel.jsp";

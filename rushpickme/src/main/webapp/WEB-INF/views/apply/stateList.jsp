@@ -18,7 +18,7 @@
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 	
-    	function cancel(num) {
+    	function detail(num) {
     	window.location.href = "applyDetail?applyNo=" + num;	
 		console.log(num);
     	}
@@ -37,12 +37,10 @@
             <div class="cell center">
                 <h2 style="text-align: center;">신청  완료</h2>
                 <div class="right">
-            <form action="applyDetail" method="post" autocomplete="off" enctype="multipart/form-data">
-                	<button type="submit" class="btn negative">
+                	<button type="submit" class="btn negative"onclick="detail('${applyNo}');" >
                 	<!--<input type="hidden" value="N" name="cancel">-->
-                    상세보기 및 취소
+                    상세보기
                 </button>
-            </form>
         </div>
 
                 <hr>
@@ -74,16 +72,17 @@
         <i class="fa-solid fa-chevron-down" style="font-size: 80px;color:rgb(66,138,66)"></i><br>
        </div>
     
+     <div class="container apply-container w-750 p-20 mt-50">
         <div class="cell list-box">
             <div class="cell center">
                 <h2 style="text-align: center;">수거  완료</h2>
                 <div class="right">
             <form action="#" method="post" autocomplete="off" enctype="multipart/form-data">
                 	<button type="submit" class="btn positive">
-                	<input type="hidden" value="수거 완료" name="pickPay">
+                	<input type="hidden" value="수거 완료" name="pickPay"/>
                     결제 내역 확인 
                 </button>
-            </form>
+                </form>
         </div>
                 
             </div>
@@ -91,6 +90,7 @@
             <div class="cell center">
                 <img class="dummy" src="/image/Picker2.png" style="width:350px; height:250px">
             </div>
+        </div>
         </div>
  
 

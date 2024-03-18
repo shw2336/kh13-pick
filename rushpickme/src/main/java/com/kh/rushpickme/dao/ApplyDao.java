@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.rushpickme.dto.ApplyDto;
+import com.kh.rushpickme.mapper.ApplyDetailVOMapper;
 import com.kh.rushpickme.mapper.ApplyListVOMapper;
 import com.kh.rushpickme.mapper.ApplyMapper;
+import com.kh.rushpickme.vo.ApplyDetailVO;
 import com.kh.rushpickme.vo.ApplyListVO;
 import com.kh.rushpickme.vo.PageVO;
 
@@ -26,6 +28,9 @@ public class ApplyDao {
 	
 	@Autowired
 	private ApplyListVOMapper applyListVOMapper;
+	
+	@Autowired
+	private ApplyDetailVOMapper applyDetailVOMapper;
 	
 
 	//수거 신청 등록
@@ -68,14 +73,20 @@ public class ApplyDao {
 		
 	}
 
-	//신청 상세내역 (requsetDetail)(selectOne)
-	public List<ApplyDto> requsetDetail(int applyNo) {
-		String sql="select * from apply where apply_no=?";
-		Object[] data = {applyNo};
-		return jdbcTemplate.query(sql, applyMapper,data);
-	}
-	
+//	//신청 상세내역 (requsetDetail)(selectOne)
+//	public List<ApplyDto> applyDetail(int applyNo) {
+//		String sql="select * from apply where apply_no=?";
+//		Object[] data = {applyNo};
+//		return jdbcTemplate.query(sql, applyMapper,data);
+//	}
+//	
 	//수거 신청 상태 목록 과 관련된 내용 (stateList)
+	public ApplyDetailVO applyDetail(int applyNo) {
+		String  sql="select apply_post, apply_address1, apply_address2, apply_weight, apply_vinyl, apply_hope_date , apply_say, apply_way from apply where apply_no= ? ";
+		Object[]data = {applyNo};
+		List<ApplyDetailVO> applyDetail = jdbcTemplate.query(sql, applyDetailVOMapper, data);
+		return applyDetail.isEmpty() ? null :applyDetail.get(0); //내가 뽑을 정보는 리스트가 아니라 한줄이라서 -한줄이라는것을 알려주는 코드
+	}
 	
 	
 	
