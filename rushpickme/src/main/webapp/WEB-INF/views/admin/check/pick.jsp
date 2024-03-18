@@ -4,12 +4,32 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
-    .pick-container {
+    .container {
         border-radius: 10px;
         border: 1px solid gainsboro;
         box-shadow: 0px 4px 4px 2px gainsboro;
+        margin: 0 auto;
+        text-align: center;
+        width: 80%; /* 수정 가능한 부분: 컨테이너 너비 조정 */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
     }
 </style>
+<div class="center">
+<h2>수거 관리</h2></div>
 
 <div class="cell container w-800 center">
     <table>
