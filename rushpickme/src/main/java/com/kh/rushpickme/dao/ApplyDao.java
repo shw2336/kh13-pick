@@ -88,18 +88,11 @@ public class ApplyDao {
 		return applyDetail.isEmpty() ? null :applyDetail.get(0); //내가 뽑을 정보는 리스트가 아니라 한줄이라서 -한줄이라는것을 알려주는 코드
 	}
 	
-	
-	
-	
 	//수거 신청 (삭제, Delete)
 	public boolean cancel(int applyNo) {
 		String sql = "update apply set apply_cancel = 'Y' where apply_no = ?";
 		Object[] data = {applyNo};
 		return jdbcTemplate.update(sql, data) > 0;
-	}
-	public Object requsetList() {
-		
-		return null;
 	}
 	
 //		//멤버아이디로 신청 내역 뽑기

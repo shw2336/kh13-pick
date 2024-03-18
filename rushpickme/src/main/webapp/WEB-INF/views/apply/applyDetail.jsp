@@ -23,10 +23,6 @@
    	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 	
-    	function cancel(num) {
-    	window.location.href = "cancel?applyNo=" + num;	
-		console.log(num);
-    	}
     	
 	</script>
 <body>
@@ -74,7 +70,9 @@
 	<br>
 	<br>
 	<div class="cell right">
-		<button class="btn negative" onclick="cancel('${applyDto.applyNo}')">취소하기</button>
+	<form action="cancel" method="post" >
+		<button class="btn negative" >취소하기</button>
+		</form>
 	</div>
 
 </div>
