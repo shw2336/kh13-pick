@@ -10,8 +10,10 @@ import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.dto.MemberGreenDto;
 import com.kh.rushpickme.dto.MemberPickDto;
 import com.kh.rushpickme.mapper.MemberGreenMapper;
+import com.kh.rushpickme.mapper.MemberListMapper;
 import com.kh.rushpickme.mapper.MemberMapper;
 import com.kh.rushpickme.mapper.MemberPickMapper;
+import com.kh.rushpickme.vo.PageVO;
 
 @Repository
 public class MemberDao {
@@ -23,6 +25,9 @@ public class MemberDao {
 	private MemberGreenMapper greenMapper;
 	@Autowired
 	private MemberPickMapper pickMapper;
+	
+	@Autowired
+	private MemberListMapper memberListMapper;
 	
 	@Autowired
 	private BuyDao buyDao;
@@ -211,5 +216,62 @@ public class MemberDao {
 							+ "where member_id = ?";
 			Object[] data = {point, memberId};
 			return jdbcTemplate.update(sql, data) > 0;
+		}
+		
+		//통합+페이징
+		public List<MemberDto> selectListByPaging(PageVO pageVO) {
+			if(pageVO.isSearch()) {
+				String sql = "select * from ("
+						+ "select rownum rn, TMP.* from("
+						+ "select "
+						+ "member_id, member_pw, member_nick, member_contact, "
+						+ "member_name, member_type, member_email, member_birth "
+						+ "from member "
+						+ "where instr("+pageVO.getColumn()+", ?) > 0 "
+								+ ")TMP"
+								+ ") where rn between ? and ?";
+				Object[] data = {
+						pageVO.getKeyword(),
+						pageVO.getBeginRow(),
+						pageVO.getEndRow()
+				};
+				return jdbcTemplate.query(sql, memberListMapper, data);
+			}
+			else {
+				String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+						+ "select "
+						+ "member_id, member_pw, member_nick, member_contact, "
+						+ "member_name, member_type, member_email, member_birth "
+						+ "from member "
+						+ ")TMP"
+						+ ") where rn between ? and ?";
+				Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+				return jdbcTemplate.query(sql, memberListMapper, data);
+			}
+		}
+		
+		//카운팅
+		public int count() {
+			String sql = "select count(*) from member";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+		public int count(String column, String keyword) {
+			String sql = "select count(*) from member "
+					+ "where instr("+column+", ?) > 0";
+			Object[] data = {keyword};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		public int count(PageVO pageVO) {
+			if(pageVO.isSearch()) {
+				String sql = "select count(*) from member "
+						+ "where instr("+pageVO.getColumn()+", ?) > 0";
+				Object[] data = {pageVO.getKeyword()};
+				return jdbcTemplate.queryForObject(sql, int.class, data);
+			}
+			else {
+				String sql = "select count(*) from member";
+				return jdbcTemplate.queryForObject(sql, int.class);
+			}
 		}
 }

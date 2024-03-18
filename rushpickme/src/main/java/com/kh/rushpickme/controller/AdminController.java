@@ -16,11 +16,8 @@ import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.BuyDao;
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dao.PickDao;
-import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.dto.MemberDto;
-import com.kh.rushpickme.dto.PickDto;
-
-import jakarta.servlet.http.HttpSession;
+import com.kh.rushpickme.vo.PageVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -40,6 +37,22 @@ public class AdminController {
 	
 	@Autowired
 	private PickDao pickDao;
+	
+//	@RequestMapping("/list")
+//	public String list(
+//			@ModelAttribute PageVO pageVO,
+//			Model model) {
+//				int count = memberDao.count(pageVO);
+//				pageVO.setCount(count);
+//				model.addAttribute("pageVO", pageVO);
+//				
+//				List<MemberDto> list = memberDao.selectListByPaging(pageVO);
+//				model.addAttribute("list", list);
+//				
+//				 return "/WEB-INF/views/admin/list/apply.jsp";
+//		
+//	}
+//	
 	
 	
 	@RequestMapping("/check/apply")

@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 <style>
     .container {
         border-radius: 10px;
@@ -28,10 +29,12 @@
         background-color: #f2f2f2;
     }
 </style>
-<div class="center">
-<h2>수거 관리</h2></div>
 
-<div class="cell container w-800 center">
+<div class="center">
+    <h2>수거 관리</h2>
+</div>
+
+<div class="cell container">
     <table>
         <thead>
             <tr>
@@ -62,8 +65,11 @@
             </c:forEach>
         </tbody>
     </table>
+</div>
 
-
+<div class="cell">
+    <%-- 네비게이터 --%>
+    <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
