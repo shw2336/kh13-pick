@@ -294,8 +294,14 @@ public class PickDao {
 		Object[] data = {pickNo, attachNo};
 		jdbcTemplate.update(sql, data);
 	}
+
+	//모든 수거건을 조회
+	public List<PickDto> getPickList(){
+	    String sql = "select * from pick ";
+		return jdbcTemplate.query(sql, pickMapper);
+	}
+	}
 	
-}
 
 
 
