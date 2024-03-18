@@ -35,13 +35,18 @@
         }
         /* Swiper 스타일 추가 */
         .swiper-container {
-            width: 80%;
-            margin: auto;
+            width: 75%;
             position: relative; 
+            overflow: hidden;
         }
         .swiper-slide img {
             max-width: 100%; 
             max-height: 100%; 
+        }
+            .swiper-container {
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
     </style>
 </head>
@@ -109,4 +114,3 @@ $(function(){
 </script>
 </body>
 </html>
-s
