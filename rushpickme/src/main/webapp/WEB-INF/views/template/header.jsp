@@ -108,6 +108,8 @@
 						<ul class="sub-menu">
                                         <li><a href="/admin/member/search">회원관리</a></li>
                                         <li><a href="/admin/point/add">포인트관리</a></li>
+                                          <li><a href="/admin/check/apply">수거관리</a></li>
+                                          <li><a href="/admin/check/pick">신청관리</a></li>
                                     </ul>
                                     <li><a href="/member/logout">로그아웃</a></li>
 				</c:if>

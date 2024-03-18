@@ -54,10 +54,7 @@ public class PointController {
         buyDto.setPointName(pointDto.getPointName());//상품명 복사
         greenDto.setMemberGreenPoint(pointDto.getPointSell() * buyDto.getBuyQty());//금액x수량
         
-        
-        // green 회원의 포인트 증가 및 구매 내역 저장
-        int greenItem = pointDto.getPointCharge() * buyDto.getBuyQty();
-        memberDao.plusMemberPoint(loginId, greenItem);
+
 
         return "redirect:chargeFinish";
     }

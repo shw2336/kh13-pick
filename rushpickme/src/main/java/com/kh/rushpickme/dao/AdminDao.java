@@ -16,19 +16,22 @@ public class AdminDao {
     private JdbcTemplate jdbcTemplate;
     
     @Autowired
-    private MemberMapper mapper;
+    private MemberMapper memberMapper;
     
     // 피커 회원 목록 조회
     public List<MemberDto> getPickerList() {
         String sql = "select * from member where member_type = '피커'";
-        return jdbcTemplate.query(sql, mapper);
+        return jdbcTemplate.query(sql, memberMapper);
     }
 
     // 회원 상세 정보 조회
     public MemberDto selectOne(String memberId) {
         String sql = "select * from member where member_id = ?";
         Object[] data = {memberId};
-        List<MemberDto> list = jdbcTemplate.query(sql, mapper, data);
+        List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
         return list.isEmpty() ? null : list.get(0);
     }
+    
+   
+    
 }

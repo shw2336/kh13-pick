@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.rushpickme.dao.AdminDao;
+import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.BuyDao;
 import com.kh.rushpickme.dao.MemberDao;
+import com.kh.rushpickme.dao.PickDao;
+import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.dto.MemberDto;
+import com.kh.rushpickme.dto.PickDto;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -31,6 +35,28 @@ public class AdminController {
 	@Autowired
 	private AdminDao adminDao;
 	
+	@Autowired
+	private ApplyDao applyDao;
+	
+	@Autowired
+	private PickDao pickDao;
+	
+	
+	@RequestMapping("/check/apply")
+	public String checkApply(Model model) {
+		//String loginId = (String) session.getAttribute("loginId");
+		//List<ApplyDto> applyList = applyDao.requsetList();
+		model.addAttribute("list", applyDao.requsetList());
+		return "/WEB-INF/views/admin/check/apply.jsp";
+	}
+	
+	@RequestMapping("/check/pick")
+	public String checkPick(Model model) {
+		model.addAttribute("list", pickDao.getPickList());
+		return "/WEB-INF/views/admin/check/pick.jsp";
+	}
+	
+
 	
 	@RequestMapping("/member/search")
 	public String memberSearch(
@@ -79,6 +105,4 @@ public class AdminController {
 		memberDao.updateMemberByAdmin(memberDto);
 		return "redirect:detail?memberId="+memberDto.getMemberId();
 	}
-	
-
 }
