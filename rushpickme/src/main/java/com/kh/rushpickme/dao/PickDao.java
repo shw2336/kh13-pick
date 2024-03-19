@@ -366,6 +366,12 @@ public class PickDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
+	
+	public int selectOne(int pickNo ) {
+		String sql="select * from pick where pick_no = ?";
+		Object[]data= {pickNo};
+		return jdbcTemplate.queryForObject(sql, int.class,data);
+	}
 	}
 	
 

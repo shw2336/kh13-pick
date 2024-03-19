@@ -30,6 +30,10 @@
     	window.location.href = "applyDetail?applyNo=" + num;	
 		console.log(num);
     	}
+    	function finish(num) {
+        	window.location.href = "finish?applyNo=" + num;	
+    		console.log(num);
+        	}
     	
     	
     	
@@ -93,9 +97,10 @@
                 <h2 style="text-align: center;">수거  완료</h2>
                 	<input type="hidden" value="${applyDto.applyState}" name="finish">
                 <div class="right">
-            <form action="#" method="post" autocomplete="off" enctype="multipart/form-data">
-                	<button type="submit" class="btn positive">
+            <form action="finish" method="post" autocomplete="off" enctype="multipart/form-data">
+                	
                 	<input type="hidden" value="수거 완료" name="pickPay"/>
+                	<button type="submit" class="btn positive"onclick="finish'${applyNo}');" >
                     결제 내역 확인  
                 </button>
                 </form>
