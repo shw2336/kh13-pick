@@ -91,6 +91,7 @@
                
                <c:if test="${sessionScope.loginLevel == '그린'}">
                <li><a href="/apply/request">수거서비스</a></li>
+               <li><a href="/apply/applyList">신청 목록</a></li>
                </c:if>
                 
                 <li class="board-menu"><a href="#">게시판</a>
