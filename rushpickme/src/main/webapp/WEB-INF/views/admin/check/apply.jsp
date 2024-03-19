@@ -76,6 +76,10 @@
         </tbody>
     </table>
 </div>
+<div class="cell">
+		<%-- 네비게이터 --%>
+		<jsp:include page="/WEB-INF/views/template/applyPageNavigator.jsp"></jsp:include>
+	</div>
 
 
 

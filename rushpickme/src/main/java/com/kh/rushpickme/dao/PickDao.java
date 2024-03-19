@@ -310,8 +310,8 @@ public class PickDao {
 		return jdbcTemplate.query(sql, pickMapper);
 	}
 	
-//	//통합+페이징
-//	public List<PickDto> selectListByPaging(PageVO pageVO) {
+	//통합+페이징
+	public List<PickDto> selectListByPaging(PageVO pageVO) {
 //		if(pageVO.isSearch()) {
 //			String sql = "select * from ("
 //					+ "select rownum rn, TMP.* from ("
@@ -330,42 +330,42 @@ public class PickDao {
 //			return jdbcTemplate.query(sql, pickMapper, data);
 //		}
 //		else {
-//			String sql = "select * from ("
-//					+ "select rownum rn, TMP.* from ("
-//					+ "select "
-//					+ "pick_no, apply_no, member_id, pick_weight, pick_pay, "
-//					+ "pick_schedule, pick_state, pick_reject, pick_delete, pick_finish_date "
-//					+ "from pick "
-//					+ ")TMP"
-//					+ ") where rn between ? and ?";
-//			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
-//			return jdbcTemplate.query(sql, pickListMapper, data);
-//		}
-//	}
-//	
-//	//카운트
-//	public int count() {
-//		String sql = "select count(*) from pick";
-//		return jdbcTemplate.queryForObject(sql, int.class);
-//	}
-//	public int count(String column, String keyword) {
-//		String sql = "select count(*) from pick "
-//				+ "where instr("+column+", ?) > 0";
-//		Object[] data = {keyword};
-//		return jdbcTemplate.queryForObject(sql, int.class, data);
-//	}
-//	public int count(PageVO pageVO) {
-//		if(pageVO.isSearch()) {
-//			String sql = "select coint(*) form pick "
-//					+ "where instr("+pageVO.getColumn()+",? ) > 0";
-//			Object[] data = {pageVO.getKeyword()};
-//			return jdbcTemplate.queryForObject(sql, int.class, data);
-//		}
-//		else {
-//			String sql = "select count(*) from pick";
-//			return jdbcTemplate.queryForObject(sql, int.class);
-//		}
-	//}
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select "
+					+ "pick_no, apply_no, member_id, pick_weight, pick_pay, "
+					+ "pick_schedule, pick_state, pick_reject, pick_delete, pick_finish_date "
+					+ "from pick "
+					+ ")TMP"
+					+ ") where rn between ? and ?";
+			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, pickListMapper, data);
+		//}
+	}
+	
+	//카운트
+	public int count() {
+		String sql = "select count(*) from pick";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	public int count(String column, String keyword) {
+		String sql = "select count(*) from pick "
+				+ "where instr("+column+", ?) > 0";
+		Object[] data = {keyword};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	public int count(PageVO pageVO) {
+		if(pageVO.isSearch()) {
+			String sql = "select coint(*) form pick "
+					+ "where instr("+pageVO.getColumn()+",? ) > 0";
+			Object[] data = {pageVO.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {
+			String sql = "select count(*) from pick";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
 	}
 	
 
