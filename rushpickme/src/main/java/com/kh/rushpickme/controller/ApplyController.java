@@ -20,7 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.AttachDao;
+import com.kh.rushpickme.dao.PickDao;
 import com.kh.rushpickme.dto.ApplyDto;
+import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.service.AttachService;
 import com.kh.rushpickme.vo.ApplyDetailVO;
 import com.kh.rushpickme.vo.ApplyListVO;
@@ -41,6 +43,9 @@ public class ApplyController {
 
 	@Autowired
 	private AttachDao attachDao;
+	
+	@Autowired
+	private PickDao pickDao;
 			
 	
 
@@ -128,6 +133,25 @@ public class ApplyController {
 		ApplyDetailVO applyDetail= applyDao.applyDetail(applyNo);
 		applyDao.cancel(applyNo);
 		return "/WEB-INF/views/apply/cancel.jsp";
+	}
+	//결제 내역
+	@RequestMapping("/finish")
+	public String finish(@RequestParam int applyNo, @ ModelAttribute ApplyDto applyDto,
+								@RequestParam int pickNo, HttpSession session, Model model) {
+		String loginId=(String) session.getAttribute("loginId");
+		applyDto.setMemberId(loginId);
+		
+		int pickDto =pickDao.applyAttachNo(pickNo);
+		ApplyDto findDto = applyDao.selectOne(applyNo);
+		
+		
+		
+		model.addAttribute("pickDto",pickDto);
+		model.addAttribute("applyDto", findDto);
+		
+		
+		
+		return "/WEB-INF/views/apply/finish.jsp";
 	}
 	
 
