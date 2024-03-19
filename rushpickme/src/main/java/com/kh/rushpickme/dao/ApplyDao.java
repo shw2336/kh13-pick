@@ -59,7 +59,17 @@ public class ApplyDao {
 		String sql = "select apply_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
-	//조회
+	//전체 조회
+	public List<ApplyDto> selectAll () {
+		String sql="select * from apply ";
+		return jdbcTemplate.query(sql, applyMapper);
+	}
+	//신청 목록 ( 서영언니가 만든 전체 조회 코드 )
+		public List<ApplyDto> requestList() {
+			String sql = "select * from apply ";
+			return jdbcTemplate.query(sql, applyMapper);
+		}
+	//번호 하나 조회
 	public ApplyDto selectOne(int applyNo) {
 		String sql = "select * from apply where apply_no = ?";
 		Object[] data = {applyNo};
@@ -67,14 +77,41 @@ public class ApplyDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	//수거 신청 목록 과 관련된 내용 requsetList (selectList)
+	//수거 신청 목록 과 관련된 내용 ApplyList
 	public List<ApplyListVO> applyList( String memberId) {
-		String sql="select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply where member_id=? ";
+		String sql="select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, apply_cancel from apply where member_id=? ";
 		Object[]data= {memberId};
 		List<ApplyListVO> applyList =jdbcTemplate.query(sql,applyListVOMapper,data);
 		return jdbcTemplate.query(sql, applyListVOMapper,data);
 		
 	}
+	//수거 신청 상태 목록 과 관련된 내용 (stateList)
+		public ApplyDetailVO applyDetail(int applyNo) {
+			String  sql="select apply_post, apply_address1, apply_address2, apply_weight, apply_vinyl, apply_hope_date , apply_say, apply_way from apply where apply_no= ? ";
+			Object[]data = {applyNo};
+			List<ApplyDetailVO> applyDetail = jdbcTemplate.query(sql, applyDetailVOMapper, data);
+			return applyDetail.isEmpty() ? null :applyDetail.get(0); //내가 뽑을 정보는 리스트가 아니라 한줄이라서 -한줄이라는것을 알려주는 코드
+		}
+	//수거 신청 (삭제, Delete)
+	public boolean cancel(int applyNo) {
+		String sql = "update apply set apply_cancel = 'Y' where apply_no = ?";
+		Object[] data = {applyNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//신청 취소는 아예 목록에서 빼기
+		public boolean deleteList(int applyNo) {
+			String sql ="delete apply where apply_no = ?";
+			Object[]data = {applyNo};
+			return jdbcTemplate.update(sql,data)>0;
+		}
+		
+		public int state(int applyNo) {
+			String sql = "SELECT apply_state FROM apply WHERE apply_no = ?";
+			Object [] data = {applyNo};
+			return jdbcTemplate.queryForObject(sql, int.class,data);
+			
+		}
 	
 	
 	// 통합+페이징
@@ -145,24 +182,9 @@ public class ApplyDao {
 //		return jdbcTemplate.query(sql, applyMapper,data);
 //	}
 //	
-	//수거 신청 상태 목록 과 관련된 내용 (stateList)
-	public ApplyDetailVO applyDetail(int applyNo) {
-		String  sql="select apply_post, apply_address1, apply_address2, apply_weight, apply_vinyl, apply_hope_date , apply_say, apply_way from apply where apply_no= ? ";
-		Object[]data = {applyNo};
-		List<ApplyDetailVO> applyDetail = jdbcTemplate.query(sql, applyDetailVOMapper, data);
-		return applyDetail.isEmpty() ? null :applyDetail.get(0); //내가 뽑을 정보는 리스트가 아니라 한줄이라서 -한줄이라는것을 알려주는 코드
-	}
+
 	
-	//수거 신청 (삭제, Delete)
-	public boolean cancel(int applyNo) {
-		String sql = "update apply set apply_cancel = 'Y' where apply_no = ?";
-		Object[] data = {applyNo};
-		return jdbcTemplate.update(sql, data) > 0;
-	}
-	public List<ApplyDto> requestList() {
-		String sql = "select * from apply ";
-		return jdbcTemplate.query(sql, applyMapper);
-	}
+
 
 
 

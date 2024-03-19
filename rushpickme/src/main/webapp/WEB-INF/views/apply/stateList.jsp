@@ -9,10 +9,18 @@
         .apply-container {
             border-radius: 30px;
             border: 2px solid gainsboro;
-            box-shadow: 0px 4px 4px 2px gainsboro;
+           box-shadow: 0px 4px 4px 2px gainsboro;
             padding: 50px;
 
         }
+        .success-container {
+            border-radius: 30px;
+            border: 5px solid rgb(255, 128, 128);
+            box-shadow: 0px 4px 4px 2px rgb(255, 128, 128);
+            padding: 50px;
+        }
+        
+        
 
    </style>
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -22,6 +30,9 @@
     	window.location.href = "applyDetail?applyNo=" + num;	
 		console.log(num);
     	}
+    	
+    	
+    	
     	
 	</script>
 <body>
@@ -36,10 +47,11 @@
         <div class="cell list-box">
             <div class="cell center">
                 <h2 style="text-align: center;">신청  완료</h2>
+                <input type="hidden" value="${applyDto.applyState}" name="confirm">
                 <div class="right">
                 	<button type="submit" class="btn negative"onclick="detail('${applyNo}');" >
-                	<!--<input type="hidden" value="N" name="cancel">-->
-                    상세보기
+                	<!--<input type="hidden" value="${applyDto.applyState}" name="confirm">  -->
+                    상세보기 
                 </button>
         </div>
 
@@ -51,6 +63,8 @@
         </div>
     </div>
     
+    
+    
 	
 	<div class="cell center">
         <i class="fa-solid fa-chevron-down" style="font-size: 80px;color:rgb(66,138,66)"></i><br>
@@ -60,6 +74,7 @@
         <div class="cell list-box">
             <div class="cell">
                 <h2 style="text-align: center;">진행중</h2>
+                	<input type="hidden" value="${applyDto.applyState}" name="proceed">
                 <hr>
             </div>
             <div class="cell center">
@@ -76,11 +91,12 @@
         <div class="cell list-box">
             <div class="cell center">
                 <h2 style="text-align: center;">수거  완료</h2>
+                	<input type="hidden" value="${applyDto.applyState}" name="finish">
                 <div class="right">
             <form action="#" method="post" autocomplete="off" enctype="multipart/form-data">
                 	<button type="submit" class="btn positive">
                 	<input type="hidden" value="수거 완료" name="pickPay"/>
-                    결제 내역 확인 
+                    결제 내역 확인  
                 </button>
                 </form>
         </div>
@@ -92,6 +108,9 @@
             </div>
         </div>
         </div>
+        
+    
+       
  
 
 

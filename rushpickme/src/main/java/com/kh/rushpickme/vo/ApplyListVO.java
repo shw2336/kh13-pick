@@ -8,6 +8,7 @@ public class ApplyListVO {
 	private int applyVinyl;
 	private Date applyDate;
 	private String applyHopeDate;
+	private String applyCancel;
 	
 	
 	public ApplyListVO() {
@@ -43,6 +44,13 @@ public class ApplyListVO {
 	public void setApplyHopeDate(String applyHopeDate) {
 		this.applyHopeDate = applyHopeDate;
 	}
+	public String getApplyCancel() {
+		return applyCancel;
+	}
+	public void setApplyCancel(String applyCancel) {
+		this.applyCancel = applyCancel;
+	}
+	
 	
 	
 	

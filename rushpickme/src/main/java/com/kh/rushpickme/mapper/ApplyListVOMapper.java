@@ -19,6 +19,7 @@ public class ApplyListVOMapper implements RowMapper<ApplyListVO> {
 		applyListVO.setApplyVinyl(rs.getInt("apply_vinyl"));
 		applyListVO.setApplyDate(rs.getDate("apply_date"));
 		applyListVO.setApplyHopeDate(rs.getString("apply_hope_Date"));
+		applyListVO.setApplyCancel(rs.getString("apply_cancel"));
 		
 		return applyListVO;
 	}
