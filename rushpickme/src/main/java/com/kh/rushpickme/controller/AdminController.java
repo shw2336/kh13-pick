@@ -16,7 +16,9 @@ import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.BuyDao;
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dao.PickDao;
+import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.dto.MemberDto;
+import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.vo.PageVO;
 
 @Controller
@@ -56,16 +58,29 @@ public class AdminController {
 	
 	
 	@RequestMapping("/check/apply")
-	public String checkApply(Model model) {
-		//String loginId = (String) session.getAttribute("loginId");
-		//List<ApplyDto> applyList = applyDao.requsetList();
-		model.addAttribute("list", applyDao.requestList());
-		return "/WEB-INF/views/admin/check/apply.jsp";
+	public String checkApply(
+			@ModelAttribute PageVO pageVO,
+			Model model) {
+		int count = applyDao.count(pageVO);
+		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
+		
+		List<ApplyDto> list = applyDao.selectListByPaging(pageVO);
+		model.addAttribute("list", list);
+			
+	    return "/WEB-INF/views/admin/check/apply.jsp";
 	}
 	
 	@RequestMapping("/check/pick")
-	public String checkPick(Model model) {
-		model.addAttribute("list", pickDao.getPickList());
+	public String checkPick(
+			@ModelAttribute PageVO pageVO,
+			Model model) {
+		int count = pickDao.count(pageVO);
+		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
+		List<PickDto> list = pickDao.selectListByPaging(pageVO);
+		model.addAttribute("list", list);
+		
 		return "/WEB-INF/views/admin/check/pick.jsp";
 	}
 	

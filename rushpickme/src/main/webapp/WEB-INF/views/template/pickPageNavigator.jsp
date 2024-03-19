@@ -13,7 +13,7 @@
 			<a class="off">&lt;이전</a>
 		</c:when>
 		<c:otherwise>
-			<a href="apply?page=${pageVO.getPrevBlock()}">&lt;이전</a>
+			<a href="pick?page=${pageVO.getPrevBlock()}">&lt;이전</a>
 		</c:otherwise>
 	</c:choose>
 	
@@ -25,7 +25,7 @@
 				<a class="on">${i}</a>
 			</c:when>
 			<c:otherwise>
-				<a href="apply?page=${i}">${i}</a>
+				<a href="pick?page=${i}">${i}</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
@@ -36,7 +36,7 @@
 			<a class="off">다음&gt;</a>
 		</c:when>
 		<c:otherwise>
-			<a href="apply?page=${pageVO.getNextBlock()}">다음&gt;</a> 
+			<a href="pick?page=${pageVO.getNextBlock()}">다음&gt;</a> 
 		</c:otherwise>
 	</c:choose>
 </div>

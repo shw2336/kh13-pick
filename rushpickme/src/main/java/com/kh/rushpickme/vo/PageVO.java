@@ -95,6 +95,7 @@ public class PageVO {
 	public int getNextBlock() {
 		return getEndBlock() + 1;
 	}
+
 }
 
 
