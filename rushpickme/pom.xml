@@ -90,68 +90,68 @@
 
 
 
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-oauth2-client</artifactId>
-    <version>3.2.3</version><!--$NO-MVN-MAN-VER$-->
-</dependency>
+<!--<dependency>-->
+<!--    <groupId>org.springframework.boot</groupId>-->
+<!--    <artifactId>spring-boot-starter-oauth2-client</artifactId>-->
+<!--    <version>3.2.3</version>$NO-MVN-MAN-VER$-->
+<!--</dependency>-->
 
 
-<dependency>
-    <groupId>ch.qos.logback</groupId>
-    <artifactId>logback-classic</artifactId>
-    <version>1.4.14</version><!--$NO-MVN-MAN-VER$-->
-    <scope>test</scope>
-</dependency>
+<!--<dependency>-->
+<!--    <groupId>ch.qos.logback</groupId>-->
+<!--    <artifactId>logback-classic</artifactId>-->
+<!--    <version>1.4.14</version>$NO-MVN-MAN-VER$-->
+<!--    <scope>test</scope>-->
+<!--</dependency>-->
 
 
-<!-- web-->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-webflux</artifactId>
-</dependency>
+ 
+<!--<dependency>-->
+<!--    <groupId>org.springframework.boot</groupId>-->
+<!--    <artifactId>spring-boot-starter-webflux</artifactId>-->
+<!--</dependency>-->
 
 <!--security-->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-security</artifactId>
-</dependency>
+<!--<dependency>-->
+<!--    <groupId>org.springframework.boot</groupId>-->
+<!--    <artifactId>spring-boot-starter-security</artifactId>-->
+<!--</dependency>-->
 
 
 
 <!-- JWT -->
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt-api</artifactId>
-    <version>0.11.5</version>
-</dependency>
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt-impl</artifactId>
-    <version>0.11.5</version>
-    <scope>runtime</scope>
-</dependency>
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt-jackson</artifactId>
-    <version>0.11.5</version>
-    <scope>runtime</scope>
-</dependency>
+<!--<dependency>-->
+<!--    <groupId>io.jsonwebtoken</groupId>-->
+<!--    <artifactId>jjwt-api</artifactId>-->
+<!--    <version>0.11.5</version>-->
+<!--</dependency>-->
+<!--<dependency>-->
+<!--    <groupId>io.jsonwebtoken</groupId>-->
+<!--    <artifactId>jjwt-impl</artifactId>-->
+<!--    <version>0.11.5</version>-->
+<!--    <scope>runtime</scope>-->
+<!--</dependency>-->
+<!--<dependency>-->
+<!--    <groupId>io.jsonwebtoken</groupId>-->
+<!--    <artifactId>jjwt-jackson</artifactId>-->
+<!--    <version>0.11.5</version>-->
+<!--    <scope>runtime</scope>-->
+<!--</dependency>-->
 
 <!--카카오 로그인-->
 <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-<dependency>
-    <groupId>com.google.code.gson</groupId>
-    <artifactId>gson</artifactId>
-    <version>2.10.1</version>
-</dependency>
+<!--<dependency>-->
+<!--    <groupId>com.google.code.gson</groupId>-->
+<!--    <artifactId>gson</artifactId>-->
+<!--    <version>2.10.1</version>-->
+<!--</dependency>-->
 
 
-<dependency>
-    <groupId>com.googlecode.json-simple</groupId>
-    <artifactId>json-simple</artifactId>
-    <version>1.1.1</version>
-</dependency>
+<!--<dependency>-->
+<!--    <groupId>com.googlecode.json-simple</groupId>-->
+<!--    <artifactId>json-simple</artifactId>-->
+<!--    <version>1.1.1</version>-->
+<!--</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -163,11 +163,11 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.projectlombok</groupId>-->
+<!--			<artifactId>lombok</artifactId>-->
+<!--			<optional>true</optional>-->
+<!--		</dependency>-->
 		
 	</dependencies>
 
@@ -178,10 +178,10 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
+<!--						<exclude>-->
+<!--							<groupId>org.projectlombok</groupId>-->
+<!--							<artifactId>lombok</artifactId>-->
+<!--						</exclude>-->
 					</excludes>
 				</configuration>
 			</plugin>
