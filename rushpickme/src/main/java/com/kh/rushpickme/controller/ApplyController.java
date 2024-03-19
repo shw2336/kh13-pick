@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,14 +54,11 @@ public class ApplyController {
 	public String request(@ModelAttribute ApplyDto applyDto, @RequestParam MultipartFile applyAttach,
 			HttpSession session) throws IllegalStateException, IOException {
 		// 1. 세션에 저장된 아이디를 꺼낸다
-		String loginId = "jihaehuh123";
+		String loginId = (String) session.getAttribute("loginId"); 
 		// 로그인 아이디 뽑기
 		applyDto.setMemberId(loginId);
-
 		int longinNo = applyDao.getSequence();
-
 		applyDto.setApplyNo(longinNo);
-
 		applyDao.applyInsert(applyDto);
 
 		// 첨부파일 등록
@@ -73,8 +71,8 @@ public class ApplyController {
 	}
 	//신청 목록 
 		@RequestMapping("/applyList")
-		public String applyList(Model model, String memberId,ApplyListVO applyListVO,ApplyDto applyDto) {
-			String loginId ="jihaehuh123";
+		public String applyList(Model model, String memberId,ApplyListVO applyListVO,ApplyDto applyDto,HttpSession session) {
+			String loginId = (String) session.getAttribute("loginId"); 
 			applyDto.setMemberId(loginId);
 			List<ApplyListVO> applyList = applyDao.applyList( loginId);
 			model.addAttribute("applyList",applyList);
@@ -83,8 +81,14 @@ public class ApplyController {
 		
 	// 수거 현황 진행사항 페이지
 	@RequestMapping("/stateList")
-	public String stateList(@RequestParam int applyNo, Model model) {
+	public String stateList(@RequestParam int applyNo, Model model, HttpSession session,ApplyDto applyDto ) {
+		String loginId = (String) session.getAttribute("loginId"); 
+		applyDto.setMemberId(loginId); //아이디 로그인 됬음 
+		ApplyDto applyDto1 = applyDao.selectOne(applyNo);
+		
 		model.addAttribute("applyNo",applyNo);
+		model.addAttribute("applyDto",applyDto1);
+		
 //	      List<ApplyDetailVO>applyDetail = applyDao.applyDetail(applyNo);
 //	        model.addAttribute("applyDetail", applyDetail);
 		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
@@ -93,30 +97,39 @@ public class ApplyController {
 	
 	//신청 상세 조회 
 	@GetMapping("/applyDetail")
-    public String applyDetail(@RequestParam int applyNo, Model model, ApplyDetailVO applyDetailVO) {
+    public String applyDetail(@RequestParam int applyNo, Model model,ApplyDto applyDto, ApplyDetailVO applyDetailVO,HttpSession session) {
 		//리스트가 아니고 ApplyDetailVO로 담아야할듯 
 		//1명 정보 뽑는거니까 리스트 아님
+		String loginId = (String) session.getAttribute("loginId"); 
+		applyDto.setMemberId(loginId);
 		ApplyDetailVO applyDetail= applyDao.applyDetail(applyNo);
         model.addAttribute("applyDetail", applyDetail);
+        model.addAttribute("applyDto",applyDto);
         return "/WEB-INF/views/apply/applyDetail.jsp";
     }
 	
-	//applyDao에서 requestList들을 부를게 
-	//부르는 형태는 List <applyDto>야 
-//		int number = 3;
+	
 //		model.addAttribute("jsp에서부를이름",현재여기서 데이터 담아놓은 파라미터명);
 	
 	@PostMapping("/applyDetail")
-	public String cancel(@RequestParam int applyNo) {
+	public String applyDetai(@RequestParam int applyNo) {
+		
+		applyDao.cancel(applyNo);
+		return "/WEB-INF/views/apply/applyDetail.jsp";
+	}
+	
+//	//신청 취소 
+	@PostMapping("/cancel")
+	public String cancel(@RequestParam int applyNo, HttpSession session,  @ModelAttribute ApplyDto applyDto ) {
+		String loginId = (String) session.getAttribute("loginId"); 
+		applyDto.setMemberId(loginId);
+		
+		ApplyDto applyDto1 = applyDao.selectOne(applyNo);
+		ApplyDetailVO applyDetail= applyDao.applyDetail(applyNo);
 		applyDao.cancel(applyNo);
 		return "/WEB-INF/views/apply/cancel.jsp";
 	}
 	
-//	//신청 취소 
-	@RequestMapping("/cancel")
-	public String cancel() {
-		return "redirect:/";
-	}
 
 //	@RequestMapping("/cancel")
 //	public String cancel(@RequestParam int applyNo,HttpSession httpSession, ApplyDto applyDto) {

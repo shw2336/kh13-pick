@@ -100,7 +100,7 @@
                 <h2> 신청 지역 선택
                     <i class="fa-solid fa-truck"></i>
                 </h2>
-				<form action="request" method="post" autocomplete="off" enctype="multipart/form-data">
+<form action="request" method="post" autocomplete="off" enctype="multipart/form-data">
                 <select name="applyArea" class="tool w-100"  oninput="areaData()">
                     <option value="">선택하세요</option>
                     <option value="강남구">강남구</option>
