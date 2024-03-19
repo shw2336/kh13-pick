@@ -6,35 +6,73 @@
 
 <style>
     .container {
-        border-radius: 10px;
-        border: 1px solid gainsboro;
-        box-shadow: 0px 4px 4px 2px gainsboro;
         margin: 0 auto;
-        text-align: center;
-        width: 80%; /* 수정 가능한 부분: 컨테이너 너비 조정 */
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+        width: 80%;
     }
 
     table {
         width: 100%;
         border-collapse: collapse;
+        margin-top: 20px;
     }
 
     th, td {
-        border: 1px solid #dddddd;
-        padding: 8px;
+        border: 1px solid #ddd;
+        padding: 10px;
         text-align: center;
     }
 
     th {
         background-color: #f2f2f2;
     }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+        background-color: #f2f2f2;
+    }
+
+    .cell {
+        margin-top: 20px;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination a {
+        display: inline-block;
+        padding: 8px 16px;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .pagination a.active {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .pagination a:hover:not(.active) {
+        background-color: #ddd;
+    }
 </style>
 
 <div class="center">
-    <h2>수거 관리</h2>
+    <img src="/image/picklist.png">
 </div>
 
-<div class="cell container">
+<div class="container">
     <table>
         <thead>
             <tr>
