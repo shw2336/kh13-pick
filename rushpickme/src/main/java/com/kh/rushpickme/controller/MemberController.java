@@ -196,6 +196,7 @@ public class MemberController {
 	    boolean isValid = memberDto != null && memberDto.getMemberType().equals("그린");
 	    
 	    // 4. 조회 정보를 화면에 보여준다
+	    
 	    model.addAttribute("memberDto", memberDto);
 	    model.addAttribute("memberGreenDto", memberGreenDto);
 	    model.addAttribute("memberPickDto", memberPickDto);
@@ -235,7 +236,7 @@ public class MemberController {
 	    MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
 
 	    // Green 포인트를 기준으로 구매 가능한 티켓 수 계산
-	    int availableTickets = memberDao.calculateAvailableTickets(memberGreenDto.getMemberGreenPoint());
+	    int availableTickets = memberDao.manTickets(memberGreenDto.getMemberGreenPoint());
 
 	    // 티켓 수 업데이트
 	    memberDao.updateTicketsByGreenPoint(loginId, availableTickets);
