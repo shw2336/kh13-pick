@@ -58,9 +58,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 					.addPathPatterns(
 						"/member/",
 						"/qna/**",
-						"/review/**"
+						"/review/**",
 						//"/point/**",
-						//"/rest/board_like/toggle"
+						"/rest/review_like/toggle"
 					)
 					.excludePathPatterns(
 						//"/member/join", "/member/joinFinish",
