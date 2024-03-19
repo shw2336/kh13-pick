@@ -16,11 +16,14 @@ import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dao.BuyDao;
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dao.PickDao;
+import com.kh.rushpickme.dao.PointDao;
 import com.kh.rushpickme.dto.ApplyDto;
+import com.kh.rushpickme.dto.BuyDto;
 import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.dto.MemberGreenDto;
 import com.kh.rushpickme.dto.MemberPickDto;
 import com.kh.rushpickme.dto.PickDto;
+import com.kh.rushpickme.dto.PointDto;
 import com.kh.rushpickme.service.AttachService;
 import com.kh.rushpickme.service.EmailService;
 
@@ -31,7 +34,7 @@ import jakarta.servlet.http.HttpSession;
 public class MemberController {
 
 	@Autowired
-	MemberDao memberDao;
+	private MemberDao memberDao;
 
 	@Autowired
 	private AttachDao attachDao;
@@ -47,6 +50,9 @@ public class MemberController {
 	
 	@Autowired
 	private PickDao pickDao;
+	
+	@Autowired
+	private PointDao pointDao;
 	
 	
 
@@ -177,16 +183,18 @@ public class MemberController {
 							) {
 	    // 1. 세션에서 아이디를 가져온다
 	    String loginId = (String) session.getAttribute("loginId");
-
+	    
 	    // 2. 아이디에 맞는 정보를 조회
 	    MemberDto memberDto = memberDao.selectOne(loginId);
 	    MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
 	    MemberPickDto memberPickDto = memberDao.selectOnePick(loginId);
+	   
 	    
 	    
+
 	    // 3. memberDto가 null이 아니고, memberDto의 memberType이 "그린"인지 확인하여 isValid 변수에 할당
 	    boolean isValid = memberDto != null && memberDto.getMemberType().equals("그린");
-
+	    
 	    // 4. 조회 정보를 화면에 보여준다
 	    model.addAttribute("memberDto", memberDto);
 	    model.addAttribute("memberGreenDto", memberGreenDto);
@@ -196,6 +204,7 @@ public class MemberController {
 	    model.addAttribute("countFinish", pickDao.countFinish(loginId));
 	    model.addAttribute("pickDto", pickDto);
 	    model.addAttribute("applyDto", applyDto);
+	    
 
 	    // 5. 구매내역을 화면에 같이 보여준다
 	    model.addAttribute("buyList", buyDao.selectList(loginId));
@@ -216,7 +225,29 @@ public class MemberController {
 	    
 	}
 
-	
+	@GetMapping("/mypage")
+	public String myPage(HttpSession session, Model model) {
+	    // 세션에서 아이디를 가져온다
+	    String loginId = (String) session.getAttribute("loginId");
+
+	    // 아이디에 해당하는 회원 정보를 조회
+	    MemberDto memberDto = memberDao.selectOne(loginId);
+	    MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
+
+	    // Green 포인트를 기준으로 구매 가능한 티켓 수 계산
+	    int availableTickets = memberDao.calculateAvailableTickets(memberGreenDto.getMemberGreenPoint());
+
+	    // 티켓 수 업데이트
+	    memberDao.updateTicketsByGreenPoint(loginId, availableTickets);
+
+	    // 회원 정보와 티켓 수를 모델에 추가
+	    model.addAttribute("memberDto", memberDto);
+	    model.addAttribute("memberGreenDto", memberGreenDto);
+	    model.addAttribute("availableTickets", availableTickets);
+
+	    return "/WEB-INF/views/member/myPageGreen.jsp";
+	}
+
 
 	
 
