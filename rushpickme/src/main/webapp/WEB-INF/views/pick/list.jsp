@@ -6,11 +6,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-.pick-container {
-	border-radius: 10px;
-	border: 1px solid gainsboro;
-	box-shadow: 0px 4px 4px 2px gainsboro;
-}
 
 .list-box {
 	border-bottom: 1px solid #2d3436;
@@ -47,7 +42,8 @@
 
 <div class="container w-700 my-50">
 	<div class="cell left">
-		<h1>${sessionScope.loginId}님의 근무지는 <span style="color: rgb(66,138,66)">${findArea}</span> 입니다. </h1>
+		<h1 ><span style="color: rgb(66,138,66)">${sessionScope.loginId}</span> 님의 근무지는 
+			<span style="color: rgb(66,138,66)">${findArea}</span> 입니다. </h1>
 		<h2>안전 운전 하세요! <i class="fa-solid fa-car-on"></i></h2>
 	</div>
 </div>
