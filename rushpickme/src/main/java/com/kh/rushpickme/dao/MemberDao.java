@@ -279,24 +279,16 @@ public class MemberDao {
 
 		// Green 포인트를 기준으로 구매할 수 있는 티켓 수 계산
 		public int calculateAvailableTickets(int memberGreenPoint) {
-		    if (memberGreenPoint >= 100000) {
-		        return 5;
-		    } else if (memberGreenPoint >= 50000) {
-		        return 3;
-		    } else if (memberGreenPoint >= 30000) {
-		        return 2;
-		    } else if (memberGreenPoint >= 10000) {
-		        return 1;
-		    } else {
-		        return 0;
-		    }
+		    int manTicket = 1; // 만원당 티켓 수
+		    int availableTickets = memberGreenPoint / 10000 * manTicket;
+		    return availableTickets;
 		}
 
 		// 구매한 티켓 수 업데이트
 		public void updateTicketsByGreenPoint(String memberId, int memberGreenTicket) {
-		    String sql = "UPDATE member_green SET member_green_ticket = member_green_ticket + ? WHERE member_id = ?";
+		    String sql = "UPDATE member_green SET member_green_ticket = ? WHERE member_id = ?";
 		    Object[] data = {memberGreenTicket, memberId};
 		    jdbcTemplate.update(sql, data);
 		}
-	}
+}
 
