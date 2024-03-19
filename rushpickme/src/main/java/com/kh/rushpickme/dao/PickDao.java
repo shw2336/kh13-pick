@@ -414,9 +414,8 @@ public class PickDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
-
-	
 }
+
 	
 
 
