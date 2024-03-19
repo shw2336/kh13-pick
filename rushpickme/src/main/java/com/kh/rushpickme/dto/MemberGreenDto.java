@@ -44,9 +44,19 @@ public class MemberGreenDto {
 		return memberGreenPoint;
 	}
 	public void setMemberGreenPoint(int memberGreenPoint) {
-		this.memberGreenPoint = memberGreenPoint;
+	    this.memberGreenPoint = memberGreenPoint;
+
+	    // memberGreenPoint에 따라 memberGreenTicket을 자동으로 업데이트
+	    if (memberGreenPoint >= 100000) {
+	        this.memberGreenTicket = 5;
+	    } else if (memberGreenPoint >= 50000) {
+	        this.memberGreenTicket = 3;
+	    } else if (memberGreenPoint >= 30000) {
+	        this.memberGreenTicket = 2;
+	    } else if (memberGreenPoint >= 10000) {
+	        this.memberGreenTicket = 1;
+	    }
 	}
-	
 	
 	
 	
