@@ -51,7 +51,7 @@ public class PointController {
      
         //기존 부름티켓 3장에서 포인트 구매시 차등지급되는 티켓수 증가
         MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
-        int changeTicket = memberGreenDto.getMemberGreenTicket() + memberGreenDto.getMemberGreenPoint() / 10000;
+        int changeTicket = memberGreenDto.getMemberGreenTicket() + pointDto.getPointSell() / 10000;
 	    // 티켓 수 업데이트
 	    memberDao.updateTicketsByGreenPoint(loginId, changeTicket);
         
