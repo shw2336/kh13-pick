@@ -108,6 +108,7 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d667a3facb2ac08f0c7fe4e48bd917e9&lib
 		<h1>
 			<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님의 
 			<span style="color: rgb(66,138,66)">${applyNo}번</span> 신청 정보
+			<img src="/image/notebook.png" style="width:50px;" class="ps-10">
 		</h1>
 		
 	</div>
