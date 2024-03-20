@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.dto.QnaDto;
+import com.kh.rushpickme.dto.ReviewDto;
 import com.kh.rushpickme.mapper.QnaListMapper;
 import com.kh.rushpickme.mapper.QnaMapper;
 import com.kh.rushpickme.vo.PageVO;
@@ -22,79 +24,7 @@ public class QnaDao {
 
 	@Autowired
 	private QnaListMapper qnaListMapper;
-
-	//목록
-	public List<QnaDto> selectList() {
-//		String sql = "select * from qna order by qna_no desc";
-//		return jdbcTemplate.query(sql, qnaMapper);
-		
-		String sql = "select "
-							+ "qna_no, member_id, qna_title, "
-							+ "qna_content, qna_delete, qna_hits, "
-							+ "qna_write, qna_edit "
-						+ "from qna order by qna_no desc";
-		return jdbcTemplate.query(sql, qnaListMapper);
-	}
-	//검색
-	public List<QnaDto> selectList(String column, String keyword) {
-//		String sql = "select * from qna "
-//						+ "where instr("+column+", ?) > 0 "
-//						+ "order by qna_no desc";
-//		Object[] data = {keyword};
-//		return jdbcTemplate.query(sql, qnaMapper, data);
-		
-		String sql = "select "
-							+ "qna_no, member_id, qna_title, "
-							+ "qna_content, qna_delete, qna_hits, "
-							+ "qna_write, qna_edit "
-						+ "from qna "
-						+ "where instr("+column+", ?) > 0 "
-						+ "order by qna_no desc";
-		Object[] data = {keyword};
-		return jdbcTemplate.query(sql, qnaListMapper, data);
-	}
 	
-	//목록+페이징
-	//- page는 현재 조회할 페이지 번호
-	//- size는 조회할 페이지의 출력개수
-	//- 위 두개를 이용하여 시작행(beginRow)과 종료행(endRow)를 계산
-	public List<QnaDto> selectListByPaging(int page, int size) {
-		int endRow = page * size;
-		int beginRow = endRow - (size-1);
-		
-		String sql = "select * from ("
-							+ "select rownum rn, TMP.* from ("
-								+ "select "
-									+ "qna_no, member_id, qna_title, "
-									+ "qna_content, qna_delete, qna_hits, "
-									+ "qna_write, qna_edit "
-								+ "from qna order by qna_no desc"
-							+ ")TMP"
-						+ ") where rn between ? and ?";
-		Object[] data = {beginRow, endRow};
-		return jdbcTemplate.query(sql, qnaListMapper, data);
-	}
-	
-	//검색+페이징
-	public List<QnaDto> selectListByPaging(
-			String column, String keyword, int page, int size){
-		int endRow = page * size;
-		int beginRow = endRow - (size-1);
-		
-		String sql = "select * from ("
-							+ "select rownum rn, TMP.* from ("
-								+ "select "
-									+ "qna_no, member_id, qna_title, "
-									+ "qna_content, qna_delete, qna_hits, "
-									+ "qna_write, qna_edit "
-								+ "from qna "
-								+ "where instr("+column+", ?) > 0 "
-								+ "order by qna_no desc"
-							+ ")TMP"
-						+ ") where rn between ? and ?";
-		Object[] data = {keyword, beginRow, endRow};
-		return jdbcTemplate.query(sql, qnaListMapper, data);
-	}
 	
 	//통합+페이징
 	public List<QnaDto> selectListByPaging(PageVO pageVO){ 
@@ -130,7 +60,6 @@ public class QnaDao {
 										+ "qna_write, qna_edit, "
 										+ "qna_group, qna_target, qna_depth "
 									+ "from qna "
-									//+ "order by qna_no desc"//옛날방식(최신순)
 									+ "connect by prior qna_no=qna_target "
 									+ "start with qna_target is null "
 									+ "order siblings by qna_group desc, qna_no asc"
@@ -140,6 +69,26 @@ public class QnaDao {
 			return jdbcTemplate.query(sql, qnaListMapper, data);
 		}
 	}
+	
+		
+	
+//	public List<QnaDto> selectListOfficial(PageVO pageVO) {
+//		String sql = "select * from ("
+//				+ "select rownum rn, TMP.* from ("
+//					+ "select "
+//						+ "qna_no, member_id, qna_title, "
+//						+ "qna_content, qna_delete, qna_hits, "
+//						+ "qna_write, qna_edit, "
+//						+ "qna_group, qna_target, qna_depth "
+//					+ "from qna "
+//					+ "connect by prior qna_no=qna_target "
+//					+ "start with qna_target is null "
+//					+ "order siblings by qna_group desc, qna_no asc"
+//				+ ")TMP"
+//			+ ") where member_id = 'adminuser1";
+//			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+//			return jdbcTemplate.query(sql, qnaListMapper, data);
+//	}
 	
 	//카운트 - 목록일 경우와 검색일 경우를 각각 구현
 	public int count() {
