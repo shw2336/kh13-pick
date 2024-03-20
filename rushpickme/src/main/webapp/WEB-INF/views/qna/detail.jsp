@@ -316,7 +316,8 @@
 		</h3>
 	</div>
 	
-	<hr>
+<hr style="border: none; height: 3px; background: linear-gradient(to right, #000000, #ffffff);">
+
 	<div class="cell" style="min-height:250px;">
 		<%-- 
 			HTML은 엔터와 스페이스 등을 무시하기 때문에 textarea와 모양이 달라진다
@@ -329,7 +330,8 @@
 		${qnaDto.qnaContent}
 	</div>
 	
-	<hr>
+<hr style="border: none; height: 3px; background: linear-gradient(to left, #000000, #ffffff);">
+
 	<div class="cell">
 		조회수 ${qnaDto.qnaHits} 
 

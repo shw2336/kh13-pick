@@ -136,7 +136,7 @@ public class ReviewController {
 		
 		//아이디를 게시글 정보에 포함시킨다
 		reviewDto.setMemberId(loginId);
-		reviewDto.setAskNo(127);
+		//reviewDto.setAskNo(127);
 		int reviewStar = (int)score;
 		reviewDto.setReviewStar(reviewStar);
 		int sequence = reviewDao.getSequence();//DB에서 시퀀스 번호를 추출
