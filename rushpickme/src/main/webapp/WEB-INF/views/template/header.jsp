@@ -84,7 +84,7 @@
 <main>
     <div class="header">
   
-        <h1 class="left"><img src="/image/title.png" ></h1>
+       <h1 class="left"><img src="/image/title.png" style="max-width: 200px; height: auto;"></h1>
         <div class="nav">
             <ul class="menu center">
                 <li><a href="/">홈</a></li>
