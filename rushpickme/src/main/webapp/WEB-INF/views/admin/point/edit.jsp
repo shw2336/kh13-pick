@@ -30,9 +30,9 @@
     <form action="edit" method="post" enctype="multipart/form-data">
         <input type="hidden" name="pointNo" value="${pointDto.pointNo}">
 
-        상품명 <input type="text" name="itemName" value="${pointDto.pointName}" required><br><br>
-        판매가 <input type="number" name="itemPrice" value="${pointDto.pointSell}" required><br><br>
-        충전액 <input type="number" name="itemCharge" value="${pointDto.pointCharge}" required><br><br>
+        상품명 <input type="text" name="pointName" value="${pointDto.pointName}" required><br><br>
+        판매가 <input type="number" name="pointPrice" value="${pointDto.pointSell}" required><br><br>
+        충전액 <input type="number" name="pointCharge" value="${pointDto.pointCharge}" required><br><br>
 
         <input type="file" name="attach"><br><br>
 

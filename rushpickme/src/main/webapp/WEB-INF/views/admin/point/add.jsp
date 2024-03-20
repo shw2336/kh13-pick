@@ -30,7 +30,7 @@
 <form action="add" method="post" autocomplete="off" enctype="multipart/form-data" class="check-form">
     <div class="container w-800">
         <div class="cell center">
-            <h3>포인트 등록</h3>
+            <h1>포인트 등록 <img src="/image/notebook.png" style="width:50px;" class="ps-10"></h1>
         </div>
 
         <div>

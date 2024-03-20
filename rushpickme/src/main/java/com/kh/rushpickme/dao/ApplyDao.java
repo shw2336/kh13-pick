@@ -115,7 +115,7 @@ public class ApplyDao {
 		}
 	
 	
-	// 통합+페이징
+	// 통합+페이징(서영)
 	public List<ApplyDto> selectListByPaging(PageVO pageVO) {
 //	    if (pageVO.isSearch()) {
 //	        String sql = "select * from ("
@@ -151,7 +151,7 @@ public class ApplyDao {
 
 	
 	
-	//카운트
+	//카운트(서영)
 	public int count() {
 		String sql = "select count(*) from apply";
 		return jdbcTemplate.queryForObject(sql, int.class);
