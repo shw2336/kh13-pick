@@ -20,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.rushpickme.dao.ApplyDao;
 import com.kh.rushpickme.dao.AttachDao;
+import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dao.PickDao;
 import com.kh.rushpickme.dto.ApplyDto;
+import com.kh.rushpickme.dto.MemberGreenDto;
 import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.service.AttachService;
 import com.kh.rushpickme.vo.ApplyDetailVO;
@@ -46,6 +48,9 @@ public class ApplyController {
 	
 	@Autowired
 	private PickDao pickDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 			
 	
 
@@ -93,7 +98,6 @@ public class ApplyController {
 		
 		model.addAttribute("applyNo",applyNo);
 		model.addAttribute("applyDto",applyDto1);
-		
 //	      List<ApplyDetailVO>applyDetail = applyDao.applyDetail(applyNo);
 //	        model.addAttribute("applyDetail", applyDetail);
 		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
@@ -123,7 +127,7 @@ public class ApplyController {
 		return "/WEB-INF/views/apply/applyDetail.jsp";
 	}
 	
-//	//신청 취소 
+	//신청 취소 
 	@PostMapping("/cancel")
 	public String cancel(@RequestParam int applyNo, HttpSession session,  @ModelAttribute ApplyDto applyDto ) {
 		String loginId = (String) session.getAttribute("loginId"); 
@@ -134,16 +138,19 @@ public class ApplyController {
 		applyDao.cancel(applyNo);
 		return "/WEB-INF/views/apply/cancel.jsp";
 	}
+	
 	//결제 내역
 	@RequestMapping("/finish")
 	public String finish(@RequestParam int applyNo, @ ModelAttribute ApplyDto applyDto,
-								@RequestParam int pickNo, HttpSession session, Model model) {
+								HttpSession session, Model model) {
 		String loginId=(String) session.getAttribute("loginId");
 		applyDto.setMemberId(loginId);
-		
-		int pickDto =pickDao.applyAttachNo(pickNo);
+		int pickNo = pickDao.selectPickNo(applyNo);
+		PickDto pickDto =pickDao.selectOneByPick(pickNo);
 		ApplyDto findDto = applyDao.selectOne(applyNo);
+		MemberGreenDto greenDto = memberDao.selectOneGreen(loginId);
 		
+		model.addAttribute("point", greenDto.getMemberGreenPoint());
 		
 		
 		model.addAttribute("pickDto",pickDto);
@@ -152,6 +159,11 @@ public class ApplyController {
 		
 		
 		return "/WEB-INF/views/apply/finish.jsp";
+	}
+	@PostMapping("/review")
+	public String review(@RequestParam String memberId) {
+		
+		return "/WEB-INF/views/review.jsp";
 	}
 	
 
