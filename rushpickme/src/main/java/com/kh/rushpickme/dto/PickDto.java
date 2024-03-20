@@ -7,7 +7,7 @@ public class PickDto {
 	private int pickNo;
 	private int applyNo;
 	private String memberId;
-	private int pickWeight;
+	private float pickWeight;
 	private int pickPay;
 	private String pickSchedule;
 	private String pickState;
@@ -49,10 +49,11 @@ public class PickDto {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public int getPickWeight() {
+
+	public float getPickWeight() {
 		return pickWeight;
 	}
-	public void setPickWeight(int pickWeight) {
+	public void setPickWeight(float pickWeight) {
 		this.pickWeight = pickWeight;
 	}
 	public int getPickPay() {

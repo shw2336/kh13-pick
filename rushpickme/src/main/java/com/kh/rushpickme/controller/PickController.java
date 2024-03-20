@@ -95,7 +95,39 @@ public class PickController {
 		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
 		model.addAttribute("findApplyDto", findApplyDto);
 		
+		MemberDto memberDto = memberDao.selectOne(findApplyDto.getMemberId());
+		model.addAttribute("memberContact", memberDto.getMemberContact()) ;
+		//신청자 연락처 뽑기
+		
 		return "/WEB-INF/views/pick/waitDetail.jsp";
+	}
+	
+	//(긴급)수거대기 리스트
+	@RequestMapping("/urgentList")
+	public String urgentList (Model model, HttpSession session, @ModelAttribute PageVO pageVo) {
+		String findArea = (String) session.getAttribute("findArea");
+		
+		int count = pickDao.countUrgentApply((String)session.getAttribute("loginId"));
+		pageVo.setCount(count);	
+		model.addAttribute("pageVo", pageVo);
+
+		List<PickWaitVo> urgentList = pickDao.urgentListByPaging(pageVo, findArea);
+		model.addAttribute("urgentList", urgentList);
+		
+		return "/WEB-INF/views/pick/urgentList.jsp";
+	}
+	
+	//(긴급)수거대기 상세
+	@RequestMapping("/urgentDetail")
+	public String urgentDetail (Model model, @RequestParam int applyNo) {
+		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
+		model.addAttribute("findApplyDto", findApplyDto);
+		
+		MemberDto memberDto = memberDao.selectOne(findApplyDto.getMemberId());
+		model.addAttribute("memberContact", memberDto.getMemberContact()) ;
+		//신청자 연락처 뽑기
+		
+		return "/WEB-INF/views/pick/urgentDetail.jsp";
 	}
 	
 	// 진행 리스트

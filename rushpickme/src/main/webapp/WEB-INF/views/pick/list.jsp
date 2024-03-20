@@ -58,19 +58,18 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th style="width: 20%;"><i
-					class="fa-solid fa-circle-exclamation fa-2x"
+				<th style="width: 20%;"><i	class="fa-solid fa-circle-exclamation fa-2x"
 					style="color: rgb(66,138,66)"></i></th>
-				<td style="width: 70%;" class="left explain"><a href="waitList"
-					class="link">수거접수 대기</a></td>
+				<td style="width: 70%;" class="left explain">
+					<a href="waitList" class="link">수거접수 대기</a></td>
 				<td class="center"><span class="num">${countApply}</span>건</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<th style="width: 20%;"><i
-					class="fa-solid fa-circle-exclamation fa-2x" style="color: rgb(255, 128, 128)"></i></span></th>
-				<td style="width: 70%;" class="left explain"><a href="#" class="link">빠른 확인이 필요해요</a></td>
+					class="fa-solid fa-circle-exclamation fa-2x" style="color: rgb(255, 128, 128)"></i></th>
+				<td style="width: 70%;" class="left explain"><a href="urgentList" class="link">빠른 확인이 필요해요</a></td>
 				<td class="center"><span class="num">${countUrgentApply}</span>건</td>
 			</tr>
 		</tbody>
@@ -80,8 +79,6 @@
 <div class="container pick-container w-700 p-20 mb-50">
 	<div class="cell flex-cell list-box">
 		<h2>&nbsp;&nbsp;수거진행</h2>
-		<h5 class="right width-fill pt-10">
-			</h3>
 	</div> 
 
 	<table class="table">
@@ -96,7 +93,7 @@
 		<tbody>
 			<tr>
 				<th style="width: 20%;"><i
-					class="fa-solid fa-circle-xmark fa-2x" style="color: rgb(255, 128, 128)"></i></span></th>
+					class="fa-solid fa-circle-xmark fa-2x" style="color: rgb(255, 128, 128)"></i></th>
 				<td style="width: 70%;" class="left explain"><a href="rejectList" class="link">수거 거부</a></td>
 				<td class="center"><span class="num">${countReject}</span>건</td>
 			</tr>

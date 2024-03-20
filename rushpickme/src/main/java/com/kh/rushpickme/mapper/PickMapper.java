@@ -17,7 +17,7 @@ public class PickMapper implements RowMapper<PickDto> {
 		pickDto.setPickNo(rs.getInt("pick_no"));
 		pickDto.setApplyNo(rs.getInt("apply_no"));
 		pickDto.setMemberId(rs.getString("member_id"));
-		pickDto.setPickWeight(rs.getInt("pick_weight"));
+		pickDto.setPickWeight(rs.getFloat("pick_weight"));
 		pickDto.setPickPay(rs.getInt("pick_pay"));
 		pickDto.setPickSchedule(rs.getString("pick_schedule"));
 		pickDto.setPickState(rs.getString("pick_state"));

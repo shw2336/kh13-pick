@@ -27,8 +27,8 @@
 src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d667a3facb2ac08f0c7fe4e48bd917e9&libraries=services"></script>
 
 <script type="text/javascript">
-	function waitList () {
-		window.location.href = "waitList";
+	function urgentList () {
+		window.location.href = "urgentList";
 	}
 	function reject (num) {
 		window.location.href = "reject?applyNo=" + num;
@@ -168,7 +168,7 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d667a3facb2ac08f0c7fe4e48bd917e9&lib
 	</div>
 
 	<div class="cell right mb-40">
-		<button class="btn move" onclick="waitList();"><span class="btn-name">돌아가기</span></button>
+		<button class="btn move" onclick="urgentList();"><span class="btn-name">돌아가기</span></button>
 		<span class="px-10"></span>
 		<button class="btn move" onclick="accept('${findApplyDto.applyNo}');"><span class="btn-name">접수하기</span></button>
 		<span class="px-10"></span>

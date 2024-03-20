@@ -25,7 +25,7 @@
 		window.location.href = "list";
 	}
 	function urgentList (){
-		window.location.href = "list";
+		window.location.href = "urgentList";
 	}
 	function waitList () {
 		window.location.href = "waitList";
@@ -33,6 +33,9 @@
 	function proceedList (){
 		window.location.href = "proceedList";
 	}	
+	function finishList (){
+		window.location.href = "finishList";
+	}
 
 </script>
 
@@ -54,6 +57,10 @@
 			<span>&nbsp;&nbsp;</span>
 		<button type="button" class="btn move" onclick="proceedList();">
 			<span class="btn-name">나의 진행건</span>
+		</button>
+			<span>&nbsp;&nbsp;</span>
+		<button type="button" class="btn move" onclick="finishList();">
+			<span class="btn-name">나의 완료건</span>
 		</button>
 	</div>
 <!-- ------------- -->
