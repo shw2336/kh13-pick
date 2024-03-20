@@ -38,7 +38,7 @@
 <body>
     <div class="cell center mt-30" >
 		<h1>
-		<span style="color: rgb(66,138,66)">${applyDto.memberId}</span> 님의 결제 내역
+		<span style="color: rgb(66,138,66)">${applyDto.memberId}</span> 님의 수거완료 상세 내역
 		</h1>
 	</div>
 
@@ -83,7 +83,11 @@
     <br>
 	
 	<div class="cell right">
-	
+		<form>
+		<button class="btn positive"  onclick="review('${applyDto.applyNo}');">결제하기</button>
+		</form>
+		
+		
 		<button class="btn positive"  onclick="review('${applyDto.applyNo}');">리뷰쓰기</button>
 		<button class="btn positive"  onclick="applyList('${applyDto.memberId}');">신청 리스트</button>
 	</div>

@@ -17,6 +17,7 @@ public class ApplyDetailVOMapper implements RowMapper<ApplyDetailVO>{
 		applyDetailVO.setApplyPost(rs.getString("apply_post"));
 		applyDetailVO.setApplyAddress1(rs.getString("apply_address1"));
 		applyDetailVO.setApplyAddress2(rs.getString("apply_address2"));
+		applyDetailVO.setApplyWeight(rs.getFloat("apply_weight"));
 		applyDetailVO.setApplyVinyl(rs.getInt("apply_vinyl"));
 		applyDetailVO.setApplyHopeDate(rs.getString("apply_hope_date"));
 		applyDetailVO.setApplySay(rs.getString("apply_say"));

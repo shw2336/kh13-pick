@@ -4,7 +4,7 @@ public class ApplyDetailVO {
 	private String applyPost;
 	private String applyAddress1;
 	private String applyAddress2;
-	private int applyWeight;
+	private float applyWeight;
 	private int applyVinyl;
 	private String applyHopeDate;
 	private String applySay;
@@ -31,10 +31,10 @@ public class ApplyDetailVO {
 	public void setApplyAddress2(String applyAddress2) {
 		this.applyAddress2 = applyAddress2;
 	}
-	public int getApplyWeight() {
+	public float getApplyWeight() {
 		return applyWeight;
 	}
-	public void setApplyWeight(int applyWeight) {
+	public void setApplyWeight(float applyWeight) {
 		this.applyWeight = applyWeight;
 	}
 	public int getApplyVinyl() {

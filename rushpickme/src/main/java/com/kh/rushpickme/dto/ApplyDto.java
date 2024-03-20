@@ -11,7 +11,7 @@ public class ApplyDto {
 	private String applyAddress2;
 	private String applySay;
 	private String applyWay;
-	private int applyWeight;
+	private float applyWeight;
 	private int applyVinyl;
 	private String applyCancel;
 	private String applyState;
@@ -70,10 +70,10 @@ public class ApplyDto {
 	public void setApplyWay(String applyWay) {
 		this.applyWay = applyWay;
 	}
-	public int getApplyWeight() {
+	public float getApplyWeight() {
 		return applyWeight;
 	}
-	public void setApplyWeight(int applyWeight) {
+	public void setApplyWeight(float applyWeight) {
 		this.applyWeight = applyWeight;
 	}
 	public int getApplyVinyl() {
