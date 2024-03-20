@@ -95,14 +95,13 @@
 		<%-- 테이블 --%>
 		<table class="table table-horizontal table-hover">
 			<thead>
-				<tr bgcolor=#bde0fe>
+				<tr>
 					<th>번호</th>
 					<th class="ff">별점</th>
 					<th width="40%">리뷰내용</th>
 					<th>조회수</th>
 					<th>글쓴이</th>
 					<th>작성일</th>
-
 				</tr>
 			</thead>
 

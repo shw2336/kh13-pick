@@ -60,7 +60,7 @@
 		<%-- 테이블 --%>
 		<table class="table table-horizontal table-hover" >
 			<thead>
-				<tr bgcolor=#bde0fe>
+				<tr>
 					<th>번호</th>
 					<th width="40%">제목</th>
 					<th>작성자</th>
@@ -70,6 +70,24 @@
 			</thead>
 			<tbody>
 				<c:forEach var="qnaDto" items="${list}">
+				<c:if test="${qnaDto.memberId=='adminuser1'}">
+				<tr>
+				<td>${qnaDto.qnaNo}</td>
+						<%-- 제목 칸 --%>
+						<td class="left">
+							<%-- 답글일 경우만 이미지를 출력 --%> <c:if test="${qnaDto.qnaDepth > 0}">
+                     →
+                  </c:if> <%-- 제목 출력 --%> <a class="link link-animation"
+							href="detail?qnaNo=${qnaDto.qnaNo}"> ${qnaDto.qnaTitle} </a>
+						</td>
+						<td>${qnaDto.memberIdStr}</td>
+						<td>${qnaDto.qnaWriteStr}</td>
+						<td>${qnaDto.qnaHits}</td>
+					</tr>
+				</c:if>
+				</c:forEach>
+				<c:forEach var="qnaDto" items="${list}">
+				<c:if test="${qnaDto.memberId!='adminuser1'}">
 					<tr>
 						<td>${qnaDto.qnaNo}</td>
 						<%-- 제목 칸 --%>
@@ -79,20 +97,11 @@
                   </c:if> <%-- 제목 출력 --%> <a class="link link-animation"
 							href="detail?qnaNo=${qnaDto.qnaNo}"> ${qnaDto.qnaTitle} </a>
 						</td>
-						<%--
-               <c:choose>
-                  <c:when test="${qnaDto.qnaWriter == null}">
-                     <td>탈퇴한사용자</td>
-                  </c:when>         
-                  <c:otherwise>
-                     <td>${qnaDto.qnaWriter}</td>
-                  </c:otherwise>
-               </c:choose>
-                --%>
 						<td>${qnaDto.memberIdStr}</td>
 						<td>${qnaDto.qnaWriteStr}</td>
 						<td>${qnaDto.qnaHits}</td>
 					</tr>
+				</c:if>
 				</c:forEach>
 			</tbody>
 		</table>
