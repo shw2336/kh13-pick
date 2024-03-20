@@ -80,15 +80,37 @@ public class ApplyController {
 
 		return "redirect:/";
 	}
-	//신청 목록 
+	//신청 목록 (원본)
+//		@RequestMapping("/applyList")
+//		public String applyList(Model model, String memberId,ApplyListVO applyListVO,ApplyDto applyDto,HttpSession session) {
+//			String loginId = (String) session.getAttribute("loginId"); 
+//			applyDto.setMemberId(loginId);
+//			List<ApplyListVO> applyList = applyDao.applyList( loginId);
+//			model.addAttribute("applyList",applyList);
+//			return "/WEB-INF/views/apply/applyList.jsp";
+//		}
+		//신청 목록 ( PageVO추가 )
 		@RequestMapping("/applyList")
-		public String applyList(Model model, String memberId,ApplyListVO applyListVO,ApplyDto applyDto,HttpSession session) {
+		public String applyList(Model model, String memberId,ApplyListVO applyListVO,
+				ApplyDto applyDto,HttpSession session,@ModelAttribute PageVO pageVO) {
 			String loginId = (String) session.getAttribute("loginId"); 
 			applyDto.setMemberId(loginId);
-			List<ApplyListVO> applyList = applyDao.applyList( loginId);
+			int count =applyDao.applyFinishCount(memberId);
+			
+			pageVO.setCount(count);
+			model.addAttribute("pageVO",pageVO);
+			
+			List<ApplyListVO> applyList = applyDao.selectApplyListByPaging(memberId,pageVO);
 			model.addAttribute("applyList",applyList);
+			
 			return "/WEB-INF/views/apply/applyList.jsp";
 		}
+		
+		
+		
+		
+		
+		
 		
 	// 수거 현황 진행사항 페이지
 	@RequestMapping("/stateList")
@@ -169,6 +191,8 @@ public class ApplyController {
 		
 		return "/WEB-INF/views/review.jsp";
 	}
+	
+	
 	
 
 //	@RequestMapping("/cancel")

@@ -79,8 +79,7 @@ public class ApplyDao {
 	
 	//수거 신청 목록 과 관련된 내용 ApplyList
 	public List<ApplyListVO> applyList( String memberId) {
-		String sql="select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, apply_state from apply where member_id=? "
-				+ "and apply_cancel = 'N'";
+		String sql="select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, apply_state from apply where member_id=? and apply_cancel = 'N'";
 		Object[]data= {memberId};
 		List<ApplyListVO> applyList =jdbcTemplate.query(sql,applyListVOMapper,data);
 		return jdbcTemplate.query(sql, applyListVOMapper,data);
@@ -93,6 +92,7 @@ public class ApplyDao {
 			List<ApplyDetailVO> applyDetail = jdbcTemplate.query(sql, applyDetailVOMapper, data);
 			return applyDetail.isEmpty() ? null :applyDetail.get(0); //내가 뽑을 정보는 리스트가 아니라 한줄이라서 -한줄이라는것을 알려주는 코드
 		}
+		
 	//수거 신청 (삭제, Delete)
 	public boolean cancel(int applyNo) {
 		String sql = "update apply set apply_cancel = 'Y' where apply_no = ?";
@@ -115,7 +115,7 @@ public class ApplyDao {
 		}
 	
 	
-	// 통합+페이징
+	// 통합+페이징(서영)
 	public List<ApplyDto> selectListByPaging(PageVO pageVO) {
 //	    if (pageVO.isSearch()) {
 //	        String sql = "select * from ("
@@ -175,6 +175,31 @@ public class ApplyDao {
 		}
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////////
+	//통합 + 페이징 추가 (지혜)
+	public List<ApplyListVO> selectApplyListByPaging(String memberId, PageVO pageVO) {
+		String sql = "select * from ("
+                + "select rownum rn, TMP.* from ("
+                + "select "
+                +"apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, apply_state from apply where member_id=? and apply_cancel = 'N' "
+                + ") TMP)"
+                + "where rn between ? and ?";
+        Object[] data = {memberId,pageVO.getBeginRow(), pageVO.getEndRow()};
+        return jdbcTemplate.query(sql, applyListVOMapper, data);
+	}
+	
+	
+	// 수거 신청 목록 개수를 뽑기
+	//신청완료 건수
+		public int applyFinishCount (String memberId) {
+			String sql = "select count(*) from apply where member_id = ? and apply_cancel ='N' ";
+			Object[]data = {memberId};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+	
+	
+	
+	
 
 //	//신청 상세내역 (requsetDetail)(selectOne)
 //	public List<ApplyDto> applyDetail(int applyNo) {
@@ -182,12 +207,6 @@ public class ApplyDao {
 //		Object[] data = {applyNo};
 //		return jdbcTemplate.query(sql, applyMapper,data);
 //	}
-//	
-
-	
-
-
-
 
 	
 //		//멤버아이디로 신청 내역 뽑기
