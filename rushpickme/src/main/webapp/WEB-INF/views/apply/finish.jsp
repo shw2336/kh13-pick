@@ -27,7 +27,7 @@
 <meta charset="UTF-8">
  <script type="text/javascript">
 	 function review(num) {
- 	window.location.href = "review?memberId=" + num;	
+ 	window.location.href = "/review/write?askNo=" + num;	
  	}
  	function applyList(num) {
      	window.location.href = "applyList?memebrId=" + num;	
@@ -84,7 +84,7 @@
 	
 	<div class="cell right">
 	
-		<button class="btn positive"  onclick="review('${applyDto.memberId}');">리뷰쓰기</button>
+		<button class="btn positive"  onclick="review('${applyDto.applyNo}');">리뷰쓰기</button>
 		<button class="btn positive"  onclick="applyList('${applyDto.memberId}');">신청 리스트</button>
 	</div>
 	<br>
