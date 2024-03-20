@@ -312,6 +312,13 @@ div{
         <div class="text">비밀번호 변경</div>
         <div class="right"> > </div>
     </a>
+    
+        <a href="/member/pointList" class="item">
+        <div class="icon">ii</div>
+        <div class="text">포인트 구매내역</div>
+        <div class="right"> > </div>
+    </a>
+    
     <a href="/member/leave" class="item">
         <div class="icon">ii</div>
         <div class="text">회원탈퇴</div>
