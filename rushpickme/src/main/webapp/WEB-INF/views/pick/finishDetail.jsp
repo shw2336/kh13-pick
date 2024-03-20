@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -51,17 +52,17 @@
 
 	<div class="cell mt-40">
 		<h2>최종 중량</h2>
-		<input class="detail-tool w-100" value="" readonly>
+		<input class="detail-tool w-100" value="${findPickDto.pickWeight} kg" readonly>
 	</div>
 
 	<div class="cell mt-40">
 		<h2>최종 금액</h2>
-		<input class="detail-tool w-100" value="" readonly>
+		<input class="detail-tool w-100" value="<fmt:formatNumber value="${findPickDto.pickPay}" pattern="#,##0"/> 원" readonly>
 	</div>
 	
 	<div class="cell mt-40">
 		<h2>수거 일시</h2>
-		<input class="detail-tool w-100" value="" readonly>
+		<input class="detail-tool w-100"  value="<fmt:formatDate value="${findPickDto.pickFinishDate}" pattern="MM월 dd일 (HH시 mm분)"/>" readonly>
 	</div>
 
 	<div class="cell mt-40">

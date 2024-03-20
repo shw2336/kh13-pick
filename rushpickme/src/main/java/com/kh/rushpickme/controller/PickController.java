@@ -217,7 +217,9 @@ public class PickController {
 		int applyNo = pickDao.selectApplyNo(pickNo);
 		model.addAttribute("applyNo", applyNo);
 		
+		PickDto findPickDto = pickDao.selectOneByPick(pickNo);
 		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
+		model.addAttribute("findPickDto", findPickDto);
 		model.addAttribute("findApplyDto", findApplyDto);
 		
 		return "/WEB-INF/views/pick/finishDetail.jsp";
@@ -293,7 +295,12 @@ public class PickController {
 			int attachNo = attachService.save(attach);
 			pickDao.connect(pickNo, attachNo);
 		}
-		return "redirect:list";
+		return "redirect:rejectFinish";
+	}
+	
+	@RequestMapping ("/rejectFinish")
+	public String rejectFinish () {
+		return "/WEB-INF/views/pick/rejectFinish.jsp";
 	}
 	
 	// 거부 취소

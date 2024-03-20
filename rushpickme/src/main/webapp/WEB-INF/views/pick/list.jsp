@@ -39,12 +39,13 @@
 	
 </script>
 
-
-<div class="container w-700 my-50">
-	<div class="cell left">
+<div class="container w-800 my-50">
+	<div class="cell center">
 		<h1 ><span style="color: rgb(66,138,66)">${sessionScope.loginId}</span> 님의 근무지는 
-			<span style="color: rgb(66,138,66)">${findArea}</span> 입니다. </h1>
-		<h2>안전 운전 하세요! <i class="fa-solid fa-car-on"></i></h2>
+			<span style="color: rgb(66,138,66)">${findArea}</span> 입니다. 
+			<span class="pe-20"></span>
+			<img src="/image/car1.png" style="width:100px;">
+		</h1>
 	</div>
 </div>
 
