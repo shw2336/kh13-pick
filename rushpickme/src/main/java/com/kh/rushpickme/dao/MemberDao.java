@@ -285,18 +285,7 @@ public class MemberDao {
 		    return availableTickets;
 		}
 		
-		public int samTickets(int memberGreenPoint) {
-			int samTicket = 2;
-			int avaliableTickets = memberGreenPoint / 30000 * samTicket;
-			return avaliableTickets;
-		}
-		
-		public int ohTickets(int memberGreenPoint) {
-			int ohTicket = 3;
-			int avaliableTickets = memberGreenPoint / 50000 * ohTicket;
-			return avaliableTickets;
-		}
-		
+	
 		
 		// 구매한 티켓 수 업데이트
 		public void updateTicketsByGreenPoint(String memberId, int memberGreenTicket) {
