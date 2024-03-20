@@ -75,7 +75,7 @@
 	<div class="cell right">
 	<form action="cancel" method="post" >
 	 <input type="hidden" name="applyNo" value="${applyDto.applyNo}" />
-		<button  type="submit" class="btn negative" onclick="cancel'${applyDto.applyNo}')">취소하기</button>
+		<button  type="submit" class="btn negative" onclick="cancel'(${applyDto.applyNo}')">취소하기</button>
 		</form>
 	</div>
 

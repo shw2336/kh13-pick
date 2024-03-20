@@ -108,7 +108,7 @@
     </script>
 
 <form action="write" method="post" autocomplete="off">
-
+	<input type="hidden" name="askNo" value="${askNo}" />
 <div class="container w-800">
 	<div class="cell center"><h1>리뷰 작성</h1></div>
         

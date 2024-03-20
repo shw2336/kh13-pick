@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.rushpickme.dao.ReviewDao;
 import com.kh.rushpickme.dao.MemberDao;
 import com.kh.rushpickme.dto.ReviewDto;
+import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.service.AttachService;
 import com.kh.rushpickme.vo.PageVO;
@@ -124,19 +125,18 @@ public class ReviewController {
 	}
 	
 	@GetMapping("/write")
-	public String write() {
+	public String write(@ModelAttribute ReviewDto reviewDto, Model model) {
+		int askNo = reviewDto.getAskNo();
+		model.addAttribute("askNo", askNo);
 		return "/WEB-INF/views/review/write.jsp";
 	}
-	
 	@PostMapping("/write")
 	public String write(@ModelAttribute ReviewDto reviewDto, HttpSession session,
-					@RequestParam float score) {
+					@RequestParam float score, @ModelAttribute ApplyDto applyDto, Model model) {
 		//세션에서 로그인한 사용자의 ID를 추출
 		String loginId = (String)session.getAttribute("loginId");
-		
 		//아이디를 게시글 정보에 포함시킨다
 		reviewDto.setMemberId(loginId);
-		//reviewDto.setAskNo(127);
 		int reviewStar = (int)score;
 		reviewDto.setReviewStar(reviewStar);
 		int sequence = reviewDao.getSequence();//DB에서 시퀀스 번호를 추출
@@ -228,10 +228,3 @@ public class ReviewController {
 	}
 	
 }
-
-
-
-
-
-
-

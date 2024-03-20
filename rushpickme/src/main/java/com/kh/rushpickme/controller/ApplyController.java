@@ -25,6 +25,7 @@ import com.kh.rushpickme.dao.PickDao;
 import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.dto.MemberGreenDto;
 import com.kh.rushpickme.dto.PickDto;
+import com.kh.rushpickme.dto.ReviewDto;
 import com.kh.rushpickme.service.AttachService;
 import com.kh.rushpickme.vo.ApplyDetailVO;
 import com.kh.rushpickme.vo.ApplyListVO;
@@ -149,6 +150,9 @@ public class ApplyController {
 		PickDto pickDto =pickDao.selectOneByPick(pickNo);
 		ApplyDto findDto = applyDao.selectOne(applyNo);
 		MemberGreenDto greenDto = memberDao.selectOneGreen(loginId);
+		
+		ReviewDto reviewDto = new ReviewDto();
+		reviewDto.setAskNo(applyNo);
 		
 		model.addAttribute("point", greenDto.getMemberGreenPoint());
 		
