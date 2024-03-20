@@ -113,68 +113,7 @@ public class ApplyDao {
 			return jdbcTemplate.queryForObject(sql, int.class,data);
 			
 		}
-	
-	
-	// 통합+페이징(서영)
-	public List<ApplyDto> selectListByPaging(PageVO pageVO) {
-//	    if (pageVO.isSearch()) {
-//	        String sql = "select * from ("
-//	                + "select rownum rn, TMP.* from ("
-//	                + "select "
-//	                + "apply_no, member_id, apply_area, apply_post, apply_address1, "
-//	                + "apply_address2, apply_say, apply_way, apply_weight, apply_vinyl, "
-//	                + "apply_hope_date, apply_cancel, apply_date, apply_state "
-//	                + "from apply "
-//	                + "where instr(" + pageVO.getColumn() + ", ?) > 0) TMP) "
-//	                + "where rn between ? and ?";
-//	        Object[] data = {
-//	                pageVO.getKeyword(),
-//	                pageVO.getBeginRow(),
-//	                pageVO.getEndRow()
-//	        };
-//	        return jdbcTemplate.query(sql, applyListMapper, data);
-//	    } else {
 		
-	        String sql = "select * from ("
-	                + "select rownum rn, TMP.* from ("
-	                + "select "
-	                + "apply_no, member_id, apply_area, apply_post, apply_address1, "
-	                + "apply_address2, apply_say, apply_way, apply_weight, apply_vinyl, "
-	                + "apply_hope_date, apply_cancel, apply_date, apply_state "
-	                + "from apply "
-	                + ") TMP)"
-	                + "where rn between ? and ?";
-	        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
-	        return jdbcTemplate.query(sql, applyListMapper, data);
-//	    }
-	}
-
-	
-	
-	//카운트(서영)
-	public int count() {
-		String sql = "select count(*) from apply";
-		return jdbcTemplate.queryForObject(sql, int.class);
-	}
-	public int count(String column, String keyword) {
-		String sql = "select count(*) from apply "
-						+ "where instr("+column+", ?) > 0";
-		Object[] data = {keyword};
-		return jdbcTemplate.queryForObject(sql, int.class, data);
-	}
-	public int count(PageVO pageVO) {
-		if(pageVO.isSearch()) {//검색
-			String sql = "select count(*) from apply "
-							+ "where instr("+pageVO.getColumn()+", ?) > 0";
-			Object[] data = {pageVO.getKeyword()};
-			return jdbcTemplate.queryForObject(sql, int.class, data);
-		}
-		else {//목록
-			String sql = "select count(*) from apply";
-			return jdbcTemplate.queryForObject(sql, int.class);
-		}
-	}
-	
 	/////////////////////////////////////////////////////////////////////////////////
 	//통합 + 페이징 추가 (지혜)
 	public List<ApplyListVO> selectApplyListByPaging(String memberId, PageVO pageVO) {
@@ -220,8 +159,70 @@ public class ApplyDao {
 //				String sql="SELECT member_id, apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, pick_pay FROM ( SELECT apply.member_id, apply.apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, pick_pay, apply_state FROM apply INNER JOIN pick ON apply.apply_no = pick.apply_no) WHERE apply_state LIKE '신청완료' ORDER BY apply_hope_date ASC";
 //				return jdbcTemplate.query(sql, applyListVOMapper);
 //			}
+		
+		
+		
+		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// 통합+페이징(서영)
+		public List<ApplyDto> selectListByPaging(PageVO pageVO) {
+//		    if (pageVO.isSearch()) {
+//		        String sql = "select * from ("
+//		                + "select rownum rn, TMP.* from ("
+//		                + "select "
+//		                + "apply_no, member_id, apply_area, apply_post, apply_address1, "
+//		                + "apply_address2, apply_say, apply_way, apply_weight, apply_vinyl, "
+//		                + "apply_hope_date, apply_cancel, apply_date, apply_state "
+//		                + "from apply "
+//		                + "where instr(" + pageVO.getColumn() + ", ?) > 0) TMP) "
+//		                + "where rn between ? and ?";
+//		        Object[] data = {
+//		                pageVO.getKeyword(),
+//		                pageVO.getBeginRow(),
+//		                pageVO.getEndRow()
+//		        };
+//		        return jdbcTemplate.query(sql, applyListMapper, data);
+//		    } else {
+			
+		        String sql = "select * from ("
+		                + "select rownum rn, TMP.* from ("
+		                + "select "
+		                + "apply_no, member_id, apply_area, apply_post, apply_address1, "
+		                + "apply_address2, apply_say, apply_way, apply_weight, apply_vinyl, "
+		                + "apply_hope_date, apply_cancel, apply_date, apply_state "
+		                + "from apply "
+		                + ") TMP)"
+		                + "where rn between ? and ?";
+		        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+		        return jdbcTemplate.query(sql, applyListMapper, data);
+//		    }
+		}
 
+		//카운트(서영)
+		public int count() {
+			String sql = "select count(*) from apply";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+		public int count(String column, String keyword) {
+			String sql = "select count(*) from apply "
+							+ "where instr("+column+", ?) > 0";
+			Object[] data = {keyword};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		public int count(PageVO pageVO) {
+			if(pageVO.isSearch()) {//검색
+				String sql = "select count(*) from apply "
+								+ "where instr("+pageVO.getColumn()+", ?) > 0";
+				Object[] data = {pageVO.getKeyword()};
+				return jdbcTemplate.queryForObject(sql, int.class, data);
+			}
+			else {//목록
+				String sql = "select count(*) from apply";
+				return jdbcTemplate.queryForObject(sql, int.class);
+			}
+		}
+		
+/////////////////////////////////////////////////////////////////////////////////
 
 	
 	}

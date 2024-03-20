@@ -11,6 +11,15 @@
             padding: 50px;
 
         }
+         .detail-tool {
+          font-size: 20px;
+          padding: 0.5em 1em;
+          outline: none;
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          border-bottom: 1px solid #636e72;
+      }
 </style>
 
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -96,12 +105,13 @@
                 <h1>수거 신청 페이지</h1>
                 
             </div>
+            <br>
             <div class="cell w-500 ">
                 <h2> 신청 지역 선택
                     <i class="fa-solid fa-truck"></i>
                 </h2>
-<form action="request" method="post" autocomplete="off" enctype="multipart/form-data">
-                <select name="applyArea" class="tool w-100"  oninput="areaData()">
+		<form action="request" method="post" autocomplete="off" enctype="multipart/form-data">
+                <select name="applyArea" class="detail-tool w-100"  oninput="areaData()">
                     <option value="">선택하세요</option>
                     <option value="강남구">강남구</option>
                     <option value="강북구">강북구</option>
@@ -138,6 +148,7 @@
           <!--<input value="" type="text" name="applyArea" placeholder="반드시 지역을 선택하세요" id="applyAreaData"
                     class="tool w-100 fail-feedback" readonly>  -->
             </div> 
+            <br>
 
 
 
@@ -146,29 +157,32 @@
                     <i class="fa-regular fa-address-book"></i>
                 </h2>
                 <div class="cell flex-cell">
-                    <input type="text" class="tool " name="applyPost" placeholder="우편번호" readonly>
-                    <button type="button" class="btn btn-address-search tool w-70"><i
+                    <input class="detail-tool w-100" type="text" name="applyPost" placeholder="우편번호" readonly>
+                    <button type="button" class="btn positive btn-address-search tool w-70"><i
                             class="fa-solid fa-magnifying-glass"></i></button><br>
                     <button type="button" class="btn negative btn-address-clear tool w-70"><i
                             class="fa-solid fa-xmark"></i></button>
                 </div>
-                <input type="text" name="applyAddress1" class="tool w-100" placeholder="주소" readonly><br>
-                <input type="text" name="applyAddress2" class="tool w-100" placeholder="상세 주소">
+                <input class="detail-tool w-100" type="text" name="applyAddress1"placeholder="주소" readonly><br>
+                <input class="detail-tool w-100" type="text" name="applyAddress2" placeholder="상세 주소">
                 <div class="fail-feedback">주소를 모두 작성하세요 </div>
             </div>
+            <br>
             
             
             <div class="cell w-500">
                 <h2> 예상 무게 </h2>
-                <input value="" placeholder="ex) 5" name="applyWeight" class="tool w-100" required> <br>
+                <input class="detail-tool w-100" value="" placeholder="ex) 5" name="applyWeight" required> <br>
                 <label>일반쓰레기 한 봉지(10L) 당 약5kg정도 입니다.</label>
             </div>
+            <br>
             
             
             <div class="cell w-500">
                 <h2> 봉투개수 <i class="fa-solid fa-sack-xmark"></i></h2>
-                <input type="number"  name="applyVinyl" value="1" class="tool w-100" required>
+                <input class="detail-tool w-100" type="number" name="applyVinyl" value="1"required>
             </div>
+            <br>
             <%-- <div class="cell">
                 <h2> 보유 포인트 </h2>
                 <input type="number" class="tool w-100" name="" value="${membergreenDto.memberGreenPoint}">
@@ -177,32 +191,34 @@
             
             <div class="cell w-500">
                 <h2> 수거 희망 날짜 <i class="fa-solid fa-calendar-check"></i></h2>
-                <input type="date" name="applyHopeDate" class="tool w-500" oninput="" required>
+                <input type="date" name="applyHopeDate" class="detail-tool w-100" oninput="" required>
                 <div class="fail-feedback">잘못된 날짜 형식입니다</div>
             </div>
+            <br>
             
             
             <div class="cell w-500">
                 <h2> 배출 사진 첨부 파일 <i class="fa-regular fa-images"></i></h2>
-                <input name="applyAttach" type="file" class="tool w-500" >
-                <button type="button" class="btn w-100">첨부</button>
+                <input name="applyAttach" type="file" class="tool w-100" >
+                <button type="button" class="btn positive w-100">첨부</button>
             </div>
-            
+            <br>
             
             <div class="cell w-500">
                 <h2>남기실 말 <i class="fa-solid fa-pen"></i></h2>
-                <input type="text" name="applySay" class="tool w-100" >
+                <input type="text" name="applySay" class="detail-tool w-100">
             </div>
+            <br>
             
             <div class="cell w-500">
                 <h2>출입 방법  <i class="fa-solid fa-pen"></i></h2>
-                <select name="applyWay" class="tool w-100"  oninput="applyWayData()">
+                <select name="applyWay" class="detail-tool w-100"  oninput="applyWayData()">
                     <option value="전화하기">전화하기</option>
                     <option value="세대호출">세대호출</option>
                     </select>
                    
                 <br><br>
-                <button type="submit" class="btn w-100" > 수거 요청하기 </button>
+                <button type="submit" class="btn positive w-100" > 수거 요청하기 </button>
             </div>
             </div>
             
