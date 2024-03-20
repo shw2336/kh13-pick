@@ -1,6 +1,7 @@
 package com.kh.rushpickme.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -497,6 +498,25 @@ public class MemberController {
 		}
 		
 	}
+//pointlist는 권서영
+	@GetMapping("/pointList")
+	public String pointList(Model model, HttpSession session) {
+	    String loginId = (String) session.getAttribute("loginId");
+	    if (loginId == null) {
+	        //세션에 로그인한 사용자의 ID가 없는 경우 처리
+	        //예를 들어 로그인 페이지로 리다이렉트하거나 에러 페이지를 보여줄수잇음
+	    	//에러페이지 생성되면 리다이렉트 에러로 하기~~
+	        return "redirect:/login"; // 로그인 페이지로 리다이렉트
+	    }
+
+	    List<BuyDto> buyList = buyDao.selectList(loginId);
+	    model.addAttribute("buyList", buyList);
+	    return "/WEB-INF/views/member/pointList.jsp";
+	}
+
+
+
+	
 	@RequestMapping("/findPwSuccess")
 	public String findPwsuccess() {
 		return "/WEB-INF/views/member/findPwSuccess.jsp";
@@ -520,4 +540,5 @@ public class MemberController {
 	}
 	}
 
+	
 }
