@@ -27,6 +27,8 @@ public class PointController {
     private BuyDao buyDao;
     @Autowired
     private MemberDao memberDao;
+    
+
 
     @GetMapping("/charge")
     public String charge(Model model) {
@@ -46,13 +48,19 @@ public class PointController {
         buyDao.insert(buyDto);//구매내역 등록
         int item = pointDto.getPointSell() * buyDto.getBuyQty();
         memberDao.plusMemberPoint(loginId, item);//포인트 증가
+     
+        //기존 부름티켓 3장에서 포인트 구매시 차등지급되는 티켓수 증가
+        MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
+        int changeTicket = memberGreenDto.getMemberGreenTicket() + memberGreenDto.getMemberGreenPoint() / 10000;
+	    // 티켓 수 업데이트
+	    memberDao.updateTicketsByGreenPoint(loginId, changeTicket);
         
         // green 회원의 포인트 구매 내역 저장
-        MemberGreenDto greenDto = new MemberGreenDto();
-        
-        greenDto.setMemberId(loginId);//아이디 설정
-        buyDto.setPointName(pointDto.getPointName());//상품명 복사
-        greenDto.setMemberGreenPoint(pointDto.getPointSell() * buyDto.getBuyQty());//금액x수량
+////        MemberGreenDto greenDto = new MemberGreenDto();
+//        
+//        greenDto.setMemberId(loginId);//아이디 설정
+//        buyDto.setPointName(pointDto.getPointName());//상품명 복사
+//        greenDto.setMemberGreenPoint(pointDto.getPointSell() * buyDto.getBuyQty());//금액x수량
         
 
 
