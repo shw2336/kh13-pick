@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.rushpickme.configuration.KakaoProperties;
 import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dao.BuyDao;
 import com.kh.rushpickme.dao.MemberDao;
@@ -27,6 +28,7 @@ import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.dto.PointDto;
 import com.kh.rushpickme.service.AttachService;
 import com.kh.rushpickme.service.EmailService;
+import com.kh.rushpickme.service.KakaoService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -54,6 +56,12 @@ public class MemberController {
 	
 	@Autowired
 	private PointDao pointDao;
+	
+	@Autowired
+	private KakaoProperties kakaoProperties;
+	
+	@Autowired
+	private KakaoService kakoService;
 	
 	
 
@@ -121,8 +129,14 @@ public class MemberController {
 	// - 아이디와 비밀번호 검사를 통과해야만 세션에 데이터를 추가한다
 	// - 사용자가 입력한 아이디를 추가한다
 	@GetMapping("/login")
-	public String login() {
-		return "/WEB-INF/views/member/login2.jsp";
+	public String login(Model model) {
+		
+		 String client_id = kakaoProperties.getId(); // Kakao Developer 사이트에서 얻어온 client_id 값
+		 String redirect_uri = kakaoProperties.getRedirectUrl(); // Kakao Developer 사이트에서 설정한 redirect_uri 값
+		
+		 String location = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id="+client_id+"&redirect_uri="+redirect_uri;
+	        model.addAttribute("location", location);
+		return "/WEB-INF/views/member/login.jsp";
 	}
 
 	@PostMapping("/login")
