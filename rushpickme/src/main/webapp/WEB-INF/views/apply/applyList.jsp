@@ -58,12 +58,7 @@ table>tbody>.contents-tr {
 						<td><fmt:formatDate value="${applyList.applyDate}"
 								pattern="MM월 dd일" /></td>
 						<td>${applyList.applyHopeDate}</td>
-						<td>
-						<c:choose>
-							<c:when test="${applyList.applyCancel == 'Y'}">취소완료</c:when>
-							<c:otherwise>진행중</c:otherwise>
-						</c:choose>
-						</td>
+						<td>${applyList.applyState}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

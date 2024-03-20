@@ -79,7 +79,8 @@ public class ApplyDao {
 	
 	//수거 신청 목록 과 관련된 내용 ApplyList
 	public List<ApplyListVO> applyList( String memberId) {
-		String sql="select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, apply_cancel from apply where member_id=? ";
+		String sql="select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date, apply_state from apply where member_id=? "
+				+ "and apply_cancel = 'N'";
 		Object[]data= {memberId};
 		List<ApplyListVO> applyList =jdbcTemplate.query(sql,applyListVOMapper,data);
 		return jdbcTemplate.query(sql, applyListVOMapper,data);
@@ -205,4 +206,3 @@ public class ApplyDao {
 
 	
 	}
-
