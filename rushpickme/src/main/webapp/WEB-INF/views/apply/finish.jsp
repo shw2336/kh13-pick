@@ -26,7 +26,13 @@
           </style>
 <meta charset="UTF-8">
  <script type="text/javascript">
-       
+	 function review(num) {
+ 	window.location.href = "review?memberId=" + num;	
+ 	}
+ 	function applyList(num) {
+     	window.location.href = "applyList?memebrId=" + num;	
+ 		console.log(num);
+     	}
     </script>
 </head>
 <body>
@@ -55,21 +61,21 @@
 	</div>
     <br>
     <div class="cell">
+        <h2>수거 완료시각</h2>
+		<input class="detail-tool w-100" value="${pickDto.pickFinishDate}" readonly>
+	</div>
+	<br>
+    <div class="cell">
         <h2>증량</h2>
         <input class="detail-tool w-100" value="${pickDto.pickWeight}" readonly>
     </div>
     <br>
     <br>
     <div class="cell">
-        <h2>봉투개수</h2>
-        <input class="detail-tool w-100" value="${applyDto.applyVinyl}" readonly>
+        <h2>보유 포인트</h2>
+        <input class="detail-tool w-100" value="${point}" readonly>
     </div>
     <br>
-    <div class="cell">
-        <h2>수거 완료시각</h2>
-		<input class="detail-tool w-100" value="${pickDto.pickFinishDate}" readonly>
-	</div>
-	<br>
     <div class="cell">
         <h2>금액</h2>
         <input class="detail-tool w-100" value="${pickDto.pickPay}" readonly>
@@ -77,9 +83,9 @@
     <br>
 	
 	<div class="cell right">
-	<form action="cancel" method="post" >
-		<button class="btn positive" >결제하기</button>
-		</form>
+	
+		<button class="btn positive"  onclick="review('${applyDto.memberId}');">리뷰쓰기</button>
+		<button class="btn positive"  onclick="applyList('${applyDto.memberId}');">신청 리스트</button>
 	</div>
 	<br>
 <!-- 커밋 연습 -->
