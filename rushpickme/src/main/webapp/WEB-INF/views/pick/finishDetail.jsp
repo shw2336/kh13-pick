@@ -32,6 +32,7 @@
 <div class="cell center" >
 		<h1>
 			<span style="color: rgb(66,138,66)">${pickNo}번</span> 수거 정보
+			<img src="/image/notebook.png" style="width:50px;" class="ps-10">
 		</h1>
 </div>
 
@@ -49,23 +50,18 @@
 	</div>
 
 	<div class="cell mt-40">
-		<h2>봉투개수</h2>
-		<input class="detail-tool w-100" value="${findApplyDto.applyVinyl}" readonly>
+		<h2>최종 중량</h2>
+		<input class="detail-tool w-100" value="" readonly>
 	</div>
 
 	<div class="cell mt-40">
-		<h2>예상무게</h2>
-		<input class="detail-tool w-100" value="${findApplyDto.applyWeight}" readonly>
+		<h2>최종 금액</h2>
+		<input class="detail-tool w-100" value="" readonly>
 	</div>
 	
 	<div class="cell mt-40">
-		<h2>수거 희망 날짜</h2>
-		<input class="detail-tool w-100" value="${findApplyDto.applyHopeDate}" readonly>
-	</div>
-
-	<div class="cell mt-40">
-		<h2>남기신 말</h2>
-		<input class="detail-tool w-100" value="${findApplyDto.applySay}" readonly>
+		<h2>수거 일시</h2>
+		<input class="detail-tool w-100" value="" readonly>
 	</div>
 
 	<div class="cell mt-40">
