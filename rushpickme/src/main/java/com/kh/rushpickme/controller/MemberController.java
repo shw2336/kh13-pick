@@ -235,16 +235,9 @@ public class MemberController {
 	    MemberDto memberDto = memberDao.selectOne(loginId);
 	    MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
 
-	    // Green 포인트를 기준으로 구매 가능한 티켓 수 계산
-	    int availableTickets = memberDao.manTickets(memberGreenDto.getMemberGreenPoint());
-
-	    // 티켓 수 업데이트
-	    memberDao.updateTicketsByGreenPoint(loginId, availableTickets);
-
 	    // 회원 정보와 티켓 수를 모델에 추가
 	    model.addAttribute("memberDto", memberDto);
 	    model.addAttribute("memberGreenDto", memberGreenDto);
-	    model.addAttribute("availableTickets", availableTickets);
 
 	    return "/WEB-INF/views/member/myPageGreen.jsp";
 	}

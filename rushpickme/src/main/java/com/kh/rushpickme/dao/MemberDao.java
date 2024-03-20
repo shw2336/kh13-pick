@@ -275,23 +275,12 @@ public class MemberDao {
 				return jdbcTemplate.queryForObject(sql, int.class);
 			}
 		}
-	
-
-		// Green 포인트를 기준으로 구매할 수 있는 티켓 수 계산
-		//만원
-		public int manTickets(int memberGreenPoint) {
-		    int manTicket = 1; // 만원당 티켓 수
-		    int availableTickets = memberGreenPoint / 10000 * manTicket;
-		    return availableTickets;
-		}
-		
-	
-		
 		// 구매한 티켓 수 업데이트
-		public void updateTicketsByGreenPoint(String memberId, int memberGreenTicket) {
+		public void updateTicketsByGreenPoint(String memberId, int changeTicket) {
 		    String sql = "UPDATE member_green SET member_green_ticket = ? WHERE member_id = ?";
-		    Object[] data = {memberGreenTicket, memberId};
+		    Object[] data = {changeTicket, memberId};
 		    jdbcTemplate.update(sql, data);
 		}
+
 }
 
