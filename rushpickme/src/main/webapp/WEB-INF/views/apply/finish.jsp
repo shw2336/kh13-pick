@@ -52,7 +52,7 @@
 			 
 			
 	</div>
-	<div class="cell">
+	<div class="cell">  
 
 		<h2>주소</h2>
 		<input class="detail-tool w-100" value="${applyDto.applyPost}" > <input
