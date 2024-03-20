@@ -29,8 +29,9 @@
             }
         };
         $("[name=pickWeight]").blur(function () {
-            var regex = /^[0-9]+$/;
-            state.pickWeightValid = regex.test($(this).val()) && $(this).val() > 0;
+//             var regex = /^[0-9]+$/;
+//             state.pickWeightValid = regex.test($(this).val()) && $(this).val() > 0;
+            state.pickWeightValid = $(this).val() > 0;
             $(this).removeClass("success fail").addClass(state.pickWeightValid ? "success" : "fail");
         });
 
@@ -128,11 +129,11 @@
 		<div class="cell flex-cell">
 			<div class="cell">
 				<button type="button" class="btn move w-100"  style="border-radius: 10px;" onclick="proceedDetail(${pickNo});">
-				신청정보 다시보기</button>
+				<span class="btn-name">신청정보 다시보기</span></button>
 			</div>
 			<div class="cell width-fill right">
 				<button type="submit" class="btn move btn-send-finish w-75" style="border-radius: 10px;">
-				<i></i><span>등록하기</span></button>
+				<i></i><span class="btn-name">등록하기</span></button>
 			</div>
 		</div>
 	</div>

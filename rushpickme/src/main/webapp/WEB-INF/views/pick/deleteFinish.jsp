@@ -15,11 +15,17 @@
 	function proceedList () {
 		window.location.href = "proceedList";
 	}
+	function rejectList () {
+		window.location.href = "rejectList";
+	}
+	function finishList () {
+		window.location.href = "finishList";
+	}
 </script>
 
-<div class="container w-500 mb-30">
+<div class="container w-500 mb-50">
 	<div class="cell">
-		<img src="/image/pickFinish.png" class="image" width="100%">
+		<img src="/image/deleteFinish.png" class="image" width="100%">
 	</div>
 </div>
 
@@ -28,9 +34,9 @@
 		<span class="me-10"></span>
 		<button class="btn move" onclick="proceedList();"><span class="btn-name">나의 진행건</span></button>
 		<span class="me-10"></span>
-		<button class="btn move" onclick="list();'"><span class="btn-name">나의 거부건</span></button>
+		<button class="btn move" onclick="rejectList();"><span class="btn-name">나의 거부건</span></button>
 		<span class="me-10"></span>
-		<button class="btn move" onclick="list();'"><span class="btn-name">전체 목록 보기</span></button>
+		<button class="btn move" onclick="finishList();"><span class="btn-name">나의 완료건</span></button>
 		<span class="me-10"></span>
 	</div>
 

@@ -150,7 +150,7 @@ public class PickDao {
 		return jdbcTemplate.query(sql, pickFinishVoMapper, data);
 	}
 	
-	//수거 완료 리스트 전체 
+	//수거 완료 리스트 전체 (최신순)
 	public List<PickFinishVo> pickFinishListByPaging (String memberId, PageVO pageVo) {
 		String sql = "select * from ("
 				+ "select rownum RN, T.* from ("
@@ -168,7 +168,25 @@ public class PickDao {
 		return jdbcTemplate.query(sql, pickFinishVoMapper, data);
 	}
 	
-	//수거 대기 리스트
+	//수거 완료 리스트 전체 (정렬기준 선택)
+	public List<PickFinishVo> pickFinishListOrderBy (String memberId, String orderBy, PageVO pageVo) {
+		String sql = "select * from ("
+				+ "select rownum RN, T.* from ("
+				+ "select pick_no, apply_date, pick_finish_date, pick_pay from ("
+				+ "select pick_no, apply_date, pick_finish_date, pick_pay from pick "
+				+ "inner join apply on pick.apply_no = apply.apply_no "
+				+ "where pick_state like '수거완료' "
+				+ "and pick.member_id like ? "
+				+ "and pick_delete = 'N' "
+				+ "and apply.apply_area in (select member_pick_area from member_pick where member_pick.member_id like ?) "
+				+ "order by pick_finish_date ?)"
+				+ ")T "
+				+ ") where RN between ? and ?";
+		Object[] data = {memberId, memberId, orderBy, pageVo.getBeginRow(), pageVo.getEndRow()};
+		return jdbcTemplate.query(sql, pickFinishVoMapper, data);
+	}
+	
+	//(일반) 수거 대기 리스트
 	public List<PickWaitVo> waitList () {
 		String sql = "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date "
 				+ "from apply "
@@ -184,6 +202,21 @@ public class PickDao {
 				+ "from apply "
 				+ "where apply_state like '신청완료' "
 				+ "and apply_area like ? "
+				+ "order by apply_hope_date asc"
+				+ ")T "
+				+ ") where RN between ? and ?";
+		Object[] data = {findArea, pageVo.getBeginRow(), pageVo.getEndRow()};
+		return jdbcTemplate.query(sql, pickWaitVoMapper, data);
+	}
+	
+	//(긴급) 수거 대기 리스트
+	public List <PickWaitVo> urgentListByPaging (PageVO pageVo, String findArea) {
+		String sql = "select * from ("
+				+ "select rownum RN, T.* from ("
+				+ "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply "
+				+ "where apply_state like '신청완료' "
+				+ "and apply_area like ? "
+				+ "and round((sysdate - apply_date) * 24, 2) > 6 "
 				+ "order by apply_hope_date asc"
 				+ ")T "
 				+ ") where RN between ? and ?";
@@ -253,7 +286,8 @@ public class PickDao {
 	
 	//오래된 신청건수 (신청한지 6시간 지난 것)
 	public int countUrgentApply (String memberId) {
-		String sql = "SELECT count(*) FROM apply WHERE ROUND((sysdate - apply_date) * 24, 2) > 6 "
+		String sql = "SELECT count(*) FROM apply "
+				+ "WHERE ROUND((sysdate - apply_date) * 24, 2) > 6 "
 				+ "and apply_state like '신청완료' "
 				+ "and apply_area in (select member_pick_area from member_pick where member_id like ?)";
 		Object[] data = {memberId};

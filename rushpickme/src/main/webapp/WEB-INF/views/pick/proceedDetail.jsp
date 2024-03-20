@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -159,7 +160,9 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d667a3facb2ac08f0c7fe4e48bd917e9&lib
 	<div class="cell mt-40">
 		<h2>출입 불가시 이렇게 해 주세요. </h2>
 		<input class="detail-tool w-100" style="color: rgb(66,138,66)" value="${findApplyDto.applyWay}" readonly>
-		<input class="detail-tool w-100" value="전화번호는 ${memberContact} 입니다." readonly>
+		<c:if test="${findApplyDto.applyWay eq '전화하기'}">
+			<input class="detail-tool w-100" value="전화번호는 ${memberContact} 입니다." readonly>
+		</c:if>
 	</div>
 	
 	<div class="cell mt-40">

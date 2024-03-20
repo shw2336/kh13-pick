@@ -18,13 +18,13 @@ table > tbody > .contents-tr {
 <script type="text/javascript">
 
 	function detail (no){
-		window.location.href = "waitDetail?applyNo=" + no;
+		window.location.href = "urgentDetail?applyNo=" + no;
 	}
 	function moveList (){
 		window.location.href = "list";
 	}
-	function urgentList (){
-		window.location.href = "urgentList";
+	function waitList (){
+		window.location.href = "waitList";
 	}
 	function proceedList (){
 		window.location.href = "proceedList";
@@ -36,7 +36,6 @@ table > tbody > .contents-tr {
 		window.location.href = "finishList";
 	}
 
-
 </script>
 	
 <!-- 이동버튼 구역 -->
@@ -45,8 +44,8 @@ table > tbody > .contents-tr {
 			<span class="btn-name">전체 목록 보기</span>
 		</button>
 			<span>&nbsp;&nbsp;</span>
-		<button type="button" class="btn move" onclick="urgentList();">
-			<span class="btn-name"><span style="color:red; font-size:15px;" >긴급</span>
+		<button type="button" class="btn move" onclick="waitList();">
+			<span class="btn-name"><span style="color:rgb(66,138,66); font-size:15px;">일반</span>
 			<span>&nbsp;</span>수거대기건</span>
 		</button>
 			<span>&nbsp;&nbsp;</span>
@@ -57,7 +56,7 @@ table > tbody > .contents-tr {
 		<button type="button" class="btn move" onclick="rejectList();">
 			<span class="btn-name">나의 거부건</span>
 		</button>
-		<span>&nbsp;&nbsp;</span>
+			<span>&nbsp;&nbsp;</span>
 		<button type="button" class="btn move" onclick="finishList();">
 			<span class="btn-name">나의 완료건</span>
 		</button>
@@ -70,8 +69,10 @@ table > tbody > .contents-tr {
 			<div class="cell">
 				<span style="font-size:25px; font-weight:bold;">수거 대기건</span>
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				<span style="color: rgb(66,138,66); font-weight:bold;">수거희망일</span>이 
-				<span style="color: rgb(255, 128, 128); font-weight:bold;">임박</span>한 순서대로 조회됩니다.
+				<i class="fa-solid fa-bomb red"></i>
+				<span style="color: rgb(66,138,66); font-weight:bold;">수거 신청</span> 후 
+				<span style="color: rgb(255, 128, 128); font-weight:bold;">6시간 지난</span> 건 입니다.
+				고객님께 <span style="color: rgb(66,138,66); font-weight:bold;">접수 여부</span>를 알려주세요!
 			</div>
 		</div>
 		
@@ -88,20 +89,20 @@ table > tbody > .contents-tr {
 			</thead>
 		
 			<tbody>
-				<c:forEach var="waitList" items="${waitList}">
-					<tr onclick="detail('${waitList.applyNo}');" class="contents-tr">
-						<td>${waitList.applyNo}</td>
-						<td>${waitList.applyAddress1}</td>
-						<td>${waitList.applyVinyl}</td>
-						<td><fmt:formatDate value="${waitList.applyDate}"
+				<c:forEach var="urgentList" items="${urgentList}">
+					<tr onclick="detail('${urgentList.applyNo}');" class="contents-tr">
+						<td>${urgentList.applyNo}</td>
+						<td>${urgentList.applyAddress1}</td>
+						<td>${urgentList.applyVinyl}</td>
+						<td><fmt:formatDate value="${urgentList.applyDate}"
 						pattern="MM월 dd일" /></td>
-						<td>${waitList.applyHopeDate}</td>
+						<td>${urgentList.applyHopeDate}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		</div>
-		<form action="waitList">
+		<form action="urgentList">
 			<jsp:include page="/WEB-INF/views/template/pickNavigator.jsp"></jsp:include>
 		</form>
 	</div>

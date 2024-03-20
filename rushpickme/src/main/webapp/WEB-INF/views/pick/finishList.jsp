@@ -23,7 +23,7 @@
 		window.location.href = "list";
 	}
 	function urgentList (){
-		window.location.href = "list";
+		window.location.href = "urgentList";
 	}
 	function waitList () {
 		window.location.href = "waitList";
