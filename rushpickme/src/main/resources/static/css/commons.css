@@ -24,6 +24,12 @@
     margin-right: auto;
 }
 
+.pick-container {
+	border-radius: 10px;
+	border: 1px solid gainsboro;
+	box-shadow: 0px 4px 4px 2px gainsboro;
+}
+
 /*
     셀(.cell)
     - 컨테이너의 내부에 배치되는 한 줄
@@ -158,6 +164,20 @@ textarea.tool.tool-fixed {
     filter: brightness(0.95);
 }
 
+/* 페이지 이동버튼스타일 */
+.btn-name {
+	font-weight: bold;
+	font-size:18px;
+}
+.btn.move {
+	background-color: white;
+	border-radius: 10px;
+	border: 1px solid gainsboro;
+	box-shadow: 0px 2px 2px 1px gainsboro;
+}
+.btn.move:hover {
+	background-color: beige;
+}
 
 /*
     정렬 스타일

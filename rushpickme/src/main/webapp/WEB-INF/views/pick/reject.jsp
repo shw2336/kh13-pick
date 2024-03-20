@@ -108,13 +108,13 @@
 
 	<form action="reject" method = "post" enctype="multipart/form-data" autocomplete="off" class="check-form">
 	
-	<div class="container w-300" style="margin-top: 50px; margin-bottom:80px;">
+	<div class="container w-300" style="margin-bottom:80px;">
 		<input type="hidden" value="${applyNo}" name="applyNo" />
 		<input type="hidden" id="pickReject" name="pickReject" />
 		<input type="hidden" value="${findApplyState}" name="applyState" class="applyState"/>
 
 		<div class="cell center mb-30">
-			<h2>거부 사유를 선택 해 주세요.</h2>
+			<h2><span style="color: rgb(255, 128, 128)">거부 </span>사유를 선택 해 주세요.</h2>
 		</div>
 
 		<div class="cell center pb-10">
@@ -130,12 +130,11 @@
 		</div>
 
 		<div class="cell center pb-10">
-			<button type="button" class="btn reject-btn comment-btn w-100">봉투
-				미사용</button>
+			<button type="button" class="btn reject-btn comment-btn w-100">봉투 미사용</button>
 		</div>
 		<div class="cell center pb-10">
 			<button type="button" class="btn reject-btn etc-btn w-100">
-				기&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타</button>
+				기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;타</button>
 		</div>
 		<div class="cell center">
 			<textarea class="tool w-100 reject-comment"

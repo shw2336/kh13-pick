@@ -77,6 +77,7 @@ public class PickController {
 		return "/WEB-INF/views/pick/list.jsp"; 
 	}
 	
+	//(일반)수거대기 리스트
 	@RequestMapping("/waitList")
 	public String waitList (Model model, HttpSession session, @ModelAttribute PageVO pageVo) {
 		String findArea = (String) session.getAttribute("findArea");
@@ -88,7 +89,7 @@ public class PickController {
 		return "/WEB-INF/views/pick/waitList.jsp";
 	}
 	
-	// 수거접수리스트 상세조회 화면 
+	// (일반)수거대기 상세  
 	@RequestMapping("/waitDetail")
 	public String waitDetail (Model model, @RequestParam int applyNo) {
 		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
@@ -97,6 +98,7 @@ public class PickController {
 		return "/WEB-INF/views/pick/waitDetail.jsp";
 	}
 	
+	// 진행 리스트
 	@RequestMapping("/proceedList")
 	public String proceedList (Model model, @ModelAttribute PageVO pageVo, HttpSession session) {
 		String memberId = (String) session.getAttribute("loginId");
@@ -111,6 +113,7 @@ public class PickController {
 		return "/WEB-INF/views/pick/proceedList.jsp";
 	}
 	
+	// 진행 상세
 	@RequestMapping("/proceedDetail")
 	public String proceedDetail (Model model, @RequestParam int pickNo) {
 		int applyNo = pickDao.selectApplyNo(pickNo);
@@ -119,12 +122,13 @@ public class PickController {
 		
 		MemberDto memberDto = memberDao.selectOne(findApplyDto.getMemberId());
 		model.addAttribute("memberContact", memberDto.getMemberContact()) ;
-		//신청자 dto에서 신청자 연락처 뽑기
+		//신청자 연락처 뽑기
 		
 		model.addAttribute("findApplyDto", findApplyDto);
 		return "/WEB-INF/views/pick/proceedDetail.jsp";
 	}
 	
+	// 거부 리스트
 	@RequestMapping("/rejectList")
 	public String rejectList (Model model, @ModelAttribute PageVO pageVo, HttpSession session) {
 		String memberId = (String) session.getAttribute("loginId");
@@ -138,6 +142,20 @@ public class PickController {
 		return "/WEB-INF/views/pick/rejectList.jsp";
 	}
 	
+	// 거부 상세
+	@RequestMapping("/rejectDetail")
+	public String rejectDetail (@RequestParam int pickNo, Model model) {
+		PickDto findPickDto = pickDao.selectOneByPick(pickNo);
+		model.addAttribute("findPickDto", findPickDto);
+		
+		int applyNo = pickDao.selectApplyNo(pickNo);
+		ApplyDto findApplyDto = pickDao.selectOneByApply(applyNo);
+		model.addAttribute("findApplyDto", findApplyDto);
+				
+		return "/WEB-INF/views/pick/rejectDetail.jsp";
+	}
+	
+	// 완료 리스트
 	@GetMapping("/finishList")
 	public String finishList (Model model, @ModelAttribute PageVO pageVo, HttpSession session) {
 		String memberId = (String) session.getAttribute("loginId");
@@ -151,20 +169,16 @@ public class PickController {
 		return "/WEB-INF/views/pick/finishList.jsp";
 	}
 	
+	// 완료 여러건 한번에 삭제 (배열로 넘기기)
 	@PostMapping("/finishList")
 	public String finishList (@RequestParam Object[] deletePicks) {
 		
-		//배열로 넘기기
 		pickDao.deleteByArray(deletePicks);
 		
 		return "redirect:finishList";
 	}
 	
-	@RequestMapping("/deleteFinish")
-	public String deleteFinish () {
-		return "/WEB-INF/views/pick/deleteFinish.jsp";
-	}
-	
+	// 완료 상세
 	@RequestMapping("/finishDetail")
 	public String finishDetail (Model model, @RequestParam int pickNo) {
 		model.addAttribute("pickNo", pickNo);
@@ -175,6 +189,19 @@ public class PickController {
 		model.addAttribute("findApplyDto", findApplyDto);
 		
 		return "/WEB-INF/views/pick/finishDetail.jsp";
+	}
+	
+	// 완료 한 건씩 삭제
+	@PostMapping("/deletePick") 
+	public String deletePick (@RequestParam int pickNo) {
+		pickDao.delete(pickNo);
+		return "redirect:deleteFinish";
+	}
+		
+	// 삭제완료
+	@RequestMapping("/deleteFinish")
+	public String deleteFinish () {
+		return "/WEB-INF/views/pick/deleteFinish.jsp";
 	}
 	
 	// 수거 접수
@@ -237,6 +264,25 @@ public class PickController {
 		return "redirect:list";
 	}
 	
+	// 거부 취소
+	@PostMapping("/rejectCancel")
+	public String rejectCancel(@RequestParam int pickNo, @RequestParam int applyNo, 
+			@RequestParam(required = false) String pickSchedule) {
+		
+		if (pickSchedule != null) {
+			//진행중에 거부한 건 이라면 
+			pickDao.rejectCancelToProceed(pickNo);
+			pickDao.updateApplyStateProceed(applyNo);
+			return "redirect:proceedList";
+		}else {
+			//접수받자마자 거부한 건 이라면 
+			pickDao.rejectCancelToWait(pickNo);
+			pickDao.updateApplyStateWait(applyNo);
+			return "redirect:list";
+		}
+	}
+	
+	// 수거 완료 처리 
 	@GetMapping("/complete")
 	public String complete(@RequestParam int applyNo, Model model) {
 		model.addAttribute("applyNo", applyNo);
@@ -275,7 +321,7 @@ public class PickController {
 		return "/WEB-INF/views/pick/pickFinish.jsp";
 	}
 	
-	
+	// 배출 사진
 	@RequestMapping ("/image/apply")
 	public String imageApply (@RequestParam int applyNo) {
 		try {
@@ -286,6 +332,7 @@ public class PickController {
 		}
 	}
 	
+	// 수거 사진
 	@RequestMapping ("/image/pick")
 	public String imagePick (@RequestParam int pickNo) {
 		try {

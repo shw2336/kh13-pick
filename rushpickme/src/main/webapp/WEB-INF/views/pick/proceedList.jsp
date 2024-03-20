@@ -8,16 +8,11 @@
     
 
 <style>
-     .pick-container {
-         border-radius: 10px;
-         border: 1px solid gainsboro;
-         box-shadow: 0px 4px 4px 2px gainsboro;
-     }
-     
-     table > tbody > .contents-tr {
-     	cursor: pointer;
-     	height: 40px;
-     }
+    
+   table > tbody > .contents-tr {
+   		cursor: pointer;
+   		height: 40px;
+   }
      
 </style>
 
@@ -26,14 +21,49 @@
 	function detail (no){
 		window.location.href = "proceedDetail?pickNo=" + no;
 	}
+	function moveList (){
+		window.location.href = "list";
+	}
+	function urgentList (){
+		window.location.href = "list";
+	}
+	function waitList (){
+		window.location.href = "waitList";
+	}	
+	function rejectList (){
+		window.location.href = "rejectList";
+	}
 
 </script>
+
+<!-- 이동버튼 구역 -->
+	<div class="container w-800">
+		<button type="button" class="btn move" onclick="moveList();">
+			<span class="btn-name">전체 목록 보기</span>
+		</button>
+			<span>&nbsp;&nbsp;</span>
+		<button type="button" class="btn move" onclick="urgentList();">
+			<span class="btn-name"><span style="color:red; font-size:15px;" >긴급</span>
+			<span>&nbsp;</span>수거대기건</span>
+		</button>
+			<span>&nbsp;&nbsp;</span>
+		<button type="button" class="btn move" onclick="waitList();">
+			<span class="btn-name"><span style="color:rgb(66,138,66); font-size:15px;" >일반</span>
+			<span>&nbsp;</span>수거대기건</span>
+		</button>
+			<span>&nbsp;&nbsp;</span>
+		<button type="button" class="btn move" onclick="rejectList();">
+			<span class="btn-name">나의 거부건</span>
+		</button>
+	</div>
+<!-- ------------- -->
 
 <div class="container pick-container w-800 py-30 px-50 my-50">
 	
 	<div class="cell flex-cell pb-10">
 		<div class="cell">
-			<span style="font-size:25px; font-weight:bold;">수거 진행중	</span>
+			<span style="font-size:25px; font-weight:bold;">수거 진행건</span>
+			<span>&nbsp;</span>
 			<span><i class="fa-solid fa-clock" style="color: rgb(255, 128, 128)"></i> 고객님의 
 			<span style="color: rgb(66,138,66); font-weight:bold;">수거 희망일</span>이 지났을 경우 표시됩니다. </span>
 		</div>

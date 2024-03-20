@@ -4,11 +4,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>    
-.pick-container {
-	border-radius: 10px;
-	border: 1px solid gainsboro;
-	box-shadow: 0px 4px 4px 2px gainsboro;
-}
+
 .submit-btn {
 	border-radius: 10px !important;
 	background-color: white;
@@ -103,27 +99,27 @@
 	<input type="hidden" value="${memberEmail}" name="memberEmail" />
 
 		<div class="cell center mt-50" >
-			<h2>
-				<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님에게
+			<h1>
+<%-- 				<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님에게 --%>
 				<span style="color: rgb(66,138,66)">완료 정보</span>를 알려주세요!
-			</h2>
+			</h1>
 		</div>
 	
 	<div class="container w-500 pick-container p-30" style="margin-top: 50px; margin-bottom:80px;">
 		
-		<div class="cell">
+		<div class="cell mb-40">
 			<h2>수거 중량</h2>
 			<input name="pickWeight" class="tool input-tool w-100" placeholder="중량을 입력하세요." style="border-radius:10px">
 			<div class="fail-feedback">숫자를 입력하세요</div>
 		</div>
 
-		<div class="cell">
+		<div class="cell mb-40">
 			<h2>수거 금액</h2>
 			<input name="pickPay" class="tool input-tool w-100" value="" style="border-radius:10px">
 			<div class="fail-feedback">금액을 입력하세요</div>
 		</div>
 		
-		<div class="cell">
+		<div class="cell mb-40">
 			<h2>수거 이미지</h2>
 			<input type="file" name="attach"id="uploadFile" class="image w-100">
 			<div id="imgArea"></div>
@@ -131,11 +127,11 @@
 		
 		<div class="cell flex-cell">
 			<div class="cell">
-				<button type="button" class="btn w-100"  style="border-radius: 10px;" onclick="proceedDetail(${pickNo});">
+				<button type="button" class="btn move w-100"  style="border-radius: 10px;" onclick="proceedDetail(${pickNo});">
 				신청정보 다시보기</button>
 			</div>
 			<div class="cell width-fill right">
-				<button type="submit" class="btn btn-send-finish w-75" style="border-radius: 10px;">
+				<button type="submit" class="btn move btn-send-finish w-75" style="border-radius: 10px;">
 				<i></i><span>등록하기</span></button>
 			</div>
 		</div>

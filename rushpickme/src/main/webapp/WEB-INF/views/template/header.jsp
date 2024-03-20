@@ -28,7 +28,7 @@
   
     .header {
         padding-top: 50px; /* 위 여백 설정 */
-        padding-bottom: 150px; /* 아래 여백 설정 */
+        padding-bottom: 100px; /* 아래 여백 설정 */
     }
 
     .header img {
@@ -41,7 +41,7 @@
     .menu a {
         color: rgb(66,138,66);
         background-color: white;
-        padding: 5px 10px;
+        padding: 10px 10px;
         text-decoration: none;
     }
 
@@ -56,10 +56,15 @@
     .board-menu {
         position: relative;
     }
-
+    
     .board-menu:hover .sub-menu {
         display: block;
     }
+    
+/*     ul > li > a:hover{ */
+/*      background-color: rgba(253, 255, 134, 0.153); */
+/*      border-radius:10px; */
+/*     } */
 </style>
 
 <!--  jQuery CDN -->

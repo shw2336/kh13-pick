@@ -14,14 +14,18 @@
 	border-bottom: 1px solid #636e72;
 }
 
-.pick-container {
-	border-radius: 10px;
-	border: 1px solid gainsboro;
-	box-shadow: 0px 4px 4px 2px gainsboro;
-}
 </style>
 
 <script type="text/javascript">
+
+	function finishList () {
+		window.location.href = "finishList";
+	}
+	function deletePick () {
+		if (confirm("정말 삭제하시겠습니까?")) {
+			$("#form-type").attr("action", "deletePick").submit();
+		}
+	}
 
 </script>
 
@@ -43,42 +47,53 @@
 			class="detail-tool w-100" value="${findApplyDto.applyAddress1}" readonly> <input
 			class=" detail-tool w-100" value="${findApplyDto.applyAddress2}" readonly>
 	</div>
-	<br>
-	<div class="cell">
+
+	<div class="cell mt-40">
 		<h2>봉투개수</h2>
 		<input class="detail-tool w-100" value="${findApplyDto.applyVinyl}" readonly>
 	</div>
-	<br>
-	<div class="cell">
+
+	<div class="cell mt-40">
 		<h2>예상무게</h2>
 		<input class="detail-tool w-100" value="${findApplyDto.applyWeight}" readonly>
 	</div>
-	<br>
-	<div class="cell">
+	
+	<div class="cell mt-40">
 		<h2>수거 희망 날짜</h2>
 		<input class="detail-tool w-100" value="${findApplyDto.applyHopeDate}" readonly>
 	</div>
-	<br>
-	<div class="cell">
+
+	<div class="cell mt-40">
 		<h2>남기신 말</h2>
 		<input class="detail-tool w-100" value="${findApplyDto.applySay}" readonly>
 	</div>
-	<br>
-	<div class="cell">
+
+	<div class="cell mt-40">
 		<h2>배출사진</h2>
 		<div class="cell">
 				<img src="image/apply?applyNo=${findApplyDto.applyNo}" class="image" width="100%">
 		</div>
 	</div>
 	
-	<div class="cell">
+	<div class="cell mt-40">
 		<h2>수거사진</h2>
 		<div class="cell">
 				<img src="image/pick?pickNo=${pickNo}" class="image" width="100%">
 		</div>
 	</div>
-	<br>
-
+	
+	<form method="post" id="form-type">
+		<input name="pickNo" type="hidden" value="${pickNo}"/>
+		<div class="cell right mb-40">
+			<button type="button" class="btn move" onclick="finishList();">
+			<span class="btn-name">돌아가기</span></button>
+			<span class="me-20"></span>
+			
+			<button class="btn move" onclick="deletePick();">
+			<span class="btn-name">삭제하기</span></button>
+		</div>
+	</form>
+	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
