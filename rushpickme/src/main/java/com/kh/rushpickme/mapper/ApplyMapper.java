@@ -22,7 +22,7 @@ public class ApplyMapper implements RowMapper<ApplyDto>{
 		applyDto.setApplyAddress2(rs.getString("apply_address2"));
 		applyDto.setApplySay(rs.getString("apply_say"));
 		applyDto.setApplyWay(rs.getString("apply_way"));
-		applyDto.setApplyWeight(rs.getInt("apply_weight"));
+		applyDto.setApplyWeight(rs.getFloat("apply_weight"));
 		applyDto.setApplyVinyl(rs.getInt("apply_vinyl"));
 		applyDto.setApplyCancel(rs.getString("apply_cancel"));
 		applyDto.setApplyState(rs.getString("apply_state"));
