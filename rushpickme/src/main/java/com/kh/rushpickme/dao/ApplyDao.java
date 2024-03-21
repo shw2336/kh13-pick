@@ -136,7 +136,29 @@ public class ApplyDao {
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 	
-	
+	//최종 결제
+		public int resultPay (String memberId) {
+			String sql= "SELECT member_green_point FROM member_green WHERE member_id = ?";
+			Object[] data = {memberId};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	
 
