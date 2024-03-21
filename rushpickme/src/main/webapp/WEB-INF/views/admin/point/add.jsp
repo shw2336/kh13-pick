@@ -22,8 +22,12 @@
         text-align: center;
         cursor: pointer;
         border: none;
-        background-color: rgb(255, 128, 128);
+        background-color: #ff8080;
+        border-radius: 10px;
+        padding: 10px 20px; 
     }
+</style>
+
 </style>
 
 

@@ -47,16 +47,17 @@
         display: inline-block;
         margin-right: 20px;
         padding: 10px 20px;
-        background-color: #4CAF50;
-        color: #2d3436;
+        background-color: #ff8080;
+        color: white;
         text-decoration: none;
         border: none;
-        border-radius: 5px;
-        cursor: pointer;
+        border-radius: 10px;
+     
     }
 
     .actions a:hover {
-        background-color: #45a049;
+    background-color: #f56a6a; 
+        	  cursor: pointer;
     }
 
     .empty-msg {
