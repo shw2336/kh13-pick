@@ -34,10 +34,14 @@
                 return this.pickWeightValid && this.pickPayValid;
             }
         };
-        $("[name=pickWeight]").blur(function () {
+        //$("[name=pickWeight]").blur(function () {
+        $(".pickWeight").blur(function () {
+       		$("[name=pickWeight]").val($(this).val());
             state.pickWeightValid = $(this).val().length > 0;
             $(this).removeClass("success fail").addClass(state.pickWeightValid ? "success" : "fail");
-            $("[name=pickPay]").val(Math.floor(parseFloat($(this).val()) * 1400));
+            var price = (Math.floor(parseFloat($(this).val()) * 1400));
+            $("[name=pickPay]").val(price);
+            $(".pick-pay").val(price.toLocaleString());
         });
 
         $("[name=pickPay]").blur(function () {
@@ -118,13 +122,15 @@
 		
 		<div class="cell mb-40">
 			<h2>수거 중량</h2>
-			<input name="pickWeight" class="tool underline w-100" placeholder="중량을 입력하세요. (소수점 가능)">
+			<input class="tool underline w-100 pickWeight" placeholder="중량을 입력하세요. (소수점 가능)">
+			<input name="pickWeight" type="hidden" />
 			<div class="fail-feedback">숫자를 입력하세요</div>
 		</div>
 
 		<div class="cell mb-40">
 			<h2>수거 금액</h2>
-			<input name="pickPay" class="tool underline w-100 pick-pay" placeholder="kg당 1400원으로 계산됩니다.">
+			<input class="tool underline w-100 pick-pay" placeholder="kg당 1400원으로 계산됩니다.">
+			<input name="pickPay" type="hidden" />
 			<div class="fail-feedback">금액을 입력하세요</div>
 		</div>
 		
