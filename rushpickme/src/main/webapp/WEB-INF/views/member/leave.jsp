@@ -82,29 +82,36 @@ width: 100%;
 	
 
 	<form action="leave" method="post" autocomplete="off">
-		<div class="cell center">
+		<div class="container pick-container w-700 p-20 mb-50">
+		         <div class="cell center">
 		           ${memberDto.memberName}님의
+		           </div>
+		           <div class="cell center">
+		           
 			       ${memberDto.memberId} 계정을 삭제 합니다
-			       </div>
+		           </div>
+			      
 			       <div class="cell center">
+			       <br>
 			       	<h5 style="color:red">탈퇴 를 위해 비밀번호를 한번 더 입력 해주세요</h5>
-			       <br><br><br><br><br><br><br>
+			       <br><br><br><br>
 			       
 			        </div>
 					<div class="cell center">
-    					<span style="color:red"></span>	
+    				
     				<input name="memberPw" type="password" placeholder="패스워드 입력" required>
     						
 					</div>
-
+		
+		 
 
 
           <div class="button---container center">
-	    <button class="btn negative" type="submit">확인</button>
+	    <button class="btn submit" type="submit">확인</button>
         </form>
 	  
       </div>
-      
+      </div>
     <!--    <c:if test="${param.error != null}">
 	<div class="cell center">
 		<h3 style="color:red">비밀번호가 일치하지 않습니다</h3>

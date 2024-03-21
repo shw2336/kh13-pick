@@ -246,21 +246,7 @@ public class MemberController {
 	    
 	}
 
-	@GetMapping("/mypage")
-	public String myPage(HttpSession session, Model model) {
-	    // 세션에서 아이디를 가져온다
-	    String loginId = (String) session.getAttribute("loginId");
-
-	    // 아이디에 해당하는 회원 정보를 조회
-	    MemberDto memberDto = memberDao.selectOne(loginId);
-	    MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
-
-	    // 회원 정보와 티켓 수를 모델에 추가
-	    model.addAttribute("memberDto", memberDto);
-	    model.addAttribute("memberGreenDto", memberGreenDto);
-
-	    return "/WEB-INF/views/member/myPageGreen.jsp";
-	}
+	
 
 
 	

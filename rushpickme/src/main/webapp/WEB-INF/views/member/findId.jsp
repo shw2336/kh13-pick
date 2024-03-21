@@ -85,6 +85,17 @@ width: 100%;
 }
 
 
+.detail-tool {
+    font-size: 20px;
+    padding: 0.5em 1em;
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #636e72;
+}
+
+
 </style>
 
 
@@ -92,16 +103,16 @@ width: 100%;
 
 
 <body>
-	<div class="container w-1200">
+	<div class="container pick-container w-700 p-20 mb-50">
 		<div class="cell center">
-			<h2 style="color:green">아이디 찾기</h2>
-			<br><br><br><br><br><br><br><br><br><br>
+			<h2 >아이디 찾기</h2>
+			<br><br><br><br>
 			<form action="findId" method="post">
-				<input type="text" name="memberNick" placeholder="닉네임을 입력 해주세요"
+				<input class="detail-tool" type="text" name="memberNick" placeholder="닉네임을 입력 해주세요"
 					required>
 				<div>
-				
-					<button class="btn positive" type="submit">찾기</button>
+					<br><br>
+					<button class="btn submit" type="submit">찾기</button>
 			</form>
 		</div>
 	</div>

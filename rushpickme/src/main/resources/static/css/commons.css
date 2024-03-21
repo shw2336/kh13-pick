@@ -178,6 +178,18 @@ textarea.tool.tool-fixed {
 .btn.move:hover {
 	background-color: beige;
 }
+.btn.submit{
+	background-color:#ff8080;
+	color: white;
+    text-decoration: none; /* 밑줄 제거 */
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    font-size: 18px;
+    border-radius: 10px;
+	
+}
 
 /*
     정렬 스타일

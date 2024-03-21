@@ -311,7 +311,7 @@
 <form action="signUpPick" method="post" enctype="multipart/form-data" 
 			autocomplete="off" class="check-form">
 
-<div class="container w-500">
+<div class="container pick-container w-700 p-20 mb-50">
 
 	<div class="cell center"><h1 >수거회원 정보</h1></div>
 	
@@ -517,7 +517,7 @@
 		<div class="flex-cell">
 			
 			<div class="w-100 center">
-				<button type="submit" class="btn positive">
+				<button type="submit" class="btn submit">
 					<i class="fa-solid fa-user"></i>
 					회원가입
 				</button>
