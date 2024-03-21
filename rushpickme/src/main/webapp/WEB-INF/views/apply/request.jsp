@@ -84,12 +84,12 @@
         
         
      //수거 신청 버튼 후 메인페이지(러쉬픽미) 로 넘어가기 
-        function mainPage(){
+       /*  function mainPage(){
         	var choice = confirm("정말 신청하시겠습니까?");
         	if(choice){
         		window.open("http://localhost:8080/","RushPickMe","width500,height=500");
         	}
-        }
+        } */
         
         
         
@@ -199,10 +199,14 @@
             
             <div class="cell w-500">
                 <h2> 배출 사진 첨부 파일 <i class="fa-regular fa-images"></i></h2>
-                <input name="applyAttach" type="file" class="tool w-100" >
-                <button type="button" class="btn positive w-100">첨부</button>
-            </div>
-            <br>
+            		<div class="cell">
+                		<input name="applyAttach" type="file" class="tool w-100">
+               		 </div>
+                	<div class="cell right">
+                		<button type="button" class="btn move">첨부</button>
+                	</div>
+           </div>
+            	<br>
             
             <div class="cell w-500">
                 <h2>남기실 말 <i class="fa-solid fa-pen"></i></h2>
@@ -218,7 +222,7 @@
                     </select>
                    
                 <br><br>
-                <button type="submit" class="btn positive w-100" > 수거 요청하기 </button>
+                <button type="submit" class="btn submit w-100"> 수거 요청하기 </button>
             </div>
             </div>
             

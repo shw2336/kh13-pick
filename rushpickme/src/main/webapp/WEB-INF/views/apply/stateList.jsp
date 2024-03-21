@@ -77,7 +77,7 @@
                 <h2 style="text-align: center;">신청  완료</h2>
                 <input type="hidden" value="${applyDto.applyState}" name="confirm">
                 <div class="right">
-                	<button type="submit" class="btn negative"onclick="detail('${applyNo}');" >
+                	<button type="submit" class="btn submit"onclick="detail('${applyNo}');" >
                 	<!--<input type="hidden" value="${applyDto.applyState}" name="confirm">  -->
                     상세보기 
                 </button>
@@ -98,7 +98,7 @@
     <div class="container apply-proceed apply-container w-750 p-20 mt-50">
         <div class="cell list-box">
             <div class="cell">
-                <h2 style="text-align: center;">진행중</h2>
+                <h2 style="text-align: center;">진행 중</h2>
                 	<input type="hidden" value="${applyDto.applyState}" name="proceed">
                 <hr>
             </div>
@@ -126,8 +126,8 @@
             <form action="finish" method="post" autocomplete="off" enctype="multipart/form-data">
                 	
                 	<input type="hidden" value="수거 완료" name="pickPay"/>
-                	<button type="button" class="btn positive btn-pick-finish" onclick="finish('${applyNo}');" >
-                    결제 내역 확인  
+                	<button type="button" class="btn submit btn-pick-finish" onclick="finish('${applyNo}');" >
+                    수거 상세  
                 </button>
                 </form>
         </div>

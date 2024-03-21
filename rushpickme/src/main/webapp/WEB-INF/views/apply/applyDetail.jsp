@@ -93,7 +93,7 @@
 	 <form action="cancel" method="post" >
 	 	<input type="hidden" name="applyNo" value="${applyDto.applyNo}" />
 	 	 <input type="hidden" value="${applyDto.applyState}" name="apply-cancel">
-			<button  type="submit" class="btn negative btn-cancel" onclick="cancel('${applyDto.applyNo}')">
+			<button  type="submit" class="btn submit btn-cancel" onclick="cancel('${applyDto.applyNo}')">
 				취소하기
             </button>
 	</form>
