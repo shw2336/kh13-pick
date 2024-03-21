@@ -122,7 +122,8 @@ public class ApplyController {
 		
 		model.addAttribute("applyNo",applyNo);
 		model.addAttribute("applyDto",applyDto1);
-		model.addAttribute("state", applyDto1.getApplyState());
+		
+		model.addAttribute("state", applyDto1.getApplyState()); //Dto에서 해당하는 수거 상태만 뽑음 
 //	      List<ApplyDetailVO>applyDetail = applyDao.applyDetail(applyNo);
 //	        model.addAttribute("applyDetail", applyDetail);
 		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
