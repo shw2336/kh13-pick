@@ -5,11 +5,17 @@
 
 <style>    
 
-.submit-btn {
+.btn-send-finish {
 	border-radius: 10px !important;
 	background-color: white;
 	border: 1px solid gainsboro;
 	box-shadow: 0px 4px 4px 2px gainsboro;
+	font-weight: bold;
+}
+.btn-send-finish:hover {
+	background-color: #ff8080 !important; 
+	color:white;
+	border-radius: 10px;
 	font-weight: bold;
 }
 
@@ -29,15 +35,17 @@
             }
         };
         $("[name=pickWeight]").blur(function () {
-//             var regex = /^[0-9]+$/;
-//             state.pickWeightValid = regex.test($(this).val()) && $(this).val() > 0;
-            state.pickWeightValid = $(this).val() > 0;
+            state.pickWeightValid = $(this).val().length > 0;
             $(this).removeClass("success fail").addClass(state.pickWeightValid ? "success" : "fail");
+            $("[name=pickPay]").val(Math.floor(parseFloat($(this).val()) * 1400));
         });
 
         $("[name=pickPay]").blur(function () {
+            if ($(this).val() === "NaN") {
+            	$(this).val("중량을 입력하면 자동 계산됩니다.").addClass("gray");
+            }
             var regex = /^[0-9]+$/;
-            state.pickPayValid = regex.test($(this).val()) && $(this).val() > 0;
+            state.pickPayValid = regex.test($(this).val()) && $(this).val().length > 0;
             $(this).removeClass("success fail").addClass(state.pickPayValid ? "success" : "fail");
         });
         
@@ -101,8 +109,8 @@
 
 		<div class="cell center mt-50" >
 			<h1>
-<%-- 				<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님에게 --%>
 				<span style="color: rgb(66,138,66)">완료 정보</span>를 알려주세요!
+				<img src="/image/notebook.png" style="width:50px;" class="ps-10">
 			</h1>
 		</div>
 	
@@ -110,13 +118,13 @@
 		
 		<div class="cell mb-40">
 			<h2>수거 중량</h2>
-			<input name="pickWeight" class="tool input-tool w-100" placeholder="중량을 입력하세요." style="border-radius:10px">
+			<input name="pickWeight" class="tool underline w-100" placeholder="중량을 입력하세요. (소수점 가능)">
 			<div class="fail-feedback">숫자를 입력하세요</div>
 		</div>
 
 		<div class="cell mb-40">
 			<h2>수거 금액</h2>
-			<input name="pickPay" class="tool input-tool w-100" value="" style="border-radius:10px">
+			<input name="pickPay" class="tool underline w-100 pick-pay" placeholder="kg당 1400원으로 계산됩니다.">
 			<div class="fail-feedback">금액을 입력하세요</div>
 		</div>
 		
@@ -128,7 +136,7 @@
 		
 		<div class="cell flex-cell">
 			<div class="cell">
-				<button type="button" class="btn move w-100"  style="border-radius: 10px;" onclick="proceedDetail(${pickNo});">
+				<button type="button" class="btn move btn-send-finish w-100"  style="border-radius: 10px;" onclick="proceedDetail(${pickNo});">
 				<span class="btn-name">신청정보 다시보기</span></button>
 			</div>
 			<div class="cell width-fill right">

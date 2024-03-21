@@ -179,7 +179,7 @@ public class PickDao {
 				+ "and pick.member_id like ? "
 				+ "and pick_delete = 'N' "
 				+ "and apply.apply_area in (select member_pick_area from member_pick where member_pick.member_id like ?) "
-				+ "order by pick_finish_date ?)"
+				+ "order by pick_finish_date "+ orderBy +")"
 				+ ")T "
 				+ ") where RN between ? and ?";
 		Object[] data = {memberId, memberId, orderBy, pageVo.getBeginRow(), pageVo.getEndRow()};
@@ -187,21 +187,13 @@ public class PickDao {
 	}
 	
 	//(일반) 수거 대기 리스트
-	public List<PickWaitVo> waitList () {
-		String sql = "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date "
-				+ "from apply "
-				+ "where apply_state like '신청완료' "
-				+ "order by apply_hope_date asc";
-		return jdbcTemplate.query(sql, pickWaitVoMapper);
-	}
-
 	public List <PickWaitVo> waitListByPaging (PageVO pageVo, String findArea) {
 		String sql = "select * from ("
 				+ "select rownum RN, T.* from ("
-				+ "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date "
-				+ "from apply "
+				+ "select apply_no, apply_address1, apply_vinyl, apply_date, apply_hope_date from apply "
 				+ "where apply_state like '신청완료' "
 				+ "and apply_area like ? "
+				+ "and not round((SYSDATE - apply_date) * 24, 2) > 6 "
 				+ "order by apply_hope_date asc"
 				+ ")T "
 				+ ") where RN between ? and ?";
@@ -279,7 +271,8 @@ public class PickDao {
 	//전체 신청건수
 	public int countApply (String memberId) {
 		String sql = "select count(*) from apply where apply_state like '신청완료' "
-				+ "and APPLY_AREA in (select MEMBER_PICK_AREA from member_pick where member_id like ?)";
+				+ "and APPLY_AREA in (select MEMBER_PICK_AREA from member_pick where member_id like ?) "
+				+ "and not round((SYSDATE - apply_date) * 24, 2) > 6 ";
 		Object[] data = {memberId};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}

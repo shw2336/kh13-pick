@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.kh.rushpickme.interceptor.ReviewOwnerInterceptor;
 import com.kh.rushpickme.interceptor.QnaOwnerInterceptor;
 import com.kh.rushpickme.interceptor.MemberInterceptor;
+import com.kh.rushpickme.interceptor.PickInterceptor;
 import com.kh.rushpickme.interceptor.QnaHitsInterceptor;
 import com.kh.rushpickme.interceptor.ReviewHitsInterceptor;
 
@@ -32,6 +33,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private QnaOwnerInterceptor qnaOwnerInterceptor;
+	
+	@Autowired
+	private PickInterceptor pickInterceptor;
 	
 	
 	@Override
@@ -60,6 +64,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/qna/**",
 						"/review/**",
 						//"/point/**",
+						"/pick/**",
 						"/rest/review_like/toggle"
 					)
 					.excludePathPatterns(
@@ -90,5 +95,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//내글 또는 관리자만 수정 삭제하는 인터셉터 등록
 		registry.addInterceptor(reviewOwnerInterceptor)
 					.addPathPatterns("/review/edit", "/review/delete");
+		
+		//피커만 접근 가능
+		registry.addInterceptor(pickInterceptor).addPathPatterns("/pick/**");
 	}
 }
