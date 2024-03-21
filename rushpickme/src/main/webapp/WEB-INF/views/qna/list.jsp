@@ -26,11 +26,21 @@
      	cursor: pointer;
      	height: 40px;
      }
+     
+
+.hei {
+ height:3em; /* 원하는 높이로 조정 */
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
 </style>
 
 <div class="container pick-container w-800 py-30 px-50 my-50">
 	<div class="cell">
-		<h1>Q&A</h1>
+		<h1>Q&A / 공지사항</h1>
 	</div>
 	<div class="cell">무분별한 비방 또는 욕설은 경고 없이 삭제될 수 있습니다</div>
 	<hr>
@@ -41,8 +51,8 @@
 			<select name="column" class="form-input">
 				<option value="qna_title"
 					${param.column == 'qna_title' ? 'selected' : ''}>제목</option>
-				<option value="member_id"
-					${param.column == 'member_id' ? 'selected' : ''}>작성자</option>
+				<option value="member_nick"
+					${param.column == 'member_nick' ? 'selected' : ''}>작성자</option>
 				<option value="qna_content"
 					${param.column == 'qna_content' ? 'selected' : ''}>내용</option>
 			</select> <input class="form-input" type="search" name="keyword"
@@ -60,7 +70,7 @@
 		<%-- 테이블 --%>
 		<table class="table table-horizontal table-hover" >
 			<thead>
-				<tr>
+				<tr class="hei">
 					<th>번호</th>
 					<th width="40%">제목</th>
 					<th>작성자</th>
@@ -72,17 +82,15 @@
 				<c:forEach var="qnaDto" items="${list}">
 				<c:if test="${qnaDto.memberId=='adminuser1'}">
 				<tr>
-				<td>${qnaDto.qnaNo}</td>
+				<td class="bold-text">공지</td>
 						<%-- 제목 칸 --%>
-						<td class="left">
-							<%-- 답글일 경우만 이미지를 출력 --%> <c:if test="${qnaDto.qnaDepth > 0}">
-                     →
-                  </c:if> <%-- 제목 출력 --%> <a class="link link-animation"
+						<td class="center">
+							<a class="link link-animation bold-text"
 							href="detail?qnaNo=${qnaDto.qnaNo}"> ${qnaDto.qnaTitle} </a>
 						</td>
-						<td>${qnaDto.memberIdStr}</td>
-						<td>${qnaDto.qnaWriteStr}</td>
-						<td>${qnaDto.qnaHits}</td>
+						<td class="bold-text">${qnaDto.memberNickStr}</td>
+						<td class="bold-text">${qnaDto.qnaWriteStr}</td>
+						<td class="bold-text">${qnaDto.qnaHits}</td>
 					</tr>
 				</c:if>
 				</c:forEach>
@@ -91,13 +99,13 @@
 					<tr>
 						<td>${qnaDto.qnaNo}</td>
 						<%-- 제목 칸 --%>
-						<td class="left">
+						<td class="center">
 							<%-- 답글일 경우만 이미지를 출력 --%> <c:if test="${qnaDto.qnaDepth > 0}">
                      →
                   </c:if> <%-- 제목 출력 --%> <a class="link link-animation"
 							href="detail?qnaNo=${qnaDto.qnaNo}"> ${qnaDto.qnaTitle} </a>
 						</td>
-						<td>${qnaDto.memberIdStr}</td>
+						<td>${qnaDto.memberNick}</td>
 						<td>${qnaDto.qnaWriteStr}</td>
 						<td>${qnaDto.qnaHits}</td>
 					</tr>
