@@ -39,23 +39,32 @@
     	//${state}에 담겨있는 값에 따라 컨테이너박스에 디자인추가
     	//${state}가 신청완료, 진행중일 때는 '결제내역보기'버튼을 hide() 처리
     	$(function(){
-    		if($(".apply-state").val() === "신청완료") {
-    			$(".apply-finish").removeClass("apply-container").addClass("success-container");
-    			$(".btn-pick-finish").hide();
-    		}else if ($(".apply-state").val() === "진행중") {
-    			$(".apply-proceed").removeClass("apply-container").addClass("success-container");
-    			$(".btn-pick-finish").hide();
-    		}else if ($(".apply-state").val() === "수거완료") {
-    			$(".pick-finish").removeClass("apply-container").addClass("success-container");
-    			$(".btn-pick-finish").show();
+    		if($(".apply-state").val() === "신청완료") { //수거 상태가 신청 완료일때
+    			$(".apply-finish").removeClass("apply-container").addClass("success-container");//신청완료의 원래 컨테이너는 지우고 성공 컨테이너는 추가해
+    			$(".btn-pick-finish").hide(); //결제 버튼pick-finish는 숨겨 
+    			$(".apply-reject").hide(); //접수 거부 apply-reject 는 숨겨
+    		}else if ($(".apply-state").val() === "진행중") {//수거 상태가 진행 중 일때
+    			$(".apply-proceed").removeClass("apply-container").addClass("success-container");//진행중의 원래 컨테이너는 지우고 성공 컨테이너는 추가해
+    			$(".btn-pick-finish").hide();//결제 버튼pick-finish는 숨겨 
+    			$(".apply-reject").hide();//접수 거부 apply-reject 는 숨겨
+    		}else if ($(".apply-state").val() === "수거완료") {//수거 상태가 수거 완료일때
+    			$(".pick-finish").removeClass("apply-container").addClass("success-container");//진행중의 원래 컨테이너는 지우고 성공 컨테이너는 추가해
+    			$(".apply-reject").hide();//접수 거부 apply-reject 는 숨겨
+    			$(".btn-pick-finish").show();//결제 버튼pick-finish는 보여줘
     		}
+    		else if($(".apply-state").val() === "접수거부") {
+    			$(".apply-proceed").removeClass("apply-container").addClass("success-container");
+    			$(".apply-reject").show();//접수 거부 apply-reject 는 보여줘
+    			$(".btn-pick-finish").hide();//결제 버튼pick-finish는 숨겨 
+    		}
+    		
     	});
     	
 	</script>
 	
 <body>
    <input type="hidden" value="${applyNo}" name="applyNo" />
-   <input type="hidden" value="${state}" class = "apply-state"/> 
+   <input type="hidden" value="${state}" class = "apply-state"/><!-- 수거 상태 받은거를 히든으로 숨겨놓음  --> 
    <!-- 
     <input type="hidden" value="${applyState}"name="applyState"/>
     <input type="hidden" value ="${pickState}" name="pickState"/>
@@ -76,7 +85,7 @@
                 <hr>
           </div>
             <div class="cell center">
-                <img class="dummy" src="/image/success.PNG" style="width:400px; height:300px">
+                <img class="dummy" src="/image/success.PNG" style="width:380px; height:280px">
             </div>
         </div>
         
@@ -95,6 +104,11 @@
             </div>
             <div class="cell center">
                 <img class="dummy" src="/image//picking.png" style="width:400px; height:300px">
+            </div>
+            <div class="cell apply-reject">
+            	<h2 style="text-align: center; color:rgb(255, 128, 128);">
+            	접수거부 되었습니다. 재신청부탁드립니다.
+            	<input type="hidden" value="접수거부" name="reject"/> </h2>
             </div>
         </div>
         </div>
@@ -121,7 +135,7 @@
             </div>
                 <hr>
             <div class="cell center">
-                <img class="dummy" src="/image/Picker2.png" style="width:350px; height:250px">
+                <img class="dummy" src="/image/Picker2.png" style="width:400px; height:300px">
             </div>
         </div>
         </div>
