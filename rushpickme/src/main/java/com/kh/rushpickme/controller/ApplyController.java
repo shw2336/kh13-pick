@@ -92,15 +92,16 @@ public class ApplyController {
 		//신청 목록 ( PageVO추가 )
 		@RequestMapping("/applyList")
 		public String applyList(Model model, String memberId,ApplyListVO applyListVO,
-				ApplyDto applyDto,HttpSession session,@ModelAttribute PageVO pageVO) {
+								ApplyDto applyDto,HttpSession session,
+								@ModelAttribute PageVO pageVO) {
 			String loginId = (String) session.getAttribute("loginId"); 
 			applyDto.setMemberId(loginId);
-			int count =applyDao.applyFinishCount(memberId);
+			int count =applyDao.applyFinishCount(loginId);
 			
 			pageVO.setCount(count);
 			model.addAttribute("pageVO",pageVO);
 			
-			List<ApplyListVO> applyList = applyDao.selectApplyListByPaging(memberId,pageVO);
+			List<ApplyListVO> applyList = applyDao.selectApplyListByPaging(loginId,pageVO);
 			model.addAttribute("applyList",applyList);
 			
 			return "/WEB-INF/views/apply/applyList.jsp";

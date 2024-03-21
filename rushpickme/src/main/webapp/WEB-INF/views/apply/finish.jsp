@@ -77,17 +77,21 @@
     </div>
     <br>
     <div class="cell">
-        <h2>금액</h2>
+        <h2>수거 금액</h2>
         <input class="detail-tool w-100" value="${pickDto.pickPay}" readonly>
+    </div>
+    <br>
+     <div class="cell">
+        <h2>최종 결제 금액</h2>
+        <input class="detail-tool w-100" value="${resultPay}" readonly>
     </div>
     <br>
 	
 	<div class="cell right">
 		<form>
-		<button class="btn positive"  onclick="review('${applyDto.applyNo}');">결제하기</button>
+		<button class="btn positive w-100"  onclick="review('${applyDto.applyNo}');">결제하기</button>
 		</form>
-		
-		
+		<br>
 		<button class="btn positive"  onclick="review('${applyDto.applyNo}');">리뷰쓰기</button>
 		<button class="btn positive"  onclick="applyList('${applyDto.memberId}');">신청 리스트</button>
 	</div>
