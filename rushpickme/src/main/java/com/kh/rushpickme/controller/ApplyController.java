@@ -3,12 +3,7 @@ package com.kh.rushpickme.controller;
 import java.io.IOException;
 import java.util.List;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +26,6 @@ import com.kh.rushpickme.vo.ApplyDetailVO;
 import com.kh.rushpickme.vo.ApplyListVO;
 import com.kh.rushpickme.vo.PageVO;
 
-import jakarta.mail.Session;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -172,33 +166,45 @@ public class ApplyController {
 		ApplyDetailVO applyDetail= applyDao.applyDetail(applyNo);
 		
 		applyDao.cancel(applyNo);
+		
+		
+		
 		return "/WEB-INF/views/apply/cancel.jsp";
 	}
 	
 	//결제 내역
 	@RequestMapping("/finish")
-	public String finish(@RequestParam int applyNo, @ ModelAttribute ApplyDto applyDto,
-								HttpSession session, Model model) {
-		String loginId=(String) session.getAttribute("loginId");
-		applyDto.setMemberId(loginId);
-		int pickNo = pickDao.selectPickNo(applyNo);
-		PickDto pickDto =pickDao.selectOneByPick(pickNo);
-		ApplyDto findDto = applyDao.selectOne(applyNo);
-		MemberGreenDto greenDto = memberDao.selectOneGreen(loginId);
-		
-		ReviewDto reviewDto = new ReviewDto();
-		reviewDto.setAskNo(applyNo);
-		
-		model.addAttribute("point", greenDto.getMemberGreenPoint());
-		
-		
-		model.addAttribute("pickDto",pickDto);
-		model.addAttribute("applyDto", findDto);
-		
-		
-		
-		return "/WEB-INF/views/apply/finish.jsp";
-	}
+    public String finish(@RequestParam int applyNo, @ ModelAttribute ApplyDto applyDto,
+                                HttpSession session, Model model) {
+        String loginId=(String) session.getAttribute("loginId");
+//        applyDto.setMemberId(loginId);
+        
+        int pickNo = pickDao.selectPickNo(applyNo); 
+        
+        PickDto pickDto =pickDao.selectOneByPick(pickNo);
+        
+        ApplyDto findDto = applyDao.selectOne(applyNo);
+//        ApplyDto resultDto = applyDao.selectOne(applyNo);
+        
+        MemberGreenDto greenDto = memberDao.selectOneGreen(loginId);
+        
+        ReviewDto reviewDto = new ReviewDto();
+        reviewDto.setAskNo(applyNo);
+        
+        model.addAttribute("point", greenDto.getMemberGreenPoint());
+        
+        
+        model.addAttribute("pickDto",pickDto);
+        model.addAttribute("findDto", findDto);
+        model.addAttribute("greenDto", greenDto);
+//        System.out.println(applyDto.getMemberId());
+        
+       int resultPoint = greenDto.getMemberGreenPoint() - pickDto.getPickPay();
+       model.addAttribute("resultPoint", resultPoint);
+
+			return "/WEB-INF/views/apply/finish.jsp";
+		}
+
 	@PostMapping("/review")
 	public String review(@RequestParam String memberId) {
 		
