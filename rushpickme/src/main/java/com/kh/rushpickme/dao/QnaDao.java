@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.dto.QnaDto;
-import com.kh.rushpickme.dto.ReviewDto;
 import com.kh.rushpickme.mapper.QnaListMapper;
 import com.kh.rushpickme.mapper.QnaMapper;
 import com.kh.rushpickme.vo.PageVO;
@@ -32,7 +30,7 @@ public class QnaDao {
 			String sql = "select * from ("
 								+ "select rownum rn, TMP.* from ("
 									+ "select "
-										+ "qna_no, member_id, qna_title, "
+										+ "qna_no, member_id, member_nick, qna_title, "
 										+ "qna_content, qna_delete, qna_hits, "
 										+ "qna_write, qna_edit, "
 										+ "qna_group, qna_target, qna_depth "
@@ -55,7 +53,7 @@ public class QnaDao {
 			String sql = "select * from ("
 								+ "select rownum rn, TMP.* from ("
 									+ "select "
-										+ "qna_no, member_id, qna_title, "
+										+ "qna_no, member_id, member_nick, qna_title, "
 										+ "qna_content, qna_delete, qna_hits, "
 										+ "qna_write, qna_edit, "
 										+ "qna_group, qna_target, qna_depth "
@@ -69,26 +67,9 @@ public class QnaDao {
 			return jdbcTemplate.query(sql, qnaListMapper, data);
 		}
 	}
+
 	
-		
-	
-//	public List<QnaDto> selectListOfficial(PageVO pageVO) {
-//		String sql = "select * from ("
-//				+ "select rownum rn, TMP.* from ("
-//					+ "select "
-//						+ "qna_no, member_id, qna_title, "
-//						+ "qna_content, qna_delete, qna_hits, "
-//						+ "qna_write, qna_edit, "
-//						+ "qna_group, qna_target, qna_depth "
-//					+ "from qna "
-//					+ "connect by prior qna_no=qna_target "
-//					+ "start with qna_target is null "
-//					+ "order siblings by qna_group desc, qna_no asc"
-//				+ ")TMP"
-//			+ ") where member_id = 'adminuser1";
-//			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
-//			return jdbcTemplate.query(sql, qnaListMapper, data);
-//	}
+
 	
 	//카운트 - 목록일 경우와 검색일 경우를 각각 구현
 	public int count() {
@@ -144,11 +125,11 @@ public class QnaDao {
 		//String sql = "insert into qna(7개) values(?, ?, ?, ?, sysdate, null, 0)";
 		//String sql = "insert into qna(4개) values(?, ?, ?, ?)";
 		String sql = "insert into qna("
-						+ "qna_no, member_id, qna_title, qna_content, "
+						+ "qna_no, member_id, member_nick, qna_title, qna_content, "
 						+ "qna_group, qna_target, qna_depth"
-					+ ") values(?, ?, ?, ?, ?, ?, ?)";
+					+ ") values(?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {
-			qnaDto.getQnaNo(), qnaDto.getMemberId(),
+			qnaDto.getQnaNo(), qnaDto.getMemberId(), qnaDto.getMemberNick(), 
 			qnaDto.getQnaTitle(), qnaDto.getQnaContent(),
 			qnaDto.getQnaGroup(), qnaDto.getQnaTarget(),
 			qnaDto.getQnaDepth()

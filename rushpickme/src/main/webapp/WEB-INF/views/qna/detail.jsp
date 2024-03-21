@@ -6,13 +6,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-	.reply-list-wrapper > .reply-item,
-	.reply-list-wrapper > .reply-item-edit 
-	{
-		padding-bottom:10px;
-		margin-bottom: 10px;
-		border-bottom: 1px solid #b2bec3;
-	}
 	         .pick-container {
          border-radius: 10px;
          border: 1px solid gainsboro;

@@ -10,6 +10,7 @@ public class QnaDto {
 	
 	private int qnaNo;//글번호
 	private String memberId;//작성자(회원아이디)
+	private String memberNick;//닉네임
 	private String qnaTitle;//제목
 	private String qnaContent;//글내용
 	private String qnaDelete;//삭제여부
@@ -39,6 +40,14 @@ public class QnaDto {
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+
+	public String getMemberNick() {
+		return memberNick;
+	}
+
+	public void setMemberNick(String memberNick) {
+		this.memberNick = memberNick;
 	}
 
 	public String getQnaTitle() {
@@ -112,7 +121,7 @@ public class QnaDto {
 	public void setQnaDepth(int qnaDepth) {
 		this.qnaDepth = qnaDepth;
 	}
-
+	
 	public String getMemberIdStr() {
 		if(memberId == null)
 			return "탈퇴한사용자";
@@ -120,6 +129,13 @@ public class QnaDto {
 			return memberId;
 	}
 	
+	public String getMemberNickStr() {
+		if(memberId == null)
+			return "탈퇴한사용자";
+		else
+			return memberNick;
+	}
+
 	//오늘 작성한 글은 시간을, 이전에 작성한 글은 날짜를 반환
 	//- LocalDate 형태로 시간을 변환하여 오늘 날짜와 비교
 	//- 날짜가 같다면 LocalDateTime으로 변환해서 시간만 반환

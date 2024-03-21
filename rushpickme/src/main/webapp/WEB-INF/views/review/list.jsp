@@ -86,11 +86,7 @@
 		</form>
 	</div>
 
-	<div class="cell right">
-		<h2>
-			<a href="write" class="link">리뷰 작성</a>
-		</h2>
-	</div>
+<br>
 	<div class="cell">
 		<%-- 테이블 --%>
 		<table class="table table-horizontal table-hover">
