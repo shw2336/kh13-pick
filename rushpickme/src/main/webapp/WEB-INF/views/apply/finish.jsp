@@ -34,8 +34,52 @@
  		console.log(num);
      	}
  	
-		console.log(${resultPoint});
+ 	/* function locationCharge() {
+        window.alert("결제 되었습니다!");
+        if(choice){
+            window.open("http://localhost:8080/apply/finish?","naver","width500,height=500");
+        }
+    }
 
+    function locationCharge() {
+        // var choice =window.confirm("정말 이동할거에요?");    
+        var choice =confirm("잔액이 부족합니다! 포인트를 충전하시겠습니까?");  
+          // console.log(button);
+        if(choice){ //확인을 누르면 이동해라
+            window.open("http://localhost:8080/point/charge","charge","width500,height=500");
+        }
+    } */
+    
+    
+    /* function checkBalance(memberId) {
+        // memberId를 사용하여 잔액을 확인하는 AJAX 요청 등을 수행하고,
+        // 해당 결과에 따라 결제할지 포인트를 충전할지를 결정합니다.
+        
+        // 임시로 잔액을 -100으로 가정합니다.
+        var balance = -100; // 이 값은 AJAX 요청을 통해 실제 잔액을 확인해야 합니다.
+        
+        if (balance < 0) {
+            // 잔액이 마이너스인 경우 포인트를 충전할 수 있도록 locationCharge 함수 실행
+            locationCharge();
+        } else {
+            // 잔액이 마이너스가 아닌 경우 결제 완료 알림을 표시하고 결제 완료 페이지로 이동
+            pay();
+        }
+    }
+
+    function pay() {
+        window.alert("결제 되었습니다!");
+        // 결제 완료 페이지로 이동
+        window.open("http://localhost:8080/apply/finish?", "_blank");
+    }
+
+    function locationCharge() {
+        var choice = confirm("잔액이 부족합니다! 포인트를 충전하시겠습니까?");  
+        if (choice) { 
+            // 포인트 충전 페이지로 이동
+            window.open("http://localhost:8080/point/charge", "_blank");
+        }
+    } */
 
  	
     </script>
@@ -93,16 +137,15 @@
     <br>
 	
 	<div class="cell right">
-		<%-- <form>
-		<button class="btn positive w-100"  onclick="review('${applyDto.applyNo}');">결제하기</button>
-		</form> --%>
+		<div class="cell">
+    		<button class="btn positive w-100" onclick="checkBalance('${findDto.memberId}');">결제하기</button>
+		</div>
 		
 		<br>
 		<button class="btn positive"  onclick="review('${applyDto.applyNo}');">리뷰쓰기</button>
 		<button class="btn positive"  onclick="applyList('${applyDto.memberId}');">신청 리스트</button>
 	</div>
 	<br>
-<!-- 커밋 연습 -->
 </div>
 
 </body>
