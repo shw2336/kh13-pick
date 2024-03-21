@@ -15,14 +15,19 @@
 	border-right: none;
 	border-bottom: 1px solid #636e72;
 }
-
+.btn.move.delete:hover {
+	background-color: #ff8080;
+	color: white;
+}
 </style>
 
 <script type="text/javascript">
 
 	function rejectList () {
 		window.location.href = "rejectList";
-	}
+	}        
+	
+	
 	function rejectCancel () {
 		if (confirm("거부를 취소하고 다시 진행하시겠습니까?")){
 			$("#form-type").attr("action", "rejectCancel").submit();
@@ -89,11 +94,11 @@
 			<span class="btn-name">돌아가기</span></button>
 			<span class="px-10"></span>
 			
-			<button class="btn move" onclick="rejectCancel();">
+			<button class="btn move delete" onclick="rejectCancel();">
 			<span class="btn-name">거부취소</span></button>
 			<span class="px-10"></span>
 			
-			<button class="btn move" onclick="deletePickNo();">
+			<button class="btn move delete" onclick="deletePickNo();">
 			<span class="btn-name">삭제하기</span></button>
 		</div>
 	</form>
