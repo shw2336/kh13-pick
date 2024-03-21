@@ -1,5 +1,6 @@
 package com.kh.rushpickme.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,12 @@ public class MemberDao {
 	private BuyDao buyDao;
 	
 	//회원 가입
+	
+	public String getId(Object object) {
+	    String sql = "SELECT MEMBER_id FROM MEMBER WHERE member_email = ?";
+	    Object[] data = { object }; // 이메일 정보를 배열에 담습니다.
+	    return jdbcTemplate.queryForObject(sql, String.class, data);
+	}
 	public void insert(MemberDto memberdto) {
 		String sql = "insert into member("
 				+ "member_id, member_pw, member_nick, "

@@ -63,6 +63,8 @@ public class MemberController {
 	@Autowired
 	private KakaoService kakoService;
 	
+
+	
 	
 
 	// 회원가입 선택창
@@ -150,6 +152,9 @@ public class MemberController {
 			// 세션에 데이터 추가
 			session.setAttribute("loginId", findDto.getMemberId());
 			session.setAttribute("loginLevel", findDto.getMemberType());
+//			
+//			   session.setAttribute("loginId",kakaoLoginInfo.getKakaoId());
+//				session.setAttribute("loginLevel", kakaoLoginInfo.getLoginType());
 
 			return "redirect:/";
 		} else {// 로그인 실패
