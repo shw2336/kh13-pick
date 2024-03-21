@@ -67,6 +67,7 @@
    }
 </script>
 
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 
 <style>
@@ -265,7 +266,6 @@ function kakaoLogout() {
          </form>
             <div class="container" style="display: flex; justify-content: center; align-content: center; align-items: center; flex-direction: column; margin: 200px auto; ">
     <h1>카카오 로그인</h1>
-    
         <button onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=45195e1ea2c23c3134d7c20011096ff7&redirect_uri=http://localhost:8080/auth/kakao/callback'" style="height: 60px; width: 120px; background-color: #FEE500; cursor: pointer;">카카오 로그인</button>
       </div>
 </body>
