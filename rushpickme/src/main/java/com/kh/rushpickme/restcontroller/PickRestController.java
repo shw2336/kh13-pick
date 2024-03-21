@@ -26,7 +26,7 @@ public class PickRestController {
 	
 	@ResponseBody
 	@RequestMapping("/order")
-	public String finishListOrderBy  (@RequestParam String orderBy, HttpSession session, PageVO pageVo, Model model) {
+	public List <PickFinishVo> finishListOrderBy  (@RequestParam String orderBy, HttpSession session, PageVO pageVo, Model model) {
 		String loginId = (String)session.getAttribute("loginId");
 		int count = pickDao.countFinish(loginId);
 		pageVo.setCount(count);
@@ -37,7 +37,7 @@ public class PickRestController {
 			finishListOrderBy = pickDao.pickFinishListOrderBy(loginId, "desc", pageVo);
 		}
 		model.addAttribute("finishListOrderBy", finishListOrderBy);
-		return "finishListOrderBy";
+		return finishListOrderBy;
 	}
 
 }

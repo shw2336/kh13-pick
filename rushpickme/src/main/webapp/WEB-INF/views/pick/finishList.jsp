@@ -50,25 +50,34 @@ table>tbody>.contents-tr {
          });
          function sendRequest(orderBy) {
              $.ajax({
-                 url: "http://localhost:8080/rest/pick/order",
+                 url: "/rest/pick/order",
                  method: "post",
                  data: { orderBy: orderBy },
+                 dataType : 'json',
                  success: function (response) {
                      // 받아온 리스트를 정렬
-                     response.sort(function (a, b) {
-                         // 오름차순으로 정렬
-                         if (orderBy === "asc") {
-                             return a.date - b.date;
-                         }
-                         // 내림차순으로 정렬
-                         else if (orderBy === "desc") {
-                             return b.date - a.date;
-                         }
-                     });
+                    console.log(response);
+                     $("#aaa").html("");
+                     
+                     var str = "";
+                     for(var i = 0; i < response.length; i++){
+                    	 var result = response[i];
+	                     str += "<tr class='contents-tr'>" +
+										"<td><input type='checkbox' name='deletePicks' value='" + result.pickNo + "'></td>" +
+										"<td onclick=\"detail('" +result.pickNo + "');\">"+ result.pickNo+"</td>" +
+										"<td onclick=\"detail('"+result.pickNo+"');\">" + result.applyDate+ "</td>" + 
+										"<td onclick=\"detail('"+result.pickNo+"');\">" + result.pickFinishDate +
+										"</td>" +
+										"<td onclick=\"detail('"+result.pickNo+"');\">"+ result.pickPay+" 원</td> " +
+									"</tr>";
+                     }
+                     $("#aaa").html(str);
                  }
              });
+             
+             
              // 정렬된 리스트를 화면에 출력
-             var tbody = $("tbody");
+             /* var tbody = $("tbody");
              tbody.empty(); // 기존의 데이터를 모두 지우고 새로운 데이터로 채움
              response.forEach(function (${finishListOrderBy}) {
                  var row = "<tr class='contents-tr'>";
@@ -79,7 +88,7 @@ table>tbody>.contents-tr {
                  row += "<td onclick='detail(\"" + finishListOrderBy.pickNo + "\");'>" + finishListOrderBy.pickPay + "원</td>";
                  row += "</tr>";
                  tbody.append(row); // 새로운 행을 테이블에 추가
-             });
+             }); */
          }
      });
 
@@ -136,39 +145,39 @@ table>tbody>.contents-tr {
 					</tr>
 				</thead>
 
-				<tbody>
-					<c:forEach var="finishListOrderBy" items="${finishListOrderBy}">
-						<tr class="contents-tr">
-							<td><input type="checkbox" name="deletePicks"
-								value="${finishListOrderBy.pickNo}"></td>
+<!-- 				<tbody> -->
+<%-- 					<c:forEach var="finishListOrderBy" items="${finishListOrderBy}"> --%>
+<!-- 						<tr class="contents-tr"> -->
+<!-- 							<td><input type="checkbox" name="deletePicks" -->
+<%-- 								value="${finishListOrderBy.pickNo}"></td> --%>
 
-							<td onclick="detail('${finishListOrderBy.pickNo}');">${finishListOrderBy.pickNo}</td>
-							<td onclick="detail('${finishListOrderBy.pickNo}');"><fmt:formatDate
-									value="${finishListOrderBy.applyDate}"
-									pattern="MM월 dd일 HH시 mm분" /></td>
-							<td onclick="detail('${finishListOrderBy.pickNo}');"><fmt:formatDate
-									value="${finishListOrderBy.pickFinishDate}"
-									pattern="MM월 dd일 HH시 mm분" /></td>
-							<td onclick="detail('${finishListOrderBy.pickNo}');">${finishListOrderBy.pickPay}
-								원</td>
-						</tr>
-					</c:forEach>
-				</tbody>
+<%-- 							<td onclick="detail('${finishListOrderBy.pickNo}');">${finishListOrderBy.pickNo}</td> --%>
+<%-- 							<td onclick="detail('${finishListOrderBy.pickNo}');"><fmt:formatDate --%>
+<%-- 									value="${finishListOrderBy.applyDate}" --%>
+<%-- 									pattern="MM월 dd일 HH시 mm분" /></td> --%>
+<%-- 							<td onclick="detail('${finishListOrderBy.pickNo}');"><fmt:formatDate --%>
+<%-- 									value="${finishListOrderBy.pickFinishDate}" --%>
+<%-- 									pattern="MM월 dd일 HH시 mm분" /></td> --%>
+<%-- 							<td onclick="detail('${finishListOrderBy.pickNo}');">${finishListOrderBy.pickPay} --%>
+<!-- 								원</td> -->
+<!-- 						</tr> -->
+<%-- 					</c:forEach> --%>
+<!-- 				</tbody> -->
 
-				<!-- 				 <tbody> -->
-				<%-- 					<c:forEach var="finishList" items="${finishList}">  --%>
-				<!-- 					<tr class="contents-tr"> -->
-				<%-- 							<td><input type="checkbox" name="deletePicks" value="${finishList.pickNo}"></td> --%>
+					 <tbody id="aaa">
+						<c:forEach var="finishList" items="${finishList}"> 
+							<tr class="contents-tr">
+								<td><input type="checkbox" name="deletePicks" value="${finishList.pickNo}"></td>
 
-				<%-- 							<td onclick="detail('${finishList.pickNo}');">${finishList.pickNo}</td> --%>
-				<%-- 							<td onclick="detail('${finishList.pickNo}');"> --%>
-				<%-- 								<fmt:formatDate value="${finishList.applyDate}" pattern="MM월 dd일 HH시 mm분" /></td> --%>
-				<%-- 							<td onclick="detail('${finishList.pickNo}');"> --%>
-				<%-- 								<fmt:formatDate value="${finishList.pickFinishDate}" pattern="MM월 dd일 HH시 mm분" /></td> --%>
-				<%-- 							<td onclick="detail('${finishList.pickNo}');">${finishList.pickPay} 원</td> --%>
-				<!-- 						</tr> -->
-				<%-- 					</c:forEach> --%>
-				<!-- 				</tbody>  -->
+								<td onclick="detail('${finishList.pickNo}');">${finishList.pickNo}</td>
+								<td onclick="detail('${finishList.pickNo}');">
+									<fmt:formatDate value="${finishList.applyDate}" pattern="MM월 dd일 HH시 mm분" /></td>
+								<td onclick="detail('${finishList.pickNo}');">
+									<fmt:formatDate value="${finishList.pickFinishDate}" pattern="MM월 dd일 HH시 mm분" /></td>
+								<td onclick="detail('${finishList.pickNo}');">${finishList.pickPay} 원</td>
+							</tr>
+						</c:forEach>
+					</tbody> 
 			</table>
 		</div>
 
@@ -179,7 +188,7 @@ table>tbody>.contents-tr {
 			</button>
 		</div>
 
-		<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/template/pickNavigator.jsp"></jsp:include>
 	</div>
 </form>
 

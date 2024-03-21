@@ -182,7 +182,7 @@ public class PickDao {
 				+ "order by pick_finish_date "+ orderBy +")"
 				+ ")T "
 				+ ") where RN between ? and ?";
-		Object[] data = {memberId, memberId, orderBy, pageVo.getBeginRow(), pageVo.getEndRow()};
+		Object[] data = {memberId, memberId, pageVo.getBeginRow(), pageVo.getEndRow()};
 		return jdbcTemplate.query(sql, pickFinishVoMapper, data);
 	}
 	
@@ -314,6 +314,7 @@ public class PickDao {
 		String sql = "SELECT count(*) FROM pick join apply on apply.apply_no = pick.apply_no "
 				+ "WHERE pick.pick_state LIKE '수거완료' "
 				+ "and pick.member_id like ? "
+				+ "and pick.pick_delete like 'N' "
 				+ "and apply.apply_area IN ("
 				+ "SELECT MEMBER_PICK_AREA FROM member_pick WHERE member_pick.member_id LIKE ?)";
 		Object[] data = {memberId, memberId};
