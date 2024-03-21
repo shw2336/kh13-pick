@@ -13,25 +13,26 @@
 
     /* 버튼 스타일 */
     .btn-primary {
-        background-color: rgb(66,126,66);
-        border-color: rgb(66,126,66);
+        background-color: #ff8080;
+        border-color: #ff8080;
+        border-radius: 10px;
+        color: white;
     }
 
     .btn-primary:hover {
-        background-color: darkgreen;
-        border-color: darkgreen;
+  		  cursor: pointer;
     }
 
     .btn-info,
     .btn-danger {
-        background-color: rgb(255, 128, 128);
-        border-color: rgb(255, 128, 128);
+        background-color: beige;
+        border-color: beige;
+        border-radius: 10px;
     }
 
     .btn-info:hover,
     .btn-danger:hover {
-        background-color: rgb(204, 0, 0);
-        border-color: rgb(204, 0, 0);
+    cursor: pointer;
     }
 
     /* 표 스타일 */

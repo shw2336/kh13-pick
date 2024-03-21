@@ -30,13 +30,13 @@
     }
 
     .search-button {
-        background-color: #4CAF50;
-        color: #2d3436;
+        background-color: #ff8080;
+        color: #white;
         cursor: pointer;
     }
 
     .search-button:hover {
-        background-color: #45a049;
+        background-color: #f56a6a;
     }
 
     .member {
