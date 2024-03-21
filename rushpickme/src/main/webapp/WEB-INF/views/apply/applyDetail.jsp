@@ -26,16 +26,33 @@
     	window.location.href = "cancel?applyNo=" + num;	
 		console.log(num);
     	}
+	$(function(){
+		if($(".apply-state").val() === "신청완료") { //수거 상태가 신청 완료일때
+			$(".btn-cancel").show(); 
+		}
+		else if ($(".apply-state").val() === "진행중") {//수거 상태가 진행 중 일때
+			$(".btn-cancel").hide();
+		}
+		else if ($(".apply-state").val() === "수거완료") {//수거 상태가 수거 완료일때
+			$(".btn-cancel").hide();
+		}
+		else if($(".apply-state").val() === "접수거부") {
+			$(".btn-cancel").hide();
+		}
+		
+	});
+	
     	
 	</script>
 <body>
+	<input type="hidden" value="${state}" class = "apply-state"/>
     <div class="cell center mt-30" >
 		<h1>
 		<span style="color: rgb(66,138,66)">${applyDto.memberId}</span> 님의 신청 정보
 		</h1>
 	</div>
 
-	<div class="container apply-container w-600 px-50 pt-10 my-50">
+	<div class="container apply-state apply-container w-600 px-50 pt-10 my-50">
 
 	<br>
 	<div class="cell">
@@ -72,11 +89,14 @@
 	</div>
 	<br>
 	<br>
-	<div class="cell right">
-	<form action="cancel" method="post" >
-	 <input type="hidden" name="applyNo" value="${applyDto.applyNo}" />
-		<button  type="submit" class="btn negative" onclick="cancel'(${applyDto.applyNo}')">취소하기</button>
-		</form>
+	<div class="cell apply-state right">
+	 <form action="cancel" method="post" >
+	 	<input type="hidden" name="applyNo" value="${applyDto.applyNo}" />
+	 	 <input type="hidden" value="${applyDto.applyState}" name="apply-cancel">
+			<button  type="submit" class="btn negative btn-cancel" onclick="cancel('${applyDto.applyNo}')">
+				취소하기
+            </button>
+	</form>
 	</div>
 
 </div>

@@ -124,7 +124,8 @@ public class ApplyController {
 		model.addAttribute("applyDto",applyDto1);
 		
 		model.addAttribute("state", applyDto1.getApplyState()); //Dto에서 해당하는 수거 상태만 뽑음 
-//	      List<ApplyDetailVO>applyDetail = applyDao.applyDetail(applyNo);
+		
+		//	      List<ApplyDetailVO>applyDetail = applyDao.applyDetail(applyNo);
 //	        model.addAttribute("applyDetail", applyDetail);
 		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
 	}
@@ -137,9 +138,18 @@ public class ApplyController {
 		//1명 정보 뽑는거니까 리스트 아님
 		String loginId = (String) session.getAttribute("loginId"); 
 		applyDto.setMemberId(loginId);
+		
 		ApplyDetailVO applyDetail= applyDao.applyDetail(applyNo);
+		
+		ApplyDto applyDto1 = applyDao.selectOne(applyNo);
+		model.addAttribute("state", applyDto1.getApplyState()); //Dto에서 해당하는 수거 상태만 뽑음 
+		
+		
         model.addAttribute("applyDetail", applyDetail);
         model.addAttribute("applyDto",applyDto);
+        model.addAttribute("applyDto1",applyDto1);
+        
+        
         return "/WEB-INF/views/apply/applyDetail.jsp";
     }
 	
@@ -147,8 +157,7 @@ public class ApplyController {
 //		model.addAttribute("jsp에서부를이름",현재여기서 데이터 담아놓은 파라미터명);
 	
 	@PostMapping("/applyDetail")
-	public String applyDetai(@RequestParam int applyNo) {
-		
+	public String applyDetai(@RequestParam int applyNo) { 
 		applyDao.cancel(applyNo);
 		return "/WEB-INF/views/apply/applyDetail.jsp";
 	}
@@ -161,6 +170,7 @@ public class ApplyController {
 		
 		ApplyDto applyDto1 = applyDao.selectOne(applyNo);
 		ApplyDetailVO applyDetail= applyDao.applyDetail(applyNo);
+		
 		applyDao.cancel(applyNo);
 		return "/WEB-INF/views/apply/cancel.jsp";
 	}
