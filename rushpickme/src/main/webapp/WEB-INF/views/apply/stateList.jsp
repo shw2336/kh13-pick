@@ -23,7 +23,9 @@
         
 
    </style>
+   
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 	<script type="text/javascript">
 	
     	function detail(num) {
@@ -33,19 +35,33 @@
         	window.location.href = "finish?applyNo=" + num;	
     		console.log(num);
         	}
-    	
-    	
-    	
+
+    	//${state}에 담겨있는 값에 따라 컨테이너박스에 디자인추가
+    	//${state}가 신청완료, 진행중일 때는 '결제내역보기'버튼을 hide() 처리
+    	$(function(){
+    		if($(".apply-state").val() === "신청완료") {
+    			$(".apply-finish").removeClass("apply-container").addClass("success-container");
+    			$(".btn-pick-finish").hide();
+    		}else if ($(".apply-state").val() === "진행중") {
+    			$(".apply-proceed").removeClass("apply-container").addClass("success-container");
+    			$(".btn-pick-finish").hide();
+    		}else if ($(".apply-state").val() === "수거완료") {
+    			$(".pick-finish").removeClass("apply-container").addClass("success-container");
+    			$(".btn-pick-finish").show();
+    		}
+    	});
     	
 	</script>
+	
 <body>
-   <input type="hidden" value="${applyNo}" name="applyNo" /> 
+   <input type="hidden" value="${applyNo}" name="applyNo" />
+   <input type="hidden" value="${state}" class = "apply-state"/> 
    <!-- 
     <input type="hidden" value="${applyState}"name="applyState"/>
     <input type="hidden" value ="${pickState}" name="pickState"/>
     <input type="hidden" value="${pickReject}" name="pickReject"/> --> 
     
-     <div class="container apply-container w-750 p-20 " id="apply-completed">
+     <div class="container apply-finish apply-container w-750 p-20 " id="apply-completed">
         
         <div class="cell list-box">
             <div class="cell center">
@@ -56,24 +72,21 @@
                 	<!--<input type="hidden" value="${applyDto.applyState}" name="confirm">  -->
                     상세보기 
                 </button>
-        </div>
-
+        		</div>
                 <hr>
-            </div>
+          </div>
             <div class="cell center">
                 <img class="dummy" src="/image/success.PNG" style="width:400px; height:300px">
             </div>
         </div>
+        
     </div>
-    
-    
-    
 	
 	<div class="cell center">
         <i class="fa-solid fa-chevron-down" style="font-size: 80px;color:rgb(66,138,66)"></i><br>
     </div>
 
-    <div class="container apply-container w-750 p-20 mt-50">
+    <div class="container apply-proceed apply-container w-750 p-20 mt-50">
         <div class="cell list-box">
             <div class="cell">
                 <h2 style="text-align: center;">진행중</h2>
@@ -90,7 +103,7 @@
         <i class="fa-solid fa-chevron-down" style="font-size: 80px;color:rgb(66,138,66)"></i><br>
        </div>
     
-     <div class="container apply-container w-750 p-20 mt-50">
+     <div class="container pick-finish apply-container w-750 p-20 mt-50">
         <div class="cell list-box">
             <div class="cell center">
                 <h2 style="text-align: center;">수거  완료</h2>
@@ -99,7 +112,7 @@
             <form action="finish" method="post" autocomplete="off" enctype="multipart/form-data">
                 	
                 	<input type="hidden" value="수거 완료" name="pickPay"/>
-                	<button type="button" class="btn positive" onclick="finish('${applyNo}');" >
+                	<button type="button" class="btn positive btn-pick-finish" onclick="finish('${applyNo}');" >
                     결제 내역 확인  
                 </button>
                 </form>
@@ -113,14 +126,6 @@
         </div>
         </div>
         
-    
-       
- 
-
-
-
-
-
 
 </body>
 </html>

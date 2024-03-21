@@ -122,6 +122,7 @@ public class ApplyController {
 		
 		model.addAttribute("applyNo",applyNo);
 		model.addAttribute("applyDto",applyDto1);
+		model.addAttribute("state", applyDto1.getApplyState());
 //	      List<ApplyDetailVO>applyDetail = applyDao.applyDetail(applyNo);
 //	        model.addAttribute("applyDetail", applyDetail);
 		return "/WEB-INF/views/apply/stateList.jsp"; // 이용상세 내역 페이지
