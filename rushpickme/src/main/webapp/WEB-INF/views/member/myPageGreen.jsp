@@ -246,7 +246,7 @@ div{
         <div>
           <div class="green number"></div>
           <div class="listContainer">
-          <a href="/apply/applyDetail" class="item">
+          <a href="/apply/applyList" class="item">
         <div class="icon cell left"></div>
         <div class="cell left">신청상세</div>
         <div class="cell left">  </div>
@@ -336,7 +336,7 @@ div{
       <div>공지사항</div>
     </a>    
     <a href="#" class="item">
-      <div>icos</div>
+      <div>icon</div>
       <div>이용안내</div>
     </a>    
     <a href="#" class="item">

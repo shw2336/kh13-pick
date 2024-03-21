@@ -62,7 +62,7 @@ div{
   height: 90px;
   margin-bottom: 10px;
 }
-/* 단골상점 , 상품후기 , 적립금 */
+
 .summaryContainer .item{
   flex-grow: 1
 }
@@ -77,7 +77,7 @@ div{
   font-size: 13px;
 }
 
-/* ================== 주문/배송조회 박스 시작 ==================== */
+
 .shippingStatusContainer{
   padding: 21px 16px;
   background-color: white;
@@ -108,7 +108,7 @@ div{
   text-align: center;
 }
 .shippingStatusContainer .text{
-  font-size: 12px;
+  font-size: 17px;
   font-weight: normal;
   color: #c2c2c2;
   text-align: center;
@@ -141,7 +141,7 @@ div{
   margin-right: 14px;
 }
 .listContainer .text{
-  font-size: 16px;
+  font-size:16px;
   position: relative;
 }
 .listContainer .right{
@@ -149,13 +149,13 @@ div{
 }
 
 
-/*=================== 내지갑의 보유 적립금 들어가는 부분 ================*/
+
 .listContainer .smallLight{
   font-size: 14px;
   color: #c2c2c2;  
 }
 .listContainer .smallLight > span{
-  margin-left: 10px;
+  margin-left: 11px;
 }
 
 .listContainer .right .blct{
