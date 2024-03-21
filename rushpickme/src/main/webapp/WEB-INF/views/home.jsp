@@ -19,6 +19,7 @@
             margin-left: 20%; 
             display: flex; 
             align-items: center; 
+             box-shadow: 0 4px 6px rgba(1, 1, 1, 0.15);
         }
         .slogan img {
             max-width: 100%; 
@@ -56,7 +57,7 @@
 
 <div class="container">
     <div class="slogan">
-        <img src="/image/slogan1.png">
+        <img src="/image/slogan.png">
         <img src="/image/click.png" style="margin-top:-150px; width: 250px; height: auto; margin-left: 10px;"> <!-- click 이미지 크기 조정 -->
     </div>
     <div class="additional-images" style="margin-right: 70px; margin-top: -200px;"> <!-- 추가 이미지 상단 여백 조정 -->
