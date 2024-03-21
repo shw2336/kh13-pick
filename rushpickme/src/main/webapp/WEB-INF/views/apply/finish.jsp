@@ -33,12 +33,17 @@
      	window.location.href = "applyList?memebrId=" + num;	
  		console.log(num);
      	}
+ 	
+		console.log(${resultPoint});
+
+
+ 	
     </script>
 </head>
 <body>
     <div class="cell center mt-30" >
 		<h1>
-		<span style="color: rgb(66,138,66)">${applyDto.memberId}</span> 님의 수거완료 상세 내역
+		<span style="color: rgb(66,138,66)">${findDto.memberId}</span> 님의 수거완료 상세 내역
 		</h1>
 	</div>
 
@@ -48,16 +53,16 @@
     <div class="cell">
 
 		<h2>신청번호</h2>
-		<input class="detail-tool w-100" value="${applyDto.applyNo}" /> 
+		<input class="detail-tool w-100" value="${findDto.applyNo}" /> 
 			 
 			
 	</div>
 	<div class="cell">  
 
 		<h2>주소</h2>
-		<input class="detail-tool w-100" value="${applyDto.applyPost}" > <input
-			class="detail-tool w-100" value="${applyDto.applyAddress1}" > <input
-			class=" detail-tool w-100" value="${applyDto.applyAddress2}" >
+		<input class="detail-tool w-100" value="${findDto.applyPost}" > <input
+			class="detail-tool w-100" value="${findDto.applyAddress1}" > <input
+			class=" detail-tool w-100" value="${findDto.applyAddress2}" >
 	</div>
     <br>
     <div class="cell">
@@ -73,7 +78,7 @@
     <br>
     <div class="cell">
         <h2>보유 포인트</h2>
-        <input class="detail-tool w-100" value="${point}" readonly>
+        <input class="detail-tool w-100" value="${greenDto.memberGreenPoint}" readonly>
     </div>
     <br>
     <div class="cell">
@@ -82,15 +87,16 @@
     </div>
     <br>
      <div class="cell">
-        <h2>최종 결제 금액</h2>
-        <input class="detail-tool w-100" value="${resultPay}" readonly>
+        <h2>잔액</h2>
+        <input class="detail-tool w-100" value="${resultPoint}" readonly>
     </div>
     <br>
 	
 	<div class="cell right">
-		<form>
+		<%-- <form>
 		<button class="btn positive w-100"  onclick="review('${applyDto.applyNo}');">결제하기</button>
-		</form>
+		</form> --%>
+		
 		<br>
 		<button class="btn positive"  onclick="review('${applyDto.applyNo}');">리뷰쓰기</button>
 		<button class="btn positive"  onclick="applyList('${applyDto.memberId}');">신청 리스트</button>

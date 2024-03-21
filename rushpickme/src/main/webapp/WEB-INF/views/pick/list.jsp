@@ -70,7 +70,7 @@
 			<tr>
 				<th style="width: 20%;"><i
 					class="fa-solid fa-circle-exclamation fa-2x" style="color: rgb(255, 128, 128)"></i></th>
-				<td style="width: 70%;" class="left explain"><a href="urgentList" class="link">빠른 확인이 필요해요</a></td>
+				<td style="width: 70%;" class="left explain"><a href="urgentList" class="link">수거접수 대기 (빠른 확인이 필요해요)</a></td>
 				<td class="center"><span class="num">${countUrgentApply}</span>건</td>
 			</tr>
 		</tbody>

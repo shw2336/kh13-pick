@@ -12,6 +12,13 @@
 	box-shadow: 0px 4px 4px 2px gainsboro;
 	font-weight: bold;
 }
+.submit-btn:hover {
+	background-color: #ff8080; 
+	color:white;
+	border-radius: 10px;
+	font-weight: bold;
+}
+
 
 .selected-btn {
 	background-color:rgb(114,188,114);
