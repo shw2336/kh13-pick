@@ -131,7 +131,6 @@
                 </button>
                 </form>
         </div>
-                
             </div>
                 <hr>
             <div class="cell center">
