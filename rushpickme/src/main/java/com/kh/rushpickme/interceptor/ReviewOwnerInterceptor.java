@@ -6,6 +6,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.kh.rushpickme.dao.ReviewDao;
 import com.kh.rushpickme.dto.ReviewDto;
+import com.kh.rushpickme.vo.ReviewMemberNickVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ public class ReviewOwnerInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
+		ReviewMemberNickVO reviewMemberNickVO = reviewDao.selectOne(reviewNo);
 		
 		String loginId = (String)session.getAttribute("loginId");
 		String loginLevel = (String)session.getAttribute("loginLevel");
@@ -35,7 +36,7 @@ public class ReviewOwnerInterceptor implements HandlerInterceptor{
 		}
 		
 		//내글이면 통과
-		if(loginId != null && loginId.equals(reviewDto.getMemberId())) {
+		if(loginId != null && loginId.equals(reviewMemberNickVO.getMemberId())) {
 			return true;
 		}
 		

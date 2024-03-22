@@ -28,6 +28,7 @@ import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.dto.MemberDto;
 import com.kh.rushpickme.service.AttachService;
 import com.kh.rushpickme.vo.PageVO;
+import com.kh.rushpickme.vo.ReviewMemberNickVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -63,7 +64,7 @@ public class ReviewController {
 		pageVO.setCount(count);
 		model.addAttribute("pageVO", pageVO);
 		
-		List<ReviewDto> list = reviewDao.selectListByPaging(pageVO);
+		List<ReviewMemberNickVO> list = reviewDao.selectListByPaging(pageVO);
 		model.addAttribute("list", list);
 		
 		return "/WEB-INF/views/review/list.jsp";
@@ -71,34 +72,34 @@ public class ReviewController {
 	
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int reviewNo, Model model) {
-		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
-		model.addAttribute("reviewDto", reviewDto);
+		ReviewMemberNickVO reviewMemberNickVO = reviewDao.selectOne(reviewNo);
+		model.addAttribute("reviewMemberNickVO", reviewMemberNickVO);
 		//조회한 게시글 정보에 있는 회원 아이디로 작성자 정보를 불러와서 첨부
-		if(reviewDto.getMemberId() != null) {//작성자가 탈퇴하지 않았다면
-			MemberDto memberDto = memberDao.selectOne(reviewDto.getMemberId());
+		if(reviewMemberNickVO.getMemberId() != null) {//작성자가 탈퇴하지 않았다면
+			MemberDto memberDto = memberDao.selectOne(reviewMemberNickVO.getMemberId());
 			model.addAttribute("memberDto", memberDto);
 		}
 		return "/WEB-INF/views/review/detail.jsp";
 	}
 	
 	@GetMapping("/write")
-	public String write(@ModelAttribute ReviewDto reviewDto, Model model) {
-		int askNo = reviewDto.getAskNo();
+	public String write(@ModelAttribute ReviewMemberNickVO reviewMemberNickVO, Model model) {
+		int askNo = reviewMemberNickVO.getAskNo();
 		model.addAttribute("askNo", askNo);
 		return "/WEB-INF/views/review/write.jsp";
 	}
 	@PostMapping("/write")
-	public String write(@ModelAttribute ReviewDto reviewDto, HttpSession session,
+	public String write(@ModelAttribute ReviewMemberNickVO reviewMemberNickVO, HttpSession session,
 					@RequestParam float score, @ModelAttribute ApplyDto applyDto, Model model) {
 		//세션에서 로그인한 사용자의 ID를 추출
 		String loginId = (String)session.getAttribute("loginId");
 		//아이디를 게시글 정보에 포함시킨다
-		reviewDto.setMemberId(loginId);
+		reviewMemberNickVO.setMemberId(loginId);
 		int reviewStar = (int)score;
-		reviewDto.setReviewStar(reviewStar);
+		reviewMemberNickVO.setReviewStar(reviewStar);
 		int sequence = reviewDao.getSequence();//DB에서 시퀀스 번호를 추출
-		reviewDto.setReviewNo(sequence);//게시글 정보에 추출한 번호를 포함시킨다
-		reviewDao.insert(reviewDto);//등록
+		reviewMemberNickVO.setReviewNo(sequence);//게시글 정보에 추출한 번호를 포함시킨다
+		reviewDao.insert(reviewMemberNickVO);//등록
 		
 		return "redirect:detail?reviewNo="+sequence;
 	}
@@ -114,10 +115,10 @@ public class ReviewController {
 		//- 글 안에 있는 <img> 중에 .server-img를 찾아서 data-key를 읽어 삭제
 		//- (문제점) Java에서 HTML 구조를 탐색(해석)할 수 있나? OK (Jsoup)
 		
-		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
+		ReviewMemberNickVO reviewMemberNickVO = reviewDao.selectOne(reviewNo);
 		
 		//Jsoup으로 내용을 탐색하는 과정
-		Document document = Jsoup.parse(reviewDto.getReviewContent());
+		Document document = Jsoup.parse(reviewMemberNickVO.getReviewContent());
 		Elements elements = document.select(".server-img");//태그 찾기
 		for(Element element : elements) {//반복문으로 한개씩 처리
 			String key = element.attr("data-key");//data-key 속성을 읽어라!
@@ -132,30 +133,30 @@ public class ReviewController {
 	
 	@GetMapping("/edit")
 	public String edit(@RequestParam int reviewNo, Model model) {
-		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
-		model.addAttribute("reviewDto", reviewDto);
+		ReviewMemberNickVO reviewMemberNickVO = reviewDao.selectOne(reviewNo);
+		model.addAttribute("reviewMemberNickVO", reviewMemberNickVO);
 		return "/WEB-INF/views/review/edit.jsp";
 	}
 
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute ReviewDto reviewDto, HttpSession session,
+	public String edit(@ModelAttribute ReviewMemberNickVO reviewMemberNickVO, HttpSession session,
 			@RequestParam float score) {
 		
 		//세션에서 로그인한 사용자의 ID를 추출
 				String loginId = (String)session.getAttribute("loginId");
 				
 				//아이디를 게시글 정보에 포함시킨다
-				reviewDto.setMemberId(loginId);
+				reviewMemberNickVO.setMemberId(loginId);
 				//reviewDto.setAskNo(4);
 				int reviewStar = (int)score;
-				reviewDto.setReviewStar(reviewStar);
+				reviewMemberNickVO.setReviewStar(reviewStar);
 				
 		//수정 전,후를 비교하여 사라진 이미지를 찾아 삭제
 		//- 수정 전 이미지 그룹과 수정 후 이미지의 차집합(Set 사용)
 		
 		//기존 글 조회하여 수정 전 이미지 그룹을 조사
 		Set<Integer> before = new HashSet<>();
-		ReviewDto findDto = reviewDao.selectOne(reviewDto.getReviewNo());
+		ReviewMemberNickVO findDto = reviewDao.selectOne(reviewMemberNickVO.getReviewNo());
 		Document doc = Jsoup.parse(findDto.getReviewContent());//해석
 		for(Element el : doc.select(".server-img")) {//태그 찾아서 반복
 			String key = el.attr("data-key");//data-key 추출
@@ -165,7 +166,7 @@ public class ReviewController {
 		
 		//수정한 글 조사하여 수정 후 이미지 그룹을 조사
 		Set<Integer> after = new HashSet<>();
-		doc = Jsoup.parse(reviewDto.getReviewContent());//해석
+		doc = Jsoup.parse(reviewMemberNickVO.getReviewContent());//해석
 		for(Element el : doc.select(".server-img")) {//태그 찾아서 반복
 			String key = el.attr("data-key");//data-key 추출
 			int attachNo = Integer.parseInt(key);//숫자로 변환
@@ -180,8 +181,8 @@ public class ReviewController {
 			attachService.remove(attachNo);
 		}
 		
-		reviewDao.update(reviewDto);
-		return "redirect:detail?reviewNo="+reviewDto.getReviewNo();
+		reviewDao.update(reviewMemberNickVO);
+		return "redirect:detail?reviewNo="+reviewMemberNickVO.getReviewNo();
 	}
 	
 }

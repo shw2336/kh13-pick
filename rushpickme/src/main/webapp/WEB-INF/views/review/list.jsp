@@ -48,6 +48,10 @@
     max-height: 60px; /* 이미지의 높이를 자동으로 조절하여 비율을 유지합니다. */
 }
 
+.hei {
+ height:3em; /* 원하는 높이로 조정 */
+}
+
 </style>
 
 <script>
@@ -76,8 +80,8 @@
 		<%-- 검색창 --%>
 		<form action="list" method="get">
 			<select name="column" class="form-input">
-				<option value="member_id"
-					${param.column == 'member_id' ? 'selected' : ''}>작성자</option>
+				<option value="member_nick"
+					${param.column == 'member_nick' ? 'selected' : ''}>작성자</option>
 				<option value="review_content"
 					${param.column == 'review_content' ? 'selected' : ''}>내용</option>
 			</select> <input class="form-input" type="search" name="keyword"
@@ -91,7 +95,7 @@
 		<%-- 테이블 --%>
 		<table class="table table-horizontal table-hover">
 			<thead>
-				<tr>
+				<tr class="hei">
 					<th>번호</th>
 					<th class="ff">별점</th>
 					<th width="40%">리뷰내용</th>
@@ -102,25 +106,25 @@
 			</thead>
 
 			<tbody align="center">
-				<c:forEach var="reviewDto" items="${list}">
+				<c:forEach var="reviewMemberNickVO" items="${list}">
 					<tr>
-						<td>${reviewDto.reviewNo}</td>
+						<td>${reviewMemberNickVO.reviewNo}</td>
 						<%-- 별점 --%>
 						<td>
 							<div class="cell">
 								<div class="score" data-max="5.0"
-									data-rate="${reviewDto.reviewStar}">
+									data-rate="${reviewMemberNickVO.reviewStar}">
 								</div>
 							</div>
 						</td>
 						<td class="center ellipsis wid fixed-height-td">
 							<%-- 내용 출력 --%> <a class="link link-animation"
-							href="detail?reviewNo=${reviewDto.reviewNo}">
-								${reviewDto.reviewContent} </a>
+							href="detail?reviewNo=${reviewMemberNickVO.reviewNo}">
+								${reviewMemberNickVO.reviewContent} </a>
 						</td>
-						<td>${reviewDto.reviewHits}</td>
-						<td>${reviewDto.memberIdStr}</td>
-						<td>${reviewDto.reviewWriteStr}</td>
+						<td>${reviewMemberNickVO.reviewHits}</td>
+						<td>${reviewMemberNickVO.memberNickStr}</td>
+						<td>${reviewMemberNickVO.reviewWriteStr}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
