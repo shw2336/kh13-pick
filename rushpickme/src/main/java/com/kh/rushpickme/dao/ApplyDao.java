@@ -142,6 +142,12 @@ public class ApplyDao {
 			Object[] data = {memberId};
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
+		public boolean minusMemberPoint(String memberId, int pickPay) {
+			String sql ="update member_green set member_green_point = member_green_point - ? where member_id = ?";
+			Object[] data = {pickPay, memberId};
+			return jdbcTemplate.update(sql, data) > 0;
+		}
+		
 		
 		
 		

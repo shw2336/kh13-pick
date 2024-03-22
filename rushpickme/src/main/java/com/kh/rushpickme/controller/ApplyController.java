@@ -173,67 +173,55 @@ public class ApplyController {
 	}
 	
 	//결제 내역
-	@RequestMapping("/finish")
+	@GetMapping("/finish")
     public String finish(@RequestParam int applyNo, @ ModelAttribute ApplyDto applyDto,
                                 HttpSession session, Model model) {
-        String loginId=(String) session.getAttribute("loginId");
-//        applyDto.setMemberId(loginId);
+        String loginId=(String) session.getAttribute("loginId"); //로그인 
         
-        int pickNo = pickDao.selectPickNo(applyNo); 
+        int pickNo = pickDao.selectPickNo(applyNo);  //픽에서 신청자 번호 뽑기 
         
-        PickDto pickDto =pickDao.selectOneByPick(pickNo);
+        PickDto pickDto =pickDao.selectOneByPick(pickNo); //픽에서 픽번호 뽑기 
         
         ApplyDto findDto = applyDao.selectOne(applyNo); //아이디 꺼내기
-//        ApplyDto resultDto = applyDao.selectOne(applyNo);
         
-        MemberGreenDto greenDto = memberDao.selectOneGreen(loginId);
+        MemberGreenDto greenDto = memberDao.selectOneGreen(loginId); //멤버 그린에서 로그인한사람(유저) 꺼내오기
         
+        //리뷰
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setAskNo(applyNo);
         
+        //포인트 불러오기 (멤버 그린 포인트)
         model.addAttribute("point", greenDto.getMemberGreenPoint());
         
-        
+        //픽
         model.addAttribute("pickDto",pickDto);
+        //로그인한 사람 
         model.addAttribute("findDto", findDto);
+        //그린 디티오 
         model.addAttribute("greenDto", greenDto);
-//        System.out.println(applyDto.getMemberId());
-       
-        //잔여 금액 
-       int resultPoint = greenDto.getMemberGreenPoint() - pickDto.getPickPay();
-       model.addAttribute("resultPoint", resultPoint);
-       
+        
+        //결제 전 준비
+        // ( 보유 포인트-${greenDto.memberGreenPoint}, 
+        //수거 금액 -${pickDto.pickPay},잔액-${resultPoint})
+        
 			return "/WEB-INF/views/apply/finish.jsp";
 		}
+	
+	
+		@PostMapping("/finish")
+		public String finish(@RequestParam int  applyNo, String memberId) {
+	        MemberGreenDto greenDto = memberDao.selectOneGreen(memberId); //멤버 그린에서 로그인한사람(유저) 꺼내오기
+	        int pickNo = pickDao.selectPickNo(applyNo);  //픽에서 신청자 번호 뽑기 
+	        PickDto pickDto =pickDao.selectOneByPick(pickNo); //픽에서 픽번호 뽑기 
 
-	@PostMapping("/review")
-	public String review(@RequestParam String memberId) {
-		
-		return "/WEB-INF/views/review.jsp";
-	}
+	        //잔여 금액 
+//	       int resultPoint = greenDto.getMemberGreenPoint() - pickDto.getPickPay(); // 잔액 = 그린 보유 포인트 - 픽 페이
+	       int pickPay = pickDto.getPickPay();
+	        applyDao.minusMemberPoint(memberId, pickPay);
+	       
+	       return "redirect:/review/write?askNo=" + applyNo;
+		}
 	
-	
-	
-
-//	@RequestMapping("/cancel")
-//	public String cancel(@RequestParam int applyNo,HttpSession httpSession, ApplyDto applyDto) {
-//			String loginId = "jihaehuh123";
-//			applyDto.setMemberId(loginId);
-//			applyDao.cancel(applyNo);
-//		return "/WEB-INF/views/apply/cancel.jsp";
-//	}
-	
-	
-	
-	//join 썼을때 결제 내역 할때 사용하기 
-//	@RequestMapping("/requestList")
-//	public String requestList(Model model) {
-//		
-//		List<ApplyListVO> requestList = applyDao.applyList();
-//		model.addAttribute("requestList", requestList);
-//			
-//		return "/WEB-INF/views/apply/requestList.jsp";
-//		}
 	
 	
 
