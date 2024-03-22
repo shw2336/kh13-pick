@@ -10,6 +10,7 @@ public class MemberDto {
 	private String memberType;
 	private String memberEmail;
 	private String memberBirth;
+	private String kakaoId;
 	public MemberDto() {
 		super();
 	}
@@ -61,6 +62,15 @@ public class MemberDto {
 	public void setMemberBirth(String memberBirth) {
 		this.memberBirth = memberBirth;
 	}
+	
+	
+	 public String getKakaoId() {
+	        return kakaoId;
+	    }
+
+	    public void setKakaoId(String kakaoId) {
+	        this.kakaoId = kakaoId;
+	    }
 
 	
 	
