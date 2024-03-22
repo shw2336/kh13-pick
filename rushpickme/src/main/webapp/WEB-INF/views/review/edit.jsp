@@ -109,19 +109,19 @@
     </script>
 
 <form action="edit" method="post" autocomplete="off">
-	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
+	<input type="hidden" name="reviewNo" value="${reviewMemberNickVO.reviewNo}">
 
 <div class="container w-800">
 	<div class="cell center"><h1>리뷰 수정</h1></div>
 
         
         <h2>
-            <div class="score-edit" data-max="5.0" data-rate="${reviewDto.reviewStar}"></div>
+            <div class="score-edit" data-max="5.0" data-rate="${reviewMemberNickVO.reviewStar}"></div>
          </h2>
 
 	<div class="cell">
 		<%-- textarea는 시작태그와 종료태그 사이에 내용을 작성 --%>
-		<textarea name="reviewContent" required rows="10">${reviewDto.reviewContent}</textarea>
+		<textarea name="reviewContent" required rows="10">${reviewMemberNickVO.reviewContent}</textarea>
 	</div>
 	<div class="cell right">
 		<a href="list" class="btn">목록</a>
