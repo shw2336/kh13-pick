@@ -511,6 +511,11 @@
 		
 		
 	</div>
+		
+        	<div class="cell">
+			<label>프로필 이미지</label>
+			<input type="file" name="attach" class="tool w-100">
+		</div>
 	
 	
 		

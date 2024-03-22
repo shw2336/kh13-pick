@@ -21,7 +21,7 @@
     	
     	<form action="findPw" method="post">
     	<div class="cell center">
-    	<h2> 비밀번호변경 </h2>
+    	<h2> 비밀번호 찾기 </h2>
     	</div>
     	<div class="cell center">
     	아이디<input class="detail-tool" type="text" name="memberId" required>
