@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //import com.kh.rushpickme.interceptor.AdminInterceptor;
 import com.kh.rushpickme.interceptor.ReviewOwnerInterceptor;
 import com.kh.rushpickme.interceptor.QnaOwnerInterceptor;
+import com.kh.rushpickme.interceptor.ApplyInterceptor;
 import com.kh.rushpickme.interceptor.MemberInterceptor;
 import com.kh.rushpickme.interceptor.PickInterceptor;
 import com.kh.rushpickme.interceptor.QnaHitsInterceptor;
@@ -36,6 +37,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private PickInterceptor pickInterceptor;
+	
+	@Autowired
+	private ApplyInterceptor applyInterceptor;
 	
 	
 	@Override
@@ -100,7 +104,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		registry.addInterceptor(pickInterceptor).addPathPatterns("/pick/**");
 		
 		//그린만 접근 가능
-				registry.addInterceptor(pickInterceptor).addPathPatterns("/apply/**");
+				registry.addInterceptor(applyInterceptor).addPathPatterns("/apply/**");
 		
 		
 	}

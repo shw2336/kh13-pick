@@ -102,11 +102,6 @@ public class ApplyController {
 		}
 		
 		
-		
-		
-		
-		
-		
 	// 수거 현황 진행사항 페이지
 	@RequestMapping("/stateList")
 	public String stateList(@RequestParam int applyNo, Model model, HttpSession session,ApplyDto applyDto ) {
