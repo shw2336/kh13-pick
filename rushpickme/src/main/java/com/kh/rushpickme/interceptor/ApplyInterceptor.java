@@ -1,11 +1,12 @@
 package com.kh.rushpickme.interceptor;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
+@Service
 public class ApplyInterceptor implements HandlerInterceptor {
 
 	@Override
