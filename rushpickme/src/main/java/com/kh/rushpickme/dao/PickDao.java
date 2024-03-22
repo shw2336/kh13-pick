@@ -10,6 +10,7 @@ import com.kh.rushpickme.dto.ApplyDto;
 import com.kh.rushpickme.dto.PickDto;
 import com.kh.rushpickme.mapper.ApplyMapper;
 import com.kh.rushpickme.mapper.MemberPickMapper;
+import com.kh.rushpickme.mapper.PickFinishRestVoMapper;
 import com.kh.rushpickme.mapper.PickFinishVoMapper;
 import com.kh.rushpickme.mapper.PickListMapper;
 import com.kh.rushpickme.mapper.PickMapper;
@@ -17,6 +18,7 @@ import com.kh.rushpickme.mapper.PickProceedVoMapper;
 import com.kh.rushpickme.mapper.PickRejectVoMapper;
 import com.kh.rushpickme.mapper.PickWaitVoMapper;
 import com.kh.rushpickme.vo.PageVO;
+import com.kh.rushpickme.vo.PickFinishRestVo;
 import com.kh.rushpickme.vo.PickFinishVo;
 import com.kh.rushpickme.vo.PickProceedVo;
 import com.kh.rushpickme.vo.PickRejectVo;
@@ -33,6 +35,9 @@ public class PickDao {
 	
 	@Autowired
 	private PickFinishVoMapper pickFinishVoMapper;
+	
+	@Autowired
+	private PickFinishRestVoMapper pickFinishRestVoMapper;
 	
 	@Autowired
 	private PickWaitVoMapper pickWaitVoMapper;
@@ -169,7 +174,7 @@ public class PickDao {
 	}
 	
 	//수거 완료 리스트 전체 (정렬기준 선택)
-	public List<PickFinishVo> pickFinishListOrderBy (String memberId, String orderBy, PageVO pageVo) {
+	public List<PickFinishRestVo> pickFinishListOrderBy (String memberId, String orderBy, PageVO pageVo) {
 		String sql = "select * from ("
 				+ "select rownum RN, T.* from ("
 				+ "select pick_no, apply_date, pick_finish_date, pick_pay from ("
@@ -183,7 +188,7 @@ public class PickDao {
 				+ ")T "
 				+ ") where RN between ? and ?";
 		Object[] data = {memberId, memberId, pageVo.getBeginRow(), pageVo.getEndRow()};
-		return jdbcTemplate.query(sql, pickFinishVoMapper, data);
+		return jdbcTemplate.query(sql, pickFinishRestVoMapper, data);
 	}
 	
 	//(일반) 수거 대기 리스트

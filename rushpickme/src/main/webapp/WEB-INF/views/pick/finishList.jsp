@@ -6,6 +6,9 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- Moment.js 스크립트를 포함 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 <style>
 table>tbody>.contents-tr {
 	cursor: pointer;
@@ -15,6 +18,11 @@ table>tbody>.contents-tr {
 .btn.move.delete:hover {
 	background-color: #ff8080;
 	color: white;
+}
+
+.array-btn {
+	background-color: white;
+	border-radius: 10px;
 }
 </style>
 
@@ -53,42 +61,27 @@ table>tbody>.contents-tr {
                  url: "/rest/pick/order",
                  method: "post",
                  data: { orderBy: orderBy },
-                 dataType : 'json',
                  success: function (response) {
-                     // 받아온 리스트를 정렬
-                    console.log(response);
-                     $("#aaa").html("");
-                     
-                     var str = "";
+                	 moment.locale('ko');
+                     $("#finish-list-wrapper").empty();
+                     var list = "";
                      for(var i = 0; i < response.length; i++){
+                    	 console.log(response);
                     	 var result = response[i];
-	                     str += "<tr class='contents-tr'>" +
+                    	 var applyDate = moment(result.applyDate).format("MM월DD일 HH시 mm분"); // moment.js로 날짜 형식 변환
+                         var finishDate = moment(result.pickFinishDate).format("MM월DD일 HH시 mm분"); // moment.js로 날짜 형식 변환
+                         
+                    	 list += "<tr class='contents-tr'>" +
 										"<td><input type='checkbox' name='deletePicks' value='" + result.pickNo + "'></td>" +
 										"<td onclick=\"detail('" +result.pickNo + "');\">"+ result.pickNo+"</td>" +
-										"<td onclick=\"detail('"+result.pickNo+"');\">" + result.applyDate+ "</td>" + 
-										"<td onclick=\"detail('"+result.pickNo+"');\">" + result.pickFinishDate +
-										"</td>" +
+										"<td onclick=\"detail('"+result.pickNo+"');\">" + applyDate + "</td>" + 
+										"<td onclick=\"detail('"+result.pickNo+"');\">" + finishDate + "</td>" +
 										"<td onclick=\"detail('"+result.pickNo+"');\">"+ result.pickPay+" 원</td> " +
 									"</tr>";
                      }
-                     $("#aaa").html(str);
+                     $("#finish-list-wrapper").html(list);
                  }
              });
-             
-             
-             // 정렬된 리스트를 화면에 출력
-             /* var tbody = $("tbody");
-             tbody.empty(); // 기존의 데이터를 모두 지우고 새로운 데이터로 채움
-             response.forEach(function (${finishListOrderBy}) {
-                 var row = "<tr class='contents-tr'>";
-                 row += "<td><input type='checkbox' name='deletePicks' value='" + ${finishListOrderBy.pickNo} + "'></td>";
-                 row += "<td onclick='detail(\"" + ${finishListOrderBy.pickNo} + "\");'>" + ${finishListOrderBy.pickNo} + "</td>";
-                 row += "<td onclick='detail(\"" + finishListOrderBy.pickNo + "\");'>" + finishListOrderBy.applyDate + "</td>";
-                 row += "<td onclick='detail(\"" + finishListOrderBy.pickNo + "\");'>" + finishListOrderBy.pickFinishDate + "</td>";
-                 row += "<td onclick='detail(\"" + finishListOrderBy.pickNo + "\");'>" + finishListOrderBy.pickPay + "원</td>";
-                 row += "</tr>";
-                 tbody.append(row); // 새로운 행을 테이블에 추가
-             }); */
          }
      });
 
@@ -119,10 +112,6 @@ table>tbody>.contents-tr {
 	</button>
 </div>
 <!-- ------------- -->
-<div class="container w-800">
-	<button class="latest" value="desc">최신순</button>
-	<button class="long" value="asc">오래된순</button>
-</div>
 
 <form action="finishList" method="post">
 	<div class="container pick-container w-800 py-30 px-50 my-50">
@@ -130,6 +119,10 @@ table>tbody>.contents-tr {
 		<div class="cell flex-cell pb-10">
 			<div class="cell">
 				<span style="font-size: 25px; font-weight: bold;">수거 완료건</span>
+			</div>
+			<div class="cell width-fill right pt-10">
+				<button type="button" class="latest array-btn" value="desc">최신순</button>
+				<button type="button" class="long array-btn" value="asc">오래된순</button>
 			</div>
 		</div>
 
@@ -145,39 +138,22 @@ table>tbody>.contents-tr {
 					</tr>
 				</thead>
 
-<!-- 				<tbody> -->
-<%-- 					<c:forEach var="finishListOrderBy" items="${finishListOrderBy}"> --%>
-<!-- 						<tr class="contents-tr"> -->
-<!-- 							<td><input type="checkbox" name="deletePicks" -->
-<%-- 								value="${finishListOrderBy.pickNo}"></td> --%>
+				 <tbody id="finish-list-wrapper">
+					<c:forEach var="finishList" items="${finishList}"> 
+						<tr class="contents-tr">
+							<td><input type="checkbox" name="deletePicks" value="${finishList.pickNo}"></td>
 
-<%-- 							<td onclick="detail('${finishListOrderBy.pickNo}');">${finishListOrderBy.pickNo}</td> --%>
-<%-- 							<td onclick="detail('${finishListOrderBy.pickNo}');"><fmt:formatDate --%>
-<%-- 									value="${finishListOrderBy.applyDate}" --%>
-<%-- 									pattern="MM월 dd일 HH시 mm분" /></td> --%>
-<%-- 							<td onclick="detail('${finishListOrderBy.pickNo}');"><fmt:formatDate --%>
-<%-- 									value="${finishListOrderBy.pickFinishDate}" --%>
-<%-- 									pattern="MM월 dd일 HH시 mm분" /></td> --%>
-<%-- 							<td onclick="detail('${finishListOrderBy.pickNo}');">${finishListOrderBy.pickPay} --%>
-<!-- 								원</td> -->
-<!-- 						</tr> -->
-<%-- 					</c:forEach> --%>
-<!-- 				</tbody> -->
-
-					 <tbody id="aaa">
-						<c:forEach var="finishList" items="${finishList}"> 
-							<tr class="contents-tr">
-								<td><input type="checkbox" name="deletePicks" value="${finishList.pickNo}"></td>
-
-								<td onclick="detail('${finishList.pickNo}');">${finishList.pickNo}</td>
-								<td onclick="detail('${finishList.pickNo}');">
-									<fmt:formatDate value="${finishList.applyDate}" pattern="MM월 dd일 HH시 mm분" /></td>
-								<td onclick="detail('${finishList.pickNo}');">
-									<fmt:formatDate value="${finishList.pickFinishDate}" pattern="MM월 dd일 HH시 mm분" /></td>
-								<td onclick="detail('${finishList.pickNo}');">${finishList.pickPay} 원</td>
-							</tr>
-						</c:forEach>
-					</tbody> 
+							<td onclick="detail('${finishList.pickNo}');">${finishList.pickNo}</td>
+							<td onclick="detail('${finishList.pickNo}');">
+								<fmt:formatDate value="${finishList.applyDate}" pattern="MM월 dd일 HH시 mm분" />
+							</td>
+							<td onclick="detail('${finishList.pickNo}');">
+								<fmt:formatDate value="${finishList.pickFinishDate}" pattern="MM월 dd일 HH시 mm분" />
+							</td>
+							<td onclick="detail('${finishList.pickNo}');">${finishList.pickPay} 원</td>
+						</tr>
+					</c:forEach>
+				</tbody> 
 			</table>
 		</div>
 
