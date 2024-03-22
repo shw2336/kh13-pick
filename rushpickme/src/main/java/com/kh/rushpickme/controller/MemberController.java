@@ -124,7 +124,11 @@ public class MemberController {
 			memberDao.connect(memberDto.getMemberId(),attachNo);
 			
 		}
+		emailService.sendWelcomeMail(memberDto.getMemberEmail(), memberDto);
 		return "redirect:signUpSuccess";
+		
+		
+		
 	}
 
 	// 실제 로그인
@@ -476,10 +480,10 @@ public class MemberController {
 				findDto.getMemberEmail().equals(memberDto.getMemberEmail());
 		if(isValid) {
 			emailService.sendTempPassword(findDto);
-			return "redirect:findPwSuccess";
+			return "redirect:changePwFinish";
 		}
 		else {
-			return "redirect:findPwFail";
+			return "redirect:changePwFail";
 		}
 		
 	}
