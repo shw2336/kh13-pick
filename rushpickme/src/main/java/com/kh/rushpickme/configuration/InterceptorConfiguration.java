@@ -98,5 +98,10 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		
 		//피커만 접근 가능
 		registry.addInterceptor(pickInterceptor).addPathPatterns("/pick/**");
+		
+		//그린만 접근 가능
+				registry.addInterceptor(pickInterceptor).addPathPatterns("/apply/**");
+		
+		
 	}
 }

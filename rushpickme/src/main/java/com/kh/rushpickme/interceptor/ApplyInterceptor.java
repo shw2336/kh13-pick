@@ -13,9 +13,10 @@ public class ApplyInterceptor implements HandlerInterceptor {
 			throws Exception {
 		
 		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");
 		String loginLevel = (String) session.getAttribute("loginLevel");
 		
-		boolean isGreen = loginLevel != null && loginLevel.equals("그린");
+		boolean isGreen = loginId != null && loginLevel.equals("그린");
 		
 		if (isGreen) {
 			return true;
