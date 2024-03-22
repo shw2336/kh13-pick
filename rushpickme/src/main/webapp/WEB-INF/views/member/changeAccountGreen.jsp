@@ -435,13 +435,6 @@
 		
 	
         
-       
-		
-		
-	</div>
-	
-	
-		
 		<div class="flex-cell">
 			
 			<div class="w-100 center">
@@ -451,11 +444,17 @@
 				</button>
 			</div>
 		</div>
+       
+		
 	</div>
+	
+</form>
+	
+	
+		
 	
 
 	
-</form>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

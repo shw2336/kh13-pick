@@ -281,7 +281,7 @@ public class MemberController {
 
 	@PostMapping("/changeAccountGreen")
 	public String changeAccountGreen(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberGreenDto memberGreenDto,
-									HttpSession session,Model model, @RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+									HttpSession session,Model model) {
 		String loginId = (String)session.getAttribute("loginId");
 
 		// memberDto 아이디 설정
@@ -293,28 +293,13 @@ public class MemberController {
 
 		// DB정보 조회
 		MemberDto findMemberDto = memberDao.selectOne(loginId);
+		
 //		MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
 		//MemberPickDto findPickDto = memberDao.selectOnePick(loginId);
 		
-		//로그인한 아이디로 attach no 조회하는 dao 실행
-		int attachNoById = memberDao.findAttachNo(loginId);
+//		//로그인한 아이디로 attach no 조회하는 dao 실행
+//		int attachNoById = memberDao.findAttachNo(loginId);
 			
-		
-		
-		//attach_no가 없으면
-		
-		if(!attach.isEmpty()) {
-			
-			int attachNo = attachService.save(attach);
-			
-			memberDao.connect(memberDto.getMemberId(),attachNo);
-			
-		}
-		//attach_no가 이미 있으면
-		//attachService.remove(attachNo) 한 담에 .save(attach)
-		
-		
-		
 		
 		/// 조건
 		boolean isValid = false;
@@ -338,7 +323,7 @@ public class MemberController {
 		}
 
 	}
-	//ㅎ2
+	
 	// 수거회원 개인정보 변경
 		@GetMapping("/changeAccountPick")
 		public String changeAccountPick(Model model, HttpSession session) {
@@ -346,61 +331,56 @@ public class MemberController {
 			String loginId = (String) session.getAttribute("loginId");
 
 			// 2.로그인 되어있는 아이디로 Dto에 있는 정보를 불러온다
+//			MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
+//			MemberPickDto memberPickDto = memberDao.selectOnePick(loginId);
 			MemberDto memberDto = memberDao.selectOne(loginId);
-		//	MemberGreenDto memberGreenDto = memberDao.selectOneGreen(loginId);
-			MemberPickDto memberPickDto = memberDao.selectOnePick(loginId);
 
 			// 3. 화면에 정보 전달
 			model.addAttribute("memberDto", memberDto);
-		//	model.addAttribute("memberGreenDto", memberGreenDto);
-			model.addAttribute("memberPickDto", memberPickDto);
+//			model.addAttribute("memberGreenDto", memberGreenDto);
+//			model.addAttribute("memberPickDto", memberPickDto);
 
 			// 4.로그인 되어있는 회원의 구매내역 첨부
 			model.addAttribute("buyList", buyDao.selectList(loginId));
 
 			// 5.현재 사용자의 Q&A 작성글
-			model.addAttribute(loginId, memberDto);
-		//	model.addAttribute(loginId, memberGreenDto);
-			model.addAttribute(loginId, memberPickDto);
+//			model.addAttribute(loginId, memberDto);
+//			model.addAttribute(loginId, memberGreenDto);
+//			model.addAttribute(loginId, memberPickDto);
 
 			// 6.view 전달
 			return "/WEB-INF/views/member/changeAccountPick.jsp";
 		}
 
 		@PostMapping("/changeAccountPick")
-		public String changeAccountPick(@ModelAttribute MemberDto memberDto, @ModelAttribute MemberPickDto memberPickDto,
-				 HttpSession session) {
+		public String changeAccountPick(@RequestParam String newPassword, @ModelAttribute MemberDto memberDto, HttpSession session) {
 			String loginId = (String) session.getAttribute("loginId");
 			// memberDto 아이디 설정
 			memberDto.setMemberId(loginId);
 			// memberGreenDto 아이디 설정
-			//memberGreenDto.setMemberId(loginId);
+//			memberGreenDto.setMemberId(loginId);
 			// memberPickDto 아이디 설정
-			memberPickDto.setMemberId(loginId);
+//			memberPickDto.setMemberId(loginId);
 
 			// DB정보 조회
 			MemberDto findMemberDto = memberDao.selectOne(loginId);
-			//MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
-			//MemberPickDto findPickDto = memberDao.selectOnePick(loginId);
+//			MemberGreenDto findGreenDto = memberDao.selectOneGreen(loginId);
+//			MemberPickDto findPickDto = memberDao.selectOnePick(loginId);
 
 			// 조건
-			boolean isValid = memberDto.getMemberPw().equals(findMemberDto.getMemberPw());
+			boolean isValid = findMemberDto.getMemberPw().equals(newPassword);
 
 			// 변경
 			if (isValid) {
 				memberDao.updateMember(memberDto);
-				//memberDao.updateGreenMember(memberGreenDto);
-				memberDao.updatePickMember(memberPickDto);
-
+//				memberDao.updateGreenMember(memberGreenDto);
+//				memberDao.updatePickMember(findPickDto);
 				return "redirect:mypage";
 			}
-
 			else {
 				// 이전 페이지로 리다이렉트
 				return "redirect:change?error";
-
 			}
-
 		}
 
 	@GetMapping("/changepassword")
