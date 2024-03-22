@@ -1,4 +1,4 @@
-package com.kh.rushpickme.dto;
+package com.kh.rushpickme.vo;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -6,11 +6,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class QnaDto {
-	
+public class QnaMemberNickVO {
+
 	private int qnaNo;//글번호
 	private String memberId;//작성자(회원아이디)
-	//private String memberNick;//닉네임
+	private String memberNick;//닉네임
 	private String qnaTitle;//제목
 	private String qnaContent;//글내용
 	private String qnaDelete;//삭제여부
@@ -21,103 +21,80 @@ public class QnaDto {
 	private int qnaGroup;//그룹번호
 	private Integer qnaTarget;//원본글번호
 	private int qnaDepth;//차수
-
-	public QnaDto() {
+	
+	
+	public QnaMemberNickVO() {
 		super();
 	}
-
 	public int getQnaNo() {
 		return qnaNo;
 	}
-
 	public void setQnaNo(int qnaNo) {
 		this.qnaNo = qnaNo;
 	}
-
 	public String getMemberId() {
 		return memberId;
 	}
-
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
-//	public String getMemberNick() {
-//		return memberNick;
-//	}
-//
-//	public void setMemberNick(String memberNick) {
-//		this.memberNick = memberNick;
-//	}
-
+	public String getMemberNick() {
+		return memberNick;
+	}
+	public void setMemberNick(String memberNick) {
+		this.memberNick = memberNick;
+	}
 	public String getQnaTitle() {
 		return qnaTitle;
 	}
-
 	public void setQnaTitle(String qnaTitle) {
 		this.qnaTitle = qnaTitle;
 	}
-
 	public String getQnaContent() {
 		return qnaContent;
 	}
-
 	public void setQnaContent(String qnaContent) {
 		this.qnaContent = qnaContent;
 	}
-
 	public String getQnaDelete() {
 		return qnaDelete;
 	}
-
 	public void setQnaDelete(String qnaDelete) {
 		this.qnaDelete = qnaDelete;
 	}
-
 	public int getQnaHits() {
 		return qnaHits;
 	}
-
 	public void setQnaHits(int qnaHits) {
 		this.qnaHits = qnaHits;
 	}
-
 	public Date getQnaWrite() {
 		return qnaWrite;
 	}
-
 	public void setQnaWrite(Date qnaWrite) {
 		this.qnaWrite = qnaWrite;
 	}
-
 	public Date getQnaEdit() {
 		return qnaEdit;
 	}
-
 	public void setQnaEdit(Date qnaEdit) {
 		this.qnaEdit = qnaEdit;
 	}
-
 	public int getQnaGroup() {
 		return qnaGroup;
 	}
-
 	public void setQnaGroup(int qnaGroup) {
 		this.qnaGroup = qnaGroup;
 	}
-
 	public Integer getQnaTarget() {
 		return qnaTarget;
 	}
-
 	public void setQnaTarget(Integer qnaTarget) {
 		this.qnaTarget = qnaTarget;
 	}
-
 	public int getQnaDepth() {
 		return qnaDepth;
 	}
-
 	public void setQnaDepth(int qnaDepth) {
 		this.qnaDepth = qnaDepth;
 	}
@@ -129,12 +106,12 @@ public class QnaDto {
 			return memberId;
 	}
 	
-//	public String getMemberNickStr() {
-//		if(memberId == null)
-//			return "탈퇴한사용자";
-//		else
-//			return memberNick;
-//	}
+	public String getMemberNickStr() {
+	if(memberId == null)
+		return "탈퇴한사용자";
+	else
+		return memberNick;
+}
 
 	//오늘 작성한 글은 시간을, 이전에 작성한 글은 날짜를 반환
 	//- LocalDate 형태로 시간을 변환하여 오늘 날짜와 비교
@@ -189,4 +166,6 @@ public class QnaDto {
 	}
 	
 	
+	
+
 }

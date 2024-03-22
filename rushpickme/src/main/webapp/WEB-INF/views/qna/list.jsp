@@ -79,35 +79,35 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="qnaDto" items="${list}">
-				<c:if test="${qnaDto.memberId=='adminuser1'}">
+				<c:forEach var="qnaMemberNickVO" items="${list}">
+				<c:if test="${qnaMemberNickVO.memberId=='adminuser1'}">
 				<tr>
 				<td class="bold-text">공지</td>
 						<%-- 제목 칸 --%>
 						<td class="center">
 							<a class="link link-animation bold-text"
-							href="detail?qnaNo=${qnaDto.qnaNo}"> ${qnaDto.qnaTitle} </a>
+							href="detail?qnaNo=${qnaMemberNickVO.qnaNo}"> ${qnaMemberNickVO.qnaTitle} </a>
 						</td>
-						<td class="bold-text">${qnaDto.memberNickStr}</td>
-						<td class="bold-text">${qnaDto.qnaWriteStr}</td>
-						<td class="bold-text">${qnaDto.qnaHits}</td>
+						<td class="bold-text">${qnaMemberNickVO.memberNickStr}</td>
+						<td class="bold-text">${qnaMemberNickVO.qnaWriteStr}</td>
+						<td class="bold-text">${qnaMemberNickVO.qnaHits}</td>
 					</tr>
 				</c:if>
 				</c:forEach>
-				<c:forEach var="qnaDto" items="${list}">
-				<c:if test="${qnaDto.memberId!='adminuser1'}">
+				<c:forEach var="qnaMemberNickVO" items="${list}">
+				<c:if test="${qnaMemberNickVO.memberId!='adminuser1'}">
 					<tr>
-						<td>${qnaDto.qnaNo}</td>
+						<td>${qnaMemberNickVO.qnaNo}</td>
 						<%-- 제목 칸 --%>
 						<td class="center">
-							<%-- 답글일 경우만 이미지를 출력 --%> <c:if test="${qnaDto.qnaDepth > 0}">
+							<%-- 답글일 경우만 이미지를 출력 --%> <c:if test="${qnaMemberNickVO.qnaDepth > 0}">
                      →
                   </c:if> <%-- 제목 출력 --%> <a class="link link-animation"
-							href="detail?qnaNo=${qnaDto.qnaNo}"> ${qnaDto.qnaTitle} </a>
+							href="detail?qnaNo=${qnaMemberNickVO.qnaNo}"> ${qnaMemberNickVO.qnaTitle} </a>
 						</td>
-						<td>${qnaDto.memberNick}</td>
-						<td>${qnaDto.qnaWriteStr}</td>
-						<td>${qnaDto.qnaHits}</td>
+						<td>${qnaMemberNickVO.memberNickStr}</td>
+						<td>${qnaMemberNickVO.qnaWriteStr}</td>
+						<td>${qnaMemberNickVO.qnaHits}</td>
 					</tr>
 				</c:if>
 				</c:forEach>
