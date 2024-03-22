@@ -102,16 +102,16 @@
     </script>
 
 <form action="edit" method="post" autocomplete="off">
-	<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
+	<input type="hidden" name="qnaNo" value="${qnaMemberNickVO.qnaNo}">
 
 <div class="container w-800">
 	<div class="cell center"><h1>게시글 수정</h1></div>
 	<div style="text-align: center; margin-top: 50px; margin-bottom: 20px;">
-		<input type="text" name="qnaTitle" required class="title-input" value="${qnaDto.qnaTitle}" placeholder="제목을 입력하세요">
+		<input type="text" name="qnaTitle" required class="title-input" value="${qnaMemberNickVO.qnaTitle}" placeholder="제목을 입력하세요">
 	</div>
 	<div class="cell">
 		<%-- textarea는 시작태그와 종료태그 사이에 내용을 작성 --%>
-		<textarea name="qnaContent" required rows="10">${qnaDto.qnaContent}</textarea>
+		<textarea name="qnaContent" required rows="10">${qnaMemberNickVO.qnaContent}</textarea>
 	</div>
 	<div class="cell right">
 		<a href="list" class="btn">목록</a>

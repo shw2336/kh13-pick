@@ -9,6 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.kh.rushpickme.dao.QnaDao;
 import com.kh.rushpickme.dto.QnaDto;
+import com.kh.rushpickme.vo.QnaMemberNickVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,13 +40,13 @@ public class QnaHitsInterceptor  implements HandlerInterceptor {
 		}
 		
 		//2. 작성자 본인인 경우 조회수 증가 방지 처리
-		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
-		if(loginId.equals(qnaDto.getMemberId())) {
+		QnaMemberNickVO qnaMemberNickVO = qnaDao.selectOne(qnaNo);
+		if(loginId.equals(qnaMemberNickVO.getMemberId())) {
 			return true;
 		}
 		
 		//3. 작성자가 탈퇴한 사용자면 조회수 증가 방지 처리
-		if(qnaDto.getMemberId() == null) {
+		if(qnaMemberNickVO.getMemberId() == null) {
 			return true;
 		}
 		

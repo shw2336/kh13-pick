@@ -16,7 +16,7 @@ public class QnaListMapper implements RowMapper<QnaDto>{
 		QnaDto qnaDto = new QnaDto();
 		qnaDto.setQnaNo(rs.getInt("qna_no"));
 		qnaDto.setMemberId(rs.getString("member_id"));
-		qnaDto.setMemberNick(rs.getString("member_nick"));
+		//qnaDto.setMemberNick(rs.getString("member_nick"));
 		qnaDto.setQnaTitle(rs.getString("qna_title"));
 		//qnaDto.setQnaContent(rs.getString("qna_content"));
 		qnaDto.setQnaDelete(rs.getString("qna_delete"));

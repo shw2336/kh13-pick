@@ -6,6 +6,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.kh.rushpickme.dao.QnaDao;
 import com.kh.rushpickme.dto.QnaDto;
+import com.kh.rushpickme.vo.QnaMemberNickVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ public class QnaOwnerInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
-		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
+		QnaMemberNickVO qnaMemberNickVO = qnaDao.selectOne(qnaNo);
 		
 		String loginId = (String)session.getAttribute("loginId");
 		String loginLevel = (String)session.getAttribute("loginLevel");
@@ -35,7 +36,7 @@ public class QnaOwnerInterceptor implements HandlerInterceptor{
 		}
 		
 		//내글이면 통과
-		if(loginId != null && loginId.equals(qnaDto.getMemberId())) {
+		if(loginId != null && loginId.equals(qnaMemberNickVO.getMemberId())) {
 			return true;
 		}
 		
