@@ -90,11 +90,6 @@
         		window.open("http://localhost:8080/","RushPickMe","width500,height=500");
         	}
         } */
-        
-        
-        
-         
-
 </script>
 <body>
  	<div class="container apply-container w-650 mt-50 mb-50">
