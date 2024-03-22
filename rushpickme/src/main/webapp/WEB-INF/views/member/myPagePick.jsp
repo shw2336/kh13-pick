@@ -300,11 +300,6 @@ div{
     
   
     
-    <a href="/member/changepassword" class="item">
-        <div class="icon">ii</div>
-        <div class="text">비밀번호 변경</div>
-        <div class="right"> > </div>
-    </a>
     <a href="/member/leave" class="item">
         <div class="icon">ii</div>
         <div class="text">회원탈퇴</div>
