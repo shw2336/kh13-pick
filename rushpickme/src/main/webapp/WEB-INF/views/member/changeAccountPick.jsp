@@ -300,17 +300,12 @@
 
 
 
-<form action="changeAccountGreen" method="post" enctype="multipart/form-data" 
+<form action="changeAccountPick" method="post" enctype="multipart/form-data" 
 			autocomplete="off" class="check-form">
 
 <div class="container pick-container w-700 p-20 mb-50">
 
 	<div class="cell center"><h1>수거회원 정보</h1></div>
-	
-	
-	 
-	
-	
 	
 	<div class="cell">
             <label>
@@ -371,40 +366,34 @@
             <div class="fail-feedback">잘못된 날짜 형식입니다</div>
         </div>
         
-        
-		
-		<!-- 
-			버튼이 없는 경우도 처리하기 위해서 flex-cell 사용
-			flex-cell은 설정에 따라 줄바꿈을 금지할 수 있기 때문에 폭을 100%로 설정	 
-		-->
 		
 	</div>
 	
 	<div class="cell">
 	<!-- 	<!-- 주소 : 모두 입력하든가 입력하지 않든가 -->
-        <div class="cell">
-            <label>주소<i class="fa-regular fa-address-book"></i>
-            </label>
-        </div>
-        <div class="cell">
-            <input value="${memberGreenDto.memberGreenPost}" type="text" name="memberGreenPost" readonly  
-                    placeholder="우편번호" class="tool" size="6" maxlength="6">
-            <button type="button" class="btn positive btn-address-search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>        
-            <button type="button" class="btn negative btn-address-clear">
-            	<i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-        <div class="cell">
-            <input value="${memberGreenDto.memberGreenAddress1}" type="text" name="memberGreenAddress1" 
-                    placeholder="기본주소" class="tool w-100" readonly>
-        </div>
-        <div class="cell">
-            <input value="${memberGreenDto.memberGreenAddress2}" type="text" name="memberGreenAddress2" 
-                    placeholder="상세주소" class="tool w-100">
-            <div class="fail-feedback">주소를 모두 작성하세요</div>
-        </div> 
+<!--         <div class="cell"> -->
+<!--             <label>주소<i class="fa-regular fa-address-book"></i> -->
+<!--             </label> -->
+<!--         </div> -->
+<!--         <div class="cell"> -->
+<%--             <input value="${memberGreenDto.memberGreenPost}" type="text" name="memberGreenPost" readonly   --%>
+<!--                     placeholder="우편번호" class="tool" size="6" maxlength="6"> -->
+<!--             <button type="button" class="btn positive btn-address-search"> -->
+<!--                 <i class="fa-solid fa-magnifying-glass"></i> -->
+<!--             </button>         -->
+<!--             <button type="button" class="btn negative btn-address-clear"> -->
+<!--             	<i class="fa-solid fa-xmark"></i> -->
+<!--             </button> -->
+<!--         </div> -->
+<!--         <div class="cell"> -->
+<%--             <input value="${memberGreenDto.memberGreenAddress1}" type="text" name="memberGreenAddress1"  --%>
+<!--                     placeholder="기본주소" class="tool w-100" readonly> -->
+<!--         </div> -->
+<!--         <div class="cell"> -->
+<%--             <input value="${memberGreenDto.memberGreenAddress2}" type="text" name="memberGreenAddress2"  --%>
+<!--                     placeholder="상세주소" class="tool w-100"> -->
+<!--             <div class="fail-feedback">주소를 모두 작성하세요</div> -->
+<!--         </div>  -->
         
         <div class="cell">
             <label>
@@ -424,7 +413,7 @@
 			     <i class="fa-solid fa-check"></i>
 			</label>
 			<!-- 비밀번호 확인은 백엔드로 전송되지 않도록 이름을 부여하지 않는다 -->
-		    <input type="password" placeholder=""
+		    <input type="password" name="newPassword" placeholder=""
 		                    id="pw-reinput" class="tool w-100">
 		    <div class="success-feedback">비밀번호가 일치합니다</div>
 		    <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
@@ -459,9 +448,7 @@
 			</div>
 		</div>
 	</div>
-	
 
-	
 </form>
 
 

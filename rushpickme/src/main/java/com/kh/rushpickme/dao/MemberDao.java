@@ -1,8 +1,8 @@
 package com.kh.rushpickme.dao;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -164,7 +164,7 @@ public class MemberDao {
 				//수거회원근무지 변경
 				public boolean updatePickMember(MemberPickDto memberPickDto) {
 					String sql = "update member_pick set "
-							+ "member_pick_area "
+							+ "member_pick_area = ? "
 							+ "where member_id =?";
 					Object[] data = {
 							memberPickDto.getMemberPickArea(),memberPickDto.getMemberId()
