@@ -183,7 +183,7 @@ public class ApplyController {
         
         PickDto pickDto =pickDao.selectOneByPick(pickNo);
         
-        ApplyDto findDto = applyDao.selectOne(applyNo);
+        ApplyDto findDto = applyDao.selectOne(applyNo); //아이디 꺼내기
 //        ApplyDto resultDto = applyDao.selectOne(applyNo);
         
         MemberGreenDto greenDto = memberDao.selectOneGreen(loginId);
@@ -198,10 +198,11 @@ public class ApplyController {
         model.addAttribute("findDto", findDto);
         model.addAttribute("greenDto", greenDto);
 //        System.out.println(applyDto.getMemberId());
-        
+       
+        //잔여 금액 
        int resultPoint = greenDto.getMemberGreenPoint() - pickDto.getPickPay();
        model.addAttribute("resultPoint", resultPoint);
-
+       
 			return "/WEB-INF/views/apply/finish.jsp";
 		}
 

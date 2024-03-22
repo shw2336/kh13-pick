@@ -33,46 +33,38 @@
      	window.location.href = "applyList?memebrId=" + num;	
  		console.log(num);
      	}
+ 	function pay(num) {
+     	window.location.href = "finish?memebrId=" + num;	
+ 		console.log(num);
+     	}
  	
- 	/* function locationCharge() {
-        window.alert("결제 되었습니다!");
-        if(choice){
-            window.open("http://localhost:8080/apply/finish?","naver","width500,height=500");
-        }
-    }
+ 	
+ 	//결제 
+ 	function checkBalance(resultPoint) {
+ 	    // memberId를 사용하여 사용자의 보유 포인트, 수거 금액 및 잔액을 가져온다고 가정
+ 	    var memberGreenPoint = "${greenDto.memberGreenPoint}"; 
+ 	    var pickPay = "${pickDto.pickPay}"; 
 
-    function locationCharge() {
-        // var choice =window.confirm("정말 이동할거에요?");    
-        var choice =confirm("잔액이 부족합니다! 포인트를 충전하시겠습니까?");  
-          // console.log(button);
-        if(choice){ //확인을 누르면 이동해라
-            window.open("http://localhost:8080/point/charge","charge","width500,height=500");
-        }
-    } */
-    
-    /* 	function checkBalance(memberId) { 
-        var balance =${resultPoin};
-        if (balance < 0) {
-            locationCharge();
-        } else {
-            pay();
-        }
-    }
+ 	    var resultPoint = memberGreenPoint - pickPay;
 
-    function pay() {
-        window.alert("결제 되었습니다!");
-        if(choice){
-            window.open("http://localhost:8080/apply/finish?","naver","width500,height=500");
-        }
-    }
-
-    function locationCharge() {
-        var choice =confirm("잔액이 부족합니다! 포인트를 충전하시겠습니까?");  
-        if(choice){ //확인을 누르면 이동해라
-            window.open("http://localhost:8080/point/charge","charge","width500,height=500");
-        }
-    }  */
-
+ 	    if (resultPoint < 0) {
+ 	        locationCharge();
+ 	    } else {
+ 	        pay(); // 잔액이 있으면 결제 함수 호출
+ 	    }
+ 	}
+ 	function locationCharge() {
+ 	    var choice = confirm("잔액이 부족합니다! 포인트를 충전하시겠습니까?");
+ 	    if (choice) { // 확인을 누르면 이동해라
+ 	        window.open("http://localhost:8080/point/charge", "charge", "width=500,height=500");
+ 	    }
+ 	}
+ 	function pay() {
+ 	    window.alert("결제 되었습니다!");
+ 	        window.open("finish?memebrId=" + num, "width=500,height=500");
+ 	 
+ 	}
+ 	
  	
     </script>
 </head>
