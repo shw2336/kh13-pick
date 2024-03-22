@@ -19,11 +19,6 @@ public class AdminDao {
     @Autowired
     private MemberMapper memberMapper;
     
-    // 피커 회원 목록 조회
-    public List<MemberDto> getPickerList() {
-        String sql = "select * from member where member_type = '피커'";
-        return jdbcTemplate.query(sql, memberMapper);
-    }
 
     // 회원 상세 정보 조회
     public MemberDto selectOne(String memberId) {
