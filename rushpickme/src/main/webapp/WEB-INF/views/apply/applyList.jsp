@@ -45,7 +45,7 @@ table>tbody>.contents-tr {
 					<th>배출봉투</th>
 					<th>신청일시</th>
 					<th>수거희망일</th>
-					<th>진행 여부 </th>
+					<th>진행 여부 </th>  
 				</tr>
 			</thead>
 
