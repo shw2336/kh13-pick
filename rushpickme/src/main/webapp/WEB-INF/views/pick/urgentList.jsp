@@ -95,7 +95,7 @@ table > tbody > .contents-tr {
 						<td>${urgentList.applyAddress1}</td>
 						<td>${urgentList.applyVinyl}</td>
 						<td><fmt:formatDate value="${urgentList.applyDate}"
-						pattern="MM월 dd일" /></td>
+						pattern="MM월 dd일 HH:mm" /></td>
 						<td>${urgentList.applyHopeDate}</td>
 					</tr>
 				</c:forEach>
