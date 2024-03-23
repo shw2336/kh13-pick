@@ -251,6 +251,7 @@ public class PickDao {
 				+ "where pick.pick_state like '수거거부' "
 				+ "and apply.apply_state like '접수거부' "
 				+ "and pick.member_id like ? "
+				+ "and pick.pick_delete like 'N' "
 				+ "and apply.apply_area in (select member_pick_area from member_pick where member_pick.member_id like ?) "
 				+ "order by apply_date desc)T ) "
 				+ "where RN between ? and ?";
@@ -308,6 +309,7 @@ public class PickDao {
 		String sql = "SELECT count(*) FROM pick join apply on apply.APPLY_NO = pick.APPLY_NO "
 				+ "WHERE pick.pick_state LIKE '수거거부' "
 				+ "and pick.member_id like ? "
+				+ "and pick_delete ='N' "
 				+ "and apply.apply_area IN "
 				+ "( SELECT MEMBER_PICK_AREA FROM member_pick WHERE member_pick.member_id LIKE ?)";
 		Object[] data = {memberId,memberId};

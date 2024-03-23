@@ -22,7 +22,13 @@ table>tbody>.contents-tr {
 
 .array-btn {
 	background-color: white;
+	border-style: none;
 	border-radius: 10px;
+	cursor:pointer;
+}
+.array-btn:hover {
+	font-weight:bold;
+	color:rgb(66, 138, 66);
 }
 </style>
 
@@ -68,15 +74,15 @@ table>tbody>.contents-tr {
                      for(var i = 0; i < response.length; i++){
                     	 console.log(response);
                     	 var result = response[i];
-                    	 var applyDate = moment(result.applyDate).format("MM월DD일 HH시 mm분"); // moment.js로 날짜 형식 변환
-                         var finishDate = moment(result.pickFinishDate).format("MM월DD일 HH시 mm분"); // moment.js로 날짜 형식 변환
+                    	 var applyDate = moment(result.applyDate).format("MM월DD일 HH:mm"); // moment.js로 날짜 형식 변환
+                         var finishDate = moment(result.pickFinishDate).format("MM월DD일 HH:mm"); // moment.js로 날짜 형식 변환
                          
                     	 list += "<tr class='contents-tr'>" +
 										"<td><input type='checkbox' name='deletePicks' value='" + result.pickNo + "'></td>" +
 										"<td onclick=\"detail('" +result.pickNo + "');\">"+ result.pickNo+"</td>" +
 										"<td onclick=\"detail('"+result.pickNo+"');\">" + applyDate + "</td>" + 
 										"<td onclick=\"detail('"+result.pickNo+"');\">" + finishDate + "</td>" +
-										"<td onclick=\"detail('"+result.pickNo+"');\">"+ result.pickPay+" 원</td> " +
+										"<td onclick=\"detail('"+result.pickNo+"');\">"+ result.pickPay.toLocaleString() +" 원</td> " +
 									"</tr>";
                      }
                      $("#finish-list-wrapper").html(list);
@@ -119,6 +125,8 @@ table>tbody>.contents-tr {
 		<div class="cell flex-cell pb-10">
 			<div class="cell">
 				<span style="font-size: 25px; font-weight: bold;">수거 완료건</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<span style="color: rgb(66,138,66); font-weight:bold;">수거일시</span> 기준으로 정렬됩니다. 
 			</div>
 			<div class="cell width-fill right pt-10">
 				<button type="button" class="latest array-btn" value="desc">최신순</button>
@@ -145,12 +153,12 @@ table>tbody>.contents-tr {
 
 							<td onclick="detail('${finishList.pickNo}');">${finishList.pickNo}</td>
 							<td onclick="detail('${finishList.pickNo}');">
-								<fmt:formatDate value="${finishList.applyDate}" pattern="MM월 dd일 HH시 mm분" />
+								<fmt:formatDate value="${finishList.applyDate}" pattern="MM월 dd일 HH:mm" />
 							</td>
 							<td onclick="detail('${finishList.pickNo}');">
-								<fmt:formatDate value="${finishList.pickFinishDate}" pattern="MM월 dd일 HH시 mm분" />
+								<fmt:formatDate value="${finishList.pickFinishDate}" pattern="MM월 dd일 HH:mm" />
 							</td>
-							<td onclick="detail('${finishList.pickNo}');">${finishList.pickPay} 원</td>
+							<td onclick="detail('${finishList.pickNo}');"><fmt:formatNumber value="${finishList.pickPay}" pattern="#,##0"/> 원</td>
 						</tr>
 					</c:forEach>
 				</tbody> 

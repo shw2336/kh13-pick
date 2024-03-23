@@ -68,6 +68,11 @@
 			function() {
 				if ($(".reject-comment").val().trim().length > 0) {
 					$("#pickReject").val($(".reject-comment").val());
+				}else  {
+					if ($("#pickReject").val().trim().length == 0) {
+						alert("기타 사유를 입력하세요.");
+						return false;
+					}
 				}
 				var length = $(".selected-btn").length;
 				$(".submit-btn").removeClass("success fail").addClass(
@@ -77,7 +82,7 @@
 		
 	});
 	
-	//이미지 미리보기
+	//이미지 미리보기 (자바스크립트에서 사용할 수 있는 Web API : 브라우저에서 공통 지원/ 자바스크립트 내장 함수)
 	$(function(){
 		$("#uploadFile").change(function(event){
 			//파일 선택한게 없다면 (취소버튼 눌렀을 때)
@@ -91,16 +96,16 @@
 					$("#imgArea").html("");	//이미지 미리보기 화면 초기화
 					return alert("이미지 파일만 등록 가능합니다."); 
 				}
-				$("#imgArea").html("");	//이미지파일이라면, 일단 이미지 미리보기 화면 초기화
+				$("#imgArea").html("");	//이미지파일이라면, 일단 이미지 미리보기 화면 초기화 (밑에 계속 추가되는거 방지)
 				var file = event.target.files;	//파일 입력 요소에서 선택한 파일을 가져와서 변수 file에 저장
 
-				var image = new Image();	//이미지 객체 생성
+				var image = new Image();	//이미지 객체 생성 (이미지 파일을 로드하고 화면에 표시)
 				var imageTempUrl = window.URL.createObjectURL(file[0]); //임시 이미지 URL생성 (현재 선택한파일)
 
-				image.src = imageTempUrl;
+				image.src = imageTempUrl; //이미지 src속성에 임시 URL 할당
 				image.style.width = "280px";
 
-				$("#imgArea").append(image);
+				$("#imgArea").append(image); //미리보기 구역에 붙이기 
 			}
 		});
 	});

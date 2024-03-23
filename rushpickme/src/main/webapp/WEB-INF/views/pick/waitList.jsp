@@ -94,7 +94,7 @@ table > tbody > .contents-tr {
 						<td>${waitList.applyAddress1}</td>
 						<td>${waitList.applyVinyl}</td>
 						<td><fmt:formatDate value="${waitList.applyDate}"
-						pattern="MM월 dd일" /></td>
+						pattern="MM월 dd일 HH:mm" /></td>
 						<td>${waitList.applyHopeDate}</td>
 					</tr>
 				</c:forEach>
