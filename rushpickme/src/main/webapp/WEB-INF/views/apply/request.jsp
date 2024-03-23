@@ -58,30 +58,6 @@
                 $("[name=applyAddress1]").val("");
                 $("[name=applyAddress2]").val("");
             });
-            
-          //신청 완료 시  후기작성 메일전송
-            $(".check-form").request(function(){
-     		   $(this).find("[name]").blur();
-    		    if (!state.isOk()) {
-    		        // 입력 값이 유효하지 않으면 폼 제출을 중단하고 함수를 종료합니다.
-    		        event.preventDefault();
-    		        return false;
-    		    }else {
-    		    	 //이메일 불러오기
-    	            var inputEmail = $("[name=memberEmail]").val();
-    	            if (inputEmail.length == 0) return;
-    	            $.ajax({
-    	                url: "http://localhost:8080/rest/member/sendApplyMail",
-    	                method: "post",
-    	                data: {memberEmail : inputEmail},
-    	                success: function(response) {
-    	                },
-    	                error:function(){
-    	                    alert("!시스템 오류! 잠시 후 이용 해 주세요.");
-    	                }
-    	            });
-    		    }
-            });
         });
  
 </script>
@@ -162,8 +138,8 @@
             
             <div class="cell w-500">
                 <h2> 예상 무게 </h2>
-                <input class="detail-tool w-100" value="" placeholder="ex) 5" name="applyWeight" required> <br>
-                <label>일반쓰레기 한 봉지(10L) 당 약5kg정도 입니다.</label>
+                <input class="detail-tool w-100" value="" placeholder="ex) 5.5" name="applyWeight" required> <br>
+                <label>일반쓰레기 한 봉지(10L)당 약5kg정도 입니다.</label>
             </div>
             <br>
             
