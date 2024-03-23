@@ -79,7 +79,7 @@
                 <div class="right">
                 	<button type="submit" class="btn submit"onclick="detail('${applyNo}');" >
                 	<!--<input type="hidden" value="${applyDto.applyState}" name="confirm">  -->
-                    상세보기 
+                    신청정보 상세내역 
                 </button>
         		</div>
                 <hr>
@@ -127,7 +127,7 @@
                 	
                 	<input type="hidden" value="수거 완료" name="pickPay"/>
                 	<button type="button" class="btn submit btn-pick-finish" onclick="finish('${applyNo}');" >
-                    수거 상세  
+                    수거완료 상세내역  
                 </button>
                 </form>
         </div>

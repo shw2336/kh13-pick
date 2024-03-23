@@ -71,6 +71,7 @@ public class ApplyController {
 			int attachNo = attachService.save(applyAttach);// 파일저장+DB저장
 			applyDao.connect(applyDto.getApplyNo(), attachNo);// 연결
 		}
+		
 
 		return "redirect:/";
 	}

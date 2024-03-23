@@ -58,38 +58,32 @@
                 $("[name=applyAddress1]").val("");
                 $("[name=applyAddress2]").val("");
             });
+            
+          //신청 완료 시  후기작성 메일전송
+            $(".check-form").request(function(){
+     		   $(this).find("[name]").blur();
+    		    if (!state.isOk()) {
+    		        // 입력 값이 유효하지 않으면 폼 제출을 중단하고 함수를 종료합니다.
+    		        event.preventDefault();
+    		        return false;
+    		    }else {
+    		    	 //이메일 불러오기
+    	            var inputEmail = $("[name=memberEmail]").val();
+    	            if (inputEmail.length == 0) return;
+    	            $.ajax({
+    	                url: "http://localhost:8080/rest/member/sendApplyMail",
+    	                method: "post",
+    	                data: {memberEmail : inputEmail},
+    	                success: function(response) {
+    	                },
+    	                error:function(){
+    	                    alert("!시스템 오류! 잠시 후 이용 해 주세요.");
+    	                }
+    	            });
+    		    }
+            });
         });
-
-      //  function checkApplyHopeDate() {
-            //select는 option이 있지만 select 자체로 제어하도록 권장
-        //    var inputTarget = document.querySelector("[name=applyHopeDate]");
-
-
-            //날짜 검사
-       //     var regex = /^(19[0-9]{2}|20[0-9]{2})-(02-(0[1-9]|1[0-9]|2[0-8])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
-        //    var isValid = regex.test(inputTarget.value);
-
-     //      inputTarget.classList.remove("success", "fail");
-       //     inputTarget.classList.add(isValid ? "success" : "fail");
-        //    return isValid;
-     //   }
-        //보유포인트 가져오기 
-
-
-        //배출사진 
-
-
-
-        //남길 말 넘기기 
-        
-        
-     //수거 신청 버튼 후 메인페이지(러쉬픽미) 로 넘어가기 
-       /*  function mainPage(){
-        	var choice = confirm("정말 신청하시겠습니까?");
-        	if(choice){
-        		window.open("http://localhost:8080/","RushPickMe","width500,height=500");
-        	}
-        } */
+ 
 </script>
 <body>
  	<div class="container apply-container w-650 mt-50 mb-50">
@@ -106,6 +100,7 @@
                     <i class="fa-solid fa-truck"></i>
                 </h2>
 		<form action="request" method="post" autocomplete="off" enctype="multipart/form-data">
+                <input type="hidden" value="${memberEmail}" name="memberEmail"/>
                 <select name="applyArea" class="detail-tool w-100"  oninput="areaData()">
                     <option value="">선택하세요</option>
                     <option value="강남구">강남구</option>
