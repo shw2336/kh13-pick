@@ -39,17 +39,22 @@
        		$("[name=pickWeight]").val($(this).val());
             state.pickWeightValid = $(this).val().length > 0;
             $(this).removeClass("success fail").addClass(state.pickWeightValid ? "success" : "fail");
-            var price = (Math.floor(parseFloat($(this).val()) * 1400));
-            $("[name=pickPay]").val(price);
-            $(".pick-pay").val(price.toLocaleString());
+            
+            if (!state.pickWeightValid) {
+            	$(".pick-pay").val("중량을 입력하면 자동 계산됩니다.").addClass("gray");
+            }else {
+            	var price = (Math.floor(parseFloat($(this).val()) * 1400));
+                $("[name=pickPay]").val(price);
+	            $(".pick-pay").val(price.toLocaleString());
+            }
         });
 
-        $("[name=pickPay]").blur(function () {
-            if ($(this).val() === "NaN") {
+        $(".pick-pay").blur(function () {
+            if ($("[name=pickPay]").val() === "NaN") {
             	$(this).val("중량을 입력하면 자동 계산됩니다.").addClass("gray");
             }
             var regex = /^[0-9]+$/;
-            state.pickPayValid = regex.test($(this).val()) && $(this).val().length > 0;
+            state.pickPayValid = regex.test($("[name=pickPay]").val()) && $("[name=pickPay]").val().length > 0;
             $(this).removeClass("success fail").addClass(state.pickPayValid ? "success" : "fail");
         });
         
@@ -80,9 +85,10 @@
 		
 		//수거완료시 후기작성 메일전송
         $(".check-form").submit(function(){
- 		   $(this).find("[name]").blur();
+ 		   $(this).find(".pickWeight").blur();
+ 		   $(this).find(".pick-pay").blur();
 		    if (!state.isOk()) {
-		        // 입력 값이 유효하지 않으면 폼 제출을 중단하고 함수를 종료합니다.
+		        // 입력 값이 유효하지 않으면 폼 제출을 중단하고 함수를 종료합니다.(자바스크립트 메소드)
 		        event.preventDefault();
 		        return false;
 		    }else {
