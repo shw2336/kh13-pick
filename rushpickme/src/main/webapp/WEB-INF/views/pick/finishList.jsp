@@ -53,6 +53,13 @@ table>tbody>.contents-tr {
 	}
 	
 	 $(function () {
+		 $(".delete").click(function (){
+			 if(confirm("정말 삭제하시겠습니까?")){
+				 $(this).submit();
+			 }else {
+				 return false;
+			 }
+		 });
          $(".long").click(function () {
              var orderBy = "asc"; // 오름차순을 나타내는 값
              sendRequest(orderBy);
@@ -72,7 +79,6 @@ table>tbody>.contents-tr {
                      $("#finish-list-wrapper").empty();
                      var list = "";
                      for(var i = 0; i < response.length; i++){
-                    	 console.log(response);
                     	 var result = response[i];
                     	 var applyDate = moment(result.applyDate).format("MM월DD일 HH:mm"); // moment.js로 날짜 형식 변환
                          var finishDate = moment(result.pickFinishDate).format("MM월DD일 HH:mm"); // moment.js로 날짜 형식 변환
