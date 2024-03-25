@@ -66,7 +66,7 @@
 	    });
 	    
 	    $("[name=memberName]").on("blur", function(){
-	        var regex =/^[가-힣]{2,10}$/;
+	        var regex =/^[가-힣A-Za-z]{2,10}$/;
 	        state.memberNameValid = regex.test($(this).val());
 	        $(this).removeClass("success fail")
 	                    .addClass(state.memberNameValid ? "success" : "fail");
@@ -354,10 +354,10 @@
                 이름<i class="fa-solid fa-pencil"></i>
                
             </label>
-            <input type="text" name="memberName" placeholder="한글 2~10글자"
+            <input type="text" name="memberName" placeholder="한글 또는 영어 2~10글자"
                                 class="tool w-100">
             <div class="success-feedback">올바른 이름 입니다</div>
-            <div class="fail-feedback">한글2~10글자로 작성하세요</div>
+            <div class="fail-feedback">한글 또는 영어 2~10글자로 작성하세요</div>
             <div class="fail2-feedback">공백은 사용할수 없습니다</div>
         </div>
 	
