@@ -37,6 +37,10 @@
      	window.location.href = "finish?applyNo=" + num;	
  		console.log(num);
      	}
+ 	function locationCharge(num) {
+     	window.location.href = "/point/charge";
+ 		console.log(num);
+     	}
  	
  	
  	//결제 
@@ -54,7 +58,7 @@
  	function locationCharge() {
  	    var choice = confirm("잔액이 부족합니다! 포인트를 충전하시겠습니까?");
  	    if (choice) { // 확인을 누르면 이동해라
- 	        window.open("http://localhost:8080/point/charge", "charge", "width=500,height=500");
+ 	    	window.location.href = "/point/charge";
  	    }
  	}
  	function pay() {
@@ -123,10 +127,13 @@
 		<form action="finish" method="post">
 			<input type="hidden" value="${greenDto.memberId}" name="memberId">
 			<input type="hidden" value="${findDto.applyNo}" name="applyNo">
-    		<button class="btn submit w-100" onclick="checkBalance('${findDto.memberId}');">결제하기</button>
+			<button class="btn submit w-100" >리뷰쓰기</button>
     	</form>
 		</div>
+    		<button class="btn submit w-100" onclick="checkBalance('${findDto.memberId}');">결제하기</button>
 		
+
+		<br>
 		<br>
 		<%-- <button class="btn move"  onclick="review('${applyDto.applyNo}');">리뷰쓰기</button> --%>
 		<button class="btn move"  onclick="applyList('${applyDto.memberId}');">신청 리스트</button>
