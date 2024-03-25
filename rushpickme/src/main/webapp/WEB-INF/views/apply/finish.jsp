@@ -31,37 +31,42 @@
  	}
  	function applyList(num) {
      	window.location.href = "applyList?memebrId=" + num;	
- 		console.log(num);
      	}
  	function pay(num) {
      	window.location.href = "finish?applyNo=" + num;	
- 		console.log(num);
+     	}
+ 	function locationCharge(num) {
+     	window.location.href = "/point/charge";
      	}
  	
  	
  	//결제 
- 	function checkBalance(resultPoint) {
+ 	function checkBalance() {
  	    // memberId를 사용하여 사용자의 보유 포인트, 수거 금액 및 잔액을 가져온다고 가정
  	    var memberGreenPoint = parseInt("${greenDto.memberGreenPoint}"); 
  	    var pickPay =  parseInt("${pickDto.pickPay}"); 
  	    
  	    if (memberGreenPoint < pickPay) {
- 	        locationCharge();
+	        event.preventDefault();
+ 	 	    var choice = confirm("잔액이 부족합니다! 포인트를 충전하시겠습니까?");
+ 	 	    if (choice) {
+	 	    	window.location.href = "/point/charge";
+ 	 	    }
  	    } else {
- 	        pay(); // 잔액이 있으면 결제 함수 호출
+ 	 	    window.alert("결제 되었습니다!");
+ 			$("#form-action").attr("action", "finish").submit(); 	 
  	    }
  	}
- 	function locationCharge() {
- 	    var choice = confirm("잔액이 부족합니다! 포인트를 충전하시겠습니까?");
- 	    if (choice) { // 확인을 누르면 이동해라
- 	        window.open("http://localhost:8080/point/charge", "charge", "width=500,height=500");
- 	    }
- 	}
- 	function pay() {
- 	    window.alert("결제 되었습니다!");
-//  	        window.open("finish?memebrId=" + num, "width=500,height=500");
- 	 
- 	}
+//  	function locationCharge() {
+//  	    var choice = confirm("잔액이 부족합니다! 포인트를 충전하시겠습니까?");
+//  	    if (choice) { // 확인을 누르면 이동해라
+//  	    	window.location.href = "/point/charge";
+//  	    }
+//  	}
+//  	function pay() {
+//  	    window.alert("결제 되었습니다!");
+// 		$("#form-action").attr("action", "finish").submit(); 	 
+//  	}
  	
  	
     </script>
@@ -120,13 +125,16 @@
 	
 	<div class="cell right">
 		<div class="cell">
-		<form action="finish" method="post">
+		<form id="form-action" method="post">
 			<input type="hidden" value="${greenDto.memberId}" name="memberId">
 			<input type="hidden" value="${findDto.applyNo}" name="applyNo">
-    		<button class="btn submit w-100" onclick="checkBalance('${findDto.memberId}');">결제하기</button>
+<!-- 			<button class="btn submit w-100 review-btn" >리뷰쓰기</button> -->
+    		<button class="btn submit w-100" onclick="checkBalance();">결제하기</button>
     	</form>
 		</div>
 		
+
+		<br>
 		<br>
 		<%-- <button class="btn move"  onclick="review('${applyDto.applyNo}');">리뷰쓰기</button> --%>
 		<button class="btn move"  onclick="applyList('${applyDto.memberId}');">신청 리스트</button>
