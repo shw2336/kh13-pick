@@ -307,8 +307,12 @@ public class MemberController {
 		
 		/// 조건
 		boolean isValid = false;
+		//memberDto에 저장되어있는 memberPw라는 변수를 설정해서 MemberPw 가져온다
 		String memberPw = memberDto.getMemberPw();
+		//findMemberPw 변수에 MemberPw를 넣는다 
 		String findMemberPw = findMemberDto.getMemberPw();
+		//만약 memberPw의 변수에있는 memberPw가 null이 아니면서 findMeberPw 가 null이 아니면
+		//isValid 에 memberPw가 findMebmerPw와 맞는지 확인해라
 		if (memberPw != null && findMemberPw != null) {
 		    isValid = memberPw.equals(findMemberPw);
 		}

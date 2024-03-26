@@ -225,18 +225,18 @@ function kakaoLogout() {
             </label> <br>
             <br>
             <p class="findId">
-               아이디 <a class="link" href="/member/findId">찾기</a>
+               아이디 <a class="link" href="${pageContext.request.contextPath}/member/findId">찾기</a>
             </p>
             <br>
 
             <p class="findPw">
-               비밀번호 <a class="link" href="/member/findPw">찾기</a>
+               비밀번호 <a class="link" href="${pageContext.request.contextPath}/member/findPw">찾기</a>
             </p>
             <br>
 
 
             <p class="signUp">
-               아직 계정이 없으신가요? <a class="link" href="/member/signUp">회원가입</a>
+               아직 계정이 없으신가요? <a class="link" href="${pageContext.request.contextPath}/member/signUp">회원가입</a>
             </p>
             <br>
             <input type="submit" value="Login" id="loginbtn">

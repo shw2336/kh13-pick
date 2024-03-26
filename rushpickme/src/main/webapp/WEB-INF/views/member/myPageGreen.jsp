@@ -246,7 +246,7 @@ div{
         <div>
           <div class="green number"></div>
           <div class="listContainer">
-          <a href="/apply/applyList" class="item">
+          <a href="${pageContext.request.contextPath}/apply/applyList" class="item">
         <div class="icon cell left"></div>
         <div class="cell left">신청상세</div>
         <div class="cell left">  </div>
@@ -266,12 +266,12 @@ div{
   </div>  
   <div class="listContainer">
     
-    <a href="/review/list" class="item">
+    <a href="${pageContext.request.contextPath}/review/list" class="item">
         <div class="icon">ii</div>
         <div class="text">리뷰게시판</div>
         <div class="right"> > </div>
     </a>
-    <a href="/qna/list" class="item">
+    <a href="${pageContext.request.contextPath}/qna/list" class="item">
         <div class="icon">ii</div>
         <div class="text">Q&A</div>
         <div class="right"> > </div>
@@ -279,7 +279,7 @@ div{
     
   </div>
   <div class="listContainer">
-    <a href="/point/charge" class="item">
+    <a href="${pageContext.request.contextPath}/point/charge" class="item">
         <div class="icon">ii</div>
         <div class="text">
           <span>내 포인트</span>
@@ -308,18 +308,18 @@ div{
     </a>
     
     
-        <a href="/member/pointList" class="item">
+        <a href="${pageContext.request.contextPath}/member/pointList" class="item">
         <div class="icon">ii</div>
         <div class="text">포인트 구매내역</div>
         <div class="right"> > </div>
     </a>
     
-    <a href="/member/leave" class="item">
+    <a href="${pageContext.request.contextPath}/member/leave" class="item">
         <div class="icon">ii</div>
         <div class="text">회원탈퇴</div>
         <div class="right"> > </div>
     </a>
-    <a href="/member/changeAccountGreen" class="item">
+    <a href="${pageContext.request.contextPath}/member/changeAccountGreen" class="item">
         <div class="icon">ii</div>
         <div class="text">개인정보변경</div>
         <div class="right"> > </div>
