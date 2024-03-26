@@ -86,12 +86,12 @@ public class KakaoService {
 		RestTemplate template = new RestTemplate();
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+//		headers.add("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 		
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 		body.add("grant_type", "authorization_code");
 		body.add("client_id", client_id);
-		body.add("redirect_uri", "http://localhost:8080/auth/kakao/callback");
+//		body.add("redirect_uri", "http://localhost:8080/auth/kakao/callback");
 		body.add("code", code);
 		
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);

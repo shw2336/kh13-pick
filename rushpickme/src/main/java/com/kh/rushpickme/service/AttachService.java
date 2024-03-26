@@ -1,29 +1,35 @@
 package com.kh.rushpickme.service;
 
-import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.rushpickme.configuration.SettingConfiguration;
 import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dto.AttachDto;
 
 @Service
 public class AttachService {
+	
+	@Autowired
+	private SettingConfiguration conf;
 
 	@Autowired
 	AttachDao attachDao;
+	@Autowired
+	SettingConfiguration sefc;
 	
 	//파일저장 + DB저장 
 	public int save(MultipartFile attach) throws IllegalStateException, IOException {
 		
 		int attachNo = attachDao.getSequence(); //첨부파일에 시퀀스생성
-		File dir = new File (System.getProperty("user.home"), "upload");
+		File dir = new File (conf.getPath());
 		dir.mkdir(); //폴더가 없다면 생성 (있으면 pass)
 		File target = new File (dir, String.valueOf(attachNo));
 		attach.transferTo(target); //위에만들어준 폴더에 실물파일저장 
@@ -39,7 +45,7 @@ public class AttachService {
 	}
 	//파일삭제 + DB삭제
 	public void remove (int attachNo) {
-		File dir = new File (System.getProperty("user.home"), "upload");
+		File dir = new File (sefc.getPath());
 		File target = new File (dir, String.valueOf(attachNo));
 		target.delete();
 		attachDao.delete(attachNo);

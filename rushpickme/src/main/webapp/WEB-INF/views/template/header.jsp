@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
 <!-- 내가 구현한 스타일 -->
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
 <!--     <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
 <!-- font awesome 아이콘 CDN -->
@@ -90,22 +90,22 @@
                 <li><a href="/">홈</a></li>
                 
                 <c:if test="${sessionScope.loginLevel == '피커'}">
-               <li><a href="/pick/list">수거서비스</a></li>
+               <li><a href="${pageContext.request.contextPath}/pick/list">수거서비스</a></li>
                </c:if>
                
                
                <c:if test="${sessionScope.loginLevel == '그린'}">
-               <li><a href="/apply/request">수거서비스</a></li>
-               <li><a href="/apply/applyList">신청 목록</a></li>
+               <li><a href="${pageContext.request.contextPath}/apply/request">수거서비스</a></li>
+               <li><a href="${pageContext.request.contextPath}/apply/applyList">신청 목록</a></li>
                </c:if>
                 
                 <li class="board-menu"><a href="#">게시판</a>
                     <ul class="sub-menu">
-                        <li><a href="/qna/list">문의게시판</a></li>
-                        <li><a href="/review/list">리뷰게시판</a></li>
+                        <li><a href="${pageContext.request.contextPath}/qna/list">문의게시판</a></li>
+                        <li><a href="${pageContext.request.contextPath}/review/list">리뷰게시판</a></li>
                 
                     </ul>
-                    <li><a href="/member/signUp">회원가입</a></li>
+                    <li><a href="${pageContext.request.contextPath}/member/signUp">회원가입</a></li>
                 </li>
                 
                 
@@ -118,31 +118,31 @@
 					 <li class="board-menu"><a href="#">관리자메뉴</a>
 		
 						<ul class="sub-menu">
-                                        <li><a href="/admin/member/search">회원관리</a></li>
-                                        <li><a href="/admin/point/add">포인트관리</a></li>
-                                          <li><a href="/admin/check/apply">신청관리</a></li>
-                                          <li><a href="/admin/check/pick">수거관리</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/admin/member/search">회원관리</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/admin/point/add">포인트관리</a></li>
+                                          <li><a href="${pageContext.request.contextPath}/admin/check/apply">신청관리</a></li>
+                                          <li><a href="${pageContext.request.contextPath}/admin/check/pick">수거관리</a></li>
                                     </ul>
-                                    <li><a href="/member/logout">로그아웃</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 				</c:if>
 
 				<li class="menu-end">
 						<c:choose>
 						<c:when test="${sessionScope.loginId != null && sessionScope.loginLevel != '관리자'}">
-							<a href="/member/mypage"> <i class="fa-solid fa-user"></i>
+							<a href="${pageContext.request.contextPath}/member/mypage"> <i class="fa-solid fa-user"></i>
 								${sessionScope.loginId}
 							</a>
 					
 								
-								<li><a href="/member/logout">로그아웃</a></li>
-								<li><a href="/point/charge">포인트충전</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
+								<li><a href="${pageContext.request.contextPath}/point/charge">포인트충전</a></li>
 								
 						</c:when>
 						<c:when test="${sessionScope.loginId != null && sessionScope.loginLevel eq '관리자'}">
 								<a href="#"><i class="fa-solid fa-user"></i>${sessionScope.loginId}</a>
 						</c:when>
 						<c:when test="${sessionScope.loginId eq null}">
-								<a href="/member/login">로그인</a>
+								<a href="${pageContext.request.contextPath}/member/login">로그인</a>
 						</c:when>
 					</c:choose>
                 

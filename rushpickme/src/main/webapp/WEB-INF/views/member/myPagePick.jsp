@@ -270,25 +270,25 @@ div{
   <div class="listContainer">
     
     
-    <a href="/pick/waitList" class="item">
+    <a href="${pageContext.request.contextPath}/pick/waitList" class="item">
         <div class="icon">ii</div>
         <div class="text">대기리스트</div>
         <div class="right"> > </div>
     </a>  
     
-    <a href="/pick/proceedList" class="item">
+    <a href="${pageContext.request.contextPath}/pick/proceedList" class="item">
         <div class="icon">ii</div>
         <div class="text">진행리스트</div>
         <div class="right"> > </div>
     </a>  
     
-    <a href="/pick/finishList" class="item">
+    <a href="${pageContext.request.contextPath}/pick/finishList" class="item">
         <div class="icon">ii</div>
         <div class="text">완료리스트</div>
         <div class="right"> > </div>
     </a>
     
-    <a href="/pick/list" class="item">
+    <a href="${pageContext.request.contextPath}/pick/list" class="item">
         <div class="icon">ii</div>
         <div class="text">전체현황</div>
         <div class="right"> > </div>
@@ -300,12 +300,12 @@ div{
     
   
     
-    <a href="/member/leave" class="item">
+    <a href="${pageContext.request.contextPath}/member/leave" class="item">
         <div class="icon">ii</div>
         <div class="text">회원탈퇴</div>
         <div class="right"> > </div>
     </a>
-    <a href="/member/changeAccountPick" class="item">
+    <a href="${pageContext.request.contextPath}/member/changeAccountPick" class="item">
         <div class="icon">ii</div>
         <div class="text">개인정보변경</div>
         <div class="right"> > </div>
