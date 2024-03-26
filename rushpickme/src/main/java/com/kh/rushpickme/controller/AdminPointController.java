@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.rushpickme.configuration.SettingConfiguration;
 import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dao.PointDao;
 import com.kh.rushpickme.dto.AttachDto;
@@ -29,6 +30,8 @@ public class AdminPointController {
 	private PointDao pointDao;
 	@Autowired
 	private AttachService attachService;
+	@Autowired
+	private SettingConfiguration scf;
 	
 	@GetMapping("/add")
 	public String add() {
@@ -100,15 +103,15 @@ public class AdminPointController {
 		if(!attach.isEmpty()) {
 			 try {
 				 int attachNo = pointDao.findAttachNo(pointDto.getPointNo());
-				 File dir = new File(System.getProperty("user.home"), "upload");
-				 File target = new File(dir, String.valueOf(attachNo));
+				 File dir = new File(scf.getPath());
+				 File target = new File(scf.getPath());
 				 target.delete();
 				 attachDao.delete(attachNo);
 			 }
 			 catch(Exception e) {}
 			 
 			 int attachNo = attachDao.getSequence();
-			 File dir = new File(System.getProperty("user.home"), "upload");
+			 File dir = new File(scf.getPath());
 			 File target = new File(dir, String.valueOf(attachNo));
 			 attach.transferTo(target);
 			 

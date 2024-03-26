@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.rushpickme.configuration.SettingConfiguration;
 import com.kh.rushpickme.dao.AttachDao;
 import com.kh.rushpickme.dto.AttachDto;
 
@@ -27,6 +28,8 @@ public class FileDownloadController {
 	@Autowired
 	private AttachDao attachDao;
 	
+	@Autowired
+	private SettingConfiguration sefc;
 	@RequestMapping
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> download(@RequestParam int attachNo) throws IOException {
@@ -40,7 +43,7 @@ public class FileDownloadController {
 		}
 		
 		// [3] 실제 파일을 불러온다 (apache commons io, apache commons fileupload)
-		File dir = new File (System.getProperty("user.home"), "upload");
+		File dir = new File (sefc.getPath());
 		File target = new File (dir, String.valueOf(attachDto.getAttachNo()));
 		
 		byte[] data = FileUtils.readFileToByteArray(target); 

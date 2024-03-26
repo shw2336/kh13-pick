@@ -90,22 +90,22 @@
                 <li><a href="/">홈</a></li>
                 
                 <c:if test="${sessionScope.loginLevel == '피커'}">
-               <li><a href="/pick/list">수거서비스</a></li>
+               <li><a href="${pageContext.request.contextPath}/pick/list">수거서비스</a></li>
                </c:if>
                
                
                <c:if test="${sessionScope.loginLevel == '그린'}">
-               <li><a href="/apply/request">수거서비스</a></li>
-               <li><a href="/apply/applyList">신청 목록</a></li>
+               <li><a href="${pageContext.request.contextPath}/apply/request">수거서비스</a></li>
+               <li><a href="${pageContext.request.contextPath}/apply/applyList">신청 목록</a></li>
                </c:if>
                 
                 <li class="board-menu"><a href="#">게시판</a>
                     <ul class="sub-menu">
-                        <li><a href="/qna/list">문의게시판</a></li>
-                        <li><a href="/review/list">리뷰게시판</a></li>
+                        <li><a href="${pageContext.request.contextPath}/qna/list">문의게시판</a></li>
+                        <li><a href="${pageContext.request.contextPath}/review/list">리뷰게시판</a></li>
                 
                     </ul>
-                    <li><a href="/member/signUp">회원가입</a></li>
+                    <li><a href="${pageContext.request.contextPath}/member/signUp">회원가입</a></li>
                 </li>
                 
                 
