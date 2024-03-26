@@ -35,7 +35,7 @@ public class KakaoLoginController {
 	    public String callback(HttpSession session ,@RequestParam("code") String code) throws IOException, URISyntaxException {
 	        String accessToken = kakaoService.getAccessTokenFromKakao(client_id, code);
 	        HashMap<String, Object> userInfo = kakaoService.getUserInfo(accessToken);
-	        log.info("id : " + userInfo.get("id"));
+	      
 	        // 카카오 ID로 이미 가입되어 있는지 확인
 	        String kakaoId = userInfo.get("id").toString();
 	        String loginId = memberDao.getId(kakaoId);

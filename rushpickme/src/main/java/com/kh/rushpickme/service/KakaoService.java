@@ -20,10 +20,9 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import lombok.extern.slf4j.Slf4j;
 
 
-@Slf4j
+
 @Service
 public class KakaoService {
 	
@@ -127,7 +126,7 @@ public class KakaoService {
 	            result += line;
 	        }
 
-	        log.info("Response Body : " + result);
+	  
 
 	        // jackson objectmapper 객체 생성
 	        ObjectMapper objectMapper = new ObjectMapper();
@@ -152,7 +151,7 @@ public class KakaoService {
 	        userInfo.put("profileImage", profileImage);
 	        userInfo.put("email", email);
 	        
-	        System.out.println(userInfo);
+	      
 
 	        return userInfo;
 	    }
