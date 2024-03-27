@@ -71,7 +71,7 @@ table>tbody>.contents-tr {
          });
          function sendRequest(orderBy) {
              $.ajax({
-                 url: "/rest/pick/order",
+                 url: "${pageContext.request.contextPath}/rest/pick/order",
                  method: "post",
                  data: { orderBy: orderBy },
                  success: function (response) {

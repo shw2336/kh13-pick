@@ -96,7 +96,7 @@
 	            var inputEmail = $("[name=memberEmail]").val();
 	            if (inputEmail.length == 0) return;
 	            $.ajax({
-	                url: "/rest/member/sendFinishMail",
+	                url: "${pageContext.request.contextPath}/rest/member/sendFinishMail",
 	                method: "post",
 	                data: {memberEmail : inputEmail},
 	                success: function(response) {
