@@ -19,22 +19,16 @@
 	function urgentList (){
 		window.location.href = "urgentList";
 	}
-	function waitList (){
-		window.location.href = "waitList";
-	}	
-	function finishList (){
-		window.location.href = "finishList";
-	}	
 
 </script>
 
-<div class="container  w-500 mb-30">
-	<div class="cell">
-		<img src="/image/pickFinish.png" class="image" width="100%">
-	</div>
+<div class="container w-500 mb-50">
+
+<h2>이미 다른 피커가 접수한 신청 건 입니다.</h2>
+
 </div>
 
-	<div class="cell center mb-50">
+	<div class="cell center mt-50 mb-50">
 		<button type="button" class="btn move" onclick="list();"><span class="btn-name">전체 목록 보기</span>
 		</button>
 			<span class="me-10"></span>
@@ -46,12 +40,6 @@
 		<button type="button" class="btn move" onclick="waitList();">
 			<span class="btn-name"><span style="color:rgb(66,138,66); font-size:15px;" >일반</span>
 			<span>&nbsp;</span>수거대기건</span>
-		</button>
-		<span class="me-10"></span>
-		<button class="btn move" onclick="proceedList();"><span class="btn-name">나의 진행건</span>
-		</button>
-		<span class="me-10"></span>
-		<button class="btn move" onclick="finishList();"><span class="btn-name">나의 완료건</span>
 		</button>
 	</div>
 

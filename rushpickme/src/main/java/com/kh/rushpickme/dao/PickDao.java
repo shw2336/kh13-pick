@@ -58,12 +58,12 @@ public class PickDao {
 	private PickListMapper pickListMapper;
 
 	//수거접수등록
-	public void insertOk (PickDto pickDto) {
+	public boolean insertOk (PickDto pickDto) {
 		String sql = "insert into pick "
 				+ "(pick_no, apply_no, member_id, pick_schedule, pick_state) "
 				+ "values (pick_seq.nextval, ?, ?, ?, '수거접수')";
 		Object[] data = {pickDto.getApplyNo(), pickDto.getMemberId(), pickDto.getPickSchedule()};
-		jdbcTemplate.update(sql, data);
+		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 	//수거거부등록(신청 받자마자 거부하는 경우)
