@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.rushpickme.dao.ApplyDao;
@@ -240,7 +242,7 @@ public class PickController {
 	
 	// 수거 접수
 	@GetMapping("/accept")
-	public String accept (@RequestParam int applyNo, Model model) {
+	public String accept (@RequestParam int applyNo, HttpSession session, Model model) {
 		model.addAttribute("applyNo", applyNo);
 		return "/WEB-INF/views/pick/accept.jsp";
 	}
@@ -248,9 +250,13 @@ public class PickController {
 	@PostMapping("/accept")
 	public String accept (@ModelAttribute PickDto pickDto, HttpSession session, Model model) {
 		pickDto.setMemberId((String) session.getAttribute("loginId"));
-		pickDao.insertOk(pickDto);
-		pickDao.updateApplyStateProceed(pickDto.getApplyNo());
-		return "redirect:acceptFinish";
+		try {
+			pickDao.insertOk(pickDto);
+			pickDao.updateApplyStateProceed(pickDto.getApplyNo());
+			return "redirect:acceptFinish";
+		} catch (Exception e) {
+			return "redirect:fail";
+		}
 	}
 	
 	@RequestMapping ("/acceptFinish")
@@ -258,6 +264,10 @@ public class PickController {
 		return "/WEB-INF/views/pick/acceptFinish.jsp";
 	}
 	
+	@RequestMapping("/fail")
+	public String fail () {
+		return "/WEB-INF/views/pick/fail.jsp";
+	}
 	
 	// 수거 거부 (접수상태에서 거부하는 경우 or 진행상태에서 거부하는 경우)
 	@GetMapping("/reject")
