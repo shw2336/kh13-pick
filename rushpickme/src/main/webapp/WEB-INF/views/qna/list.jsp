@@ -27,6 +27,9 @@
      	height: 40px;
      }
      
+     .wid {
+	max-width: 10em;
+     
 
 .hei {
  height:3em; /* 원하는 높이로 조정 */
@@ -34,6 +37,11 @@
 
 .bold-text {
     font-weight: bold;
+}
+
+.fixed-height-td {
+    height: 60px; /* 고정하려는 높이 설정 */
+    width: 60px;
 }
 
 </style>
@@ -84,7 +92,7 @@
 				<tr>
 				<td class="bold-text">공지</td>
 						<%-- 제목 칸 --%>
-						<td class="center">
+						<td class="center ellipsis wid fixed-height-td">
 							<a class="link link-animation bold-text"
 							href="detail?qnaNo=${qnaMemberNickVO.qnaNo}"> ${qnaMemberNickVO.qnaTitle} </a>
 						</td>
@@ -99,7 +107,7 @@
 					<tr>
 						<td>${qnaMemberNickVO.qnaNo}</td>
 						<%-- 제목 칸 --%>
-						<td class="center">
+						<td class="center ellipsis wid fixed-height-td">
 							<%-- 답글일 경우만 이미지를 출력 --%> <c:if test="${qnaMemberNickVO.qnaDepth > 0}">
                      →
                   </c:if> <%-- 제목 출력 --%> <a class="link link-animation"
