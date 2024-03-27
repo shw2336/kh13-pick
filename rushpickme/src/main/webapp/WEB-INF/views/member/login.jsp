@@ -137,6 +137,27 @@ body {
    background-repeat: no-repeat;
    background-size: contain;
 }
+
+.custom-kakao-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #FFEB00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            background-image: url('Kakao.png'); /* 이모티콘 이미지 파일 경로 */
+            background-repeat: no-repeat;
+            background-position: left center; /* 이모티콘 위치 조정 */
+            background-size: 30px; /* 이모티콘 크기 조정 */
+            padding-left: 40px; /* 이모티콘과 텍스트 사이 여백 */
+        }
+        .custom-kakao-button:hover {
+            background-color: #FFC400;
+        }
+
 </style>
 
 <script type="text/javascript">
@@ -244,6 +265,12 @@ function kakaoLogout() {
             
     
 </div>
+	 <div class="container" style="display: flex; justify-content: center; align-content: center; align-items: center; flex-direction: column; margin: 200px auto;">
+        
+        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=45195e1ea2c23c3134d7c20011096ff7&redirect_uri=http://${pageContext.request.contextPath}/auth/kakao/callback" class="custom-kakao-button">
+        카카오 로그인
+        </a>
+    </div>
             
             
             
@@ -264,10 +291,7 @@ function kakaoLogout() {
 <!--                </ul> -->
             
          </form>
-            <div class="container" style="display: flex; justify-content: center; align-content: center; align-items: center; flex-direction: column; margin: 200px auto; ">
-    <h1>카카오 로그인</h1>
-        <button onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=45195e1ea2c23c3134d7c20011096ff7&redirect_uri=http://localhost:8080/auth/kakao/callback'" style="height: 60px; width: 120px; background-color: #FEE500; cursor: pointer;">카카오 로그인</button>
-      </div>
+           
 </body>
 </div>
 
