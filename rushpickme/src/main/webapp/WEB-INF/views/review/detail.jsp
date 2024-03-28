@@ -64,7 +64,7 @@
 		//목표 : 하트를 클릭하면 좋아요 갱신처리
 		$(".review-like").find(".fa-heart").click(function(){
 			$.ajax({
-				url : "/rest/review_like/toggle",//같은 서버이므로 앞 경로 생략
+				url : "${pageContext.request.contextPath}/rest/review_like/toggle",//같은 서버이므로 앞 경로 생략
 				method : "post",
 				data : { reviewNo : reviewNo },
 				success : function(response){
@@ -93,7 +93,7 @@
 		
 		//최초에 표시될 화면을 위해 화면이 로딩되자마자 서버로 비동기통신 시도
 		$.ajax({
-			url : "/rest/review_like/check",
+			url : "${pageContext.request.contextPath}/rest/review_like/check",
 			method : "post",
 			data : { reviewNo : reviewNo },
 			success: function(response) {
