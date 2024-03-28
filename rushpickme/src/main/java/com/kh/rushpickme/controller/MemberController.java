@@ -95,9 +95,7 @@ public class MemberController {
 		}
 		//가입 환영 메일 발송
 		emailService.sendWelcomeMail(memberDto.getMemberEmail(), memberDto);
-			return "redirect:signUpSuccess";
-		
-		
+			return "redirect:signUpSuccess";		
 	}
 
 	@RequestMapping("/signUpSuccess")
@@ -161,7 +159,9 @@ public class MemberController {
 //				session.setAttribute("loginLevel", kakaoLoginInfo.getLoginType());
 
 			return "redirect:/";
-		} else {// 로그인 실패
+			
+		} 
+		else {// 로그인 실패
 			return "redirect:login?error";
 		}
 	}

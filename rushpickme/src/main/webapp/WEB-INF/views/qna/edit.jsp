@@ -78,7 +78,7 @@
                         }
 
                         $.ajax({
-                          url: "http://localhost:8080/rest/qna_attach/upload",
+                          url: "${pageContext.request.contextPath}/rest/qna_attach/upload",
                           method: "post",
                           data: formData,
                           processData: false,
@@ -89,7 +89,7 @@
 
                             for(var i=0; i < response.length; i++) {
                               //response[i] == 이미지 번호 1개
-                              var tag = $("<img>").attr("src", "http://localhost:8080/download?attachNo="+response[i])
+                              var tag = $("<img>").attr("src", "${pageContext.request.contextPath}/download?attachNo="+response[i])
                               $("[name=qnaContent]").summernote("insertNode", tag[0]);
                             }
                           }

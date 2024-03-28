@@ -103,10 +103,9 @@
                     <ul class="sub-menu">
                         <li><a href="${pageContext.request.contextPath}/qna/list">문의게시판</a></li>
                         <li><a href="${pageContext.request.contextPath}/review/list">리뷰게시판</a></li>
-                
                     </ul>
-                    <li><a href="${pageContext.request.contextPath}/member/signUp">회원가입</a></li>
                 </li>
+               
                 
                 
                 
@@ -143,7 +142,9 @@
 						</c:when>
 						<c:when test="${sessionScope.loginId eq null}">
 								<a href="${pageContext.request.contextPath}/member/login">로그인</a>
+								<li><a href="${pageContext.request.contextPath}/member/signUp">회원가입</a><li>
 						</c:when>
+						
 					</c:choose>
                 
             </ul>

@@ -14,9 +14,9 @@
 	        memberPwCheckValid : false,
 	        memberNickValid : false,
 	        memberEmailValid : false,
-	        memberBirthValid : true, //선택항목
-	        memberContactValid : true, //선택항목
-	        memberAddressValid : true,//선택항목
+	        memberBirthValid : false, 
+	        memberContactValid : false, 
+	        memberAddressValid : false,
 	        //객체에 함수를 변수처럼 생성할 수 있다
 	        //- this는 객체 자신(자바와 동일하지만 생략이 불가능)
 	        ok : function(){
@@ -35,7 +35,7 @@
 	
 	        if(regex.test(value)) {//아이디 형식 검사를 통과했다면
 	            $.ajax({
-	                url : "/rest/member/checkId",
+	                url : "${pageContext.request.contextPath}/rest/member/checkId",
 	                method : "post",
 	                data: {
 	                    memberId : value
@@ -90,7 +90,7 @@
 	
 	        if(regex.test(value)) {
 	            $.ajax({
-	                url:"/rest/member/checkMemberNick",
+	                url:"${pageContext.request.contextPath}/rest/member/checkMemberNick",
 	                method:"post",
 	                data : { memberNick : value },
 	                success:function(response){
