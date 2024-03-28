@@ -369,31 +369,7 @@
 		
 	</div>
 	
-	<div class="cell">
-	<!-- 	<!-- 주소 : 모두 입력하든가 입력하지 않든가 -->
-<!--         <div class="cell"> -->
-<!--             <label>주소<i class="fa-regular fa-address-book"></i> -->
-<!--             </label> -->
-<!--         </div> -->
-<!--         <div class="cell"> -->
-<%--             <input value="${memberGreenDto.memberGreenPost}" type="text" name="memberGreenPost" readonly   --%>
-<!--                     placeholder="우편번호" class="tool" size="6" maxlength="6"> -->
-<!--             <button type="button" class="btn positive btn-address-search"> -->
-<!--                 <i class="fa-solid fa-magnifying-glass"></i> -->
-<!--             </button>         -->
-<!--             <button type="button" class="btn negative btn-address-clear"> -->
-<!--             	<i class="fa-solid fa-xmark"></i> -->
-<!--             </button> -->
-<!--         </div> -->
-<!--         <div class="cell"> -->
-<%--             <input value="${memberGreenDto.memberGreenAddress1}" type="text" name="memberGreenAddress1"  --%>
-<!--                     placeholder="기본주소" class="tool w-100" readonly> -->
-<!--         </div> -->
-<!--         <div class="cell"> -->
-<%--             <input value="${memberGreenDto.memberGreenAddress2}" type="text" name="memberGreenAddress2"  --%>
-<!--                     placeholder="상세주소" class="tool w-100"> -->
-<!--             <div class="fail-feedback">주소를 모두 작성하세요</div> -->
-<!--         </div>  -->
+	
         
         <div class="cell">
             <label>
@@ -408,17 +384,9 @@
         
         
         <div class="cell">
-			<label>
-			    비밀번호 확인
-			     <i class="fa-solid fa-check"></i>
-			</label>
-			<!-- 비밀번호 확인은 백엔드로 전송되지 않도록 이름을 부여하지 않는다 -->
-		    <input type="password" name="newPassword" placeholder=""
-		                    id="pw-reinput" class="tool w-100">
-		    <div class="success-feedback">비밀번호가 일치합니다</div>
-		    <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
-		    <div class="fail2-feedback">비밀번호를 먼저 입력하세요</div>
-		</div>
+	<label>비밀번호 확인 <b style="color:red">*</b></label>
+	 <input class="tool w-100" type="password" name="memberPw" placeholder="비밀번호 입력" required> <br><br>
+	</div>
         
          <div class="cell">
             <label>
