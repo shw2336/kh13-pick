@@ -152,6 +152,44 @@ public class ApplyController {
 		return "/WEB-INF/views/apply/applyDetail.jsp";
 	}
 	
+	//진행 거부 
+	//- 신청 번호 , 신청 주소, 거부 사유, 
+	@GetMapping("/rejectDetail")
+	public String rejectDetail(@RequestParam int applyNo, Model model,ApplyDto applyDto, ApplyDetailVO applyDetailVO,HttpSession session) {
+		
+				
+				String loginId = (String) session.getAttribute("loginId"); 
+				applyDto.setMemberId(loginId);
+				
+				 int pickNo = pickDao.selectPickNo(applyNo);  //픽에서 신청자 번호 뽑기 
+				PickDto pickDto =pickDao.selectOneByPick(pickNo); //픽에서 픽번호 뽑기 
+				
+				ApplyDto applyDto1 = applyDao.selectOne(applyNo);
+				model.addAttribute("state", applyDto1.getApplyState()); //Dto에서 해당하는 수거 상태만 뽑음 
+				
+			
+		        model.addAttribute("applyDto",applyDto);
+		        model.addAttribute("applyDto1",applyDto1);
+		        model.addAttribute("pickDto",pickDto);
+		        
+		        
+		        return "/WEB-INF/views/apply/rejectDetail.jsp";
+		    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//진행 중 
+	
+	
 	//신청 취소 
 	@PostMapping("/cancel")
 	public String cancel(@RequestParam int applyNo, HttpSession session,  @ModelAttribute ApplyDto applyDto ) {
