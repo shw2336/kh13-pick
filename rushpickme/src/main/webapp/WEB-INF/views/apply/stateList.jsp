@@ -103,7 +103,7 @@
 
     <div class="container apply-proceed apply-container w-750 p-20 mt-50">
         <div class="cell list-box">
-            <div class="cell">
+            <div class="cell"> 
                 <h2 style="text-align: center;">진행 중</h2>
                 	<input type="hidden" value="${applyDto.applyState}" name="proceed">
         			
