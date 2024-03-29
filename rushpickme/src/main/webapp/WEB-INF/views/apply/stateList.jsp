@@ -111,7 +111,7 @@
             </div>
             <div class="cell center">
                 <img class="dummy" src="/image//picking.png" style="width:400px; height:300px">
-            </div>
+            </div>  
             <div class="cell apply-reject">
             	<h2 style="text-align: center; color:rgb(255, 128, 128);">
             	접수거부 되었습니다. 재신청부탁드립니다.
