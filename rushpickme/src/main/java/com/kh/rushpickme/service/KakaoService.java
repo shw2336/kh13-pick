@@ -133,7 +133,7 @@ public class KakaoService {
 	        // JSON String -> Map
 	        Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {});
 
-	        System.out.println(jsonMap);
+	        //System.out.println(jsonMap);
 
 	        //사용자 정보 추출
 	        Map<String, Object> properties = (Map<String, Object>) jsonMap.get("properties");
