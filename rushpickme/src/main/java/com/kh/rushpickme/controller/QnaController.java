@@ -71,7 +71,7 @@ public class QnaController {
 	public String detail(@RequestParam int qnaNo, Model model) {
 		QnaMemberNickVO qnaMemberNickVO = qnaDao.selectOne(qnaNo);
 		model.addAttribute("qnaMemberNickVO", qnaMemberNickVO);
-		System.out.println(qnaMemberNickVO.getMemberId());
+//		System.out.println(qnaMemberNickVO.getMemberId());
 		//조회한 게시글 정보에 있는 회원 아이디로 작성자 정보를 불러와서 첨부
 		if(qnaMemberNickVO.getMemberId() != null) {//작성자가 탈퇴하지 않았다면
 			MemberDto memberDto = memberDao.selectOne(qnaMemberNickVO.getMemberId());
