@@ -128,6 +128,7 @@
         		</div>
                 <hr>
             </div>
+            <%--안녕 --%>
             <div class="cell center">
                 <img class="dummy" src="${pageContext.request.contextPath}/image/picking.png" style="width:400px; height:300px">
             </div>
