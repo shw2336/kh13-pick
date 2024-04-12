@@ -16,16 +16,16 @@
 
 <body>
     <div class="container w-1200 center">
-    <img src="/image/join.png">
+    <img src="${pageContext.request.contextPath}/image/join.png">
         <div class="cell center">
         </div>
         <!-- 이미지 버튼으로 변경 -->
         <div class="button-container">
            <div class="btn" type="button" onclick="location.href='signUpGreen'">
-                <img src="/image/il.png" alt="일반회원 이미지"> 
+                <img src="${pageContext.request.contextPath}/image/il.png" alt="일반회원 이미지"> 
             </div>
             <div class="btn" type="button" onclick="location.href='signUpPick'">
-                <img src="/image/su.png" alt="수거회원 이미지"> 
+                <img src="${pageContext.request.contextPath}/image/su.png" alt="수거회원 이미지"> 
            </div>
         </div>
     </div>

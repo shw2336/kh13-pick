@@ -104,7 +104,7 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d667a3facb2ac08f0c7fe4e48bd917e9&lib
 	<div class="cell center" >
 		<h1> 
 			<span style="color: rgb(66,138,66)">${findApplyDto.memberId}</span> 님의 신청 정보
-			<img src="/image/notebook.png" style="width:50px;" class="ps-10">
+			<img src="${pageContext.request.contextPath}/image/notebook.png" style="width:50px;" class="ps-10">
 		</h1>
 	</div>
 
@@ -164,7 +164,7 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d667a3facb2ac08f0c7fe4e48bd917e9&lib
 	<div class="cell mt-40">
 		<h2>배출사진</h2>
 		<div class="cell">
-				<img src="image/apply?applyNo=${findApplyDto.applyNo}" class="image" width="100%">
+				<img src="${pageContext.request.contextPath}/image/apply?applyNo=${findApplyDto.applyNo}" class="image" width="100%">
 		</div>
 	</div>
 

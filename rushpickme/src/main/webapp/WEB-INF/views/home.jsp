@@ -57,14 +57,14 @@
 
 <div class="container">
     <div class="slogan">
-        <img src="/image/slogan.png">
-        <img src="/image/click.png" style="margin-top:-150px; width: 250px; height: auto; margin-left: 10px;"> <!-- click 이미지 크기 조정 -->
+        <img src="${pageContext.request.contextPath}/image/slogan.png">
+        <img src="${pageContext.request.contextPath}/image/click.png" style="margin-top:-150px; width: 250px; height: auto; margin-left: 10px;"> <!-- click 이미지 크기 조정 -->
     </div>
     <div class="additional-images" style="margin-right: 70px; margin-top: -200px;"> <!-- 추가 이미지 상단 여백 조정 -->
          <a href="${pageContext.request.contextPath}/point/charge"><img src="/image/shop.png"></a>
     </div>
-    <img src="/image/how.png" style="width: 1200px; height: auto; margin-top:70px; margin-left:365px;">
-    <img src="/image/how2.png" style="width: 1200px; height: auto; margin-top:70px; margin-left:365px;">
+    <img src="${pageContext.request.contextPath}/image/how.png" style="width: 1200px; height: auto; margin-top:70px; margin-left:365px;">
+    <img src="${pageContext.request.contextPath}/image/how2.png" style="width: 1200px; height: auto; margin-top:70px; margin-left:365px;">
     <!-- 슬라이더 컨테이너 추가 -->
     <div class="swiper-container">
         <!-- 슬라이드 항목을 감싸는 wrapper 추가 -->

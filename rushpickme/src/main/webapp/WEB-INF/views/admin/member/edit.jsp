@@ -39,7 +39,7 @@
 </style>
 
 <div class="container">
-    <img src="/image/memberedit.png">
+    <img src="${pageContext.request.contextPath}/image/memberedit.png">
 
     <form action="edit" method="post">
         <input type="hidden" name="memberId" value="${memberDto.memberId}">

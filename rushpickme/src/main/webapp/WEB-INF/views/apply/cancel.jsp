@@ -21,7 +21,7 @@
         <div class="cell list-box">
         
                 <div class="cell">
-                <img class="dummy" src="/image/fail.png" style="width:400px; height:300px">
+                <img class="dummy" src="${pageContext.request.contextPath}s/image/fail.png" style="width:400px; height:300px">
                 </div>
             </div>
         </div>

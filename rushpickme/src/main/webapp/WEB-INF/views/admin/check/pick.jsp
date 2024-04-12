@@ -31,7 +31,7 @@
 </style>
 
 <div class="center">
-    <h1>수거 관리 <img src="/image/notebook.png" style="width:50px;" class="ps-10"></h1>
+    <h1>수거 관리 <img src="${pageContext.request.contextPath}/image/notebook.png" style="width:50px;" class="ps-10"></h1>
 </div>
 
 <div class="cell container">

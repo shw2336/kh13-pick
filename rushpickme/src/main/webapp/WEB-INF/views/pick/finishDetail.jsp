@@ -33,7 +33,7 @@
 <div class="cell center" >
 		<h1>
 			<span style="color: rgb(66,138,66)">${pickNo}번</span> 수거 정보
-			<img src="/image/notebook.png" style="width:50px;" class="ps-10">
+			<img src="${pageContext.request.contextPath}/image/notebook.png" style="width:50px;" class="ps-10">
 		</h1>
 </div>
 
@@ -68,14 +68,14 @@
 	<div class="cell mt-40">
 		<h2>배출사진</h2>
 		<div class="cell">
-				<img src="image/apply?applyNo=${findApplyDto.applyNo}" class="image" width="100%">
+				<img src="${pageContext.request.contextPath}/image/apply?applyNo=${findApplyDto.applyNo}" class="image" width="100%">
 		</div>
 	</div>
 	
 	<div class="cell mt-40">
 		<h2>수거사진</h2>
 		<div class="cell">
-				<img src="image/pick?pickNo=${pickNo}" class="image" width="100%">
+				<img src="${pageContext.request.contextPath}/image/pick?pickNo=${pickNo}" class="image" width="100%">
 		</div>
 	</div>
 	

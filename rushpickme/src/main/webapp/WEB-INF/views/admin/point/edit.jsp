@@ -36,7 +36,7 @@
 
         <input type="file" name="attach"><br><br>
 
-        <img src="image?pointNo=${pointDto.pointNo}" width="100"><br><br>
+        <img src="${pageContext.request.contextPath}image?pointNo=${pointDto.pointNo}" width="100"><br><br>
 
         <!-- 수정된 부분: 버튼 스타일 적용 -->
         <button type="submit">변경</button>
