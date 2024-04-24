@@ -81,7 +81,7 @@
                 <!-- 포인트 상품 반복 출력 -->
                 <c:forEach var="pointDto" items="${list}">
                     <tr>
-                        <td><img src="image?pointNo=${pointDto.pointNo}" alt="${pointDto.pointName}" class="img-thumbnail"></td>
+                        <td><img src="${pageContext.request.contextPath}image?pointNo=${pointDto.pointNo}" alt="${pointDto.pointName}" class="img-thumbnail"></td>
                         <td>${pointDto.pointName}</td>
                         <td>${pointDto.pointSell}원</td>
                         <td>${pointDto.pointCharge}포인트 충전</td>

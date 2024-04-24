@@ -25,7 +25,7 @@
 
 <div class="container w-500 mb-50">
 	<div class="cell">
-		<img src="/image/deleteFinish.png" class="image" width="100%">
+		<img src="${pageContext.request.contextPath}/image/deleteFinish.png" class="image" width="100%">
 	</div>
 </div>
 

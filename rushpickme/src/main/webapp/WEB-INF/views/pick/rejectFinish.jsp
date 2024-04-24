@@ -21,7 +21,7 @@
 
 <div class="container  w-500 mb-30">
 	<div class="cell">
-		<img src="/image/rejectFinish.png" class="image" width="100%">
+		<img src="${pageContext.request.contextPath}/image/rejectFinish.png" class="image" width="100%">
 	</div>
 </div>
 

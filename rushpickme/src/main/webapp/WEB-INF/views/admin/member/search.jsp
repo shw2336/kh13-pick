@@ -84,7 +84,7 @@
 </style>
 <div class="container">
     <div class="search-container center">
-        <img src="/image/search.png">
+        <img src="${pageContext.request.contextPath}/image/search.png">
         <form action="search" method="get">
             <select name="column" class="search-select">
                 <option value="member_id" ${param.column == 'member_id' ? 'selected' : ''}>아이디</option>

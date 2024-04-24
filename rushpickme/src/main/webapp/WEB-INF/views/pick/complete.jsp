@@ -120,7 +120,7 @@
 		<div class="cell center mt-50" >
 			<h1>
 				<span style="color: rgb(66,138,66)">완료 정보</span>를 알려주세요!
-				<img src="/image/notebook.png" style="width:50px;" class="ps-10">
+				<img src="${pageContext.request.contextPath}/image/notebook.png" style="width:50px;" class="ps-10">
 			</h1>
 		</div>
 	
