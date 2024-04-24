@@ -38,7 +38,7 @@
 
     <c:forEach var="pointDto" items="${list}">
         <div class="cell center"> 
-            <img src="${pageContext.request.contextPath}/image?pointNo=${pointDto.pointNo}"> <br>
+            <img src="${pageContext.request.contextPath}image?pointNo=${pointDto.pointNo}"> <br>
             <fmt:formatNumber value="${pointDto.pointSell}" pattern="#,##0"/>원
 
             <!-- 구매를 위한 form 생성 -->

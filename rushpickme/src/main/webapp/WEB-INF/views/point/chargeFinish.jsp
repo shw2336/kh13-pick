@@ -5,6 +5,6 @@
 
 
 <div class="cell center">
-<img src="${pageContext.request.contextPath}/image/chargeFinish.png">
+<img src="${pageContext.request.contextPath}image/chargeFinish.png">
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

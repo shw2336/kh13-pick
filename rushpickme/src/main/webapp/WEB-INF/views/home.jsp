@@ -61,7 +61,7 @@
         <img src="${pageContext.request.contextPath}/image/click.png" style="margin-top:-150px; width: 250px; height: auto; margin-left: 10px;"> <!-- click 이미지 크기 조정 -->
     </div>
     <div class="additional-images" style="margin-right: 70px; margin-top: -200px;"> <!-- 추가 이미지 상단 여백 조정 -->
-         <a href="${pageContext.request.contextPath}/point/charge"><img src="/image/shop.png"></a>
+         <a href="/point/charge"><img src="${pageContext.request.contextPath}/image/shop.png"></a>
     </div>
     <img src="${pageContext.request.contextPath}/image/how.png" style="width: 1200px; height: auto; margin-top:70px; margin-left:365px;">
     <img src="${pageContext.request.contextPath}/image/how2.png" style="width: 1200px; height: auto; margin-top:70px; margin-left:365px;">
@@ -71,10 +71,10 @@
         <div class="swiper-wrapper">
             <!-- 슬라이드 항목 추가 -->
             <div class="swiper-slide">
-                <a href="${pageContext.request.contextPath}/review/list"><img src="/image/review1.png"></a>
+                <a href="/review/list"><img src="${pageContext.request.contextPath}/image/review1.png"></a>
             </div>
             <div class="swiper-slide">
-                <a href="${pageContext.request.contextPath}/review/list"><img src="/image/review2.png"></a>
+                <a href="/review/list"><img src="${pageContext.request.contextPath}/image/review2.png"></a>
             </div>
         </div>
         <!-- Swiper 페이징 및 네비게이션 버튼 -->
